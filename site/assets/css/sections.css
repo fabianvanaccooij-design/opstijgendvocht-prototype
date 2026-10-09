@@ -36,15 +36,22 @@
 .tile { position: relative; display: block; aspect-ratio: 539 / 680; overflow: hidden; border-radius: var(--radius-card); isolation: isolate; }
 .tile__img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: var(--color-placeholder) url("../img/placeholder.png") center / cover no-repeat; transition: transform .5s var(--ease); }
 .tile__img.media--ph::before { display: none; }
-.tile__overlay { position: absolute; inset: 0; background: var(--gradient-beeldtegel-overlay); transition: background .3s var(--ease); }
+/* Verloop: een gradient zelf kan niet vloeiend overgaan, daarom staan de stops in geregistreerde variabelen.
+   Waarden = Figma Verloop/Beeldtegel overlay (rust) en Verloop/Beeldtegel overlay hover:
+   middelste stop 70% -> 50% (verloop schuift omhoog), dekking .15 -> .25 en onderaan .6 -> .7. */
+@property --tile-mid { syntax: '<percentage>'; inherits: false; initial-value: 70%; }
+@property --tile-mid-a { syntax: '<number>'; inherits: false; initial-value: .15; }
+@property --tile-end-a { syntax: '<number>'; inherits: false; initial-value: .6; }
+.tile__overlay { position: absolute; inset: 0; --tile-mid: 70%; --tile-mid-a: .15; --tile-end-a: .6;
+  background: linear-gradient(180deg, rgba(10,42,67,0) 0%, rgba(10,42,67,var(--tile-mid-a)) var(--tile-mid), rgba(10,42,67,var(--tile-end-a)) 100%); }
 .tile__body { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; padding: var(--card-padding); }
 /* Hover: de kaart maakt ruimte (titel schuift omhoog) en tekst + knop komen vanaf de onderrand van de kaart omhoog.
    In rust staan ze net onder de kaart (de kaart knipt af). */
 .tile { --tile-speed: .6s; }
 .tile__details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--tile-speed) var(--ease); }
 .tile__details-inner { min-height: 0; align-self: start; display: flex; flex-direction: column; gap: var(--gap-action-sm); padding-top: var(--gap-action-sm); transform: translateY(var(--card-padding)); transition: transform var(--tile-speed) var(--ease); }
-.tile__overlay { transition: background var(--tile-speed) var(--ease); }
-.tile:hover .tile__overlay, .tile:focus-visible .tile__overlay { background: var(--gradient-beeldtegel-overlay-hover); }
+.tile__overlay { transition: --tile-mid var(--tile-speed) var(--ease), --tile-mid-a var(--tile-speed) var(--ease), --tile-end-a var(--tile-speed) var(--ease); }
+.tile:hover .tile__overlay, .tile:focus-visible .tile__overlay { --tile-mid: 50%; --tile-mid-a: .25; --tile-end-a: .7; }
 .tile:hover .tile__details, .tile:focus-visible .tile__details { grid-template-rows: 1fr; }
 .tile:hover .tile__details-inner, .tile:focus-visible .tile__details-inner { transform: none; }
 .tile__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
