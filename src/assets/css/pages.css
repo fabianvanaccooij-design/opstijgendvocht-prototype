@@ -309,9 +309,12 @@
 .modal__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .lightbox { width: min(1200px, 100%); gap: 24px; }
 .lightbox__title { display: flex; align-items: baseline; gap: 12px; }
-.lightbox__stage { display: flex; align-items: center; gap: 32px; }
+/* Op lagere schermen krimpt de foto mee (3:2, hoogte = scherm min kop, miniaturen en paddings ~300),
+   zodat de miniaturen nooit worden afgesneden. Kop en miniaturen krimpen niet. */
+.lightbox > * { flex-shrink: 0; }
+.lightbox__stage { display: flex; align-items: center; justify-content: center; gap: 32px; }
 .lightbox__stage .gallery__arrow { position: static; translate: none; flex: none; }
-.lightbox__img { flex: 1; }
+.lightbox__img { flex: 0 1 auto; width: min(100%, calc((100dvh - 300px) * 3 / 2)); }
 .lightbox__thumbs { display: flex; gap: 12px; list-style: none; padding: 0; overflow-x: auto; }
 .lightbox__thumbs li { flex: 0 0 80px; }
 
