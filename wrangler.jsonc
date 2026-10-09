@@ -1,0 +1,10 @@
+// Cloudflare Workers (Workers Builds): het prototype is een statische site.
+// De gebouwde HTML staat in de map "site" en staat in de repo, dus een build command is niet nodig.
+{
+  "name": "opstijgendvocht-prototype",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "404-page"
+  }
+}
