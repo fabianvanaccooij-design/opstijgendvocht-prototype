@@ -1,0 +1,24 @@
+---
+crumb: Bedankt
+crumbParents:
+  - label: Gratis vochtadvies
+    href: gratis-vochtadvies
+title: Bedankt voor uw aanvraag
+description: Wij hebben uw aanvraag goed ontvangen.
+---
+{% import "components/sections.njk" as s %}
+
+{{ s.heroPage({
+  variant: 'center', tight: true,
+  title: 'Bedankt voor uw aanvraag!',
+  subtitle: 'Wij hebben uw aanvraag goed ontvangen.',
+  text: '<p>Eén van onze vochtspecialisten neemt zo spoedig mogelijk persoonlijk contact met u op om uw situatie te bespreken. Wij luisteren eerst naar uw verhaal en geven daarna eerlijk advies over de oorzaak én de beste oplossing.<br><br>Wij geloven dat een goede diagnose belangrijker is dan een snelle verkoop. Daarom luisteren wij eerst naar uw situatie voordat wij een oplossing adviseren.</p>'
+}, site) }}
+
+{{ s.contentCards({
+  cols: 2,
+  cards: [
+    { title: 'Heeft u foto\'s van het vochtprobleem?', text: 'Stuur deze gerust via WhatsApp zodat wij alvast met u mee kunnen kijken.', btn: { label: 'Stuur foto’s via WhatsApp', wa: true, style: 'primary', iconLeft: 'whatsapp' } },
+    { title: 'Vraag gratis ons Vocht Magazine aan', text: 'In het Vocht Magazine leest u alles over het ontstaan, het herkennen en de oplossingen voor vochtproblemen.', btn: { label: 'Download gratis Vocht Magazine', href: 'vocht-magazine', style: 'primary' } }
+  ]
+}) }}

@@ -1,0 +1,77 @@
+{#- ==========================================================================
+    Paginaspecifieke blokken (komen maar op één of twee pagina's voor).
+    Importeer met {% import "components/blocks.njk" as b %}.
+    ========================================================================== -#}
+{% import "components/ui.njk" as ui %}
+
+{#- Paginering (Figma: Paginering). current = actieve pagina, total = aantal -#}
+{% macro paginering(current=1, total=3) -%}
+<nav class="pager" aria-label="Paginering" data-pager data-current="{{ current }}" data-total="{{ total }}">
+  <button class="pager__arrow" type="button" aria-label="Vorige pagina" data-pager-prev{{ ' disabled' if current == 1 }}>{{ icon('arrow-left') }}</button>
+  <ol class="pager__nums" role="list" data-pager-nums>
+    {%- set nums = range(1, total + 1) if total <= 5 else [1, 2, 3, '…', total] -%}
+    {% for n in nums %}{% if n == '…' %}<li class="pager__ellipsis" aria-hidden="true">…</li>{% else %}<li><a class="pager__num{{ ' is-active' if n == current }}" href="#" data-page="{{ n }}"{% if n == current %} aria-current="page"{% endif %}>{{ n }}</a></li>{% endif %}{% endfor %}
+  </ol>
+  <button class="pager__arrow" type="button" aria-label="Volgende pagina" data-pager-next{{ ' disabled' if current == total }}>{{ icon('arrow-right') }}</button>
+</nav>
+{%- endmacro %}
+
+{#- Werkwijze: kop links (sticky), genummerde kaarten rechts die op elkaar stapelen bij scrollen -#}
+{% macro werkwijze(d) -%}
+<section class="ww">
+  <div class="ww__inner">
+    <div class="ww__side">
+      <div class="ww__side-inner">
+        <div class="stack" style="gap:var(--gap-heading-2)">
+          <h2>{{ d.title }}</h2>
+          <p class="body-lg c-secondary">{{ d.text }}</p>
+        </div>
+        {{ ui.btn('Gratis vochtadvies aanvragen', 'gratis-vochtadvies') }}
+      </div>
+    </div>
+    <ol class="ww__cards" role="list">
+      {% for c in d.cards %}
+      <li class="ww__slot" style="--i: {{ loop.index0 }}">
+        <div class="ww__card">
+          <div class="ww__card-head"><span class="badge-num ww__badge">{{ loop.index }}</span><h3>{{ c.title }}</h3></div>
+          <div class="ww__card-body"><p class="bold">{{ c.subtitle }}</p><p class="c-secondary">{{ c.text }}</p></div>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Card / Resultaat: review met voor- en nafoto -#}
+{% macro resultaat(r) -%}
+<article class="result">
+  <div class="result__body">
+    {{ ui.stars(5) }}
+    <p class="h4">{{ r.title }}</p>
+    <p class="c-secondary">{{ r.text }}</p>
+    <p class="bold">{{ r.name }}</p>
+  </div>
+  <div class="result__imgs">
+    <figure class="result__img">{{ ui.media(r.before, 'Voor de behandeling', '1-1') }}<figcaption class="chip">Voor</figcaption></figure>
+    <figure class="result__img">{{ ui.media(r.after, 'Na de behandeling', '1-1') }}<figcaption class="chip">Na</figcaption></figure>
+  </div>
+</article>
+{%- endmacro %}
+
+{#- Over ons: hoofdstukken met sticky foto links en tekst rechts -#}
+{% macro verhaal(chapters) -%}
+<section class="story">
+  {% for c in chapters %}
+  <div class="story__chapter" data-story-chapter>
+    <div class="story__photo">{{ ui.media(c.image, '', '', '', 'story__media') }}</div>
+    <div class="story__text">
+      <div class="story__text-inner">
+        <h2>{{ c.title }}</h2>
+        <div class="prose body-lg c-secondary">{{ c.text | safe }}</div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{%- endmacro %}

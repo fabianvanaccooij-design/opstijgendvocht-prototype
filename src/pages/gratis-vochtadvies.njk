@@ -1,0 +1,158 @@
+---
+crumb: Gratis vochtadvies
+title: Gratis vochtadvies
+description: Onze vochtspecialist komt vrijblijvend bij je langs voor een grondige inspectie en eerlijk advies op maat.
+---
+{% import "components/sections.njk" as s %}
+{% import "components/ui.njk" as ui %}
+
+{{ s.heroPage({
+  variant: 'foto', image: 'hero-gratis-vochtadvies.jpg', rating: true,
+  title: 'Gratis vochtadvies',
+  text: 'Last van een vochtige muur, muffe lucht of afbrokkelend stucwerk? Blijf er niet mee zitten. Onze vochtspecialist komt vrijblijvend bij je langs op locatie voor een grondige inspectie en eerlijk advies op maat.',
+  btn: { label: 'Gratis vochtadvies aanvragen', href: '#aanvragen' }
+}, site) }}
+
+{#- Figma: Formulier / Aanvraag vochtadvies (Stap 1-3). Witte kaart over de volle breedte, inhoud 949 breed in het midden.
+    Wisselen tussen de stappen, adres aanvullen en de WhatsApp-tip zitten in main.js (data-steps, data-address). -#}
+{%- set nb = '&nbsp;' -%}
+{%- set waTip = '<strong>Twijfel je?</strong> Stuur een paar foto' ~ "'" ~ 's via WhatsApp naar 06' ~ nb ~ '11' ~ nb ~ '69' ~ nb ~ '18' ~ nb ~ '81, dan kijken we meteen met je mee.' -%}
+<section class="section gv-form-sec" id="aanvragen">
+  <div class="container">
+    <div class="card gv-form">
+      <form class="gv-form__inner" data-form data-steps data-redirect="bedankt.html" novalidate>
+        <div class="gv-form__head">
+          <div class="stack" style="gap:var(--gap-heading-3)">
+            <h3>Vul het aanvraagformulier in</h3>
+            <p class="c-secondary">Vul onderstaande gegevens in, dan nemen wij snel contact op om een afspraak in te plannen op een moment dat het jou uitkomt.</p>
+          </div>
+          {{ ui.stepper(['Je situatie', 'Je adres', 'Je gegevens'], 1) }}
+        </div>
+
+        {#- Stap 1: Je situatie -#}
+        <div class="gv-step" data-step="1">
+          <div class="gv-step__fields">
+            <div class="stack" style="gap:var(--gap-heading-4)">
+              <h4>Wat zie je?</h4>
+              <p class="c-secondary">Kies wat het meest lijkt op jouw situatie. Je kunt meerdere keuzes maken.</p>
+            </div>
+            <div class="gv-step__input">
+              <div class="choices" role="group" aria-label="Wat zie je?">
+                {{ ui.choiceCard('watzieje', 'Vochtige muur', 'Natte of donkere plekken, vaak onderaan de muur') }}
+                {{ ui.choiceCard('watzieje', 'Schimmel', 'Zwarte of groene vlekken op muur of plafond') }}
+                {{ ui.choiceCard('watzieje', 'Condens', 'Beslagen ramen of druppels op koude muren') }}
+                {{ ui.choiceCard('watzieje', 'Beschadigd stucwerk', 'Bladderende verf, losse kalk of witte uitslag') }}
+                {{ ui.choiceCard('watzieje', 'Anders', 'Licht het hieronder kort toe') }}
+                {{ ui.choiceCard('watzieje', 'Weet ik niet', 'Geen probleem, onze specialist kijkt met je mee', { tip: waTip }) }}
+              </div>
+              {{ ui.field('toelichting', 'Korte toelichting', 'textarea', { placeholder: 'Beschrijf kort wat je ziet, bijvoorbeeld vochtplekken onderaan de muur of schimmel.' }) }}
+              <div class="stack" style="gap:var(--space-8)">
+                {{ ui.upload() }}
+                <p class="body-sm c-secondary">Onze specialist bekijkt je foto's vooraf, zodat hij goed voorbereid bij je langskomt. We gebruiken ze alleen voor jouw advies.</p>
+              </div>
+            </div>
+          </div>
+          <div class="gv-step__action">
+            <div class="btn-row gv-step__buttons">{{ ui.btn('Volgende stap', '', 'primary', { type: 'button', attrs: 'data-next' }) }}</div>
+            <p class="gv-reassure">{{ icon('check') }}<span>Gratis en vrijblijvend</span></p>
+          </div>
+        </div>
+
+        {#- Stap 2: Je adres -#}
+        <div class="gv-step" data-step="2" hidden>
+          <div class="gv-step__fields">
+            <div class="stack" style="gap:var(--gap-heading-4)">
+              <h4>Waar moet de specialist langskomen?</h4>
+              <p class="c-secondary">Vul je postcode en huisnummer in, dan vullen wij straat en plaats aan.</p>
+            </div>
+            <div class="gv-step__input" data-address>
+              <div class="gv-row">
+                {{ ui.field('postcode', 'Postcode', 'text', { required: true, placeholder: '1234 AB', autocomplete: 'postal-code', error: 'Vul je postcode in.' }) }}
+                <div class="gv-row gv-row--keep">
+                  {{ ui.field('huisnummer', 'Huisnummer', 'text', { required: true, placeholder: '12', error: 'Vul je huisnummer in.' }) }}
+                  {{ ui.field('toevoeging', 'Toevoeging', 'text', { placeholder: 'A' }) }}
+                </div>
+              </div>
+              <div class="gv-address" data-address-found hidden>
+                <span class="gv-address__icon">{{ icon('check') }}</span>
+                <span class="gv-address__text" data-address-text></span>
+                <button type="button" class="link gv-address__edit" data-address-edit>Wijzigen</button>
+              </div>
+              <div class="gv-row" data-address-manual hidden>
+                {{ ui.field('straat', 'Straat', 'text', { required: true, value: 'Voorbeeldstraat', autocomplete: 'address-line1', error: 'Vul je straat in.' }) }}
+                {{ ui.field('plaats', 'Plaats', 'text', { required: true, value: 'Voorbeeldplaats', autocomplete: 'address-level2', error: 'Vul je plaats in.' }) }}
+              </div>
+            </div>
+          </div>
+          <div class="gv-step__action">
+            <div class="btn-row gv-step__buttons">{{ ui.btn('Vorige', '', 'secondary', { back: true, type: 'button', attrs: 'data-prev' }) }}{{ ui.btn('Volgende stap', '', 'primary', { type: 'button', attrs: 'data-next' }) }}</div>
+            <p class="gv-reassure">{{ icon('check') }}<span>Gratis en vrijblijvend</span></p>
+          </div>
+        </div>
+
+        {#- Stap 3: Je gegevens -#}
+        <div class="gv-step" data-step="3" hidden>
+          <div class="gv-step__fields">
+            <div class="stack" style="gap:var(--gap-heading-4)">
+              <h4>Hoe kunnen we je bereiken?</h4>
+              <p class="c-secondary">We nemen contact met je op om een afspraak in te plannen.</p>
+            </div>
+            <div class="gv-step__input">
+              <div class="gv-name">
+                {{ ui.field('voornaam', 'Voornaam', 'text', { required: true, placeholder: 'Jan', autocomplete: 'given-name', cls: 'gv-name__first' }) }}
+                {{ ui.field('tussenvoegsel', 'Tussenvoegsel', 'text', { placeholder: 'van der' }) }}
+                {{ ui.field('achternaam', 'Achternaam', 'text', { required: true, placeholder: 'Berg', autocomplete: 'family-name' }) }}
+              </div>
+              <div class="gv-row">
+                {{ ui.field('email', 'E-mailadres', 'email', { required: true, placeholder: 'naam@voorbeeld.nl', error: 'Vul een geldig e-mailadres in.' }) }}
+                {{ ui.field('telefoon', 'Telefoonnummer', 'tel', { placeholder: '06 12345678', hint: 'Handig om snel een afspraak in te plannen.' }) }}
+              </div>
+            </div>
+          </div>
+          <div class="gv-step__action">
+            <div class="btn-row gv-step__buttons gv-step__buttons--submit">{{ ui.btn('Vorige', '', 'secondary', { back: true, type: 'button', attrs: 'data-prev' }) }}{{ ui.btn('Vrijblijvend vochtadvies aanvragen', '', 'primary', { type: 'submit' }) }}</div>
+            <p class="gv-reassure">{{ icon('check') }}<span>Gratis en vrijblijvend</span></p>
+            {{ ui.privacy('Wij respecteren je privacy. Lees in onze', 'privacyverklaring', ' hoe we met je gegevens omgaan.') }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+{#- Figma: Sectie / Direct contact (kop + drie losse kaarten). Op desktop staat in de titel alleen het nummer of adres. -#}
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    {{ s.head('Direct contact op onze snelle kanalen', 'Heb je een dringende vraag of stuur je liever meteen een foto van de situatie door?', { center: true, narrow: true }) }}
+    <ul class="gv-direct" role="list">
+      <li><button type="button" class="card gv-direct__card" data-wa-open><span class="usp__icon usp__icon--box">{{ icon('whatsapp') }}</span><span class="stack" style="gap:var(--gap-heading-4)"><span class="h3"><span class="only-mobile">Via WhatsApp: </span>{{ site.whatsapp.label }}</span><span class="c-secondary">Stuur een foto van je vochtprobleem en ontvang snel een eerste inschatting van onze expert!</span></span></button></li>
+      <li><a class="card gv-direct__card" href="{{ site.phone.href }}"><span class="usp__icon usp__icon--box">{{ icon('phone') }}</span><span class="stack" style="gap:var(--gap-heading-4)"><span class="h3"><span class="only-mobile">Bellen: </span>{{ site.phone.label }}</span><span class="c-secondary">Maandag t/m vrijdag van 08:30 tot 17:00 uur.</span></span></a></li>
+      <li><a class="card gv-direct__card" href="mailto:{{ site.email }}"><span class="usp__icon usp__icon--box">{{ icon('envelope') }}</span><span class="stack" style="gap:var(--gap-heading-4)"><span class="h3"><span class="only-mobile">E-mailen: </span>{{ site.email }}</span><span class="c-secondary">Stuur een bericht met je vragen.</span></span></a></li>
+    </ul>
+  </div>
+</section>
+
+{{ s.stappen({
+  variant: 'raster', title: 'Hoe verloopt een <span class="c-blue">adviesgesprek</span> op locatie?', align: 'left',
+  steps: [
+    { title: 'Afspraak op locatie', text: 'Onze specialist komt op de afgesproken datum en tijd bij je langs.' },
+    { title: 'Professionele meting', text: 'Met behulp van vochtmeters en inspectieapparatuur stellen we de exacte bron van het vocht vast.' },
+    { title: 'Uitleg ter plaatse', text: 'Je krijgt direct duidelijke uitleg over de Oorzaak en welke oplossingen (zoals muurinjectie, Meltem ventilatie of Saltshield) écht werken.' },
+    { title: 'Gespecificeerde offerte', text: 'Na afloop ontvang je een heldere vochtofferte met een vaste prijsgarantie, zonder verrassingen achteraf.' }
+  ],
+  btn: { label: 'Meer over onze werkwijze', href: 'werkwijze', style: 'secondary' }
+}) }}
+
+{{ s.split({
+  side: 'links', image: 'magazine.png', ratio: '4-3', panel: true,
+  title: 'Twijfel je nog of wil je je eerst inlezen?',
+  blocks: [{ text: 'Wil je liever eerst op je eigen tempo meer lezen over de oorzaken en oplossingen voor vochtproblemen? Download gratis onze uitgebreide gids inclusief stappenplannen, productspecificaties en handige rekentools.' }],
+  btn: { label: 'Download gratis PDF magazine', href: 'vocht-magazine', style: 'secondary' }
+}) }}
+
+{{ s.faq({ title: 'Veelgestelde vragen over het gratis vochtadvies', btn: false, items: [
+  { q: 'Is een vochtadvies op locatie echt 100% gratis en vrijblijvend?', a: shared.TBD },
+  { q: 'Moet ik al weten wat voor vochtprobleem ik heb?', a: shared.TBD },
+  { q: 'Hoe snel kan de specialist langskomen?', a: shared.TBD },
+  { q: 'Wat gebeurt er nadat ik de vochtofferte heb ontvangen?', a: shared.TBD }
+] }) }}

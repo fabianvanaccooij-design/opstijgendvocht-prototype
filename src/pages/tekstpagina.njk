@@ -1,0 +1,21 @@
+---
+crumb: '<Privacybeleid>'
+title: Privacybeleid
+description: Juridische tekstpagina (voorbeeld).
+---
+{% import "components/sections.njk" as s %}
+
+{{ s.heroPage({ variant: 'split', noMedia: true, tight: true, title: '&lt;Privacybeleid&gt;', text: 'Laatst bijgewerkt: &lt;datum&gt;' }, site) }}
+
+<section class="section">
+  <div class="container">
+    <div class="legal">
+      {% for i in range(1, 5) %}
+      <section>
+        <h2 class="h3">&lt;Kop van onderdeel {{ i }}&gt;</h2>
+        <p class="c-secondary">&lt;Tekst van dit onderdeel. De juridische tekst wordt aangeleverd door de klant.&gt;</p>
+      </section>
+      {% endfor %}
+    </div>
+  </div>
+</section>

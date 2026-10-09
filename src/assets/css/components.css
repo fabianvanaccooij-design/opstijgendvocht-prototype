@@ -1,0 +1,245 @@
+/* ==========================================================================
+   Componenten. Namen volgen de Figma-componenten (04 Local Components).
+   ========================================================================== */
+
+/* --- Icon (Font Awesome 7 Sharp Solid, via sprite) ----------------------- */
+.icon { width: var(--size-icon-md); height: var(--size-icon-md); flex: none; fill: currentColor; }
+.icon--sm { width: var(--size-icon-sm); height: var(--size-icon-sm); }
+.icon--lg { width: var(--size-icon-lg); height: var(--size-icon-lg); }
+
+/* --- Button --------------------------------------------------------------
+   .btn--primary   Style=Primary (oranje pil)
+   .btn--secondary Style=Secondary (tekst + oranje cirkel met pijl)
+   .btn--whatsapp  Style=WhatsApp (groene pil met witte cirkel)
+   .btn--text      Style=Text (link met pijl)
+   .btn--icon      Content=Icon only (rond, 64 px)
+   .btn--on-blue   Tone=Op blauw / op donker                                 */
+.btn {
+  --btn-h: var(--size-control);
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: var(--btn-h); padding: 0 var(--button-padding-x);
+  border-radius: var(--radius-full); border: 0;
+  font-family: var(--font-body); font-size: var(--font-size-body); line-height: var(--font-line-height-body); font-weight: var(--font-weight-medium);
+  text-align: center; white-space: nowrap; cursor: pointer;
+  transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease), gap var(--duration) var(--ease), padding var(--duration) var(--ease);
+}
+.btn:focus-visible { outline: var(--border-width-focus) solid var(--color-border-focus); outline-offset: 2px; }
+.btn[disabled], .btn.is-disabled { cursor: not-allowed; }
+.btn--block { width: 100%; }
+
+.btn--primary { background: var(--color-action-primary-bg); color: var(--color-action-primary-text); }
+.btn--primary:hover { background: var(--color-action-primary-bg-hover); }
+.btn--primary:active { background: var(--color-action-primary-bg-pressed); }
+.btn--primary[disabled] { background: var(--color-action-disabled-bg); color: var(--color-action-disabled-text); }
+
+.btn--secondary { padding: 8px 0; gap: 12px; background: none; color: var(--color-action-secondary-text); font-weight: var(--font-weight-bold); }
+.btn--secondary .btn__circle {
+  display: grid; place-items: center; width: var(--size-control-inner); height: var(--size-control-inner);
+  border-radius: var(--radius-full); background: var(--color-action-secondary-circle); color: var(--color-text-primary);
+  transition: background-color var(--duration) var(--ease);
+}
+.btn--secondary:hover .btn__circle { background: var(--color-action-secondary-circle-hover); }
+.btn--secondary:active .btn__circle { background: var(--color-action-secondary-circle-pressed); }
+.btn--secondary.btn--on-blue { color: var(--color-text-on-ink); }
+.btn--secondary[disabled] { color: var(--color-action-disabled-text); }
+.btn--secondary[disabled] .btn__circle { background: var(--color-action-disabled-border); }
+
+.btn--whatsapp { gap: 24px; padding: 8px 8px 8px var(--button-padding-x); background: var(--color-action-whatsapp); color: var(--color-action-secondary-text); }
+.btn--whatsapp .btn__circle { display: grid; place-items: center; width: var(--size-control-inner); height: var(--size-control-inner); border-radius: var(--radius-full); background: var(--color-action-secondary-band-bg); color: var(--color-text-primary); }
+.btn--whatsapp:hover { background: var(--color-action-whatsapp-hover); }
+
+.btn--text { min-height: 0; padding: 0; background: none; color: var(--color-text-link); }
+.btn--text:hover { color: var(--color-brand-secondary-hover); }
+.btn--text.btn--on-blue { color: var(--color-text-on-ink); }
+.btn--text.btn--on-blue:hover { color: var(--color-orange-300); }
+
+.btn--icon { width: var(--btn-h); padding: 0; }
+.btn--icon.btn--secondary { padding: 8px; background: var(--color-action-secondary-bg); }
+.btn--icon.btn--secondary.btn--on-blue { background: var(--color-action-secondary-band-bg); }
+.btn--icon.btn--secondary:hover { padding: 0; }
+.btn--icon.btn--secondary:hover .btn__circle { width: 100%; height: 100%; }
+.btn--icon.btn--primary[disabled] { background: var(--color-action-disabled-bg); color: var(--color-action-disabled-text); }
+
+/* Button / Sluiten: grijze ronde sluitknop in overlays */
+.btn-close { display: grid; place-items: center; width: 44px; height: 44px; flex: none; border-radius: var(--radius-full); background: var(--color-action-tertiary-bg); color: var(--color-text-primary); transition: background-color var(--duration); }
+.btn-close:hover { background: var(--color-action-tertiary-bg-hover); }
+.btn-close:active { background: var(--color-action-tertiary-bg-pressed); }
+
+.btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-buttons); }
+@media (max-width: 767px) {
+  .btn-row--stack { flex-direction: column; align-items: stretch; }
+  .btn-row--stack > .btn--primary { width: 100%; }
+  .btn-row--stack > .btn--secondary { align-self: flex-start; }
+  .btn { white-space: normal; }
+}
+
+/* --- Media / Placeholder ------------------------------------------------- */
+.media { position: relative; overflow: hidden; border-radius: var(--radius-card); background: var(--color-placeholder); }
+/* Foto vult het vak zonder het vak te vergroten (anders rekt de natuurlijke fotohoogte het vak op). */
+.media:has(> img) { background: none; }
+.media > img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+/* Placeholder = het grijze placeholderbeeld uit Figma (Media / Placeholder) */
+.media--ph { display: grid; place-items: center; background: var(--color-placeholder); }
+.media--ph::before { content: ""; position: absolute; inset: 0; background: url("../img/placeholder.png") center / cover no-repeat; transition: transform .5s var(--ease); }
+/* Klikbare kaarten: beeld zoomt licht in bij hover */
+.card-t--link:hover .media > img, .card-t--link:hover .media--ph::before, .tile:hover .tile__img { transform: scale(1.05); }
+.media__note { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px max(24px, calc(50% - 300px)); text-align: center; font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); color: var(--color-text-muted); }
+.ratio-3-2 { aspect-ratio: 3 / 2; }
+.ratio-4-3 { aspect-ratio: 4 / 3; }
+.ratio-1-1 { aspect-ratio: 1; }
+.ratio-16-9 { aspect-ratio: 16 / 9; }
+
+/* --- Rating (Trustoo-logo, sterren, score) ------------------------------- */
+.rating { display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.rating__logo { height: 24px; width: auto; }
+.rating__row { display: inline-flex; align-items: center; gap: 12px; }
+.rating--sm .rating__row { gap: 8px; }
+/* Figma: Rating / Ster is een vak van 20 (klein 16) met een ster-glyph die 1,125x zo breed is en uitsteekt.
+   Daardoor is de zichtbare ruimte tussen de sterren kleiner dan de gap van 6 (klein 4). */
+.stars { --star: 20px; display: inline-flex; gap: 6px; color: var(--color-rating); }
+.stars .icon { width: calc(var(--star) * 1.125); height: calc(var(--star) * 1.085); margin: calc(var(--star) * -0.0425) calc(var(--star) * -0.0625); }
+.stars--sm { --star: 16px; gap: 4px; }
+.rating__score { display: inline-flex; align-items: center; gap: var(--gap-value); }
+
+/* --- Badge / Nummer (stapcirkel) ----------------------------------------- */
+.badge-num { display: grid; place-items: center; width: 48px; height: 48px; flex: none; border-radius: var(--radius-full); background: var(--color-bg-secondary-subtle); color: var(--color-text-brand-blue); font-family: var(--font-heading); font-weight: var(--font-weight-bold); font-size: var(--font-size-h4); line-height: 1; }
+.badge-num.is-active { background: var(--color-bg-brand); color: var(--color-text-on-brand); }
+@media (max-width: 767px) { .badge-num { width: 40px; height: 40px; } }
+
+/* Label (bijv. categorie, korting) */
+.tag { display: inline-flex; align-items: center; gap: 6px; padding: 2px 12px; border-radius: var(--radius-full); background: var(--color-bg-secondary-subtle); color: var(--color-text-brand-blue); font-size: var(--font-size-caption); line-height: var(--font-line-height-caption); font-weight: var(--font-weight-medium); letter-spacing: var(--font-letter-spacing-caps); text-transform: uppercase; }
+.tag--success { background: var(--color-feedback-success-bg); color: var(--color-feedback-success); }
+
+/* --- Card basis ---------------------------------------------------------- */
+.card { background: var(--color-bg-surface); border-radius: var(--radius-card); padding: var(--card-padding); }
+.card--lg { padding: var(--card-padding-lg); }
+.card--alt { background: var(--color-bg-page); }
+
+/* Card / USP: icoonvak + titel (+ tekst) */
+.usp { display: flex; align-items: center; gap: 12px; }
+.usp__icon { display: grid; place-items: center; flex: none; color: var(--color-text-brand-blue); }
+.usp__icon--box { width: 48px; height: 48px; border-radius: var(--radius-inset); background: var(--color-bg-secondary-subtle); }
+@media (max-width: 767px) { .usp__icon--box { width: 40px; height: 40px; } .usp__icon--box .icon { width: 20px; height: 20px; } }   /* Figma Card header Type=Icoon, Apparaat=Mobile: 40 met icoon 20 */
+.usp__text { display: flex; flex-direction: column; gap: var(--gap-heading-4); }
+
+/* Checklist (vinkje voor eerste regel) */
+.checklist { display: flex; flex-direction: column; gap: 8px; list-style: none; padding: 0; }
+.checklist li { display: flex; gap: 8px; align-items: flex-start; }
+.checklist .icon { margin-top: calc((var(--font-line-height-body) - var(--size-icon-sm)) / 2); color: var(--color-text-primary); width: var(--size-icon-sm); height: var(--size-icon-sm); flex: none; }
+.checklist--blue .icon { color: var(--color-text-brand-blue); }
+.checklist--success { gap: 0; }   /* standaard vinkjeslijst (koopbox, WhatsApp): groen vinkje, Body/Default, text/primary, geen ruimte tussen regels */
+.checklist--success li { color: var(--color-text-primary); }
+.checklist--success .icon { color: var(--color-feedback-success); }
+.checklist.body-sm .icon { margin-top: calc((var(--font-line-height-body-sm) - var(--size-icon-sm)) / 2); }
+
+/* --- Card / Accordion (uitklapkaart) ------------------------------------- */
+.accordion { display: flex; flex-direction: column; gap: 16px; }
+.accordion--ruim { gap: 24px; }          /* Figma Sectie / Uitklaplijst (FAQ-pagina) */
+@media (max-width: 767px) { .accordion--ruim { gap: 16px; } }
+.acc { background: var(--color-bg-surface); border-radius: var(--radius-card); }
+.acc__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding: var(--card-padding) var(--card-padding) var(--gap-heading-4); text-align: left; }
+.acc__chev { display: grid; place-items: center; width: 24px; height: 32px; flex: none; transition: transform var(--duration) var(--ease); }
+.acc__chev .icon { width: var(--size-icon-accordion); height: var(--size-icon-accordion); }
+.acc.is-open .acc__chev { transform: rotate(180deg); }
+/* Dicht: kop + (card-padding minus kopruimte) als ondermarge. Open: de kaart groeit, de tekst staat al op zijn plek en verschijnt van 0 naar 100% dekking. */
+.acc__body { display: grid; grid-template-rows: 0fr; min-height: calc(var(--card-padding) - var(--gap-heading-4)); transition: grid-template-rows .3s var(--ease); }
+.acc.is-open .acc__body { grid-template-rows: 1fr; }
+.acc__inner { overflow: hidden; }
+.acc__content { padding: 0 var(--card-padding) var(--card-padding); display: flex; flex-direction: column; gap: var(--gap-action-sm); align-items: flex-start; color: var(--color-text-secondary); opacity: 0; transition: opacity .3s var(--ease); }
+.acc.is-open .acc__content { opacity: 1; }
+.acc__content .prose { color: var(--color-text-secondary); }
+@media (max-width: 767px) { .acc__content > .btn { align-self: stretch; } }   /* Figma 393 (Card / Accordion Mobile): knop over de volle breedte */
+
+/* --- Form / Field -------------------------------------------------------- */
+.form { display: flex; flex-direction: column; gap: var(--gap-field); }
+.form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.form-row--3 { grid-template-columns: 2fr 1fr 1fr; }
+@media (max-width: 767px) { .form-row, .form-row--3 { grid-template-columns: 1fr; } .form-row--keep { grid-template-columns: repeat(2, minmax(0, 1fr)); } }   /* Figma 393: huisnummer en toevoeging naast elkaar */
+.field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.field__label { display: flex; gap: 4px; color: var(--color-text-primary); }
+.field__req { color: var(--color-feedback-error); }
+.field__control { position: relative; }
+.input, .select, .textarea {
+  width: 100%; min-height: var(--size-control); padding: 12px 24px;
+  border: 1px solid var(--color-border-default); border-radius: var(--radius-inset);
+  background: var(--color-bg-surface); color: var(--color-text-primary);
+  font-size: var(--font-size-body); line-height: var(--font-line-height-body);
+  transition: border-color var(--duration), box-shadow var(--duration);
+  appearance: none;
+}
+.textarea { min-height: 96px; resize: vertical; display: block; }
+.textarea--lg { min-height: 160px; }
+.input::placeholder, .textarea::placeholder { color: var(--color-text-muted); opacity: 1; }
+.input:hover, .select:hover, .textarea:hover { border-color: var(--color-border-strong); }
+.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--color-border-focus); box-shadow: inset 0 0 0 1px var(--color-border-focus); }
+.select { padding-right: 56px; cursor: pointer; }
+.select:invalid, .select.is-empty { color: var(--color-text-muted); }
+.select option { color: var(--color-text-primary); }
+.field__chev { position: absolute; right: 24px; top: 50%; translate: 0 -50%; pointer-events: none; }
+.field__hint { font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); color: var(--color-text-secondary); }   /* Figma: Message onder het veld (bijv. telefoon) */
+.field__msg { display: none; gap: 8px; align-items: flex-start; font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); }
+.field__msg .icon { margin-top: 5px; width: 16px; height: 16px; }
+.field.is-error .input, .field.is-error .select, .field.is-error .textarea { border-color: var(--color-feedback-error); }
+.field.is-error .field__msg { display: flex; color: var(--color-feedback-error); }
+.field.is-success .field__msg--success { display: flex; color: var(--color-feedback-success); }
+.field.is-disabled .field__label { color: var(--color-text-muted); }
+.field.is-disabled .input { background: var(--color-bg-surface-alt); color: var(--color-text-muted); }
+
+/* Checkbox / privacy */
+.check { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
+.check input { appearance: none; flex: none; width: 24px; height: 24px; margin-top: 2px; border: 1px solid var(--color-border-default); border-radius: 4px; background: var(--color-bg-surface) center / 16px no-repeat; cursor: pointer; transition: border-color var(--duration), background-color var(--duration); }
+.check input:hover { border-color: var(--color-border-strong); }
+.check input:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 0; }
+.check input:checked { background-color: var(--color-action-primary-bg); border-color: var(--color-action-primary-bg); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23201f1d'%3E%3Cpath d='M23.11 4.17 9.19 23.3 .89 15 3 12.89l5.81 5.81L20.67 2.39z'/%3E%3C/svg%3E"); }
+.check input:checked:hover { background-color: var(--color-action-primary-bg-hover); border-color: var(--color-action-primary-bg-hover); }
+.privacy { display: flex; gap: 8px; align-items: flex-start; font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); color: var(--color-text-secondary); }
+.privacy .icon { margin-top: 5px; width: 16px; height: 16px; flex: none; color: var(--color-text-primary); }
+
+/* Melding (succes / fout) */
+.alert { display: flex; gap: 12px; align-items: flex-start; padding: 16px 20px; border-radius: var(--radius-inset); background: var(--color-feedback-success-bg); color: var(--color-feedback-success); }
+.alert--error { background: var(--color-feedback-error-bg); color: var(--color-feedback-error); }
+.alert .icon { margin-top: 4px; }
+
+/* --- Keuze / Optie (pil met pijl, WhatsApp-keuzehulp) -------------------- */
+.choice { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 56px; padding: 12px 24px; border: 1px solid var(--color-border-default); border-radius: var(--radius-full); background: var(--color-bg-surface); text-align: left; transition: border-color var(--duration), box-shadow var(--duration); }
+.choice:hover { border-color: var(--color-action-primary-bg); box-shadow: inset 0 0 0 1px var(--color-action-primary-bg); }
+.choice.is-selected { background: var(--color-bg-secondary-subtle); border-color: var(--color-text-brand-blue); box-shadow: inset 0 0 0 1px var(--color-text-brand-blue); }
+
+/* --- Slider-bediening ---------------------------------------------------- */
+.slider-nav { display: flex; gap: var(--gap-buttons); }
+.dots { display: flex; justify-content: center; gap: 8px; }
+.dots button { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--color-border-strong); transition: width var(--duration), background-color var(--duration); }
+.dots button.is-active { width: 24px; background: var(--color-brand-secondary); }
+
+/* --- Overlay basis (paneel, sheet, lightbox) ----------------------------- */
+.scrim { position: fixed; inset: 0; z-index: 90; background: rgb(10 42 67 / .6); opacity: 0; visibility: hidden; transition: opacity .25s var(--ease), visibility .25s; }
+.scrim.is-open { opacity: 1; visibility: visible; }
+
+/* Bevestiging na verzenden */
+.confirm { display: flex; flex-direction: column; gap: var(--gap-heading-3); }
+.confirm__title { display: flex; align-items: center; gap: 16px; }
+
+/* --- Form / Upload -------------------------------------------------------- */
+.upload { display: flex; flex-direction: column; gap: 8px; }
+.upload__zone { position: relative; display: grid; place-items: center; min-height: 143px; padding: 24px; border: 1px dashed var(--color-border-strong); border-radius: var(--radius-inset); background: var(--color-bg-surface); text-align: center; cursor: pointer; transition: border-color var(--duration), background-color var(--duration); }
+.upload__zone:focus-within { border-color: var(--color-border-focus); box-shadow: inset 0 0 0 1px var(--color-border-focus); }
+.upload__idle, .upload__full { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.upload__idle .icon { color: var(--color-text-brand-blue); }
+.upload__drop, .upload__full { display: none; }
+.upload.is-dragging .upload__zone { border-style: solid; border-color: var(--color-border-focus); background: var(--color-bg-secondary-subtle); }
+.upload.is-dragging .upload__idle { display: none; }
+.upload.is-dragging .upload__drop { display: block; font-weight: var(--font-weight-bold); color: var(--color-text-brand-blue); }
+.upload.is-full .upload__zone { cursor: default; border-style: solid; background: var(--color-bg-surface-alt); }
+.upload.is-full .upload__idle { display: none; }
+.upload.is-full .upload__full { display: flex; }
+.upload__list { display: flex; flex-direction: column; gap: 8px; list-style: none; padding: 0; }
+.upload__item { display: flex; align-items: center; gap: 16px; padding: 12px; border: 1px solid var(--color-border-default); border-radius: var(--radius-inset); background: var(--color-bg-surface); }
+.upload__item.is-error { border-color: var(--color-feedback-error); }
+.upload__thumb { width: 56px; height: 56px; flex: none; border-radius: 8px; object-fit: cover; background: var(--color-placeholder); }
+.upload__info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.upload__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.upload__meta { font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); color: var(--color-text-secondary); }
+.upload__item.is-error .upload__meta { color: var(--color-feedback-error); }
+.upload__bar { height: 4px; margin-top: 6px; border-radius: 2px; background: var(--color-border-default); overflow: hidden; }
+.upload__bar span { display: block; height: 100%; width: 0; background: var(--color-brand-secondary); transition: width .2s linear; }
+.upload__retry { color: var(--color-text-link); text-decoration: underline; text-underline-offset: 3px; font: inherit; }

@@ -1,0 +1,176 @@
+---
+title: Meltem M-WRG-I Unit
+description: Decentrale WTW balansventilatie. Tot 71% warmteterugwinning.
+bodyClass: has-sticky-bar
+cart: true
+---
+{% import "components/sections.njk" as s %}
+{% import "components/product.njk" as pr %}
+{% import "components/ui.njk" as ui %}
+{#- Productgegevens. Alle producten in het prototype linken naar deze pagina. -#}
+{% set p = {
+  name: 'Meltem M-WRG-I Unit', category: 'Decentrale WTW balansventilatie',
+  score: '<score>', reviews: '<aantal>', photos: 12,
+  price: 2645, montagePrice: 605,
+  usps: ['Tot 71% warmteterugwinning', 'Allergiefilter tegen pollen en fijnstof', 'Bediening via de Meltem App'],
+  subsidyNote: '<Eventuele subsidie of financiering, bijv. tot € X terug via regeling Y>',
+  montageText: 'Onze specialist installeert de unit compleet, inclusief muurdoorvoer en buitenrooster.',
+  leadTime: '<Levertijd, bijv. binnen X werkdagen in huis>',
+  service: ['<Garantie, bijv. X jaar fabrieksgarantie>', '<Verzendkosten of gratis verzending>', '<Retourbeleid, bijv. X dagen bedenktijd>', '<Betaalmethoden, bijv. iDEAL>']
+} %}
+
+{{ s.kruimelpad([{ label: 'Home', href: 'index' }, { label: 'Webshop', href: 'webshop' }, { label: 'M-WRG-I unit', href: 'webshop' }, { label: 'Meltem M-WRG-I Unit' }]) }}
+
+<section class="section product-hero" data-product>
+  <div class="container product-hero__grid">
+    {{ pr.galerij(p) }}
+    {{ pr.koopbox(p, site) }}
+  </div>
+</section>
+
+<nav class="section anchors" aria-label="Op deze pagina" data-anchors>
+  <div class="container anchors__bar" data-anchors-bar>
+    {% for a in [['voordelen', 'Voordelen'], ['beschrijving', 'Productbeschrijving'], ['specificaties', 'Inhoud en specificaties'], ['vergelijken', 'Vergelijken'], ['montage', 'Montage'], ['subsidie', 'Subsidie'], ['reviews', 'Reviews'], ['faq', 'Veelgestelde vragen']] %}
+    <a class="btn btn--text anchors__link" href="#{{ a[0] }}" data-label="{{ a[1] }}">{{ a[1] }}</a>
+    {% endfor %}
+  </div>
+</nav>
+
+<div id="voordelen">
+{{ s.contentCards({
+  title: '<span class="c-blue">Belangrijkste voordelen</span> Meltem M-WRG-I Unit', slideMobile: true,
+  cards: [
+    { icon: 'check', title: 'Energiezuinig & warmteterugwinning', text: 'Hergebruikt tot 71% van de warmte uit de afgevoerde lucht.' },
+    { icon: 'check', title: 'Gezond binnenklimaat', text: 'Het standaard allergiefilter houdt pollen, fijnstof en allergenen buiten.' },
+    { icon: 'check', title: 'Slimme bediening', text: 'Beheer de ventilatie eenvoudig via de Meltem App op je smartphone.' },
+    { icon: 'check', title: 'Compact & stijlvol design', text: 'Past moeiteloos in vrijwel elke ruimte dankzij het compacte formaat.' },
+    { icon: 'check', title: 'Flexibele installatie', text: 'Keuze uit levering inclusief professionele opbouwmontage of enkel het product.' }
+  ]
+}) }}
+</div>
+
+<div id="beschrijving">
+{{ s.split({
+  side: 'rechts', image: '', ratio: '4-3',
+  title: 'Productbeschrijving Meltem M-WRG-I Unit',
+  blocks: [
+    { text: 'De Meltem M-WRG-I unit is de ideale oplossing voor wie streeft naar een gezond, vochtvrij en energiezuinig binnenklimaat zonder dat er ingewikkelde kanaalsystemen aangelegd hoeven te worden. Door decentrale ventilatie toe te passen, wordt vochtige en vervuilde lucht rechtstreeks afgevoerd, terwijl verse buitenlucht opgewarmd de ruimte binnenkomt.' },
+    { text: 'Dankzij het compacte formaat (39 x 41 x 20 cm) en het gewicht van slechts 8,1 kg kan het systeem discreet aan een buitenmuur worden gemonteerd. Het meegeleverde RVS buitenrooster zorgt voor een duurzame en nette afwerking aan de buitenkant van je woning.' }
+  ]
+}) }}
+</div>
+
+<section class="section" id="specificaties">
+  <div class="container specs">
+    <div class="stack" style="gap:var(--gap-heading-2)">
+      <h2>Inhoud van de complete set</h2>
+      <div class="stack" style="gap:16px">
+        <p class="c-secondary">Bij bestelling van de Meltem M-WRG-I unit ontvang je een complete installatieset:</p>
+        {{ ui.checklist(['Meltem M-WRG-I ventilatie-unit', 'Set aansluitbuizen', 'Hoogwaardig RVS buitenrooster', 'Geïntegreerd allergiefilter (ideaal bij hooikoorts en stofallergie)', 'Gateway voor slimme bediening via de Meltem App']) }}
+      </div>
+    </div>
+    <div class="stack" style="gap:var(--gap-heading-2)">
+      <h2>Technische specificaties</h2>
+      <table class="spec-table">
+        <thead><tr><th scope="col">Eigenschap</th><th scope="col">Specificatie</th></tr></thead>
+        <tbody>
+          {% for r in [['Breedte', '39 cm'], ['Hoogte', '41 cm'], ['Diepte', '20 cm'], ['Gewicht', '8,1 kg'], ['Warmteterugwinning (WTW)', 'Tot 71%'], ['Montagewijze', 'Opbouw'], ['Bediening', 'Via Meltem App (gateway inclusief)'], ['Filterklasse', 'Allergiefilter'], ['Artikelnummer (SKU)', 'M-WRG-I'], ['Geluidsniveau', '<dB(A)>'], ['Luchtdebiet', '<m³/h>'], ['Energieverbruik', '<Watt>'], ['Garantie', '<X jaar>']] %}
+          <tr><th scope="row">{{ r[0] }}</th><td>{{ r[1] }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="vergelijken">
+  <div class="container compare">
+    <div class="stack compare__head" style="gap:var(--gap-heading-2)">
+      <h2>Welke Meltem past bij jou?</h2>
+      <p class="c-secondary">Beide units ventileren per ruimte en winnen warmte terug. Dit zijn de verschillen op een rij.</p>
+    </div>
+    <div class="compare__table" role="table" aria-label="Vergelijking Meltem M-WRG-I en M-WRG-II">
+      <div class="compare__row compare__row--products" role="row">
+        <div class="compare__cell is-current" role="cell"><p class="bold center c-blue">Je bekijkt dit model</p>{{ ui.media('', '', '16-9') }}<p class="h4">Meltem M-WRG-I</p><p><strong>€ 2.645,00</strong> <span class="body-sm c-secondary">incl. btw, zonder montage</span></p></div>
+        <div class="compare__cell" role="cell"><p class="bold center compare__spacer" aria-hidden="true">Je bekijkt dit model</p>{{ ui.media('', '', '16-9') }}<p class="h4"><a class="c-blue" href="{{ 'productpagina' | href }}">Meltem M-WRG-II</a></p><p><strong>€ 3.350,00</strong> <span class="body-sm c-secondary">incl. btw, zonder montage</span></p></div>
+      </div>
+      {% for r in [
+        ['Reviews', 'stars', 'stars'],
+        ['Beste keuze als', '<Voor wie of welke ruimte dit model de beste keuze is>', '<Voor wie of welke ruimte dit model de beste keuze is>'],
+        ['Warmteterugwinning', 'Tot 71%', 'Tot 94%'],
+        ['Vocht- en CO₂-sensor', '<Ja of nee>', 'Ja, ventileert automatisch'],
+        ['Afmetingen (b × h × d)', '39 × 41 × 20 cm', '36 × 59 × 22 cm'],
+        ['Buitenrooster', 'RVS', 'RVS of wit'],
+        ['Prijs met montage', '€ 3.250,00', '€ 3.995,00'],
+        ['Renteloze lening Warmtefonds', '<Ja of nee>', 'Mogelijk, bij montage door ons']
+      ] %}
+      <div class="compare__label" role="row"><span class="is-current bold" role="rowheader">{{ r[0] }}</span><span aria-hidden="true"></span></div>
+      <div class="compare__row" role="row">
+        {% for v in [r[1], r[2]] %}<div class="compare__cell{{ ' is-current' if loop.first }}" role="cell">{% if v == 'stars' %}<span class="rating__row only-desktop">{{ ui.stars(5) }}<span><strong>&lt;score&gt;</strong> <span class="body-sm c-secondary">(&lt;aantal&gt; reviews)</span></span></span><span class="rating__row only-mobile"><span class="stars">{{ icon('star') }}</span><span><strong>&lt;score&gt;</strong> <span class="c-secondary">(24)</span></span></span>{% else %}{{ v }}{% endif %}</div>{% endfor %}
+      </div>
+      {% endfor %}
+      <div class="compare__row compare__row--btn" role="row"><div class="compare__cell compare__cell--plain" role="cell"></div><div class="compare__cell" role="cell">{{ ui.btn('Bekijk de M-WRG-II', 'productpagina', 'secondary') }}</div></div>
+    </div>
+  </div>
+</section>
+
+<div id="montage">
+{{ s.stappen({ title: 'Zo verloopt de <span class="c-blue">montage</span>', cardW: 603, steps: [
+  { title: 'Je bestelt met montage', text: 'Vink bij het bestellen \'Inclusief montage\' aan. Je betaalt de montage direct mee.' },
+  { title: 'We plannen de montage in', text: '&lt;Hoe en wanneer we contact opnemen om een afspraak te plannen&gt;' },
+  { title: 'We monteren de unit', text: 'Onze specialist installeert de unit compleet, inclusief de muurdoorvoer, montage van het RVS buitenrooster en het aansluiten van de unit. &lt;Duur van de montage&gt;' },
+  { title: 'Uitleg en ingebruikname', text: '&lt;Uitleg over de Meltem App en het onderhoud van de filters&gt;' }
+] }) }}
+</div>
+
+<section class="section" id="subsidie">
+  <div class="container card stack" style="gap:var(--gap-heading-3)">
+    <h3>Subsidie en financiering</h3>
+    <p class="c-secondary">&lt;Informatie over subsidie en financieringsmogelijkheden voor deze unit, met bedragen en voorwaarden&gt;</p>
+  </div>
+</section>
+
+<div id="reviews">
+{{ s.reviews({ title: 'Ervaringen van kopers', btn: false, text: '&lt;Gemiddelde score en aantal reviews van dit product&gt;', items: [
+  { name: '<Naam>', date: '<Datum>', text: '<Review van een klant over de Meltem M-WRG-I>' },
+  { name: '<Naam>', date: '<Datum>', text: '<Review van een klant over de Meltem M-WRG-I>' },
+  { name: '<Naam>', date: '<Datum>', text: '<Review van een klant over de Meltem M-WRG-I>' },
+  { name: '<Naam>', date: '<Datum>', text: '<Review van een klant over de Meltem M-WRG-I>' }
+] }, site) }}
+</div>
+
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <h2 class="t-center">Past hierbij: vervangfilters</h2>
+    <ul class="cards cards--3 products cards--slide-mobile" role="list">
+      {% for f in [['Actief koolstof filter (toevoerfilter) voor Meltem M-WRG-I unit', '€ 55,00'], ['Allergie-vrij filter (toevoerfilter) voor Meltem M-WRG-I unit', '€ 35,00'], ['Standaard filter (afvoerfilter) voor Meltem M-WRG-I unit', '€ 22,50']] %}
+      <li class="product-card card-t card-t--link">
+        {{ ui.media('', '', '16-9') }}
+        <div class="product-card__body">
+          <div class="stack" style="gap:var(--gap-meta)"><span>Vervangfilter</span><h3><a class="card-t__link" href="{{ 'productpagina' | href }}">{{ f[0] }}</a></h3></div>
+          <span class="rating__row"><span class="stars">{{ icon('star') }}</span><span><strong>&lt;score&gt;</strong> <span class="body-sm c-secondary">(&lt;aantal&gt;)</span></span></span>
+          <p class="h4">Vanaf {{ f[1] }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<div id="faq">
+{{ s.faq({ title: 'Veelgestelde vragen over de<br class="only-desktop"> Meltem M-WRG-I Unit', btn: false, items: [
+  { q: 'Wat houdt \'montage in opbouw\' in?', a: shared.TBD },
+  { q: 'Hoe werkt de bediening via de app?', a: shared.TBD },
+  { q: 'Hoe vaak moet het allergiefilter vervangen worden?', a: shared.TBD }
+] }) }}
+</div>
+
+{{ s.cta({
+  title: 'Wil je weten of de Meltem M-WRG-I geschikt is voor jouw specifieke situatie?',
+  text: 'Onze adviseurs helpen je graag bij het maken van de juiste keuze voor jouw woning.',
+  primary: { label: 'Neem contact met ons op', href: 'contact' },
+  secondary: false, contact: true
+}) }}
+
+{{ pr.stickyBar(p) }}
+{{ pr.overlays(p) }}

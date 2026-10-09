@@ -1,0 +1,18 @@
+{
+  "name": "opstijgendvocht-prototype",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Klikbaar prototype Opstijgendvocht.nl (Vsee), gebouwd met Eleventy",
+  "scripts": {
+    "tokens": "node tools/build-tokens.js",
+    "icons": "node tools/build-icons.js",
+    "fonts": "node tools/build-fonts.js",
+    "prepare-assets": "npm run tokens && npm run icons && npm run fonts",
+    "build": "npm run prepare-assets && eleventy",
+    "start": "npm run prepare-assets && eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.6",
+    "nunjucks": "^3.2.4"
+  }
+}

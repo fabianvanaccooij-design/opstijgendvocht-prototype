@@ -1,0 +1,42 @@
+---
+title: Hoe herken en bestrijd je opstijgend vocht in huis?
+description: Lees hoe je de eerste signalen van opstijgend vocht herkent, wat de oorzaken zijn en welke oplossingen werken.
+---
+{% import "components/sections.njk" as s %}
+{% import "components/ui.njk" as ui %}
+
+{{ s.kruimelpad([{ label: 'Home', href: 'index' }, { label: 'Blog', href: 'blog' }, { label: 'Hoe herken en bestrijd je opstijgend vocht in huis?' }]) }}
+
+<article class="article">
+  <header class="article__intro">
+    <h1>Hoe herken en bestrijd je opstijgend vocht in huis?</h1>
+    <div class="body-lg c-secondary prose">
+      <p>Opstijgend vocht is een hardnekkig probleem dat de constructie van je woning én je gezondheid kan aantasten. In dit artikel lees je hoe je de eerste signalen herkent, wat de oorzaken zijn en welke oplossingen het meest effectief zijn om je muren weer volledig droog te krijgen.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </div>
+  </header>
+  {{ ui.media('', '', '16-9') }}
+  <section class="article__block">
+    <h2>Wat is opstijgend vocht precies?</h2>
+    <div class="prose c-secondary">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+      <ul class="c-primary list--signaal">
+        <li><strong class="c-blue">Signaal 1:</strong> Loslatend behang of afbrokkelend stucwerk aan de onderkant van de muur.</li>
+        <li><strong class="c-blue">Signaal 2:</strong> Een muffe, vochtige lucht in de ruimte die niet weggaat door te ventileren.</li>
+        <li><strong class="c-blue">Signaal 3:</strong> Witte zoutuitslag (zoutpeter) op de bakstenen of binnenmuren.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="article__block">
+    <h2>De impact op je woning en gezondheid</h2>
+    <p class="c-secondary">Curabitur blandit tempus porttitor. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+  </section>
+</article>
+
+{{ s.cta({
+  title: 'Heb je last van opstijgend vocht in je woning?',
+  text: 'Blijf er niet mee zitten. Voorkom verdere schade aan je muren en laat een specialist gratis meekijken met jouw situatie.',
+  primary: { label: 'Klik hier om direct contact met ons op te nemen', href: 'contact' },
+  secondary: false
+}) }}
+
+{{ s.artikelen({ title: 'Gerelateerde artikelen', items: shared.artikelen }) }}

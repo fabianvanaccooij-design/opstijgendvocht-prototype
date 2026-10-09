@@ -1,0 +1,153 @@
+{#- ==========================================================================
+    UI-macro's. Importeer in een template met:
+      {% import "components/ui.njk" as ui %}
+    en gebruik dan bijv. {{ ui.btn('Contact', 'contact') }}.
+    ========================================================================== -#}
+
+{#- Button. style: primary | secondary | whatsapp | text
+    o.onBlue: Tone=Op blauw   o.block: volle breedte   o.wa: opent WhatsApp-paneel
+    o.icon: ander icoon in de cirkel   o.type: 'button'/'submit' maakt een <button>
+    o.attrs: extra attributen als tekst   o.cls: extra classes -#}
+{% macro btn(label, href='#', style='primary', o={}) -%}
+{%- set cls = 'btn btn--' ~ style ~ (' btn--back' if o.back) ~ (' btn--on-blue' if o.onBlue) ~ (' btn--block' if o.block) ~ (' ' ~ o.cls if o.cls) -%}
+{%- set attrs = (' data-wa-open' if o.wa) ~ (' ' ~ o.attrs if o.attrs) -%}
+{%- if o.type or o.wa %}<button type="{{ o.type or 'button' }}" class="{{ cls }}"{{ attrs | safe }}>{% else %}<a href="{{ href | href }}" class="{{ cls }}"{{ attrs | safe }}>{% endif -%}
+{%- if style == 'secondary' and o.back -%}
+<span class="btn__circle">{{ icon('arrow-left') }}</span><span>{{ label }}</span>
+{%- elif style == 'secondary' or style == 'whatsapp' -%}
+<span>{{ label }}</span><span class="btn__circle">{{ icon(o.icon or ('whatsapp' if style == 'whatsapp' else 'arrow-right')) }}</span>
+{%- elif style == 'text' -%}
+<span>{{ label }}</span>{{ icon(o.icon or 'arrow-right') }}
+{%- else -%}
+{% if o.iconLeft %}{{ icon(o.iconLeft) }}{% endif %}<span>{{ label }}</span>
+{%- endif -%}
+{%- if o.type or o.wa %}</button>{% else %}</a>{% endif -%}
+{%- endmacro %}
+
+{#- Ronde icoonknop (sliderpijlen e.d.). style: primary | secondary -#}
+{% macro iconBtn(iconName, label, style='primary', o={}) -%}
+<button type="button" class="btn btn--icon btn--{{ style }}{{ ' btn--on-blue' if o.onBlue }}" aria-label="{{ label }}"{{ (' ' ~ o.attrs) | safe if o.attrs }}>
+{%- if style == 'secondary' %}<span class="btn__circle">{{ icon(iconName) }}</span>{% else %}{{ icon(iconName) }}{% endif -%}
+</button>
+{%- endmacro %}
+
+{#- Beeld. src leeg = grijze placeholder (zoals in Figma). ratio: '3-2', '4-3', '1-1', '16-9' of leeg -#}
+{% macro media(src='', alt='', ratio='', note='', cls='') -%}
+<div class="media{{ ' media--ph' if not src }}{{ ' ratio-' ~ ratio if ratio }}{{ ' ' ~ cls if cls }}">
+  {%- if src %}<img src="assets/img/{{ src }}" alt="{{ alt }}" loading="lazy">{% endif -%}
+  {%- if note %}<span class="media__note">{{ note }}</span>{% endif -%}
+</div>
+{%- endmacro %}
+
+{% macro stars(n=5, small=false) -%}
+<span class="stars{{ ' stars--sm' if small }}" role="img" aria-label="{{ n }} van 5 sterren">{% for i in range(0, n) %}{{ icon('star') }}{% endfor %}</span>
+{%- endmacro %}
+
+{#- Rating: Trustoo-logo + sterren + score -#}
+{% macro rating(site, o={}) -%}
+<div class="rating{{ ' rating--sm' if o.small }}">
+  {% if not o.noLogo %}<img class="rating__logo" src="assets/img/trustoo.png" alt="Trustoo" width="102" height="24">{% endif %}
+  <span class="rating__row">{{ stars(5, o.small) }}
+  <span class="rating__score{{ ' body-sm' if o.small }}"><strong>{{ site.rating.score }}</strong> <span class="{{ 'c-on-ink' if o.onInk else 'c-secondary' }}">({{ site.rating.count }} reviews)</span></span></span>
+</div>
+{%- endmacro %}
+
+{#- Formulierveld. type: text | email | tel | textarea | select
+    o.required, o.placeholder, o.options (select), o.error (foutmelding bij leeg), o.cls, o.value -#}
+{% macro field(name, label, type='text', o={}) -%}
+{%- set id = 'f-' ~ (o.idPrefix or '') ~ name -%}
+<div class="field{{ ' ' ~ o.cls if o.cls }}{{ ' is-disabled' if o.disabled }}"{{ ' data-field' if not o.disabled }}>
+  <label class="field__label" for="{{ id }}">{{ label }}{% if o.required %}<span class="field__req" aria-hidden="true">*</span>{% endif %}</label>
+  <div class="field__control">
+  {%- if type == 'textarea' %}
+    <textarea class="textarea{{ ' textarea--lg' if o.large }}" id="{{ id }}" name="{{ name }}" placeholder="{{ o.placeholder }}"{{ ' required' if o.required }} rows="2">{{ o.value }}</textarea>
+  {%- elif type == 'select' %}
+    <select class="select" id="{{ id }}" name="{{ name }}"{{ ' required' if o.required }}>
+      <option value="" disabled selected hidden>{{ o.placeholder or 'Maak een keuze' }}</option>
+      {%- for opt in o.options %}<option>{{ opt }}</option>{% endfor %}
+    </select>
+    <span class="field__chev">{{ icon('chevron-down') }}</span>
+  {%- else %}
+    <input class="input" id="{{ id }}" name="{{ name }}" type="{{ type }}" placeholder="{{ o.placeholder }}"{{ ' required' if o.required }}{% if type == 'email' %} autocomplete="email"{% elif type == 'tel' %} autocomplete="tel" inputmode="tel"{% elif o.autocomplete %} autocomplete="{{ o.autocomplete }}"{% endif %}{% if o.value %} value="{{ o.value }}"{% endif %}{{ ' readonly tabindex="-1"' | safe if o.disabled }}>
+  {%- endif %}
+  </div>
+  {%- if o.hint %}<p class="field__hint" id="{{ id }}-hint">{{ o.hint }}</p>{% endif %}
+  <p class="field__msg" role="alert">{{ icon('error') }}<span>{{ o.error or ('Vul je ' ~ (label | lower) ~ ' in.') }}</span></p>
+</div>
+{%- endmacro %}
+
+{#- Formulier / Stappen: balk per stap met badge (afgerond = vinkje, actief = cijfer) en label.
+    current: actieve stap (1-based). main.js (data-steps) werkt de staten bij bij wisselen. -#}
+{% macro stepper(labels, current=1) -%}
+<ol class="stepper" role="list" aria-label="Stappen" data-stepper>
+  {%- for l in labels %}
+  {%- set n = loop.index %}
+  <li class="stepper__item{{ ' is-done' if n < current }}{{ ' is-active' if n == current }}"{{ ' aria-current="step"' | safe if n == current }}>
+    <span class="stepper__bar"></span>
+    <span class="stepper__row"><span class="stepper__badge" aria-hidden="true"><span class="stepper__num">{{ n }}</span>{{ icon('check') }}</span><span class="stepper__label">{{ l }}</span></span>
+  </li>
+  {%- endfor %}
+</ol>
+{%- endmacro %}
+
+{#- Keuze / Beeldoptie (zonder beeld): kaart met checkbox, label en omschrijving.
+    o.tip: tekst (HTML) voor de lichtblauwe WhatsApp-tip die verschijnt zodra de kaart gekozen is. -#}
+{% macro choiceCard(name, label, desc='', o={}) -%}
+<label class="choice-card check">
+  <input type="checkbox" name="{{ name }}" value="{{ label }}">
+  <span class="choice-card__text">
+    <span class="choice-card__label">{{ label }}</span>
+    {%- if desc %}<span class="choice-card__desc">{{ desc }}</span>{% endif %}
+    {%- if o.tip %}<span class="choice-card__tip"><span class="choice-card__banner"><span class="choice-card__icon">{{ icon('whatsapp') }}</span><span>{{ o.tip | safe }}</span></span></span>{% endif %}
+  </span>
+</label>
+{%- endmacro %}
+
+{% macro privacy(text='Wij respecteren je privacy. Je gegevens zijn veilig en je ontvangt geen spam. Lees onze', linkLabel='privacyverklaring', after='.') -%}
+<p class="privacy">{{ icon('shield-check') }}<span>{{ text }} <a class="link" href="{{ 'tekstpagina' | href }}">{{ linkLabel }}</a>{{ after }}</span></p>
+{%- endmacro %}
+
+{#- Uitklapkaart. level: kopniveau (3 of 4). content mag HTML bevatten. -#}
+{% macro acc(title, content, open=false, level=3, id='', badge='') -%}
+{%- set uid = id or ('acc-' ~ (title | slugify)) -%}
+<div class="acc{{ ' is-open' if open }}{{ ' acc--badge' if badge }}" data-acc>
+  <h{{ level }} class="h{{ level }}" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="{{ 'true' if open else 'false' }}" aria-controls="{{ uid }}">
+      {% if badge %}<span class="badge-num" aria-hidden="true">{{ badge }}</span>{% endif %}<span class="acc__title">{{ title }}</span><span class="acc__chev">{{ icon('chevron-down') }}</span>
+    </button>
+  </h{{ level }}>
+  <div class="acc__body" id="{{ uid }}"><div class="acc__inner"><div class="acc__content">{{ content | safe }}</div></div></div>
+</div>
+{%- endmacro %}
+
+{% macro checklist(items, cls='') -%}
+<ul class="checklist {{ cls }}" role="list">{% for it in items %}<li>{{ icon('check') }}<span>{{ it | safe }}</span></li>{% endfor %}</ul>
+{%- endmacro %}
+
+{#- Bevestiging na verzenden (Figma: Bevestiging): vinkje + titel + tekst. Verborgen tot het formulier is verstuurd. -#}
+{% macro confirm(id, title, text) -%}
+<div class="confirm" id="{{ id }}" hidden role="status" tabindex="-1">
+  <div class="confirm__title"><span class="usp__icon usp__icon--box">{{ icon('check', 'icon--lg') }}</span><h3>{{ title }}</h3></div>
+  <p class="c-secondary">{{ text }}</p>
+</div>
+{%- endmacro %}
+
+{#- Form / Upload: foto's toevoegen met slepen of kiezen. Gedrag in main.js (data-upload).
+    Staten: leeg, slepen, uploaden, geüpload (met prullenbak), mislukt, te groot, verkeerd type, maximum bereikt. -#}
+{% macro upload(name='fotos', label='Foto’s toevoegen', max=5) -%}
+<div class="upload" data-upload data-max="{{ max }}" data-max-mb="10">
+  <p class="field__label" id="{{ name }}-label">{{ label }}</p>
+  <label class="upload__zone" data-upload-zone>
+    <input class="visually-hidden" type="file" name="{{ name }}" accept="image/jpeg,image/png" multiple aria-labelledby="{{ name }}-label" data-upload-input>
+    <span class="upload__idle">
+      {{ icon('camera', 'icon--lg') }}
+      <span class="only-desktop">Sleep je foto’s hierheen of <span class="link">kies bestanden</span></span>
+      <span class="only-mobile link">Kies foto’s of maak een foto</span>
+      <span class="body-sm c-muted">JPG of PNG, maximaal &lt;x&gt; MB per foto</span>
+    </span>
+    <span class="upload__drop">Laat je foto’s hier los</span>
+    <span class="upload__full"><strong>Je hebt het maximum van {{ max }} foto’s bereikt</strong><span class="body-sm c-secondary">Verwijder een foto om een andere toe te voegen.</span></span>
+  </label>
+  <ul class="upload__list" role="list" data-upload-list></ul>
+</div>
+{%- endmacro %}

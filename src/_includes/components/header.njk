@@ -1,0 +1,126 @@
+{#- Topheader + Main-Header (desktop) en de mobiele balk met menu.
+    Menu-inhoud komt uit src/_data/site.js (nav). -#}
+{% import "components/ui.njk" as ui %}
+{#- Winkelmand (Figma Main-Header: Toon winkelmand / Toon aantal). Aan via front matter: cart: true, cartCount: 1 -#}
+{% macro cartBtn(count, cls) -%}
+<button class="cartbtn {{ cls }}" type="button" aria-label="Winkelmand{{ ', ' ~ count ~ ' product' if count }}">{{ icon('cart', 'icon--lg' if cls else '') }}{% if count %}<span class="cartbtn__count" aria-hidden="true">{{ count }}</span>{% endif %}</button>
+{%- endmacro %}
+
+<div class="topheader">
+  <ul class="topheader__usps" role="list">
+    {% for u in site.usps %}<li>{{ icon(u.icon, 'icon--sm') }}<span>{{ u.text }}</span></li>{% endfor %}
+  </ul>
+  <div class="topheader__right">
+    <nav class="topheader__links" aria-label="Snelkoppelingen">
+      {% for l in site.topLinks %}<a href="{{ l.href | href }}">{{ l.label }}</a>{% endfor %}
+    </nav>
+    <span class="topheader__divider" aria-hidden="true"></span>
+    <a class="topheader__phone" href="{{ site.phone.href }}">{{ icon('phone', 'icon--sm') }}<span>{{ site.phone.label }}</span></a>
+  </div>
+</div>
+
+<header class="site-header" data-header>
+  <div class="site-header__bar">
+    <a class="site-header__logo" href="index.html" aria-label="{{ site.name }}, naar de homepage">
+      <img src="assets/img/logo.png" alt="{{ site.name }}" width="180" height="55">
+    </a>
+
+    {# Desktopmenu #}
+    <nav class="mainnav" aria-label="Hoofdmenu">
+      <ul class="mainnav__list" role="list">
+        {% for item in site.nav %}
+        <li class="mainnav__item">
+          {% if item.groups %}
+          <button class="mainnav__link" type="button" aria-expanded="false" aria-controls="mega-{{ loop.index }}" data-mega-toggle>
+            <span>{{ item.label }}</span>{{ icon('chevron-down', 'icon--sm') }}
+          </button>
+          {% else %}
+          <a class="mainnav__link" href="{{ item.href | href }}"{% if page.fileSlug == item.href %} aria-current="page"{% endif %}><span>{{ item.label }}</span></a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="site-header__cta">
+      {% if cart %}{{ cartBtn(cartCount) }}{% endif %}
+      {{ ui.btn('Gratis vochtadvies aanvragen', 'gratis-vochtadvies') }}
+    </div>
+
+    {# Mobiele acties #}
+    <div class="site-header__actions">
+      {% if cart %}{{ cartBtn(cartCount, 'iconbtn') }}{% endif %}
+      <a class="iconbtn" href="{{ site.phone.href }}" aria-label="Bel {{ site.phone.label }}">{{ icon('phone', 'icon--lg') }}</a>
+      <button class="iconbtn" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="mobilemenu" data-mobilemenu-open>{{ icon('menu', 'icon--lg') }}</button>
+    </div>
+  </div>
+
+  {# Megamenu's (desktop) #}
+  {% for item in site.nav %}{% if item.groups %}
+  <div class="mega" id="mega-{{ loop.index }}" hidden data-mega>
+    <div class="mega__inner{{ ' mega__inner--small' if item.small }}">
+      <p class="h4">{{ item.label }}</p>
+      <div class="mega__groups">
+        {% for g in item.groups %}
+        <div class="mega__group">
+          {% if g.title %}<p class="bold">{{ g.title }}</p>{% endif %}
+          <ul role="list">{% for l in g.links %}<li><a href="{{ l.href | href }}">{{ l.label }}</a></li>{% endfor %}</ul>
+        </div>
+        {% endfor %}
+      </div>
+      {{ ui.btn(item.cta.label, item.cta.href, 'secondary') }}
+    </div>
+  </div>
+  {% endif %}{% endfor %}
+</header>
+<div class="scrim scrim--mega" data-mega-scrim></div>
+
+{# Mobiel menu (overlay met submenu's) #}
+<div class="mobilemenu" id="mobilemenu" role="dialog" aria-modal="true" aria-label="Menu" hidden data-mobilemenu>
+  <div class="mobilemenu__bar">
+    <a class="site-header__logo" href="index.html"><img src="assets/img/logo.png" alt="{{ site.name }}" width="131" height="40"></a>
+    <div class="site-header__actions">
+      {% if cart %}{{ cartBtn(cartCount, 'iconbtn') }}{% endif %}
+      <a class="iconbtn" href="{{ site.phone.href }}" aria-label="Bel {{ site.phone.label }}">{{ icon('phone', 'icon--lg') }}</a>
+      <button class="iconbtn" type="button" aria-label="Menu sluiten" data-mobilemenu-close>{{ icon('close', 'icon--lg') }}</button>
+    </div>
+  </div>
+
+  <div class="mobilemenu__panes">
+    <div class="mobilemenu__pane is-active" data-pane="root">
+      <ul class="mobilemenu__list" role="list">
+        {% for item in site.nav %}
+        <li>
+          {% if item.groups %}
+          <button class="mobilemenu__row" type="button" data-pane-open="sub-{{ loop.index }}"><span>{{ item.label }}</span>{{ icon('chevron-right') }}</button>
+          {% else %}
+          <a class="mobilemenu__row" href="{{ item.href | href }}"><span>{{ item.label }}</span></a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      <nav class="mobilemenu__secondary" aria-label="Snelkoppelingen">
+        {% for l in site.topLinks %}<a href="{{ l.href | href }}">{{ l.label }}</a>{% endfor %}
+      </nav>
+    </div>
+
+    {% for item in site.nav %}{% if item.groups %}
+    <div class="mobilemenu__pane mobilemenu__sub" data-pane="sub-{{ loop.index }}" hidden>
+      <button class="mobilemenu__back" type="button" data-pane-back>{{ icon('chevron-left') }}<span>Menu</span></button>
+      <p class="h3">{{ item.label }}</p>
+      {% for g in item.groups %}
+      <div class="mobilemenu__group">
+        {% if g.title %}<p class="bold">{{ g.title }}</p>{% endif %}
+        {% for l in g.links %}<a href="{{ l.href | href }}">{{ l.label }}</a>{% endfor %}
+      </div>
+      {% endfor %}
+      {{ ui.btn(item.cta.label, item.cta.href, 'secondary') }}
+    </div>
+    {% endif %}{% endfor %}
+  </div>
+
+  <div class="mobilemenu__cta">
+    {{ ui.btn('Gratis vochtadvies aanvragen', 'gratis-vochtadvies', 'primary', { block: true }) }}
+    {{ ui.btn(site.phone.label, site.phone.href, 'secondary', { icon: 'phone' }) }}
+  </div>
+</div>

@@ -1,0 +1,38 @@
+---
+crumb: Blog
+title: Kennisbank & Blog
+description: Alles wat je moet weten over het herkennen, behandelen en voorkomen van vochtproblemen in huis.
+---
+{% import "components/sections.njk" as s %}
+{% import "components/blocks.njk" as b %}
+{% import "components/ui.njk" as ui %}
+
+{{ s.heroPage({
+  variant: 'center', tight: true,
+  title: 'Kennisbank & Blog',
+  text: 'Alles wat je moet weten over het herkennen, behandelen en voorkomen van vochtproblemen in huis.'
+}, site) }}
+
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <div class="cards cards--3" style="row-gap:var(--gap-action)">
+      {% for i in range(0, 4) %}{% for a in shared.artikelen %}
+      <article class="card-t card-t--link">
+        {{ ui.media('', '', '16-9') }}
+        <div class="card-t__body"><div class="stack" style="gap:var(--gap-heading-3)">
+          <h3><a class="card-t__link" href="{{ 'blogartikel' | href }}">{{ a.title }}</a></h3>
+          <p class="c-secondary">{{ a.text }}</p>
+        </div></div>
+      </article>
+      {% endfor %}{% endfor %}
+    </div>
+    {{ b.paginering(1, 12) }}
+  </div>
+</section>
+
+{{ s.cta({
+  title: 'Twijfel je over het vochtprobleem <br>in jouw woning?',
+  text: 'Laat een deskundige de situatie beoordelen en ontvang gericht advies.',
+  primary: { label: 'Vraag een vrijblijvende vochtdiagnose aan', href: 'gratis-vochtadvies' },
+  secondary: false
+}) }}

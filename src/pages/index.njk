@@ -1,0 +1,106 @@
+---
+title: OpstijgendVocht.nl
+permalink: index.html
+description: Vochtige muren? Wij krijgen ze droog. Eerst de oorzaak, daarna de juiste oplossing.
+---
+{% import "components/sections.njk" as s %}
+
+{{ s.heroHome({
+  image: 'hero-home.jpg',
+  title: 'Vochtige muren? <br>Wij krijgen ze droog!',
+  subtitle: 'Eerst de oorzaak. Daarna de juiste oplossing.',
+  text: 'Heb je last van een vochtige muur, schimmel of condens? Eerst kijken we waar het vocht vandaan komt. Daarna adviseren we de oplossing die bij je woning past.',
+  usps: ['Gratis en vrijblijvende inspectie', '30 jaar garantie op geïnjecteerde muren', 'Gratis droogcontrole'],
+  uspsDesktop: [
+    { icon: 'search', text: 'Gratis en vrijblijvende inspectie' },
+    { icon: 'shield-check', text: '30 jaar garantie op geïnjecteerde muren' },
+    { icon: 'success', text: 'Gratis droogcontrole' }
+  ]
+}, site) }}
+
+{{ s.watZieJe({
+  title: 'Wat zie je in huis?',
+  intro: 'Je hoeft zelf niet te weten wat de oorzaak is. Kies wat je herkent:',
+  tiles: [
+    { title: 'Vochtige muur', image: '', href: site.routes.vochtigeMuur, btn: 'Bekijk vochtige muur',
+      text: 'Zie je vochtplekken, witte zoutuitslag of loslatende verf of stucwerk? De oorzaak kan opstijgend vocht zijn, maar ook lekkage, condens, doorslaand vocht of regeninslag.' },
+    { title: 'Schimmel', image: '', href: 'schimmel', btn: 'Bekijk schimmel in huis',
+      text: 'Zie je zwarte, groene of grijze plekken op muren, plafonds of rond kozijnen? Schimmel ontstaat waar oppervlakken langere tijd vochtig blijven.' },
+    { title: 'Condens', image: '', href: site.routes.condens, btn: 'Bekijk condens in huis',
+      text: 'Zijn je ramen vaak nat of zie je vocht op koude muren? Dan kunnen temperatuur en onvoldoende ventilatie een belangrijke rol spelen.' }
+  ],
+  bar: { title: 'Muur afwerken', btn: 'Bekijk muur afwerken', href: site.routes.muurAfwerken,
+    text: 'Is jouw muur behandeld tegen vocht en wil je weten wanneer je weer kunt stucen of schilderen?<br>Wij leggen je uit waar je op moet letten om de muur weer netjes af te werken.' }
+}) }}
+
+{{ s.uitklaplijst({
+  title: 'Daarom is kiezen voor <span class="c-blue">OpstijgendVocht.nl</span> een slimme keuze',
+  center: true,
+  image: '', ratio: '4-3',
+  items: [
+    { title: 'Eerst onderzoeken, dan behandelen', text: 'Niet elke vochtplek is opstijgend vocht. We kijken eerst naar de plek, het schadebeeld en hoe je huis is gebouwd. Daarna zoeken we de oorzaak en adviseren we wat helpt.' },
+    { title: 'Technisch onderbouwde behandeling', text: shared.TBD },
+    { title: '30 jaar garantie', text: shared.TBD },
+    { title: 'We blijven je helpen', text: shared.TBD }
+  ]
+}) }}
+
+{{ s.stappen({ title: 'Zo werkt ons <span class="c-blue">vochtadvies</span>', steps: shared.stappen, btn: { label: 'Bekijk onze werkwijze', href: 'werkwijze', style: 'secondary' } }) }}
+
+{{ s.keurmerken({ title: 'Onze keurmerken en certificeringen', items: shared.keurmerken }) }}
+
+{{ s.reviews({ items: shared.reviews, text: 'Klanten beoordelen ons met <strong>9,7</strong> op Trustoo (144 reviews)' }, site) }}
+
+{{ s.uitklaplijst({
+  title: 'Wat helpt bij jouw <span class="c-blue">vochtprobleem?</span>',
+  center: true, leftMobile: true,
+  image: '', ratio: '3-2',
+  items: [
+    { title: 'Opstijgend vocht', text: 'Trekt grondvocht via het metselwerk omhoog? Dan kan muurinjectie de vochttoevoer stoppen. Bij vastgesteld opstijgend vocht vormen we laag in de muur een permanente waterkerende barrière.', btn: 'Lees hoe wij opstijgend vocht behandelen', btnMobile: 'Bekijk onze aanpak', href: site.routes.vochtigeMuur },
+    { title: 'Schimmel', text: shared.TBD },
+    { title: 'Condens en ventilatie', text: shared.TBD },
+    { title: 'Muur afwerken na vocht', text: shared.TBD }
+  ]
+}) }}
+
+{{ s.split({
+  side: 'links', image: '',
+  kicker: 'Opstijgend vocht?', title: 'Wij stoppen het bij de bron',
+  blocks: [
+    { text: 'Bij vastgesteld opstijgend vocht gebruiken we <strong class="c-primary">FASSA-INJECT</strong>. Deze injectiecrème vormt laag in de muur een permanente waterkerende barrière, zodat nieuw vocht niet verder kan opstijgen. Waar mogelijk werken we op plintniveau, zodat de boorgaten na afloop netjes uit het zicht verdwijnen.' },
+    { title: 'Technisch getest: A+, A+, A+', text: 'FASSA-INJECT is onafhankelijk beoordeeld door <strong class="c-primary">Buildwise</strong> en behaalde bij verschillende vochtbelastingen telkens de hoogste klasse: <strong class="c-primary">A+</strong>. Daarnaast beschikt het product over <strong class="c-primary">ATG 3121</strong>. Zo combineren we een technisch bewezen product met een juiste diagnose en zorgvuldige uitvoering.' }
+  ],
+  btn: { label: 'Bekijk hoe muurinjectie werkt', href: site.routes.vochtigeMuur }
+}) }}
+
+{{ s.team({
+  title: 'De mensen die voor droge muren zorgen',
+  text: 'Achter OpstijgendVocht.nl staat een team dat dagelijks met vochtproblemen in woningen en gebouwen bezig is. Van het eerste advies tot de uitvoering willen we vooral duidelijk zijn over wat we zien, wat we adviseren en waarom. Geen standaardbehandeling. Wel een aanpak die begint bij de oorzaak.',
+  btn: { label: 'Maak kennis met ons team', href: 'over-ons' },
+  images: [{ src: 'team-groot.jpg' }, { src: 'team-1.jpg', pos: '50% 34%' }, { src: 'team-2.jpg', pos: '50% 100%' }]
+}) }}
+
+{{ s.split({
+  side: 'rechts', image: '',
+  title: 'Wanneer is je muur weer droog?',
+  blocks: [
+    { title: 'De muur moet drogen', text: 'Injecteren stopt de nieuwe vochttoevoer. Het aanwezige vocht moet daarna uit de muur verdampen. Dat duurt meestal enkele maanden en bij dikkere muren soms tot één jaar.' },
+    { title: 'Let ook op zouten in de muur', text: 'Na het injecteren kunnen zouten nog zichtbaar blijven in het pleisterwerk. Wij adviseren wanneer en hoe je de muur het beste kunt afwerken. Wil je de muur gelijk afwerken? Dan kan <strong class="c-primary">SaltShieldPlus</strong> in geschikte situaties helpen.' }
+  ],
+  btn: { label: 'Bekijk SaltShieldPlus', href: site.routes.product }
+}) }}
+
+{{ s.split({
+  side: 'links', image: '',
+  title: 'Ook voor VvE’s, woningbouw en bouwbedrijven',
+  blocks: [
+    { text: '<p>Wij werken niet alleen voor huiseigenaren. We werken ook voor:</p><ul><li>VvE’s</li><li>woningbouworganisaties</li><li>aannemers</li><li>bouwbedrijven</li></ul><p class="na-lege-regel">We kunnen meedenken bij renovaties, vochtproblemen beoordelen en onze werkzaamheden afstemmen op de planning van het project.</p>' }
+  ],
+  btn: { label: 'Zakelijk samenwerken', href: 'zakelijk', style: 'secondary' }
+}) }}
+
+{{ s.magazine({}) }}
+
+{{ s.cta() }}
+
+{{ s.faq({ title: 'Veelgestelde vragen over <span class="c-blue">vochtproblemen</span>', items: shared.faqHome }) }}

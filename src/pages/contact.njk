@@ -1,0 +1,80 @@
+---
+crumb: Contact
+title: Contact
+description: Neem contact op met OpstijgendVocht.nl via telefoon, WhatsApp, e-mail of het contactformulier.
+---
+{% import "components/sections.njk" as s %}
+{% import "components/ui.njk" as ui %}
+
+{{ s.heroPage({
+  variant: 'smal',
+  title: 'Neem contact op',
+  text: 'Heb je een vraag over je offerte, een lopende opdracht, je garantie of een bestelling? Stuur ons een bericht of neem direct contact op via telefoon, WhatsApp of e-mail.'
+}, site) }}
+
+<section class="section contact-direct">
+  <ul class="container cards cards--3" role="list">
+    <li><a class="card contact-card" href="{{ site.phone.href }}">
+      <span class="usp__icon usp__icon--box">{{ icon('phone') }}</span>
+      <span class="stack" style="gap:4px"><span class="h4">{{ site.phone.label }}</span><span class="body-sm c-secondary">Maandag t/m vrijdag van 08:30 tot 17:00 uur.</span></span>
+    </a></li>
+    <li><a class="card contact-card" href="mailto:{{ site.email }}">
+      <span class="usp__icon usp__icon--box">{{ icon('envelope') }}</span>
+      <span class="stack" style="gap:4px"><span class="h4">{{ site.email }}</span><span class="body-sm c-secondary">Binnen 24 uur antwoord op werkdagen.</span></span>
+    </a></li>
+    <li><button class="card contact-card" type="button" data-wa-open>
+      <span class="usp__icon usp__icon--box">{{ icon('whatsapp') }}</span>
+      <span class="stack" style="gap:4px"><span class="h4">{{ site.whatsapp.label }}</span><span class="body-sm c-secondary">Stuur foto’s voor een snelle eerste inschatting.</span></span>
+    </button></li>
+  </ul>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <div class="card card--lg contact-form">
+      <form class="form" data-form data-success="contact-ok" data-form-wrap novalidate>
+        <div class="stack" style="gap:var(--gap-heading-3)">
+          <h2 class="h3">Stuur ons een bericht</h2>
+          <p class="c-secondary">Vul het formulier in, dan reageren we binnen {{ site.reactietijd }} op werkdagen.</p>
+        </div>
+        <div class="stack" style="gap:var(--gap-field)">
+          <div class="form-row">
+            {{ ui.field('naam', 'Naam', 'text', { required: true, placeholder: 'Je naam', autocomplete: 'name' }) }}
+            {{ ui.field('email', 'E-mailadres', 'email', { required: true, placeholder: 'naam@voorbeeld.nl', error: 'Vul een geldig e-mailadres in.' }) }}
+          </div>
+          <div class="form-row">
+            {{ ui.field('telefoon', 'Telefoonnummer', 'tel', { placeholder: '06 12345678' }) }}
+            {{ ui.field('onderwerp', 'Onderwerp', 'select', { required: true, placeholder: 'Kies een onderwerp', options: shared.onderwerpen, error: 'Kies een onderwerp.' }) }}
+          </div>
+          {{ ui.field('bericht', 'Bericht', 'textarea', { required: true, placeholder: 'Waar kunnen we je mee helpen?', error: 'Vul je bericht in.' }) }}
+        </div>
+        <div class="stack" style="gap:16px; align-items:flex-start">
+          {{ ui.btn('Verstuur bericht', '', 'primary', { type: 'submit' }) }}
+          {{ ui.privacy('Wij respecteren je privacy. Lees in onze', 'privacyverklaring', ' hoe we met je gegevens omgaan.') }}
+        </div>
+      </form>
+      {{ ui.confirm('contact-ok', 'Bedankt, je bericht is verstuurd', 'We reageren binnen ' ~ site.reactietijd ~ ' op werkdagen.') }}
+    </div>
+    <div class="contact-side">
+      <div class="card contact-side__card">
+        <div class="stack" style="gap:var(--gap-heading-4)"><h2 class="h3">Heb je vocht in huis?</h2><p class="c-secondary">Vraag dan gratis vochtadvies aan. We kijken eerst wat de oorzaak is en wat een logische volgende stap is.</p></div>
+        {{ ui.btn('Gratis vochtadvies aanvragen', 'gratis-vochtadvies', 'primary', { block: true }) }}
+      </div>
+      <div class="card contact-side__card">
+        <div class="stack" style="gap:var(--gap-heading-4)"><h2 class="h3">Liever foto’s sturen?</h2><p class="c-secondary">Met een paar foto’s zien we vaak al wat er speelt.</p></div>
+        {{ ui.btn('Stuur foto’s via WhatsApp', '#', 'primary', { block: true, wa: true }) }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ s.oplossingen({
+  title: 'Onze locaties',
+  intro: '&lt;Korte regel over bezoek: alleen op afspraak, of vrij binnenlopen&gt;',
+  ratio: '16-9',
+  cards: [
+    { title: 'Hoofdkantoor Rijsbergen', text: 'Begijneweide 4s<br>4891 TR Rijsbergen' },
+    { title: 'Vestiging Goes', text: 'Van Dusseldorpstraat 40<br>4461 LV Goes' },
+    { title: 'Vestiging Middelharnis', text: 'Voorstraat 15<br>3241 EE Middelharnis' }
+  ]
+}) }}

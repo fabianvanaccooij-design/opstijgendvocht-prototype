@@ -1,0 +1,546 @@
+{#- ==========================================================================
+    Secties. Elke macro is één Figma-sectiecomponent (Sectie / ...).
+    Importeer met {% import "components/sections.njk" as s %}.
+    Inhoud gaat er als object in, zodat dezelfde sectie op elke pagina
+    hergebruikt wordt. Een wijziging hier geldt dus voor alle pagina's.
+    ========================================================================== -#}
+{% import "components/ui.njk" as ui %}
+
+{#- Knop vanuit data: { label, href, style, wa } -#}
+{% macro action(b, o={}) -%}
+{%- if b -%}{{ ui.btn(b.label, b.href, b.style or o.style or 'primary', { wa: b.wa, onBlue: o.onBlue, icon: b.icon, iconLeft: b.iconLeft }) }}{%- endif -%}
+{%- endmacro %}
+
+{#- Sectie / Hero (homepage): foto met witte kaart links -#}
+{% macro heroHome(d, site) -%}
+<section class="hero-home">
+  <div class="hero-home__img">{% if d.image %}<img src="assets/img/{{ d.image }}" alt="" fetchpriority="high">{% endif %}</div>
+  <div class="hero-home__wrap">
+    <div class="hero-home__card">
+      <div class="stack hero-home__text">
+        <div class="stack" style="gap:var(--gap-meta)">
+          {{ ui.rating(site) }}
+          <h1>{{ d.title | safe }}</h1>
+        </div>
+        <div class="stack" style="gap:var(--gap-heading-4)">
+          <p class="h4">{{ d.subtitle }}</p>
+          <p class="body-lg c-secondary">{{ d.text }}</p>
+        </div>
+      </div>
+      <div class="btn-row btn-row--stack hero-home__btns">
+        {{ ui.btn('Gratis vochtadvies aanvragen', 'gratis-vochtadvies') }}
+        {{ ui.btn('Stuur foto’s via WhatsApp', '#', 'secondary', { wa: true, icon: 'whatsapp' }) }}
+      </div>
+      {{ ui.checklist(d.usps, 'only-mobile') }}
+    </div>
+  </div>
+</section>
+<section class="section usp-bar only-desktop" aria-label="Voordelen">
+  <ul class="usp-bar__list container" role="list">
+    {% for u in d.uspsDesktop %}<li class="usp"><span class="usp__icon">{{ icon(u.icon, 'icon--lg') }}</span><span class="h4">{{ u.text }}</span></li>{% endfor %}
+  </ul>
+</section>
+{%- endmacro %}
+
+{#- Sectiekop: titel (H2) + optionele intro. o.center -#}
+{% macro head(title, intro='', o={}) -%}
+<div class="sec-head{{ ' sec-head--center' if o.center }}{{ ' sec-head--left-mobile' if o.leftMobile }}{{ ' sec-head--narrow' if o.narrow }}">
+  {% if o.kicker %}<p class="h2 c-blue">{{ o.kicker }}</p>{% endif %}
+  <h2>{{ title | safe }}</h2>
+  {% if intro %}<p class="body-lg c-secondary">{{ intro | safe }}</p>{% endif %}
+</div>
+{%- endmacro %}
+
+{#- Sectie / Wat zie je in huis: beeldtegels (hover toont tekst) + balk -#}
+{% macro watZieJe(d) -%}
+<section class="section tiles-sec">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    {{ head(d.title, d.intro, { center: true }) }}
+    <div class="stack" style="gap:var(--grid-gutter)">
+      <div class="tiles" data-slider>
+        <div class="tiles__track" data-slider-track>
+          {% for t in d.tiles %}
+          <a class="tile" href="{{ t.href | href }}">
+            {% if t.image %}<img class="tile__img" src="assets/img/{{ t.image }}" alt="" loading="lazy">{% else %}<span class="tile__img media--ph"></span>{% endif %}
+            <span class="tile__overlay"></span>
+            <span class="tile__body">
+              <span class="tile__head"><span class="h3 c-on-ink">{{ t.title }}</span><span class="tile__arrow only-mobile">{{ icon('arrow-right') }}</span></span>
+              <span class="tile__details"><span class="tile__details-inner">
+                <span class="c-on-ink">{{ t.text }}</span>
+                <span class="btn btn--primary btn--block">{{ t.btn }}</span>
+              </span></span>
+            </span>
+          </a>
+          {% endfor %}
+        </div>
+        <div class="dots only-mobile" data-slider-dots></div>
+      </div>
+      {% if d.bar %}
+      <div class="card tiles-bar">
+        <div class="stack" style="gap:var(--gap-heading-3)">
+          <h3>{{ d.bar.title }}</h3>
+          <p class="c-secondary">{{ d.bar.text | safe }}</p>
+        </div>
+        {{ ui.btn(d.bar.btn, d.bar.href, 'secondary') }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Uitklaplijst: kop + uitklapkaarten naast een beeld.
+    d.image, d.imageSide ('rechts'|'links'), d.ratio, d.note, d.items[{title,text,btn,href}] -#}
+{% macro uitklaplijst(d) -%}
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    {{ head(d.title, d.intro, { center: d.center, leftMobile: d.leftMobile }) }}
+    <div class="split-acc{{ ' split-acc--links' if d.imageSide == 'links' }}">
+      <div class="accordion split-acc__list">
+        {% for it in d.items %}
+        {%- set body -%}<div class="prose">{{ it.text | safe }}</div>{% if it.list %}{{ ui.checklist(it.list) }}{% endif %}{% if it.btn %}{% if it.btnMobile %}{{ ui.btn(it.btn, it.href, it.btnStyle or 'primary', { cls: 'only-desktop' }) }}{{ ui.btn(it.btnMobile, it.href, it.btnStyle or 'primary', { cls: 'only-mobile' }) }}{% else %}{{ ui.btn(it.btn, it.href, it.btnStyle or 'primary') }}{% endif %}{% endif %}{%- endset -%}
+        {{ ui.acc(it.title, body, loop.first and not d.allClosed, 4 if (d.numbered or d.small) else 3, '', loop.index if d.numbered else '') }}
+        {% endfor %}
+      </div>
+      <div class="split-acc__media">{{ ui.media(d.image, '', d.ratio or '4-3', d.note) }}</div>
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Zo werkt ons vochtadvies. d.variant: 'slider' (standaard) of 'raster' -#}
+{% macro stappen(d) -%}
+<section class="section steps{{ ' steps--raster' if d.variant == 'raster' }}{{ ' steps--left' if d.align == 'left' }}">
+  <div class="container stack" style="gap:var(--gap-action)">
+    <div class="stack" style="gap:var(--heading-gap)" data-slider>
+      <div class="steps__head">
+        <h2>{{ d.title | safe }}</h2>
+        {% if d.variant != 'raster' %}
+        <div class="slider-nav only-desktop">
+          {{ ui.iconBtn('chevron-left', 'Vorige', 'primary', { attrs: 'data-slider-prev' }) }}
+          {{ ui.iconBtn('chevron-right', 'Volgende', 'primary', { attrs: 'data-slider-next' }) }}
+        </div>
+        {% endif %}
+      </div>
+      {% if d.intro %}<p class="body-lg c-secondary steps__intro">{{ d.intro }}</p>{% endif %}
+      <div class="steps__viewport">
+        <ol class="steps__track" role="list" data-slider-track{% if d.cardW %} style="--step-w: {{ d.cardW }}px"{% endif %}>
+          {% for st in d.steps %}
+          <li class="card step">
+            {% if st.icon %}<span class="usp__icon usp__icon--box">{{ icon(st.icon) }}</span>{% else %}<span class="badge-num">{{ loop.index }}</span>{% endif %}
+            <div class="stack" style="gap:var(--gap-heading-3)">
+              <h3>{{ st.title }}</h3>
+              <p class="c-secondary">{{ st.text | safe }}</p>
+            </div>
+          </li>
+          {% endfor %}
+        </ol>
+      </div>
+      <div class="dots only-mobile" data-slider-dots></div>
+    </div>
+    {% if d.btn %}<div class="steps__btn">{{ action(d.btn, { style: 'secondary' }) }}</div>{% endif %}
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Keurmerken -#}
+{% macro keurmerken(d) -%}
+<section class="section marks-sec">
+  <div class="container stack center" style="gap:var(--heading-gap)">
+    {{ head(d.title, d.intro, { center: true }) }}
+    <ul class="marks{{ ' marks--bold' if d.logoBold }}" role="list">
+      {% for m in d.items %}
+      <li class="mark"><span class="mark__logo">{{ m.logo }}</span><span class="body-sm c-secondary">{% if m.name %}<strong class="c-primary">{{ m.name }}</strong><br>{% endif %}{{ m.text | safe }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Card / Review -#}
+{% macro review(r) -%}
+<article class="card review">
+  <div class="stack" style="gap:24px">
+    {{ ui.stars(r.stars or 5) }}
+    <p class="body-lg">{{ r.text }}</p>
+  </div>
+  <div class="person">
+    <span class="person__photo"{% if r.photo %} style="background-image:url(assets/img/{{ r.photo }})"{% endif %}></span>
+    <span class="stack"><strong>{{ r.name }}</strong><span class="body-sm c-secondary">{{ r.date }}</span></span>
+  </div>
+</article>
+{%- endmacro %}
+
+{#- Sectie / Reviews: blauw paneel, kop sticky links, reviews rechts -#}
+{% macro reviews(d, site) -%}
+<section class="section--bleed reviews-sec">
+  <div class="reviews-panel">
+    <div class="reviews-panel__side">
+      <div class="reviews-panel__sticky">
+        <div class="stack" style="gap:var(--gap-heading-2)">
+          <h2>{{ (d.title or 'Blije klanten, dáár doen we het voor!') | safe }}</h2>
+          <p class="body-lg">{{ (d.text or ('Klanten beoordelen ons met <strong>' ~ site.rating.score ~ '</strong> op ' ~ site.rating.source ~ ' (' ~ site.rating.count ~ ' reviews)')) | safe }}</p>
+        </div>
+        {% if d.btn !== false %}<div class="only-desktop">{{ ui.btn('Bekijk alle reviews', 'resultaten', 'secondary') }}</div>{% endif %}
+      </div>
+    </div>
+    <div class="reviews-panel__list" data-slider>
+      <div class="reviews-panel__track" data-slider-track>
+        {% for r in d.items %}{{ review(r) }}{% endfor %}
+      </div>
+      <div class="dots only-mobile" data-slider-dots></div>
+      {% if d.btn !== false %}<div class="only-mobile reviews-panel__btn">{{ ui.btn('Bekijk alle reviews', 'resultaten', 'secondary') }}</div>{% endif %}
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Split: beeld en tekst naast elkaar.
+    d.side: 'links' (beeld links) of 'rechts'. d.kicker: blauwe eerste kopregel.
+    d.blocks[{title, text}], d.btn {label, href, style} -#}
+{% macro split(d) -%}
+<section class="section{{ ' section--bleed' if d.panel }}">
+  <div class="{{ 'split-panel' if d.panel else 'container' }} split{{ ' split--rechts' if d.side == 'rechts' }}">
+    <div class="split__media">{{ ui.media(d.image, '', d.ratio or '3-2', d.note) }}</div>
+    <div class="split__content">
+      <div class="stack" style="gap:var(--gap-heading-2)">
+        <h2>{% if d.kicker %}<span class="c-blue">{{ d.kicker }}</span><br>{% endif %}{{ d.title | safe }}</h2>
+        <div class="stack" style="gap:var(--gap-block)">
+          {% for b in d.blocks %}
+          <div class="stack" style="gap:var(--gap-heading-3)">
+            {% if b.title %}<h3>{{ b.title }}</h3>{% endif %}
+            <div class="prose c-secondary">{{ b.text | safe }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% if d.btn %}<div class="split__btn{{ ' split__btn--primary' if (d.btn.style or 'primary') == 'primary' }}">{{ action(d.btn) }}</div>{% endif %}
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Team -#}
+{% macro team(d) -%}
+<section class="section--bleed">
+  <div class="team">
+    <div class="team__main">
+      <img src="assets/img/{{ d.images[0].src }}" alt="" loading="lazy">
+      <div class="team__text">
+        <div class="stack" style="gap:var(--gap-heading-2)">
+          <h2>{{ d.title | safe }}</h2>
+          <p>{{ d.text }}</p>
+        </div>
+        {{ ui.btn(d.btn.label, d.btn.href, 'secondary', { onBlue: true, cls: 'team__btn' }) }}
+      </div>
+    </div>
+    <div class="team__side">
+      {% for img in d.images.slice(1) %}<div class="media"><img src="assets/img/{{ img.src }}" alt="" loading="lazy"{% if img.pos %} style="--pos: {{ img.pos }}"{% endif %}></div>{% endfor %}
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Vocht Magazine (aanvraagformulier) -#}
+{% macro magazine(d) -%}
+<section class="section--bleed" id="magazine">
+  <div class="magazine">
+    <div class="magazine__img"><img src="assets/img/magazine-uitsnede.png" alt="" loading="lazy"></div>
+    <div class="magazine__body">
+      <h2>{{ (d.title or 'Wil je liever eerst zelf lezen? Bekijk ons <span class="c-blue">gratis Vocht Magazine</span>') | safe }}</h2>
+      <form class="stack magazine__form" style="gap:32px" data-form data-success="magazine-ok" novalidate>
+        <p class="body-lg c-secondary">Lees handige tips over vochtige muren, schimmel en ventilatie. Zo kun je je rustig inlezen voordat je contact opneemt.</p>
+        <div class="form-row">
+          {{ ui.field('naam', 'Naam', 'text', { required: true, placeholder: 'Vul je naam in', idPrefix: 'mag-', autocomplete: 'name' }) }}
+          {{ ui.field('email', 'E-mailadres', 'email', { required: true, placeholder: 'email@voorbeeld.nl', idPrefix: 'mag-', error: 'Vul een geldig e-mailadres in.' }) }}
+        </div>
+        <div class="stack" style="gap:16px; align-items:flex-start">
+          {{ ui.btn('Magazine aanvragen', '', 'primary', { type: 'submit' }) }}
+          {{ ui.privacy() }}
+        </div>
+      </form>
+      {{ ui.confirm('magazine-ok', 'Het Vocht Magazine is onderweg', 'We hebben het magazine als pdf naar je e-mailadres gestuurd. Zie je het niet binnen een paar minuten? Kijk dan ook even in je spam.') }}
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / CTA.
+    d.primary {label, href, wa}   standaard: Gratis vochtadvies aanvragen
+    d.secondary false | label     standaard: Stuur foto’s via WhatsApp (opent WhatsApp)
+    d.checks []                   voordelen met vinkje
+    d.contact true                blok "Liever direct contact?" met telefoonnummer -#}
+{% macro cta(d={}, site={}) -%}
+{%- set p = d.primary or { label: 'Gratis vochtadvies aanvragen', href: 'gratis-vochtadvies' } -%}
+<section class="section">
+  <div class="container cta">
+    <div class="stack center" style="gap:var(--heading-gap); max-width:1024px">
+      <div class="stack center" style="gap:var(--gap-action)">
+        <div class="stack center" style="gap:var(--gap-heading-2)">
+          <h2>{{ (d.title or 'Weet je niet waar het <span class="c-blue">vocht</span> vandaan komt?') | safe }}</h2>
+          <p class="body-lg c-secondary">{{ (d.text or 'Je hoeft dit niet zelf uit te zoeken. Stuur ons een paar duidelijke foto’s. We bekijken de situatie en geven aan wat een logische vervolgstap is.') | safe }}</p>
+        </div>
+        {% if d.checks %}<ul class="cta__checks" role="list">{% for c in d.checks %}<li>{{ icon('check', 'icon--sm') }}<span>{{ c }}</span></li>{% endfor %}</ul>{% endif %}
+        <div class="btn-row btn-row--stack cta__btns">
+          {{ ui.btn(p.label, p.href, 'primary', { wa: p.wa }) }}
+          {% if d.secondaryLink %}{{ ui.btn(d.secondaryLink.label, d.secondaryLink.href, 'secondary') }}
+          {% elif d.secondary !== false %}{{ ui.btn(d.secondary or 'Stuur foto’s via WhatsApp', '#', 'secondary', { wa: true }) }}{% endif %}
+        </div>
+      </div>
+      {% if d.contact %}
+      <div class="stack center" style="gap:var(--gap-heading-4)">
+        <p class="h4">Liever direct contact?</p>
+        <a class="cta__phone h4" href="tel:+31767676322">{{ icon('phone', 'icon--lg') }}<span>+31 (0)76 76 76 322</span></a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Navigatie / Kruimelpad. items [{label, href}], laatste item = huidige pagina -#}
+{% macro kruimelpad(items) -%}
+<nav class="crumbs{{ ' crumbs--top' if items.length == 2 }}" aria-label="Kruimelpad">
+  <ol class="crumbs__list" role="list">
+    {% for it in items %}
+    <li>{% if not loop.last %}<a href="{{ it.href | href }}">{{ it.label }}</a>{{ icon('chevron-right', 'icon--sm') }}{% else %}<span aria-current="page">{{ it.label }}</span>{% endif %}</li>
+    {% endfor %}
+  </ol>
+  {% if items.length > 1 %}{% set parent = items[items.length - 2] %}
+  <a class="crumbs__back" href="{{ parent.href | href }}">{{ icon('chevron-left', 'icon--sm') }}<span>{{ parent.label }}</span></a>{% endif %}
+</nav>
+{%- endmacro %}
+
+{#- Sectie / Hero pagina.
+    d.variant: 'split' (tekst + beeld, standaard) | 'foto' (achtergrondfoto) | 'center' (gecentreerd)
+    d.rating, d.title, d.subtitle (H4), d.text (tekst of HTML), d.btn {label, href, wa}, d.btn2, d.image -#}
+{% macro heroPage(d, site) -%}
+{%- set v = d.variant or 'split' -%}
+<section class="hero-page hero-page--{{ v }}{{ ' hero-page--tight' if d.tight }}{{ ' hero-page--licht' if d.licht }}">
+  {% if v == 'foto' %}<div class="hero-page__bg">{% if d.image %}<img{{ ' class="only-desktop"' | safe if d.imageMobile }} src="assets/img/{{ d.image }}" alt="">{% endif %}{% if d.imageMobile %}<img class="only-mobile" src="assets/img/{{ d.imageMobile }}" alt="">{% endif %}</div>{% endif %}
+  <div class="hero-page__inner">
+    <div class="hero-page__intro">
+      <div class="stack" style="gap:var(--gap-heading-1)">
+        <div class="stack" style="gap:var(--gap-meta)">
+          {% if d.rating %}<div class="hero-page__rating">{{ ui.rating(site) }}</div>{% endif %}
+          <h1>{{ d.title | safe }}</h1>
+        </div>
+        {% if d.subtitle or d.text %}
+        <div class="stack hero-page__text" style="gap:var(--gap-paragraph)">
+          {% if d.subtitle %}<p class="h4">{{ d.subtitle }}</p>{% endif %}
+          {% if d.text %}<div class="body-lg prose">{{ d.text | safe }}</div>{% endif %}
+        </div>
+        {% endif %}
+      </div>
+      {% if d.btn %}<div class="btn-row btn-row--stack">{{ action(d.btn) }}{% if d.btn2 %}{{ action(d.btn2, { style: 'secondary', onBlue: v == 'foto' }) }}{% endif %}</div>{% endif %}
+    </div>
+    {% if v == 'split' and not d.noMedia %}<div class="hero-page__media">{{ ui.media(d.image, '', d.ratio or '4-3', d.note) }}</div>{% endif %}
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Signalen: rij beeldkaarten (5) met titel en optionele tekst bij hover -#}
+{% macro signalen(d) -%}
+<section class="section tiles-sec">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    {{ head(d.title, d.intro, { center: true }) }}
+    <div class="tiles" data-slider>
+      <div class="tiles__track tiles__track--5" data-slider-track>
+        {% for t in d.items %}
+        <div class="tile tile--sm{{ ' tile--beeld' if d.beeldtegel }}" tabindex="0">
+          {% if t.image %}<img class="tile__img" src="assets/img/{{ t.image }}" alt="" loading="lazy">{% else %}<span class="tile__img media--ph"></span>{% endif %}
+          <span class="tile__overlay"></span>
+          <span class="tile__body">
+            <span class="h4 c-on-ink">{{ t.title }}</span>
+            {% if t.text %}<span class="tile__details"><span class="tile__details-inner"><span class="c-on-ink">{{ t.text }}</span></span></span>{% endif %}
+          </span>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="dots only-mobile" data-slider-dots></div>
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Card / USP-lijst (icoonvak + titel + tekst) -#}
+{% macro uspList(items) -%}
+<ul class="usp-list" role="list">
+  {% for u in items %}
+  <li class="usp usp--top"><span class="usp__icon usp__icon--box">{{ icon(u.icon or 'check') }}</span>
+    <span class="usp__text"><span class="h4">{{ u.title }}</span>{% if u.text %}<span class="c-secondary">{{ u.text }}</span>{% endif %}</span></li>
+  {% endfor %}
+</ul>
+{%- endmacro %}
+
+{#- Sectie / Uitklaplijst, variant Beeld=Achtergrond: foto met witte kaart en USP's -#}
+{% macro uspPanel(d) -%}
+<section class="section--bleed">
+  <div class="usp-panel">
+    <div class="usp-panel__bg{{ ' media--ph' if not d.image }}">{% if d.image %}<img src="assets/img/{{ d.image }}" alt="" loading="lazy">{% endif %}</div>
+    <div class="usp-panel__card">
+      <h2>{{ d.title | safe }}</h2>
+      <div class="stack" style="gap:var(--gap-action-sm); align-items:flex-start">
+        {{ uspList(d.items) }}
+        {% if d.btn %}{{ action(d.btn, { style: 'secondary' }) }}{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Oplossingen: kop + kaarten met beeld (Card / Content, Surface=Transparant) -#}
+{% macro oplossingen(d) -%}
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <div class="sec-head">
+      <h2>{{ d.title | safe }}</h2>
+      {% if d.intro %}<div class="body-lg c-secondary prose">{{ d.intro | safe }}</div>{% endif %}
+    </div>
+    <div class="cards cards--opl cards--{{ d.cols or d.cards.length }}">
+      {% for c in d.cards %}
+      <article class="card-t">
+        {{ ui.media(c.image, '', c.ratio or d.ratio or '16-9') }}
+        <div class="card-t__body">
+          <div class="stack" style="gap:var(--gap-heading-3)">
+            <h3>{% if c.href and not c.btn %}<a href="{{ c.href | href }}">{{ c.title }}</a>{% else %}{{ c.title }}{% endif %}</h3>
+            {% if c.text %}<div class="c-secondary prose">{{ c.text | safe }}</div>{% endif %}
+          </div>
+          {% if c.btn %}{{ action(c.btn) }}{% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% if d.btn %}<div class="center stack">{{ action(d.btn, { style: 'secondary' }) }}</div>{% endif %}
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Productuitlicht (Stijl=Band): donkere band met productinformatie -#}
+{% macro productBand(d, site) -%}
+<section class="section--bleed">
+  <div class="pband">
+    <div class="pband__content">
+      <div class="stack" style="gap:var(--gap-heading-2)">
+        <h2 class="c-on-ink">{{ d.title | safe }}</h2>
+        {% if d.intro %}<p class="body-lg pband__muted">{{ d.intro | safe }}</p>{% endif %}
+        {% if d.price %}
+        <div class="pband__meta">
+          <span class="rating__row">{{ ui.stars(5) }}<span><strong class="c-on-ink">{{ d.score }}</strong> <span class="body-sm pband__muted">({{ d.count }} reviews)</span></span></span>
+          <p><span class="h4 c-on-ink">{{ d.price }}</span> <span class="body-sm pband__muted">incl. btw</span></p>
+        </div>
+        {% endif %}
+      </div>
+      {% if d.features %}
+      <div class="stack" style="gap:var(--gap-heading-4)">
+        <p class="h4 c-on-ink">{{ d.featuresTitle }}</p>
+        <ul class="pband__list" role="list">{% for f in d.features %}<li>{{ icon('check') }}<span>{{ f }}</span></li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+      {% if d.certs %}
+      <div class="stack" style="gap:var(--gap-heading-4)">
+        <p class="h4 c-on-ink">{{ d.certsTitle }}</p>
+        <ul class="pband__certs" role="list">{% for c in d.certs %}<li>{{ icon('shield-check') }}<span><strong class="c-on-ink">{{ c.title }}</strong><br><span class="pband__muted">{{ c.text }}</span></span></li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+      {% if d.subsidy %}
+      <div class="pband__subsidy">
+        <div class="stack" style="gap:var(--gap-heading-4)"><p class="h4 c-on-ink">{{ d.subsidy.title }}</p><p class="pband__muted">{{ d.subsidy.text }}</p></div>
+        <div class="pband__logos">{% for l in d.subsidy.logos %}<span>{{ l }}</span>{% endfor %}</div>
+      </div>
+      {% endif %}
+      {% if d.btn %}<div>{{ action(d.btn) }}</div>{% endif %}
+    </div>
+    <div class="pband__media">{{ ui.media(d.image, '', '1-1') }}</div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Tekst. d.style: 'basis' | 'citaat'. Basis: d.title + d.text (HTML). Citaat: d.kicker, d.quote, d.caption -#}
+{% macro tekst(d) -%}
+<section class="section">
+  <div class="container">
+    {% if d.style == 'citaat' %}
+    <div class="text-sec text-sec--quote">
+      <p class="h2"><span class="c-blue">{{ d.kicker }}</span><br class="only-desktop"> {{ d.quote }}</p>   {#- mobiel: kop en citaat lopen door (Figma 393) -#}
+      <p class="body-lg c-secondary">{{ d.caption }}</p>
+    </div>
+    {% else %}
+    <div class="text-sec">
+      <h2>{{ d.title | safe }}</h2>
+      <div class="body-lg c-secondary prose">{{ d.text | safe }}</div>
+      {% if d.btn %}<div>{{ action(d.btn) }}</div>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Card / Content-kaarten met beeld voor artikelen (Gerelateerde artikelen) -#}
+{% macro artikelen(d) -%}
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <h2{{ ' class="t-center"' | safe if d.center !== false }}>{{ d.title | safe }}</h2>
+    <div class="stack art-slider" data-slider>
+    <div class="cards cards--3 cards--slide-mobile" data-slider-track>
+      {% for a in d.items %}
+      <article class="card-t card-t--link">
+        {{ ui.media(a.image, '', '16-9') }}
+        <div class="card-t__body">
+          <div class="stack" style="gap:var(--gap-heading-3)">
+            {% if a.tag %}<span class="tag">{{ a.tag }}</span>{% endif %}
+            <h3><a class="card-t__link" href="{{ (a.href or 'blogartikel') | href }}">{{ a.title }}</a></h3>
+            {% if a.text %}<p class="c-secondary">{{ a.text }}</p>{% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="dots only-mobile" data-slider-dots></div>
+    </div>
+    {% if d.btn %}<div class="stack center">{{ action(d.btn, { style: 'secondary' }) }}</div>{% endif %}
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Veelgestelde vragen. d.items[{q, a}] -#}
+{% macro faq(d) -%}
+<section class="section">
+  <div class="container container--text stack" style="gap:var(--heading-gap)">
+    <div class="stack t-center" style="gap:var(--gap-heading-2)">
+      <h2>{{ (d.title or 'Veelgestelde vragen') | safe }}</h2>
+      {% if d.intro %}<p class="body-lg c-secondary">{{ d.intro }}</p>{% endif %}
+    </div>
+    <div class="stack" style="gap:var(--gap-action); align-items:flex-start">
+      <div class="accordion{{ ' accordion--ruim' if d.ruim }}" style="width:100%">
+        {% for it in d.items %}{{ ui.acc(it.q, '<div class="prose">' ~ it.a ~ '</div>', false, 4) }}{% endfor %}
+      </div>
+      {% if d.btn !== false %}{{ ui.btn(d.btnLabel or 'Bekijk alle veelgestelde vragen', 'veelgestelde-vragen', 'secondary') }}{% endif %}
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+
+{#- Card / Content, Surface=Wit: witte kaarten met titel, tekst en knop (bijv. 404) -#}
+{% macro contentCards(d) -%}
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    {% if d.title %}<h2{{ ' class="t-center"' | safe if (d.align or 'center') == 'center' }}>{{ d.title | safe }}</h2>{% endif %}
+    {% if d.slideMobile %}<div class="stack" style="gap:16px" data-slider>{% endif %}
+    <div class="cards cards--{{ d.cols or 3 }}{{ ' cards--slide-mobile' if d.slideMobile }}"{{ ' data-slider-track' | safe if d.slideMobile }}>
+      {% for c in d.cards %}
+      <article class="card content-card">
+        {% if c.icon %}<span class="usp__icon usp__icon--box">{{ icon(c.icon) }}</span>{% endif %}
+        <div class="stack" style="gap:var(--gap-heading-3)">
+          <h3>{{ c.title }}</h3>
+          {% if c.text %}<div class="c-secondary prose">{{ c.text | safe }}</div>{% endif %}
+        </div>
+        {% if c.btn %}{{ action(c.btn, { style: 'secondary' }) }}{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    {% if d.slideMobile %}<div class="dots only-mobile" data-slider-dots></div></div>{% endif %}
+  </div>
+</section>
+{%- endmacro %}

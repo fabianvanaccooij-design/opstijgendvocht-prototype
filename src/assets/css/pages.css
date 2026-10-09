@@ -1,0 +1,390 @@
+/* ==========================================================================
+   Paginaspecifieke blokken (components/blocks.njk).
+   ========================================================================== */
+
+/* --- Paginering ----------------------------------------------------------- */
+.pager { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.pager__nums { display: flex; gap: 16px; list-style: none; padding: 0; }
+.pager__num, .pager__arrow { display: grid; place-items: center; width: var(--size-control); height: var(--size-control); border-radius: var(--radius-inset); background: var(--color-bg-surface); }
+.pager__num { border: 2px solid transparent; transition: border-color var(--duration); }
+.pager__num:hover { border-color: var(--color-border-default); }      /* Figma Paginering / Nummer State=Hover */
+.pager__num.is-active { border-color: var(--color-border-brand); font-weight: var(--font-weight-bold); }
+.pager__arrow { background: var(--color-action-primary-bg); color: var(--color-action-primary-text); }
+.pager__arrow:hover { background: var(--color-action-primary-bg-hover); }
+.pager__arrow[disabled] { background: var(--color-action-disabled-bg); color: var(--color-action-disabled-text); cursor: not-allowed; }
+@media (max-width: 767px) { .pager__nums { gap: 8px; } .pager__num, .pager__arrow { width: 44px; height: 44px; } }   /* Figma Paginering Apparaat=Mobile: 44x44, ellips 24 (zie onder) */
+
+/* --- Werkwijze (stapelende kaarten) --------------------------------------- */
+.ww { background: var(--color-bg-surface); padding: 0 var(--page-margin); }
+.ww__inner { display: grid; grid-template-columns: minmax(0, 600px) minmax(0, 1016px); gap: var(--heading-gap); max-width: var(--container); margin: 0 auto; }
+.ww__side { align-self: stretch; padding-bottom: var(--section-padding-y); }   /* Figma: kolom 2592 hoog, kop plakt daarin */
+.ww__side-inner { position: sticky; top: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-action); padding-top: var(--section-padding-y); }
+.page > .hero-page + .ww { margin-top: calc(-1 * var(--section-padding-y)); }
+/* Figma-opbouw: elke kaart zit in een eigen vak (1112 hoog) dat 320 lager begint dan het vorige en plakt.
+   Kaart k staat 120 + k*96 onder de bovenrand, dus ze stapelen met 96 ertussen. Alle vakken lopen tegelijk
+   tegen de onderkant van de kolom (2712), zodat de stapel compleet is precies op het moment dat hij wegscrolt. */
+.ww__cards { --step: 320px; --slot: 1112px; --p0: 120px; --pstep: 96px; --ww-top: 0px; display: grid; list-style: none; padding: 0; }
+.ww__slot { grid-area: 1 / 1; position: sticky; top: var(--ww-top); height: var(--slot); margin-top: calc(var(--i) * var(--step)); padding-top: calc(var(--p0) + var(--i) * var(--pstep)); pointer-events: none; }
+.ww__card { pointer-events: auto; display: flex; flex-direction: column; gap: var(--gap-heading-3); padding: var(--card-padding); border-radius: var(--radius-card); background: var(--color-blue-50); min-height: 392px; }
+.ww__slot:nth-child(2) .ww__card { background: #edf5fc; }
+.ww__slot:nth-child(3) .ww__card { background: #e5f1fb; }
+.ww__slot:nth-child(4) .ww__card { background: #deedf9; }
+.ww__slot:nth-child(5) .ww__card { background: #d6e9f8; }
+.ww__slot:nth-child(6) .ww__card { background: #cfe5f7; }
+.ww__card-head { display: flex; align-items: center; gap: 16px; }
+.ww__badge { background: var(--color-bg-surface); }
+.ww__card-body { display: flex; flex-direction: column; gap: 8px; padding-left: 64px; }
+@media (max-width: 767px) {
+  .ww__inner { grid-template-columns: 1fr; gap: 0; }
+  .ww__side { padding-bottom: 0; }
+  .ww__side-inner { position: static; }
+  .ww__side .btn--primary { width: 100%; }
+  /* Figma 393: vakken 856 hoog, 272 verschoven, kaart 24 + k*88 onder de bovenrand; plakt direct onder de header */
+  .ww__cards { --step: 272px; --slot: 876px; --p0: 24px; --pstep: 92px; --ww-top: calc(var(--header-h) - 24px); }   /* Figma 393: per kaart padding 24 + kop + 8, zoals desktop alleen de kop zichtbaar. main.js meet de kop per kaart (data-ww) */
+  .ww__card { min-height: 344px; }
+  .ww__card-body { padding-left: 0; }
+}
+
+/* --- Card / Resultaat ------------------------------------------------------ */
+.results { display: flex; flex-direction: column; gap: 40px; }
+.result { display: grid; grid-template-columns: minmax(0, 480fr) minmax(0, 1112fr); gap: 40px; padding: var(--card-padding); background: var(--color-bg-surface); border-radius: var(--radius-card); }
+.result__body { display: flex; flex-direction: column; justify-content: flex-start; gap: var(--gap-heading-4); padding: 16px 0 16px 16px; }
+/* Figma Card / Resultaat Hover=Voor/Na: de foto onder de muis wordt 652 breed, de andere 436 (smart animate 0,4 s) */
+.result__imgs { display: grid; grid-template-columns: 544fr 544fr; gap: 24px; aspect-ratio: 1112 / 544; transition: grid-template-columns .4s cubic-bezier(.16, 1, .3, 1); }
+.result__img { position: relative; margin: 0; min-width: 0; }
+.result__img .media { height: 100%; aspect-ratio: auto; border-radius: var(--radius-inset); }
+@media (hover: hover) and (min-width: 768px) {
+  .result__imgs:has(.result__img:first-child:hover) { grid-template-columns: 652fr 436fr; }
+  .result__imgs:has(.result__img:last-child:hover) { grid-template-columns: 436fr 652fr; }
+}
+.chip { position: absolute; top: 16px; left: 16px; padding: 4px 12px; border-radius: var(--radius-full); background: var(--color-bg-surface-alt); font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); }
+@media (max-width: 1199px) { .result { grid-template-columns: 1fr; } .result__body { padding: 0; } }
+/* Figma 393: foto's bovenaan onder elkaar (zonder rand), tekst eronder met 24 padding */
+@media (max-width: 767px) {
+  .results { gap: 16px; }
+  .result { display: flex; flex-direction: column; gap: 0; padding: 0; overflow: hidden; border-radius: 16px; }
+  .result__imgs { grid-template-columns: 1fr; gap: 8px; aspect-ratio: auto; }   /* Figma 393: beoordeling boven, voor en na eronder */
+  .result__img .media { aspect-ratio: 16 / 9; border-radius: 0; }
+  .result__body { padding: var(--card-padding); gap: 8px; }
+}
+
+/* --- Over ons: ons verhaal --------------------------------------------------- */
+.story { display: flex; flex-direction: column; }
+/* Hoofdstukhoogte = fotohoogte + de afstand die de tekst aflegt van het midden naar de bovenkant van de foto (main.js) */
+.story__chapter { display: grid; grid-template-columns: 1fr 1fr; align-items: start; }
+.story__chapter + .story__chapter { margin-top: -24px; }
+.story__photo { position: sticky; top: var(--header-h); padding: 24px 0 24px 24px; height: calc(100vh - var(--header-h)); max-height: 1000px; }
+.story__media { height: 100%; }
+/* Figma: tekst verticaal gecentreerd naast de fotokolom (niet over het hele hoofdstuk) */
+.story__text { align-self: start; min-height: min(1000px, calc(100vh - var(--header-h))); padding: 0 var(--page-margin); display: flex; flex-direction: column; justify-content: center; }
+.story__text-inner { display: flex; flex-direction: column; gap: var(--gap-heading-2); }
+@media (max-width: 767px) {
+  .story { gap: var(--section-padding-y); }
+  .story__chapter { grid-template-columns: 1fr; min-height: 0; gap: 24px; }
+  .story__chapter + .story__chapter { margin-top: 0; }
+  .story__text { min-height: 0; }
+  .story__photo { position: static; height: 260px; padding: 0 var(--page-margin); }
+}
+
+/* --- Contact ------------------------------------------------------------- */
+.page > .hero-page--smal + .contact-direct { margin-top: calc(-1 * var(--section-padding-y)); }
+.contact-direct .cards { list-style: none; padding: 0; }
+.contact-card { display: flex; align-items: center; gap: 16px; width: 100%; height: 100%; padding: var(--card-padding-sm); text-align: left; border: 1px solid transparent; transition: border-color var(--duration); }
+.contact-card > .stack { min-width: 0; }
+.contact-card .h4 { overflow-wrap: anywhere; }   /* lang e-mailadres breekt af in plaats van buiten de kaart te lopen */
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1109fr) minmax(0, 539fr); gap: var(--grid-gutter); align-items: stretch; margin-top: var(--gap-block); }
+.contact-form .form { gap: var(--gap-block); }
+.contact-side { display: grid; grid-template-rows: 1fr 1fr; gap: var(--grid-gutter); }
+.contact-side__card { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+@media (max-width: 1199px) { .contact-grid { grid-template-columns: minmax(0, 1fr); } .contact-side { grid-template-rows: none; grid-template-columns: repeat(2, minmax(0, 1fr)); } .contact-form .select { min-width: 0; width: 100%; } }
+@media (max-width: 767px) { .contact-side { grid-template-columns: 1fr; } .contact-form { padding: var(--card-padding); } .contact-form .btn--primary { width: 100%; } }
+
+/* --- Juridische tekst ---------------------------------------------------- */
+.legal { max-width: 800px; display: flex; flex-direction: column; gap: var(--gap-block); }
+.legal section { display: flex; flex-direction: column; gap: var(--gap-heading-3); }
+
+/* --- Gratis vochtadvies --------------------------------------------------- */
+/* Figma: Formulier / Aanvraag vochtadvies. Witte kaart over de volle breedte, inhoud 949 breed in het midden.
+   Kop en stappenbalk (gap/block), dan de stap: vraag en velden (gap/block), knoppen (40). */
+.gv-form { padding: var(--card-padding-lg); }
+.gv-form__inner { max-width: 949px; margin-inline: auto; display: flex; flex-direction: column; gap: var(--space-48); }
+.gv-form__head { display: flex; flex-direction: column; gap: var(--gap-block); }
+.gv-step { display: flex; flex-direction: column; gap: var(--space-40); animation: gv-step-in .4s var(--ease); }
+@keyframes gv-step-in { from { opacity: 0; } to { opacity: 1; } }   /* Figma: Smart animate 0,4 s tussen de stappen */
+.gv-step h4:focus { outline: none; }   /* focus na wisselen van stap (schermlezer), geen zichtbare rand */
+.gv-step__fields { display: flex; flex-direction: column; gap: var(--gap-block); }
+.gv-step__input { display: flex; flex-direction: column; gap: var(--gap-field); }
+.gv-step__action { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-16); }
+.gv-reassure { display: flex; gap: var(--space-8); align-items: flex-start; color: var(--color-text-primary); }   /* zelfde als de vinkjeslijst in de koopbox */
+.gv-reassure .icon { margin-top: calc((var(--font-line-height-body) - 16px) / 2); width: 16px; height: 16px; flex: none; color: var(--color-feedback-success); }
+.gv-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap-field); }
+.gv-name { display: grid; grid-template-columns: minmax(0, 1fr) 180px minmax(0, 1fr); gap: var(--gap-field); }
+
+.gv-step .btn--back { padding-left: var(--space-8); }   /* Figma: Vorige (Content=Label terug) 8 px links */
+
+/* Formulier / Stappen: balk + badge + label per stap */
+.stepper { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }
+.stepper__item { display: flex; flex-direction: column; gap: var(--space-12); min-width: 0; }
+.stepper__bar { height: 4px; border-radius: var(--radius-full); background: var(--color-border-default); }
+.stepper__item.is-done .stepper__bar { background: var(--color-bg-brand); }
+.stepper__item.is-active .stepper__bar { background: linear-gradient(90deg, var(--color-bg-brand), var(--color-orange-200) 50%, var(--color-border-default)); }
+.stepper__row { display: flex; align-items: center; gap: var(--space-8); min-width: 0; }
+.stepper__badge { display: grid; place-items: center; width: 28px; height: 28px; flex: none; border-radius: var(--radius-full); background: var(--color-bg-secondary-subtle); color: var(--color-text-secondary); font-size: var(--font-size-body-sm); line-height: 1; font-weight: var(--font-weight-medium); }
+.stepper__badge .icon { display: none; width: 16px; height: 16px; }
+.stepper__item.is-done .stepper__badge { background: var(--color-orange-200); color: var(--color-orange-600); }
+.stepper__item.is-done .stepper__num { display: none; }
+.stepper__item.is-done .stepper__badge .icon { display: block; }
+.stepper__item.is-active .stepper__badge { background: var(--color-bg-brand); color: var(--color-text-on-brand); }
+.stepper__label { color: var(--color-text-secondary); }
+.stepper__item.is-done .stepper__label, .stepper__item.is-active .stepper__label { color: var(--color-text-primary); }
+.stepper__item.is-active .stepper__label { font-weight: var(--font-weight-bold); }
+
+/* Keuze / Beeldoptie zonder beeld: 2 kolommen, radius 12, gekozen = 2px oranje rand */
+.choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-16); align-items: start; }
+.choice-card { padding: var(--space-24); background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-12); transition: border-color var(--duration), box-shadow var(--duration); }
+.choice-card:hover { border-color: var(--color-border-strong); }
+.choice-card:has(input:checked) { border-color: var(--color-action-primary-bg); box-shadow: inset 0 0 0 1px var(--color-action-primary-bg); }
+.choice-card__text { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+.choice-card__desc { font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); color: var(--color-text-secondary); }
+.choice-card__tip { display: none; padding-top: var(--space-12); }
+.choice-card:has(input:checked) .choice-card__tip { display: block; }
+.choice-card__banner { display: flex; gap: var(--space-8); align-items: flex-start; padding: var(--space-12) var(--space-16); border-radius: var(--radius-8); background: var(--color-bg-secondary-subtle); font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); color: var(--color-text-primary); }
+.choice-card__icon { display: grid; place-items: center; height: var(--font-line-height-body-sm); flex: none; }
+.choice-card__icon .icon { width: 16px; height: 16px; }
+
+/* Formulier / Adres: gevonden adres met Wijzigen, daarna straat en plaats */
+.gv-address { display: flex; gap: var(--space-12); align-items: flex-start; padding: var(--space-16) var(--space-24); border-radius: var(--radius-inset); background: var(--color-bg-page); }
+.gv-address__icon { display: grid; place-items: center; height: var(--font-line-height-body); flex: none; color: var(--color-text-brand-blue); }
+.gv-address__icon .icon { width: 16px; height: 16px; }
+.gv-address__text { flex: 1; min-width: 0; }
+.gv-address__edit { flex: none; padding: 0; border: 0; background: none; font: inherit; font-weight: var(--font-weight-medium); cursor: pointer; }
+
+/* Sectie / Direct contact: drie losse kaarten */
+.gv-direct { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--grid-gutter); }
+.gv-direct > li { display: flex; }
+.gv-direct__card { display: flex; flex-direction: column; gap: var(--space-24); width: 100%; border: 0; text-align: left; color: inherit; cursor: pointer; }
+@media (max-width: 1199px) { .gv-direct { grid-template-columns: 1fr; } }
+
+@media (max-width: 767px) {
+  .gv-form { padding: var(--card-padding) var(--page-margin); border-radius: 0; }   /* volle breedte: inhoud op de paginamarge, gelijk met de hero */
+  .gv-form-sec { padding-inline: 0; }                                         /* Figma 393: wit formulierblok over de volle breedte */
+  .page > .hero-page + .gv-form-sec { margin-top: calc(-1 * var(--section-padding-y)); }   /* direct onder de hero, geen ruimte erboven */
+  .gv-form__inner { gap: var(--space-40); }
+  .gv-step { gap: var(--space-32); }
+  .stepper__item { gap: var(--space-8); }
+  .stepper__badge { display: none; }   /* Figma 393: alleen balk en label */
+  .choices { grid-template-columns: 1fr; gap: var(--space-12); }
+  .choice-card { padding: var(--space-20); }
+  .gv-row { grid-template-columns: 1fr; }
+  .gv-row--keep { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gv-name { grid-template-columns: 124px minmax(0, 1fr); }
+  .gv-name__first { grid-column: 1 / -1; }
+  .gv-step__buttons { width: 100%; flex-wrap: nowrap; }
+  .gv-step__buttons .btn--primary { flex: 1; }
+  .gv-step__buttons--submit { flex-direction: column-reverse; align-items: flex-start; }   /* Figma 393 stap 3: versturen over de volle breedte, Vorige eronder */
+  .gv-step__buttons--submit .btn--primary { width: 100%; flex: none; white-space: nowrap; padding-inline: var(--space-20); }   /* Figma: label op één regel */
+}
+.pager__ellipsis { display: grid; place-items: center; width: 32px; color: var(--color-text-secondary); }
+@media (max-width: 767px) { .pager__ellipsis { width: 24px; } }
+
+/* --- Blogartikel ---------------------------------------------------------- */
+.article { display: flex; flex-direction: column; gap: var(--gap-block); padding: var(--section-padding-y) var(--page-margin) 0; }
+.article > * { width: 100%; max-width: 1024px; margin-inline: auto; }
+.article__intro { display: flex; flex-direction: column; gap: var(--gap-heading-1); }
+.article__block { display: flex; flex-direction: column; gap: var(--gap-heading-2); }
+/* Figma: opsomming met blauwe bolletjes, 16 px onder de alinea */
+.prose p + ul.list--signaal { margin-top: var(--gap-paragraph); }
+.list--signaal li::marker { color: var(--color-text-brand-blue); }
+.page > .crumbs + .article { margin-top: calc(-1 * var(--section-padding-y)); }
+.article .c-secondary { color: var(--color-text-primary); }   /* Figma: leestekst blogartikel in text-primary */
+
+/* --- Vocht Magazine ------------------------------------------------------- */
+.mag-request { display: grid; grid-template-columns: 1fr 1fr; gap: var(--grid-column-gap); align-items: center; padding: var(--card-padding-lg); background: var(--color-bg-surface); border-radius: var(--radius-card); }
+.mag-request__head { display: flex; flex-direction: column; gap: var(--gap-meta); }
+@media (max-width: 1199px) { .mag-request { grid-template-columns: 1fr; } }
+@media (max-width: 767px) { .mag-request { padding: var(--card-padding); } .mag-request .btn--primary { width: 100%; } }
+
+/* --- Webshop -------------------------------------------------------------- */
+.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+.pill { min-height: var(--size-control); padding: 0 24px; border-radius: var(--radius-full); background: var(--color-bg-surface); border: 2px solid transparent; transition: border-color var(--duration); }
+.pill:hover { border-color: var(--color-border-default); }            /* Figma Filter / Pill State=Hover */
+.pill.is-active { border-color: var(--color-border-brand); font-weight: var(--font-weight-bold); }
+.products { list-style: none; padding: 0; }
+@media (max-width: 767px) {
+  .products.cards--slide-mobile { padding-inline: var(--page-margin); }   /* Figma 393: eerste kaart op de paginamarge */
+  .products.cards--slide-mobile .media { aspect-ratio: 16 / 9; }          /* Figma 393 Past hierbij: productfoto 16:9 */
+}
+.product-card__body { display: flex; flex-direction: column; gap: var(--card-gap); }
+.product-card[hidden] { display: none; }
+@media (max-width: 767px) {
+  .filters { flex-wrap: nowrap; justify-content: flex-start; gap: 8px; overflow-x: auto; margin-inline: calc(-1 * var(--page-margin)); padding-inline: var(--page-margin); scrollbar-width: none; }
+  .pill { flex: none; min-height: 44px; padding: 0 16px; }                 /* Figma 393: Pill 44 hoog, 16 opzij */
+  .products.cards--3 { grid-template-columns: 1fr 1fr; gap: 24px 16px; }
+  .products .media { aspect-ratio: 1; }                                     /* Figma 393: vierkante productfoto */
+  .product-card h3 { font-size: var(--font-size-body); line-height: var(--font-line-height-body); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }   /* max 2 regels */
+  .product-card .h4 { font-family: var(--font-body); font-size: var(--font-size-body); }
+  .product-card .c-secondary:not(.body-sm) { display: none; }
+}
+
+/* --- Productpagina -------------------------------------------------------- */
+.product-hero { padding-top: 64px; }
+.page > .crumbs + .product-hero { margin-top: calc(-1 * var(--section-padding-y)); }
+.product-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--grid-column-gap); align-items: start; }
+.gallery { display: flex; flex-direction: column; gap: 16px; }
+@media (min-width: 1200px) { .gallery { position: sticky; top: calc(var(--header-h) + 24px); } }
+.gallery__main { position: relative; }
+.gallery__stage { display: block; width: 100%; cursor: zoom-in; }
+.gallery__arrow { position: absolute; top: 50%; translate: 0 -50%; display: grid; place-items: center; width: 48px; height: 48px; border-radius: var(--radius-full); background: var(--color-bg-surface); box-shadow: var(--shadow-default); }
+.gallery__arrow--prev { left: 24px; }   /* Figma Product / Galerij: 24 van de rand */
+.gallery__arrow--next { right: 24px; }
+.gallery__count { position: absolute; right: 24px; bottom: 24px; padding: 4px 12px; border-radius: var(--radius-full); background: var(--color-bg-surface); }
+.gallery__thumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; list-style: none; padding: 0; }
+.gallery__thumb { position: relative; display: block; width: 100%; border-radius: var(--radius-card); }
+.gallery__thumb .media { border: 2px solid transparent; }
+.gallery__thumb.is-active .media { border-color: var(--color-border-brand); }
+.gallery__thumb--more .h4 { position: absolute; inset: 0; display: grid; place-items: center; border-radius: var(--radius-card); background: rgb(10 42 67 / .6); color: var(--color-text-on-ink); }
+
+.buybox { display: flex; flex-direction: column; gap: 24px; }
+.buybox__usps { list-style: none; padding: 0; }
+.buybox .checklist { gap: 0; }   /* Figma: Service-lijst zonder tussenruimte */
+.buybox__usps li::before { content: "• "; }
+.option-card { display: flex; flex-direction: column; gap: 4px; padding: var(--card-padding-sm); background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-card); cursor: pointer; transition: border-color var(--duration), box-shadow var(--duration); }
+.option-card:has(input:checked) { border-color: var(--color-border-brand); box-shadow: inset 0 0 0 1px var(--color-border-brand); }   /* Figma State=Aan: 2px oranje */
+.option-card__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.option-card__title { display: flex; align-items: center; gap: 8px; }
+.option-card__text { padding-left: 32px; }
+.option-card .check { display: inline-flex; align-items: center; gap: 8px; }
+.option-card .check input { margin-top: 0; }
+.buybox__stock { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.buybox__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-feedback-success); }
+.buybox__instock { color: var(--color-feedback-success); }
+.buybox__buy { display: flex; gap: 16px; }
+.buybox__cart { flex: 1; }
+.qty { display: flex; align-items: center; gap: 8px; height: var(--size-control); padding: 0 16px; border-radius: var(--radius-full); background: var(--color-bg-surface); }
+.qty button { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; }
+.qty input { width: 36px; border: 0; text-align: center; font-weight: var(--font-weight-bold); background: none; -moz-appearance: textfield; }
+.qty input::-webkit-inner-spin-button { display: none; }
+.card--sm { padding: var(--card-padding-sm); }
+.buybox__advice { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+
+.anchors { margin-top: calc(64px - var(--section-padding-y)); }
+.anchors__bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 32px; padding: 16px 32px; background: var(--color-bg-surface); border-radius: var(--radius-inset); }
+[id] { scroll-margin-top: calc(var(--header-h) + 100px); }
+
+.specs { display: grid; grid-template-columns: 1fr 1fr; gap: var(--grid-column-gap); align-items: start; }
+.spec-table { width: 100%; border-collapse: collapse; background: var(--color-bg-surface); border-radius: var(--radius-card); overflow: hidden; text-align: left; }
+.spec-table th, .spec-table td { padding: 16px 32px; }
+.spec-table thead th { background: var(--color-bg-band-alt); font-weight: var(--font-weight-bold); }
+.spec-table tbody th { font-weight: var(--font-weight-regular); width: 50%; color: var(--color-text-secondary); }
+.spec-table td { font-weight: var(--font-weight-bold); }
+.spec-table tbody tr:nth-child(even) { background: var(--color-bg-page); }
+
+.compare { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1200px); gap: var(--grid-column-gap); align-items: start; }
+.compare__table { background: var(--color-bg-surface); border-radius: var(--radius-card); overflow: hidden; }
+.compare__row, .compare__label { display: grid; grid-template-columns: 1fr 1fr; }
+/* Figma Modelvergelijking: geen rand om de tabel; elke waarderij heeft een scheidingslijn onderaan
+   (blauw 200 in de kolom van het huidige product, blauw 100 in de andere kolom). */
+.compare__cell { padding: 8px 24px 16px; border-bottom: 1px solid var(--color-border-default); }
+.compare__cell.is-current { background: var(--color-bg-secondary-subtle); border-bottom-color: var(--color-border-strong); }
+.compare__row--products .compare__cell { display: flex; flex-direction: column; gap: 16px; padding: 24px; }
+.compare__row--btn .compare__cell { border-bottom: 0; }
+.compare__row--products .media { border-radius: var(--radius-inset); }
+.compare__label > * { padding: 16px 24px 0; }
+.compare__label .is-current { background: var(--color-bg-secondary-subtle); }
+.compare__cell--plain { background: transparent !important; border-color: transparent !important; }
+.compare__spacer { visibility: hidden; }   /* houdt de foto's in beide kolommen op gelijke hoogte */
+
+.buybar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px var(--page-margin); background: var(--color-bg-surface); box-shadow: var(--shadow-boven); transform: translateY(100%); transition: transform .3s var(--ease); }
+.buybar.is-visible { transform: none; }
+.buybar__product { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.buybar__img { width: 64px; height: 64px; flex: none; }
+.buybar__action { display: flex; align-items: center; gap: 24px; }
+.buybar__price { white-space: nowrap; }
+.has-sticky-bar .sticky-wa { bottom: 120px; }
+
+/* Modals (lightbox, uitleg montage) */
+.modal { position: fixed; inset: 0; z-index: 110; display: grid; place-items: center; padding: 24px; }
+.modal__scrim { position: absolute; inset: 0; background: rgb(10 42 67 / .6); }
+.modal__box { position: relative; display: flex; flex-direction: column; gap: 12px; width: min(560px, 100%); max-height: calc(100dvh - 48px); overflow: auto; padding: 40px; background: var(--color-bg-surface); border-radius: var(--radius-card); }
+.modal__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.lightbox { width: min(1200px, 100%); gap: 24px; }
+.lightbox__title { display: flex; align-items: baseline; gap: 12px; }
+.lightbox__stage { display: flex; align-items: center; gap: 32px; }
+.lightbox__stage .gallery__arrow { position: static; translate: none; flex: none; }
+.lightbox__img { flex: 1; }
+.lightbox__thumbs { display: flex; gap: 12px; list-style: none; padding: 0; overflow-x: auto; }
+.lightbox__thumbs li { flex: 0 0 80px; }
+
+.toast { position: fixed; left: 50%; bottom: 120px; z-index: 120; translate: -50% 0; display: flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: var(--radius-full); background: var(--color-bg-ink); color: var(--color-text-on-ink); box-shadow: var(--shadow-mobiel); }
+.toast .icon { color: var(--color-feedback-success-bg); }
+
+@media (max-width: 1199px) {
+  .product-hero__grid, .specs, .compare { grid-template-columns: minmax(0, 1fr); }
+  .gallery { position: static; }
+  /* Figma 393: ankerbalk loopt door en scrolt horizontaal */
+  .anchors__bar { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; gap: 24px; }
+  .anchors__bar::-webkit-scrollbar { display: none; }
+  .anchors__bar .btn { flex: none; }
+}
+@media (max-width: 767px) {
+  .product-hero { padding-top: 0; }   /* Figma 393: galerij direct onder het kruimelpad */
+  /* Figma 393 (Product / Galerij Apparaat=Mobile): hoofdfoto 3:2 met pijlen van 40, vijf miniaturen van 64 (4 foto's + "+X") */
+  .gallery { gap: 8px; }
+  .gallery__main .gallery__arrow { width: 40px; height: 40px; }
+  .gallery__thumbs { display: flex; justify-content: space-between; gap: 8px; }
+  .gallery__thumbs > li { flex: 0 1 64px; min-width: 0; }   /* smaller dan 393: miniaturen schalen mee */
+  .gallery__thumbs > li:nth-child(5) { display: none; }
+  .gallery__thumb, .gallery__thumb .media, .gallery__thumb--more .h4 { border-radius: var(--radius-inset); }
+  .anchors { margin-top: calc(24px - var(--section-padding-y)); padding-inline: 0; }
+  .anchors__bar { border-radius: 0; padding: 16px var(--page-margin); }
+  .buybox__cart { flex: 1; }
+  .option-card__head { flex-wrap: wrap; row-gap: 4px; }
+  .option-card__head > strong { width: 100%; padding-left: 32px; }
+  .buybox__stock { flex-wrap: nowrap; align-items: flex-start; }
+  .buybox__dot { flex: none; margin-top: calc((1lh - 8px) / 2); }
+  .buybox__instock { white-space: nowrap; }
+  .buybox__advice { flex-direction: column; align-items: flex-start; }
+  .spec-table th, .spec-table td { padding: 16px; }
+  /* Figma 393: vergelijking past in twee kolommen, geen horizontaal scrollen */
+  .compare__cell, .compare__row--products .compare__cell { padding: 8px 12px 16px; border-width: 0; }
+  .compare__row:not(.compare__row--products) .compare__cell.is-current { background: transparent; }   /* Figma 393: tint alleen in de productkop, waarden op wit */
+  .compare__row--products .compare__cell { padding: 16px 12px; gap: 12px; }
+  .compare__label > * { padding: 16px 12px 0; }
+  /* Figma 393: kenmerk als regel over de volle breedte, knop onderaan links */
+  .compare__label { grid-template-columns: 1fr; border-top: 1px solid var(--color-border-default); }
+  .compare__label > :last-child { display: none; }
+  .compare__label .is-current { background: transparent; }
+  .compare__row--products .compare__cell > p:last-child > span { display: block; }
+  .compare__row--btn { grid-template-columns: 1fr; border-top: 1px solid var(--color-border-default); }
+  .compare__row--btn .compare__cell--plain { display: none; }
+  .compare__row--btn .compare__cell { padding: 16px 12px; border: 0; }
+  .buybar { min-height: 96px; padding: 16px var(--page-margin); transform: none; }   /* Figma 393: altijd zichtbaar, 96 hoog */
+  .buybar__product { display: none; }
+  .buybar__action { flex: 1; justify-content: space-between; gap: 12px; }
+  .buybar__price { display: flex; flex-direction: column; }
+  .has-sticky-bar { padding-bottom: 96px; }                 /* footer valt niet onder de balk */
+  .has-sticky-bar .sticky-wa { display: none; }             /* productpagina mobiel: geen WhatsApp-knop */
+  .modal { padding: 0; align-items: end; }
+  .modal__box { width: 100%; padding: 24px var(--page-margin) 32px; border-radius: var(--radius-card) var(--radius-card) 0 0; }
+  .lightbox__stage { gap: 8px; }
+  .lightbox__stage .gallery__arrow { width: 40px; height: 40px; }
+}
+
+/* --- Ankerbalk mobiel (Figma Navigatie / Anker en 'Productpagina 393 | Ankerbalk sticky (voorbeeld)') ---
+   Plakt onder de header, wit verloop waar nog items zijn, actief onderdeel donker en vet met oranje lijn. Gedrag in main.js (data-anchors). */
+@media (max-width: 767px) {
+  html:has([data-anchors]) { scroll-padding-top: calc(var(--header-h) + 57px + 16px); }
+  html:has([data-anchors]) [id] { scroll-margin-top: 0; }   /* onderdeel begint 16 onder de vastgeplakte ankerbalk */
+  .anchors { position: sticky; top: var(--header-h); z-index: 60; }
+  .anchors__bar { position: relative; padding-block: 0; }
+  .anchors__link { position: relative; flex-direction: column; align-items: flex-start; gap: 0; padding: 16px 0; }
+  .anchors__link::after { content: attr(data-label); height: 0; overflow: hidden; visibility: hidden; font-weight: var(--font-weight-bold); }   /* reserveert de breedte van de vette staat */
+  .anchors__link::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; }
+  .anchors__link.is-active { color: var(--color-text-primary); font-weight: var(--font-weight-bold); }
+  .anchors__link.is-active::before { background: var(--color-border-brand); }
+  .anchors::before, .anchors::after { content: ""; position: absolute; top: 0; bottom: 0; z-index: 1; width: 48px; pointer-events: none; opacity: 0; transition: opacity var(--duration); }
+  .anchors::before { left: 0; background: var(--gradient-scroll-wit-links); }
+  .anchors::after { right: 0; background: var(--gradient-scroll-wit-rechts); }
+  .anchors.has-more-left::before, .anchors.has-more-right::after { opacity: 1; }
+  .anchors.is-stuck .anchors__bar { box-shadow: inset 0 -1px 0 var(--color-border-default); }
+}

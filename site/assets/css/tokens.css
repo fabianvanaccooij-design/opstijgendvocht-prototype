@@ -1,0 +1,295 @@
+/* Gegenereerd door tools/build-tokens.js uit tools/figma-tokens.json. Niet met de hand aanpassen. */
+/* Bron: Figma tUguEVvwZz6DdLwQAQy763 (variabelen, tekststijlen, effectstijlen, verlopen), export 2026-10-08 */
+
+:root {
+  --color-orange-50: #fef8f0;
+  --color-orange-100: #fdeedd;
+  --color-orange-200: #fbdbb6;
+  --color-orange-300: #f9c486;
+  --color-orange-400: #f6ac55;
+  --color-orange-500: #f49424;
+  --color-orange-600: #e4800b;
+  --color-orange-700: #b96809;
+  --color-orange-800: #8d4f07;
+  --color-orange-900: #613705;
+  --color-blue-50: #f4f9fd;
+  --color-blue-100: #d7eaf9;
+  --color-blue-200: #afd5f3;
+  --color-blue-300: #70b5ea;
+  --color-blue-400: #3697e2;
+  --color-blue-500: #1b75bb;
+  --color-blue-600: #17629c;
+  --color-blue-700: #124e7d;
+  --color-blue-800: #0e3b5e;
+  --color-blue-900: #0a2a43;
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fdfdfd;
+  --color-neutral-100: #f6f5f3;
+  --color-neutral-200: #e6e3e0;
+  --color-neutral-300: #cfccc9;
+  --color-neutral-400: #a9a39e;
+  --color-neutral-500: #878078;
+  --color-neutral-600: #6c6660;
+  --color-neutral-700: #514c48;
+  --color-neutral-800: #363330;
+  --color-neutral-900: #201f1d;
+  --color-green-50: #ecfdf3;
+  --color-green-500: #16a34a;
+  --color-green-600: #15803d;
+  --color-red-50: #fef2f2;
+  --color-red-500: #dc2626;
+  --color-red-600: #b91c1c;
+  --color-amber-50: #fffbeb;
+  --color-amber-500: #d97706;
+  --color-whatsapp-500: #25d366;
+  --color-whatsapp-600: #1ebe5a;
+  --radius-0: 0px;
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+  --radius-999: 999px;
+  --border-1: 1px;
+  --border-2: 2px;
+  --opacity-disabled: 0.4;
+  --opacity-overlay: 0.6;
+  --space-0: 0px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-120: 120px;
+  --space-160: 160px;
+  --color-slate-600: #4a5a6a;
+  --color-slate-500: #738393;
+  --color-slate-100: #f5f5f6;
+  --color-slate-200: #e1e4e6;
+  --color-yellow-400: #fece2d;
+  --color-bg-page: var(--color-blue-50);
+  --color-bg-surface: var(--color-neutral-0);
+  --color-bg-surface-alt: var(--color-blue-50);
+  --color-bg-brand: var(--color-orange-500);
+  --color-bg-brand-subtle: var(--color-orange-50);
+  --color-bg-secondary: var(--color-blue-900);
+  --color-bg-secondary-subtle: var(--color-blue-100);
+  --color-bg-ink: var(--color-blue-900);
+  --color-bg-overlay: var(--color-blue-900);
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-slate-600);
+  --color-text-muted: var(--color-slate-500);
+  --color-text-on-brand: var(--color-text-primary);
+  --color-text-on-secondary: var(--color-neutral-0);
+  --color-text-on-ink: var(--color-neutral-0);
+  --color-text-brand-orange: var(--color-orange-600);
+  --color-text-brand-blue: var(--color-blue-500);
+  --color-text-link: var(--color-text-brand-blue);
+  --color-text-error: var(--color-red-600);
+  --color-border-default: var(--color-blue-100);
+  --color-border-strong: var(--color-blue-200);
+  --color-border-focus: var(--color-blue-500);
+  --color-border-brand: var(--color-orange-500);
+  --color-brand-primary: var(--color-orange-500);
+  --color-brand-secondary: var(--color-blue-500);
+  --color-brand-secondary-hover: var(--color-blue-900);
+  --color-brand-secondary-pressed: var(--color-blue-700);
+  --color-action-primary-bg: var(--color-orange-500);
+  --color-action-primary-bg-hover: var(--color-orange-600);
+  --color-action-primary-text: var(--color-text-primary);
+  --color-action-secondary-bg: var(--color-orange-50);
+  --color-action-secondary-text: var(--color-neutral-900);
+  --color-action-whatsapp: var(--color-whatsapp-500);
+  --color-action-whatsapp-hover: var(--color-whatsapp-600);
+  --color-feedback-success: var(--color-green-600);
+  --color-feedback-success-bg: var(--color-green-50);
+  --color-feedback-error: var(--color-red-600);
+  --color-feedback-error-bg: var(--color-red-50);
+  --color-feedback-warning: var(--color-amber-500);
+  --color-feedback-warning-bg: var(--color-amber-50);
+  --color-review-star: var(--color-yellow-400);
+  --radius-full: var(--radius-999);
+  --radius-card: var(--radius-24);
+  --border-width-default: var(--border-1);
+  --border-width-focus: var(--border-2);
+  --opacity-disabled: var(--opacity-disabled);
+  --opacity-overlay: var(--opacity-overlay);
+  --size-control: 64px;
+  --size-icon-sm: 16px;
+  --size-icon-md: 20px;
+  --size-icon-lg: 24px;
+  --size-avatar: 56px;
+  --color-action-primary-bg-pressed: var(--color-orange-700);
+  --color-action-secondary-bg-hover: var(--color-orange-100);
+  --color-action-secondary-bg-pressed: var(--color-orange-200);
+  --color-action-disabled-bg: var(--color-slate-100);
+  --color-action-disabled-text: var(--color-slate-500);
+  --color-action-disabled-border: var(--color-slate-200);
+  --page-margin: var(--space-120);
+  --section-padding-y: var(--space-120);
+  --card-padding-lg: var(--space-80);
+  --heading-gap: var(--space-64);
+  --grid-column-gap: var(--space-80);
+  --grid-gutter: var(--space-32);
+  --card-padding: var(--space-40);
+  --size-control-sm: 44px;
+  --button-padding-x: var(--space-32);
+  --button-padding-x-sm: var(--space-20);
+  --color-bg-band: var(--color-neutral-0);
+  --color-bg-band-alt: var(--color-blue-100);
+  --color-bg-statement: var(--color-orange-500);
+  --color-text-ink: var(--color-blue-900);
+  --color-border-ink: var(--color-blue-900);
+  --card-padding-sm: var(--space-32);
+  --radius-inset: var(--radius-12);
+  --color-action-secondary-band-bg: var(--color-neutral-0);
+  --color-action-secondary-band-bg-hover: var(--color-blue-50);
+  --color-action-secondary-band-bg-pressed: var(--color-blue-100);
+  --color-action-secondary-circle: var(--color-orange-500);
+  --color-action-secondary-circle-hover: var(--color-orange-600);
+  --card-gap: var(--space-12);
+  --size-control-inner: 48px;
+  --size-icon-accordion: 24px;
+  --color-action-secondary-circle-pressed: var(--color-orange-700);
+  --color-bg-on-ink-subtle: #ffffff14;
+  --color-text-on-ink-secondary: var(--color-blue-200);
+  --gap-meta: var(--space-12);
+  --gap-heading-1: var(--space-32);
+  --gap-heading-2: var(--space-24);
+  --gap-heading-3: var(--space-16);
+  --gap-heading-4: var(--space-12);
+  --gap-paragraph: var(--space-16);
+  --gap-block: var(--space-32);
+  --gap-action: var(--space-40);
+  --gap-action-sm: var(--space-24);
+  --gap-value: var(--space-4);
+  --gap-buttons: var(--space-24);
+  --gap-field: var(--space-24);
+  --color-action-tertiary-bg: var(--color-blue-50);
+  --color-action-tertiary-bg-hover: var(--color-blue-100);
+  --color-action-tertiary-bg-pressed: var(--color-blue-200);
+  --font-family-heading: "Plus Jakarta Sans";
+  --font-family-body: "Noto Sans";
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-size-h1: 64px;
+  --font-size-h2: 48px;
+  --font-size-h3: 32px;
+  --font-size-h4: 24px;
+  --font-size-body-lg: 21px;
+  --font-size-body: 18px;
+  --font-size-body-sm: 16px;
+  --font-size-caption: 12px;
+  --font-line-height-h1: 79px;
+  --font-line-height-h2: 62px;
+  --font-line-height-h3: 40px;
+  --font-line-height-h4: 32px;
+  --font-line-height-body-lg: 32px;
+  --font-line-height-body: 28px;
+  --font-line-height-body-sm: 25px;
+  --font-line-height-caption: 18px;
+  --font-letter-spacing-heading: -0.5px;
+  --font-letter-spacing-caps: 1px;
+  --shadow-default: 0 5px 24px #bac9d426;
+  --shadow-mobiel: 0 8px 32px #0a2a431f;
+  --shadow-boven: 0 -5px 24px #bac9d426;
+  --gradient-hero-licht: linear-gradient(180deg, #ffffff 0%, #f4f9fd 100%);
+  --gradient-foto-overlay: linear-gradient(90deg, #0a2a43 0%, rgba(10,42,67,0) 63%);
+  --gradient-foto-overlay-mobiel: linear-gradient(180deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.9) 100%);
+  --gradient-foto-overlay-wit: linear-gradient(90deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.88) 42%, rgba(255,255,255,0) 62%);
+  --gradient-foto-overlay-wit-mobiel: linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.88) 45%, rgba(255,255,255,0) 63%);
+  --gradient-beeldtegel-overlay: linear-gradient(180deg, rgba(10,42,67,0) 0%, rgba(10,42,67,.15) 70%, rgba(10,42,67,.6) 100%);
+  --gradient-beeldtegel-overlay-hover: linear-gradient(180deg, rgba(10,42,67,0) 0%, rgba(10,42,67,.25) 50%, rgba(10,42,67,.7) 100%);
+  --gradient-header-op-beeld: linear-gradient(180deg, #0a2a43 0%, rgba(10,42,67,0) 100%);
+  --gradient-team-overlay: linear-gradient(180deg, rgba(10,42,67,.6) 0%, rgba(10,42,67,0) 65%);
+  --gradient-foto-naar-inkt-mobiel: linear-gradient(180deg, rgba(10,42,67,0) 0%, rgba(10,42,67,0) 30%, rgba(10,42,67,.85) 75%, #0a2a43 100%);
+  --gradient-foto-naar-wit-mobiel: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,.85) 75%, #ffffff 100%);
+  --gradient-scroll-wit-rechts: linear-gradient(90deg, rgba(255,255,255,0) 0%, #ffffff 100%);
+  --gradient-scroll-wit-links: linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0) 100%);
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  :root {
+    --page-margin: 40px;
+    --section-padding-y: 80px;
+    --card-padding-lg: 56px;
+    --heading-gap: 40px;
+    --grid-column-gap: 48px;
+    --font-size-h1: 48px;
+    --font-line-height-h1: 58px;
+    --font-size-h2: 36px;
+    --font-line-height-h2: 46px;
+    --font-size-h3: 26px;
+    --font-line-height-h3: 34px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --radius-card: var(--radius-16);
+    --size-control: 56px;
+    --size-avatar: 48px;
+    --page-margin: var(--space-20);
+    --section-padding-y: var(--space-48);
+    --card-padding-lg: var(--space-48);
+    --heading-gap: var(--space-24);
+    --grid-column-gap: var(--space-32);
+    --grid-gutter: var(--space-16);
+    --card-padding: var(--space-24);
+    --button-padding-x: var(--space-24);
+    --button-padding-x-sm: var(--space-16);
+    --card-padding-sm: var(--space-16);
+    --radius-inset: var(--radius-8);
+    --size-control-inner: 40px;
+    --size-icon-accordion: 20px;
+    --gap-meta: var(--space-8);
+    --gap-heading-1: var(--space-12);
+    --gap-heading-2: var(--space-12);
+    --gap-heading-3: var(--space-8);
+    --gap-heading-4: var(--space-8);
+    --gap-paragraph: var(--space-12);
+    --gap-block: var(--space-24);
+    --gap-action: var(--space-24);
+    --gap-action-sm: var(--space-16);
+    --gap-buttons: var(--space-16);
+    --gap-field: var(--space-16);
+    --font-size-h1: 34px;
+    --font-size-h2: 28px;
+    --font-size-h3: 22px;
+    --font-size-h4: 19px;
+    --font-size-body-lg: 18px;
+    --font-size-body: 16px;
+    --font-size-body-sm: 14px;
+    --font-line-height-h1: 42px;
+    --font-line-height-h2: 36px;
+    --font-line-height-h3: 30px;
+    --font-line-height-h4: 26px;
+    --font-line-height-body-lg: 28px;
+    --font-line-height-body: 25px;
+    --font-line-height-body-sm: 22px;
+    --font-letter-spacing-heading: -0.25px;
+  }
+}
+
+/* Tekststijlen (Figma Text Styles) */
+.text-heading-h1 { font-family: var(--font-family-heading), system-ui, sans-serif; font-size: var(--font-size-h1); line-height: var(--font-line-height-h1); font-weight: var(--font-weight-bold); letter-spacing: var(--font-letter-spacing-heading); }
+.text-heading-h2 { font-family: var(--font-family-heading), system-ui, sans-serif; font-size: var(--font-size-h2); line-height: var(--font-line-height-h2); font-weight: var(--font-weight-bold); letter-spacing: var(--font-letter-spacing-heading); }
+.text-heading-h3 { font-family: var(--font-family-heading), system-ui, sans-serif; font-size: var(--font-size-h3); line-height: var(--font-line-height-h3); font-weight: var(--font-weight-bold); }
+.text-heading-h4 { font-family: var(--font-family-heading), system-ui, sans-serif; font-size: var(--font-size-h4); line-height: var(--font-line-height-h4); font-weight: var(--font-weight-bold); }
+.text-body-large { font-family: var(--font-family-body), system-ui, sans-serif; font-size: var(--font-size-body-lg); line-height: var(--font-line-height-body-lg); font-weight: var(--font-weight-regular); }
+.text-body-default { font-family: var(--font-family-body), system-ui, sans-serif; font-size: var(--font-size-body); line-height: var(--font-line-height-body); font-weight: var(--font-weight-regular); }
+.text-body-default-bold { font-family: var(--font-family-body), system-ui, sans-serif; font-size: var(--font-size-body); line-height: var(--font-line-height-body); font-weight: var(--font-weight-bold); }
+.text-body-small { font-family: var(--font-family-body), system-ui, sans-serif; font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); font-weight: var(--font-weight-regular); }
+.text-body-caption { font-family: var(--font-family-body), system-ui, sans-serif; font-size: var(--font-size-caption); line-height: var(--font-line-height-caption); font-weight: var(--font-weight-regular); }
+.text-ui-button { font-family: var(--font-family-body), system-ui, sans-serif; font-size: var(--font-size-body); line-height: var(--font-line-height-body); font-weight: var(--font-weight-medium); }
+.text-ui-button-small { font-family: var(--font-family-body), system-ui, sans-serif; font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); font-weight: var(--font-weight-medium); }
+.text-ui-label-caps { font-family: var(--font-family-body), system-ui, sans-serif; font-size: var(--font-size-caption); line-height: var(--font-line-height-caption); font-weight: var(--font-weight-medium); letter-spacing: var(--font-letter-spacing-caps); text-transform: uppercase; }
+.text-ui-link { font-family: var(--font-family-body), system-ui, sans-serif; font-size: var(--font-size-body); line-height: var(--font-line-height-body); font-weight: var(--font-weight-medium); }

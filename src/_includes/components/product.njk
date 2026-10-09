@@ -1,0 +1,115 @@
+{#- ==========================================================================
+    Productpagina-onderdelen (Figma: Product / Galerij, Koopbox, Sticky koopbalk,
+    Galerij lightbox, Uitleg montage). Gedrag in main.js (data-product).
+    Productgegevens komen uit het object `p` (zie src/pages/productpagina.njk).
+    ========================================================================== -#}
+{% import "components/ui.njk" as ui %}
+
+{#- Product / Galerij: hoofdfoto 3:2 met pijlen en teller, 5 miniaturen + "+X"-tegel (mobiel 4 + "+X") -#}
+{% macro galerij(p) -%}
+<div class="gallery" data-gallery data-count="{{ p.photos }}">
+  <div class="gallery__main">
+    <button type="button" class="gallery__stage" data-lightbox-open aria-label="Foto’s vergroot bekijken">{{ ui.media('', '', '3-2') }}</button>
+    <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Vorige foto" data-gallery-prev>{{ icon('chevron-left') }}</button>
+    <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Volgende foto" data-gallery-next>{{ icon('chevron-right') }}</button>
+    <span class="gallery__count" data-gallery-count>1 / {{ p.photos }}</span>
+  </div>
+  <ul class="gallery__thumbs" role="list">
+    {% for i in range(0, 5) %}<li><button type="button" class="gallery__thumb{{ ' is-active' if loop.first }}" data-gallery-thumb="{{ i }}" aria-label="Foto {{ i + 1 }}">{{ ui.media('', '', '1-1') }}</button></li>{% endfor %}
+    <li><button type="button" class="gallery__thumb gallery__thumb--more" data-lightbox-open="5" aria-label="Alle {{ p.photos }} foto’s bekijken">{{ ui.media('', '', '1-1') }}<span class="h4"><span class="only-desktop">+{{ p.photos - 5 }}</span><span class="only-mobile">+{{ p.photos - 4 }}</span></span></button></li>
+  </ul>
+</div>
+{%- endmacro %}
+
+{#- Product / Koopbox (Montage=Zonder|Met). Prijs en sticky balk volgen de montagekeuze. -#}
+{% macro koopbox(p, site) -%}
+<div class="buybox" data-buybox data-price="{{ p.price }}" data-montage-price="{{ p.montagePrice }}">
+  <div class="stack" style="gap:12px">
+    <div class="stack">
+      <p class="body-lg">{{ p.category }}</p>
+      <h1 class="h2">{{ p.name }}</h1>
+    </div>
+    <span class="rating__row">{{ ui.stars(5) }}<span><strong>{{ p.score }}</strong> <span class="body-sm c-secondary">({{ p.reviews }} reviews)</span></span></span>
+  </div>
+  <ul class="buybox__usps" role="list">{% for u in p.usps %}<li>{{ u }}</li>{% endfor %}</ul>
+  <div class="stack" style="gap:var(--gap-value)">
+    <p class="buybox__price"><span class="h3" data-buybox-price>{{ p.price | euroCents }}</span> <span class="c-secondary">incl. btw</span></p>
+    <p class="body-sm c-secondary">{{ p.subsidyNote }}</p>
+  </div>
+  <div class="stack" style="gap:12px">
+    <p class="bold">Extra service</p>
+    <label class="option-card" data-montage>
+      <span class="option-card__head">
+        <span class="option-card__title">
+          <span class="check"><input type="checkbox" data-montage-input><span>Inclusief montage</span></span>
+          <button type="button" class="link" data-modal-open="montage-uitleg">Uitleg</button>
+        </span>
+        <strong>+ {{ p.montagePrice | euroCents }}</strong>
+      </span>
+      <span class="option-card__text body-sm c-secondary">{{ p.montageText }}</span>
+    </label>
+  </div>
+  <p class="buybox__stock"><span class="buybox__dot"></span><span class="buybox__instock">Op voorraad</span> <span class="c-secondary">{{ p.leadTime }}</span></p>
+  <div class="buybox__buy">
+    <div class="qty" data-qty>
+      <button type="button" aria-label="Minder" data-qty-min>{{ icon('minus') }}</button>
+      <input type="number" value="1" min="1" max="99" aria-label="Aantal" data-qty-input>
+      <button type="button" aria-label="Meer" data-qty-plus>{{ icon('plus') }}</button>
+    </div>
+    {{ ui.btn('In winkelmand', '', 'primary', { type: 'button', iconLeft: 'cart', cls: 'buybox__cart', attrs: 'data-add-to-cart' }) }}
+  </div>
+  <ul class="checklist checklist--success" role="list">{% for s in p.service %}<li>{{ icon('check') }}<span>{{ s }}</span></li>{% endfor %}</ul>
+  <div class="card card--sm buybox__advice">
+    <div class="stack" style="gap:4px"><p class="bold">Twijfel je of dit past in jouw woning?</p><p class="c-secondary">Stuur een paar foto's, dan kijken we gratis met je mee.</p></div>
+    {{ ui.btn("Stuur foto's via WhatsApp", '#', 'secondary', { wa: true, icon: 'whatsapp' }) }}
+  </div>
+</div>
+{%- endmacro %}
+
+{#- Product / Sticky koopbalk: verschijnt als de koopbox uit beeld is -#}
+{% macro stickyBar(p) -%}
+<div class="buybar" data-buybar hidden>
+  <div class="buybar__product">
+    {{ ui.media('', '', '1-1', '', 'buybar__img') }}
+    <div class="stack"><strong>{{ p.name }}</strong><span class="c-secondary" data-buybar-variant>Zonder montage</span></div>
+  </div>
+  <div class="buybar__action">
+    <p class="buybar__price"><span class="h4" data-buybar-price>{{ p.price | euroCents }}</span> <span class="c-secondary">incl. btw</span></p>
+    {{ ui.btn('In winkelmand', '', 'primary', { type: 'button', iconLeft: 'cart', attrs: 'data-add-to-cart' }) }}
+  </div>
+</div>
+{%- endmacro %}
+
+{#- Overlays: galerij-lightbox en uitleg montage -#}
+{% macro overlays(p) -%}
+<div class="modal modal--lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden data-modal>
+  <div class="modal__scrim" data-modal-close></div>
+  <div class="modal__box lightbox">
+    <div class="modal__head">
+      <p class="lightbox__title"><span class="h4" id="lightbox-title">{{ p.name }}</span> <span data-lightbox-count>1 / {{ p.photos }}</span></p>
+      <button type="button" class="btn-close" aria-label="Sluiten" data-modal-close>{{ icon('close') }}</button>
+    </div>
+    <div class="lightbox__stage">
+      <button type="button" class="gallery__arrow" aria-label="Vorige foto" data-lightbox-prev>{{ icon('chevron-left') }}</button>
+      {{ ui.media('', '', '3-2', '', 'lightbox__img') }}
+      <button type="button" class="gallery__arrow" aria-label="Volgende foto" data-lightbox-next>{{ icon('chevron-right') }}</button>
+    </div>
+    <ul class="lightbox__thumbs" role="list">
+      {% for i in range(0, p.photos) %}<li><button type="button" class="gallery__thumb{{ ' is-active' if loop.first }}" data-lightbox-thumb="{{ i }}" aria-label="Foto {{ i + 1 }}">{{ ui.media('', '', '1-1') }}</button></li>{% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="modal" id="montage-uitleg" role="dialog" aria-modal="true" aria-labelledby="montage-title" hidden data-modal>
+  <div class="modal__scrim" data-modal-close></div>
+  <div class="modal__box modal__box--sm">
+    <div class="modal__head"><h2 class="h4" id="montage-title">Montage in opbouw</h2><button type="button" class="btn-close" aria-label="Sluiten" data-modal-close>{{ icon('close') }}</button></div>
+    <div class="stack" style="gap:16px">
+      <p>Bij de optie met montage komt onze specialist de unit compleet bij jou installeren, inclusief de muurdoorvoer, montage van het RVS buitenrooster en het aansluiten van de unit.</p>
+      {{ ui.checklist(['&lt;Duur van de montage&gt;', '&lt;Regio waarin we monteren&gt;', '&lt;Hoe en wanneer we de afspraak inplannen&gt;']) }}
+    </div>
+  </div>
+</div>
+
+<div class="toast" role="status" aria-live="polite" data-toast hidden>{{ icon('success') }}<span>Toegevoegd aan je winkelmand</span></div>
+{%- endmacro %}

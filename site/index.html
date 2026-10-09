@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpstijgendVocht.nl</title>
+  <meta name="description" content="Vochtige muren? Wij krijgen ze droog. Eerst de oorzaak, daarna de juiste oplossing.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <script src="assets/js/vendor/qrcode.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body class="">
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none">
+  <symbol id="i-arrow-left" viewBox="0 0 25 24"><path d="M1.07812 10.9219L8.57812 3.42188L9.60938 2.39062L11.7656 4.5C11.6719 4.54688 9.70312 6.5625 5.76562 10.5H24.6094V13.5H5.76562C9.70312 17.4375 11.6719 19.4531 11.7656 19.5L9.60938 21.6094L8.57812 20.5781L1.07812 13.0781L0 12L1.07812 10.9219Z"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 25 24"><path d="M23.5781 13.0781L16.0781 20.5781L15 21.6094L12.8906 19.5C12.9375 19.4531 14.9531 17.4375 18.8906 13.5H0V10.5H18.8906C14.9531 6.5625 12.9375 4.54688 12.8906 4.5L15 2.39062L16.0781 3.42188L23.5781 10.9219L24.6562 12L23.5781 13.0781Z"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 25"><path d="M13.0781 1.03125L20.5781 8.53125L21.6562 9.60938L19.5 11.7188C19.4531 11.6719 17.4375 9.65625 13.5 5.71875V24.6094H10.5V5.71875C6.5625 9.65625 4.59375 11.6719 4.5 11.7188L2.39062 9.60938L3.46875 8.53125L10.9688 1.03125L12 0L13.0781 1.03125Z"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 25"><path d="M10.9688 23.5781H10.9219L3.42188 16.0781L2.39062 15L4.5 12.8906C4.54688 12.9375 6.5625 14.9531 10.5 18.8906V0H13.5V18.8906C17.4375 14.9531 19.4531 12.9375 19.5 12.8906L21.6094 15L20.5781 16.0781L13.0781 23.5781L12 24.6094L10.9688 23.5781Z"/></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M4.64062 12L5.71875 10.9219L14.7188 1.92188L15.75 0.890625L17.9062 3L16.8281 4.07812L8.90625 12L16.8281 19.9219L17.9062 21L15.75 23.1094L14.7188 22.0781L5.71875 13.0781L4.64062 12Z"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M19.4062 12L18.3281 13.0781L9.32812 22.0781L8.25 23.1094L6.14062 21L7.21875 19.9219L15.1406 12L7.21875 4.07812L6.14062 3L8.25 0.890625L9.32812 1.92188L18.3281 10.9219L19.4062 12Z"/></symbol>
+  <symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="M12 3.89062L13.0781 4.92188L23.1562 15L21 17.1094L19.9688 16.0781L12 8.10938L4.07812 16.0781L3 17.1094L0.890625 15L1.96875 13.9219L10.9688 4.92188L12 3.89062Z"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M12 20.1094L10.9688 19.0781L1.96875 10.0781L0.890625 9L3 6.89062L4.07812 7.92188L12 15.8906L19.9688 7.92188L21 6.89062L23.1562 9L22.0781 10.0781L12 20.1094Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M23.1094 4.17188L22.2188 5.39062L10.2188 21.8906L9.1875 23.2969C9.1875 23.25 6.75 20.8594 1.96875 16.0781L0.890625 15L3 12.8906C3.09375 12.9844 5.0625 14.9062 8.8125 18.7031L19.7812 3.60938L20.6719 2.39062L23.1094 4.17188Z"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M1.5 10.5H22.5V13.5H1.5V10.5Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M13.5 3V10.5H22.5V13.5H13.5V22.5H10.5V13.5H1.5V10.5H10.5V1.5H13.5V3Z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M5.57812 3.42188L12 9.89062L18.4688 3.42188L19.5 2.39062L21.6562 4.5L20.5781 5.57812L14.1562 12L20.5781 18.4219L21.6562 19.5L19.5 21.6094L18.4688 20.5781L12 14.1094L5.57812 20.5781L4.5 21.6094L2.39062 19.5L3.46875 18.4219L9.89062 12L3.46875 5.57812L2.39062 4.5L4.5 2.39062L5.57812 3.42188Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M1.5 3H22.5V6H1.5V3ZM1.5 10.5H22.5V13.5H1.5V10.5ZM22.5 18V21H1.5V18H22.5Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 25 25"><path d="M19.5 9.75C19.5 11.9062 18.7969 13.875 17.625 15.5156L23.5781 21.4219L24.6562 22.5L22.5 24.6094L21.4688 23.5781L15.5156 17.625C13.9219 18.7969 11.9062 19.5 9.75 19.5C4.35938 19.5 0 15.1406 0 9.75C0 4.35938 4.35938 0 9.75 0C15.1406 0 19.5 4.35938 19.5 9.75ZM9.75 16.5C13.5 16.5 16.5 13.5 16.5 9.75C16.5 6 13.5 3 9.75 3C6.04688 3 3 6 3 9.75C3 13.5 6.04688 16.5 9.75 16.5Z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M13.5 1.5V11.3906C14.9531 9.9375 15.9375 8.95312 16.5 8.39062L18.6094 10.5L17.5781 11.5781C13.9688 15.1406 12.1406 16.9688 12 17.1094L10.9219 16.0781C7.35938 12.4688 5.53125 10.6406 5.39062 10.5L7.5 8.39062C8.0625 8.95312 9.04688 9.9375 10.5 11.3906V0H13.5V1.5ZM1.5 15H6.70312C8.48438 16.7812 10.2188 18.5156 12 20.2969C13.7812 18.5156 15.5156 16.7812 17.2969 15H22.5V22.5H1.5V15ZM18.75 17.625C18.1406 17.625 17.625 18.1406 17.625 18.75C17.625 19.3594 18.1406 19.875 18.75 19.875C19.3594 19.875 19.875 19.3594 19.875 18.75C19.875 18.1406 19.3594 17.625 18.75 17.625Z"/></symbol>
+  <symbol id="i-external-link" viewBox="0 0 24 24"><path d="M15 0H24V10.5H21V5.10938L11.5781 14.5781L10.5 15.6094L8.39062 13.5L9.42188 12.4219L18.8906 3H13.5V0H15ZM1.5 4.5H9V7.5H3V21H16.5V15H19.5V24H0V4.5H1.5Z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 28 27"><path d="M13.7812 0L18.1406 8.53125L27.5625 10.0312L20.8125 16.7812L22.3125 26.2031L13.7812 21.8906L5.29688 26.2031L6.75 16.7812L0 10.0312L9.46875 8.53125L13.7812 0Z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M12 11.625C8.90625 11.625 6.375 9.09375 6.375 6C6.375 2.90625 8.90625 0.375 12 0.375C15.0938 0.375 17.625 2.90625 17.625 6C17.625 9.09375 15.0938 11.625 12 11.625ZM21.75 24H2.25L5.25 14.25H18.75L21.75 24Z"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path d="M12 24C5.39062 24 0 18.6094 0 12C0 5.39062 5.39062 0 12 0C18.6094 0 24 5.39062 24 12C24 18.6094 18.6094 24 12 24ZM10.125 15.75H9V18H15V15.75H13.5V10.5H9V12.75H11.25V15.75H10.125ZM13.5 9V6H10.5V9H13.5Z"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><path d="M12 24C5.39062 24 0 18.6094 0 12C0 5.39062 5.39062 0 12 0C18.6094 0 24 5.39062 24 12C24 18.6094 18.6094 24 12 24ZM12 8.25C12.8438 8.25 13.5 8.90625 13.5 9.75C13.5 10.4062 13.1719 10.875 12.6562 11.2031C12.1406 11.5312 11.625 11.6719 11.0625 11.8594C11.0156 11.8594 10.9219 11.8594 10.875 11.9062V14.5312H13.125V13.5C13.3594 13.4062 13.6875 13.2188 13.9688 13.0312C14.8125 12.4688 15.75 11.3906 15.75 9.75C15.75 7.6875 14.0625 6 12 6C9.9375 6 8.25 7.6875 8.25 9.75H10.5C10.5 8.90625 11.1562 8.25 12 8.25ZM10.875 16.125V18.375H13.125V16.125H10.875Z"/></symbol>
+  <symbol id="i-error" viewBox="0 0 24 24"><path d="M12 24C5.39062 24 0 18.6094 0 12C0 5.39062 5.39062 0 12 0C18.6094 0 24 5.39062 24 12C24 18.6094 18.6094 24 12 24ZM10.6875 15.1875V17.8125H13.3125V15.1875H10.6875ZM10.5 6L11.1094 13.5H12.8906L13.5 6H10.5Z"/></symbol>
+  <symbol id="i-warning" viewBox="0 0 26 25"><path d="M25.5 23.25H0L12.75 0L25.5 23.25ZM11.4375 17.4375V20.0625H14.0625V17.4375H11.4375ZM11.25 8.25L11.8594 15.75H13.6406L14.25 8.25H11.25Z"/></symbol>
+  <symbol id="i-success" viewBox="0 0 24 24"><path d="M12 24C5.39062 24 0 18.6094 0 12C0 5.39062 5.39062 0 12 0C18.6094 0 24 5.39062 24 12C24 18.6094 18.6094 24 12 24ZM15.9844 7.07812L10.3594 14.7656L7.125 11.5312L5.53125 13.125L9.70312 17.2969L10.6406 18.2344L11.3906 17.1562L17.7656 8.39062L18.4219 7.5L16.6406 6.1875L15.9375 7.07812H15.9844Z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M0 3L6 0L10.5469 6L6.75 9.75C8.29688 13.0312 10.9688 15.7031 14.25 17.25L18 13.4531L24 18L21 24H20.25C9.04688 24 0 14.9531 0 3.75V3Z"/></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M19.3594 4.54688C21.3281 6.51562 22.5 9.14062 22.5 11.9062C22.5 17.6719 17.7188 22.3125 12 22.3125C10.2656 22.3125 8.53125 21.8906 7.03125 21.0469L1.5 22.5L3 17.1094C2.0625 15.5156 1.59375 13.7344 1.59375 11.9062C1.59375 6.1875 6.28125 1.5 12 1.5C14.7656 1.5 17.3906 2.57812 19.3594 4.54688ZM12 20.5781C16.7812 20.5781 20.7656 16.6875 20.7656 11.9062C20.7656 9.60938 19.7344 7.45312 18.0938 5.8125C16.5 4.17188 14.2969 3.28125 12 3.28125C7.21875 3.28125 3.32812 7.125 3.32812 11.9062C3.32812 13.5469 3.79688 15.1406 4.6875 16.5L4.875 16.8281L3.98438 20.0156L7.26562 19.1719L7.59375 19.3594C8.90625 20.1562 10.4531 20.5781 12 20.5781ZM16.7344 14.1094C17.0156 14.2031 17.1562 14.2969 17.25 14.3906C17.2969 14.4844 17.2969 15.0469 17.0625 15.6562C16.875 16.2656 15.8438 16.7812 15.3281 16.875C14.4844 17.0156 13.875 16.9219 12.1875 16.2188C9.60938 15.0938 7.875 12.4688 7.78125 12.2812C7.64062 12.1406 6.70312 10.875 6.70312 9.60938C6.70312 8.34375 7.35938 7.6875 7.59375 7.45312C7.875 7.17188 8.15625 7.125 8.29688 7.125C8.48438 7.125 8.67188 7.125 8.8125 7.125C8.95312 7.125 9.1875 7.07812 9.375 7.54688C9.60938 8.0625 10.125 9.375 10.1719 9.51562C10.2656 9.60938 10.3125 9.79688 10.2188 9.9375C9.70312 10.9219 9.1875 10.9219 9.46875 11.3906C10.4531 13.0781 11.4844 13.6875 12.9844 14.4844C13.2656 14.5781 13.4062 14.5781 13.5469 14.3906C13.6875 14.2031 14.2031 13.6406 14.3906 13.3594C14.5312 13.125 14.7188 13.1719 14.9531 13.2656C15.1875 13.3125 16.5 13.9688 16.7344 14.1094Z"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 27 25"><path d="M1.125 0H5.4375C5.53125 0.5625 5.67188 1.3125 5.85938 2.25H27L24.75 14.25H8.01562L8.4375 16.5H22.5V18.75H6.5625L6.375 17.8125L3.5625 2.25H0V0H1.125ZM9.75 24.75C8.48438 24.75 7.5 23.7656 7.5 22.5C7.5 21.2344 8.48438 20.25 9.75 20.25C11.0156 20.25 12 21.2344 12 22.5C12 23.7656 11.0156 24.75 9.75 24.75ZM20.25 24.75C18.9844 24.75 18 23.7656 18 22.5C18 21.2344 18.9844 20.25 20.25 20.25C21.5156 20.25 22.5 21.2344 22.5 22.5C22.5 23.7656 21.5156 24.75 20.25 24.75Z"/></symbol>
+  <symbol id="i-bullseye" viewBox="0 0 24 24"><path d="M21 12C21 7.03125 16.9688 3 12 3C7.03125 3 3 7.03125 3 12C3 16.9688 7.03125 21 12 21C16.9688 21 21 16.9688 21 12ZM0 12C0 5.39062 5.39062 0 12 0C18.6094 0 24 5.39062 24 12C24 18.6094 18.6094 24 12 24C5.39062 24 0 18.6094 0 12ZM12 15.75C14.0625 15.75 15.75 14.0625 15.75 12C15.75 9.9375 14.0625 8.25 12 8.25C9.9375 8.25 8.25 9.9375 8.25 12C8.25 14.0625 9.9375 15.75 12 15.75ZM12 5.25C15.75 5.25 18.75 8.25 18.75 12C18.75 15.75 15.75 18.75 12 18.75C8.25 18.75 5.25 15.75 5.25 12C5.25 8.25 8.25 5.25 12 5.25ZM10.5 12C10.5 11.1562 11.1562 10.5 12 10.5C12.8438 10.5 13.5 11.1562 13.5 12C13.5 12.8438 12.8438 13.5 12 13.5C11.1562 13.5 10.5 12.8438 10.5 12Z"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 27"><path d="M14.4375 1.45312L17.25 1.40625L18.6094 3.89062L21.0938 5.25L21.0469 8.0625L22.5 10.5L21.0469 12.9375L21.0938 15.75L18.6094 17.1094L18.0469 18.1406L21 24L15 27L12 21.6094L9 27L3 24L5.95312 18.1406L5.39062 17.1094L2.90625 15.75L2.95312 12.9375L1.5 10.5L2.95312 8.0625L2.90625 5.25L5.39062 3.89062L6.75 1.40625L9.5625 1.45312L12 0L14.4375 1.45312ZM12 6C9.51562 6 7.5 8.01562 7.5 10.5C7.5 12.9844 9.51562 15 12 15C14.4844 15 16.5 12.9844 16.5 10.5C16.5 8.01562 14.4844 6 12 6Z"/></symbol>
+  <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12.5625 0.234375L22.2656 3.98438L23.1562 4.3125L23.25 5.29688C23.3438 7.64062 23.0156 11.2031 21.4688 14.7188C19.9688 18.2344 17.2031 21.75 12.6094 23.7188L12 24L11.3906 23.7188C6.79688 21.75 4.07812 18.2344 2.53125 14.7188C1.03125 11.2031 0.65625 7.64062 0.796875 5.29688L0.84375 4.35938L1.73438 3.98438L11.4844 0.234375L12 0L12.5625 0.234375ZM14.6719 7.96875L10.6875 13.5C9.79688 12.5625 9.09375 11.8594 8.67188 11.3906L7.03125 12.9375C7.3125 13.2656 8.29688 14.25 9.98438 15.9844L10.9219 16.9688L11.7188 15.8906L16.5 9.28125L17.1562 8.39062L15.375 7.07812L14.6719 7.96875Z"/></symbol>
+  <symbol id="i-rotate-left" viewBox="0 0 24 25"><path d="M0 9.375V0L3.70312 3.70312C6.04688 1.5 9 0.375 12 0.375C18.5156 0.375 24 5.8125 24 12.375C24 18.9844 18.6094 24.375 12 24.375C7.3125 24.375 3.23438 21.7031 1.26562 17.7656L3.9375 16.4062C5.4375 19.3594 8.48438 21.375 12 21.375C16.9688 21.375 21 17.3438 21 12.375C21 7.5 16.875 3.375 12 3.375C9.79688 3.375 7.54688 4.17188 5.8125 5.8125L9.375 9.375H0Z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M7.5 1.5H16.5L18 4.5H24V22.5H0V4.5H6L7.5 1.5ZM12 9C9.51562 9 7.5 11.0156 7.5 13.5C7.5 15.9844 9.51562 18 12 18C14.4844 18 16.5 15.9844 16.5 13.5C16.5 11.0156 14.4844 9 12 9Z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 25"><path d="M8.25 0H15.75L16.5 2.25H22.5V5.25H1.5V2.25H7.5L8.25 0ZM3 7.5H21V24.75H3V7.5ZM8.25 10.5H6V21.75H8.25V10.5ZM13.125 10.5H10.875V21.75H13.125V10.5ZM18 10.5H15.75V21.75H18V10.5Z"/></symbol>
+  <symbol id="i-envelope" viewBox="0 0 16 16"><path d="M0 2H16V4.25L15.5938 4.5625L8.59375 9.8125L8 10.25L7.40625 9.8125L0.40625 4.5625L0 4.25V2ZM0 6.125L8 12.125L16 6.125V14H0V6.125Z"/></symbol>
+</svg>
+
+  <a class="skip-link" href="#main">Naar de inhoud</a>
+  
+
+<div class="topheader">
+  <ul class="topheader__usps" role="list">
+    <li><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><span>9,7/10 (145 reviews)</span></li><li><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-shield-check"></use></svg><span>30 jaar schriftelijke garantie</span></li><li><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Gratis en vrijblijvend advies</span></li>
+  </ul>
+  <div class="topheader__right">
+    <nav class="topheader__links" aria-label="Snelkoppelingen">
+      <a href="webshop.html">Webshop</a><a href="werkwijze.html">Werkwijze</a><a href="resultaten.html">Resultaten</a><a href="blog.html">Kennis</a>
+    </nav>
+    <span class="topheader__divider" aria-hidden="true"></span>
+    <a class="topheader__phone" href="tel:+31767676322"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg><span>+31 (0)76 76 76 322</span></a>
+  </div>
+</div>
+
+<header class="site-header" data-header>
+  <div class="site-header__bar">
+    <a class="site-header__logo" href="index.html" aria-label="OpstijgendVocht.nl, naar de homepage">
+      <img src="assets/img/logo.png" alt="OpstijgendVocht.nl" width="180" height="55">
+    </a>
+
+    
+    <nav class="mainnav" aria-label="Hoofdmenu">
+      <ul class="mainnav__list" role="list">
+        
+        <li class="mainnav__item">
+          
+          <button class="mainnav__link" type="button" aria-expanded="false" aria-controls="mega-1" data-mega-toggle>
+            <span>Vochtige muur</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+          </button>
+          
+        </li>
+        
+        <li class="mainnav__item">
+          
+          <button class="mainnav__link" type="button" aria-expanded="false" aria-controls="mega-2" data-mega-toggle>
+            <span>Schimmel</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+          </button>
+          
+        </li>
+        
+        <li class="mainnav__item">
+          
+          <button class="mainnav__link" type="button" aria-expanded="false" aria-controls="mega-3" data-mega-toggle>
+            <span>Condens</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+          </button>
+          
+        </li>
+        
+        <li class="mainnav__item">
+          
+          <button class="mainnav__link" type="button" aria-expanded="false" aria-controls="mega-4" data-mega-toggle>
+            <span>Muur afwerken</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+          </button>
+          
+        </li>
+        
+        <li class="mainnav__item">
+          
+          <button class="mainnav__link" type="button" aria-expanded="false" aria-controls="mega-5" data-mega-toggle>
+            <span>Over ons</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+          </button>
+          
+        </li>
+        
+        <li class="mainnav__item">
+          
+          <a class="mainnav__link" href="contact.html"><span>Contact</span></a>
+          
+        </li>
+        
+      </ul>
+    </nav>
+
+    <div class="site-header__cta">
+      
+      <a href="gratis-vochtadvies.html" class="btn btn--primary"><span>Gratis vochtadvies aanvragen</span></a>
+    </div>
+
+    
+    <div class="site-header__actions">
+      
+      <a class="iconbtn" href="tel:+31767676322" aria-label="Bel +31 (0)76 76 76 322"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg></a>
+      <button class="iconbtn" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="mobilemenu" data-mobilemenu-open><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg></button>
+    </div>
+  </div>
+
+  
+  
+  <div class="mega" id="mega-1" hidden data-mega>
+    <div class="mega__inner">
+      <p class="h4">Vochtige muur</p>
+      <div class="mega__groups">
+        
+        <div class="mega__group">
+          <p class="bold">Waar zit het vocht?</p>
+          <ul role="list"><li><a href="vocht-in-een-binnenmuur.html">Vocht in een binnenmuur</a></li><li><a href="vocht-in-een-binnenmuur.html">Vocht in een buitenmuur</a></li><li><a href="vocht-in-een-binnenmuur.html">Vocht in de spouwmuur</a></li></ul>
+        </div>
+        
+        <div class="mega__group">
+          <p class="bold">Mogelijke oorzaak</p>
+          <ul role="list"><li><a href="vocht-in-een-binnenmuur.html">Opstijgend vocht</a></li><li><a href="vocht-in-een-binnenmuur.html">Vocht na isolatie</a></li><li><a href="vocht-in-een-binnenmuur.html">Andere oorzaken van vocht in muren</a></li></ul>
+        </div>
+        
+        <div class="mega__group">
+          <p class="bold">Behandeling</p>
+          <ul role="list"><li><a href="vocht-in-een-binnenmuur.html">Opstijgend vocht behandelen</a></li><li><a href="vocht-in-een-binnenmuur.html">Muur injecteren tegen vocht</a></li><li><a href="vocht-in-een-binnenmuur.html">Vochtige muren behandelen</a></li></ul>
+        </div>
+        
+      </div>
+      <a href="vocht-in-een-binnenmuur.html" class="btn btn--secondary"><span>Alles over vochtige muren</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+  </div>
+  
+  <div class="mega" id="mega-2" hidden data-mega>
+    <div class="mega__inner">
+      <p class="h4">Schimmel</p>
+      <div class="mega__groups">
+        
+        <div class="mega__group">
+          
+          <ul role="list"><li><a href="schimmel.html">Schimmel in huis</a></li><li><a href="schimmel.html">Schimmel in huis verwijderen</a></li><li><a href="schimmel.html">Vocht en schimmel in huis</a></li></ul>
+        </div>
+        
+      </div>
+      <a href="schimmel.html" class="btn btn--secondary"><span>Alles over schimmel</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+  </div>
+  
+  <div class="mega" id="mega-3" hidden data-mega>
+    <div class="mega__inner">
+      <p class="h4">Condens</p>
+      <div class="mega__groups">
+        
+        <div class="mega__group">
+          <p class="bold">Condens &amp; Luchtvochtigheid</p>
+          <ul role="list"><li><a href="schimmel.html">Condens aan de binnenkant van het raam</a></li><li><a href="schimmel.html">Hoge luchtvochtigheid in huis</a></li></ul>
+        </div>
+        
+        <div class="mega__group">
+          <p class="bold">Ventilatie als oplossing</p>
+          <ul role="list"><li><a href="productpagina.html">CTA systeem (Overdruksysteem)</a></li><li><a href="productpagina.html">Decentrale ventilatie (WTW)</a></li><li><a href="productpagina.html">WTW-unit / Luchtbehandeling</a></li><li><a href="schimmel.html">Spouwmuurisolatie vochtproblemen</a></li></ul>
+        </div>
+        
+      </div>
+      <a href="schimmel.html" class="btn btn--secondary"><span>Alles over condens</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+  </div>
+  
+  <div class="mega" id="mega-4" hidden data-mega>
+    <div class="mega__inner">
+      <p class="h4">Muur afwerken</p>
+      <div class="mega__groups">
+        
+        <div class="mega__group">
+          <p class="bold">Afwerking &amp; Herstel</p>
+          <ul role="list"><li><a href="vocht-in-een-binnenmuur.html">Muur drogen na injecteren</a></li><li><a href="vocht-in-een-binnenmuur.html">Zoutuitslag op de muur</a></li><li><a href="vocht-in-een-binnenmuur.html">Beschadigd stucwerk herstellen</a></li><li><a href="productpagina.html">SaltShieldPlus</a></li></ul>
+        </div>
+        
+      </div>
+      <a href="vocht-in-een-binnenmuur.html" class="btn btn--secondary"><span>Alles over muur afwerken</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+  </div>
+  
+  <div class="mega" id="mega-5" hidden data-mega>
+    <div class="mega__inner mega__inner--small">
+      <p class="h4">Over ons</p>
+      <div class="mega__groups">
+        
+        <div class="mega__group">
+          
+          <ul role="list"><li><a href="zakelijk.html">Zakelijk samenwerken</a></li><li><a href="veelgestelde-vragen.html">Veelgestelde vragen</a></li></ul>
+        </div>
+        
+      </div>
+      <a href="over-ons.html" class="btn btn--secondary"><span>Alles over ons</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+  </div>
+  
+</header>
+<div class="scrim scrim--mega" data-mega-scrim></div>
+
+
+<div class="mobilemenu" id="mobilemenu" role="dialog" aria-modal="true" aria-label="Menu" hidden data-mobilemenu>
+  <div class="mobilemenu__bar">
+    <a class="site-header__logo" href="index.html"><img src="assets/img/logo.png" alt="OpstijgendVocht.nl" width="131" height="40"></a>
+    <div class="site-header__actions">
+      
+      <a class="iconbtn" href="tel:+31767676322" aria-label="Bel +31 (0)76 76 76 322"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg></a>
+      <button class="iconbtn" type="button" aria-label="Menu sluiten" data-mobilemenu-close><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg></button>
+    </div>
+  </div>
+
+  <div class="mobilemenu__panes">
+    <div class="mobilemenu__pane is-active" data-pane="root">
+      <ul class="mobilemenu__list" role="list">
+        
+        <li>
+          
+          <button class="mobilemenu__row" type="button" data-pane-open="sub-1"><span>Vochtige muur</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-right"></use></svg></button>
+          
+        </li>
+        
+        <li>
+          
+          <button class="mobilemenu__row" type="button" data-pane-open="sub-2"><span>Schimmel</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-right"></use></svg></button>
+          
+        </li>
+        
+        <li>
+          
+          <button class="mobilemenu__row" type="button" data-pane-open="sub-3"><span>Condens</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-right"></use></svg></button>
+          
+        </li>
+        
+        <li>
+          
+          <button class="mobilemenu__row" type="button" data-pane-open="sub-4"><span>Muur afwerken</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-right"></use></svg></button>
+          
+        </li>
+        
+        <li>
+          
+          <button class="mobilemenu__row" type="button" data-pane-open="sub-5"><span>Over ons</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-right"></use></svg></button>
+          
+        </li>
+        
+        <li>
+          
+          <a class="mobilemenu__row" href="contact.html"><span>Contact</span></a>
+          
+        </li>
+        
+      </ul>
+      <nav class="mobilemenu__secondary" aria-label="Snelkoppelingen">
+        <a href="webshop.html">Webshop</a><a href="werkwijze.html">Werkwijze</a><a href="resultaten.html">Resultaten</a><a href="blog.html">Kennis</a>
+      </nav>
+    </div>
+
+    
+    <div class="mobilemenu__pane mobilemenu__sub" data-pane="sub-1" hidden>
+      <button class="mobilemenu__back" type="button" data-pane-back><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-left"></use></svg><span>Menu</span></button>
+      <p class="h3">Vochtige muur</p>
+      
+      <div class="mobilemenu__group">
+        <p class="bold">Waar zit het vocht?</p>
+        <a href="vocht-in-een-binnenmuur.html">Vocht in een binnenmuur</a><a href="vocht-in-een-binnenmuur.html">Vocht in een buitenmuur</a><a href="vocht-in-een-binnenmuur.html">Vocht in de spouwmuur</a>
+      </div>
+      
+      <div class="mobilemenu__group">
+        <p class="bold">Mogelijke oorzaak</p>
+        <a href="vocht-in-een-binnenmuur.html">Opstijgend vocht</a><a href="vocht-in-een-binnenmuur.html">Vocht na isolatie</a><a href="vocht-in-een-binnenmuur.html">Andere oorzaken van vocht in muren</a>
+      </div>
+      
+      <div class="mobilemenu__group">
+        <p class="bold">Behandeling</p>
+        <a href="vocht-in-een-binnenmuur.html">Opstijgend vocht behandelen</a><a href="vocht-in-een-binnenmuur.html">Muur injecteren tegen vocht</a><a href="vocht-in-een-binnenmuur.html">Vochtige muren behandelen</a>
+      </div>
+      
+      <a href="vocht-in-een-binnenmuur.html" class="btn btn--secondary"><span>Alles over vochtige muren</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+    
+    <div class="mobilemenu__pane mobilemenu__sub" data-pane="sub-2" hidden>
+      <button class="mobilemenu__back" type="button" data-pane-back><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-left"></use></svg><span>Menu</span></button>
+      <p class="h3">Schimmel</p>
+      
+      <div class="mobilemenu__group">
+        
+        <a href="schimmel.html">Schimmel in huis</a><a href="schimmel.html">Schimmel in huis verwijderen</a><a href="schimmel.html">Vocht en schimmel in huis</a>
+      </div>
+      
+      <a href="schimmel.html" class="btn btn--secondary"><span>Alles over schimmel</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+    
+    <div class="mobilemenu__pane mobilemenu__sub" data-pane="sub-3" hidden>
+      <button class="mobilemenu__back" type="button" data-pane-back><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-left"></use></svg><span>Menu</span></button>
+      <p class="h3">Condens</p>
+      
+      <div class="mobilemenu__group">
+        <p class="bold">Condens &amp; Luchtvochtigheid</p>
+        <a href="schimmel.html">Condens aan de binnenkant van het raam</a><a href="schimmel.html">Hoge luchtvochtigheid in huis</a>
+      </div>
+      
+      <div class="mobilemenu__group">
+        <p class="bold">Ventilatie als oplossing</p>
+        <a href="productpagina.html">CTA systeem (Overdruksysteem)</a><a href="productpagina.html">Decentrale ventilatie (WTW)</a><a href="productpagina.html">WTW-unit / Luchtbehandeling</a><a href="schimmel.html">Spouwmuurisolatie vochtproblemen</a>
+      </div>
+      
+      <a href="schimmel.html" class="btn btn--secondary"><span>Alles over condens</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+    
+    <div class="mobilemenu__pane mobilemenu__sub" data-pane="sub-4" hidden>
+      <button class="mobilemenu__back" type="button" data-pane-back><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-left"></use></svg><span>Menu</span></button>
+      <p class="h3">Muur afwerken</p>
+      
+      <div class="mobilemenu__group">
+        <p class="bold">Afwerking &amp; Herstel</p>
+        <a href="vocht-in-een-binnenmuur.html">Muur drogen na injecteren</a><a href="vocht-in-een-binnenmuur.html">Zoutuitslag op de muur</a><a href="vocht-in-een-binnenmuur.html">Beschadigd stucwerk herstellen</a><a href="productpagina.html">SaltShieldPlus</a>
+      </div>
+      
+      <a href="vocht-in-een-binnenmuur.html" class="btn btn--secondary"><span>Alles over muur afwerken</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+    
+    <div class="mobilemenu__pane mobilemenu__sub" data-pane="sub-5" hidden>
+      <button class="mobilemenu__back" type="button" data-pane-back><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-left"></use></svg><span>Menu</span></button>
+      <p class="h3">Over ons</p>
+      
+      <div class="mobilemenu__group">
+        
+        <a href="zakelijk.html">Zakelijk samenwerken</a><a href="veelgestelde-vragen.html">Veelgestelde vragen</a>
+      </div>
+      
+      <a href="over-ons.html" class="btn btn--secondary"><span>Alles over ons</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+    
+  </div>
+
+  <div class="mobilemenu__cta">
+    <a href="gratis-vochtadvies.html" class="btn btn--primary btn--block"><span>Gratis vochtadvies aanvragen</span></a>
+    <a href="tel:+31767676322" class="btn btn--secondary"><span>+31 (0)76 76 76 322</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg></span></a>
+  </div>
+</div>
+
+  <main id="main" class="page">
+    
+
+<section class="hero-home">
+  <div class="hero-home__img"><img src="assets/img/hero-home.jpg" alt="" fetchpriority="high"></div>
+  <div class="hero-home__wrap">
+    <div class="hero-home__card">
+      <div class="stack hero-home__text">
+        <div class="stack" style="gap:var(--gap-meta)">
+          <div class="rating">
+  <img class="rating__logo" src="assets/img/trustoo.png" alt="Trustoo" width="102" height="24">
+  <span class="rating__row"><span class="stars" role="img" aria-label="5 van 5 sterren"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg></span>
+  <span class="rating__score"><strong>9,7</strong> <span class="c-secondary">(145 reviews)</span></span></span>
+</div>
+          <h1>Vochtige muren? <br>Wij krijgen ze droog!</h1>
+        </div>
+        <div class="stack" style="gap:var(--gap-heading-4)">
+          <p class="h4">Eerst de oorzaak. Daarna de juiste oplossing.</p>
+          <p class="body-lg c-secondary">Heb je last van een vochtige muur, schimmel of condens? Eerst kijken we waar het vocht vandaan komt. Daarna adviseren we de oplossing die bij je woning past.</p>
+        </div>
+      </div>
+      <div class="btn-row btn-row--stack hero-home__btns">
+        <a href="gratis-vochtadvies.html" class="btn btn--primary"><span>Gratis vochtadvies aanvragen</span></a>
+        <button type="button" class="btn btn--secondary" data-wa-open><span>Stuur foto’s via WhatsApp</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg></span></button>
+      </div>
+      <ul class="checklist only-mobile" role="list"><li><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Gratis en vrijblijvende inspectie</span></li><li><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>30 jaar garantie op geïnjecteerde muren</span></li><li><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Gratis droogcontrole</span></li></ul>
+    </div>
+  </div>
+</section>
+<section class="section usp-bar only-desktop" aria-label="Voordelen">
+  <ul class="usp-bar__list container" role="list">
+    <li class="usp"><span class="usp__icon"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></span><span class="h4">Gratis en vrijblijvende inspectie</span></li><li class="usp"><span class="usp__icon"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-shield-check"></use></svg></span><span class="h4">30 jaar garantie op geïnjecteerde muren</span></li><li class="usp"><span class="usp__icon"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-success"></use></svg></span><span class="h4">Gratis droogcontrole</span></li>
+  </ul>
+</section>
+
+<section class="section tiles-sec">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <div class="sec-head sec-head--center">
+  
+  <h2>Wat zie je in huis?</h2>
+  <p class="body-lg c-secondary">Je hoeft zelf niet te weten wat de oorzaak is. Kies wat je herkent:</p>
+</div>
+    <div class="stack" style="gap:var(--grid-gutter)">
+      <div class="tiles" data-slider>
+        <div class="tiles__track" data-slider-track>
+          
+          <a class="tile" href="vocht-in-een-binnenmuur.html">
+            <span class="tile__img media--ph"></span>
+            <span class="tile__overlay"></span>
+            <span class="tile__body">
+              <span class="tile__head"><span class="h3 c-on-ink">Vochtige muur</span><span class="tile__arrow only-mobile"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></span>
+              <span class="tile__details"><span class="tile__details-inner">
+                <span class="c-on-ink">Zie je vochtplekken, witte zoutuitslag of loslatende verf of stucwerk? De oorzaak kan opstijgend vocht zijn, maar ook lekkage, condens, doorslaand vocht of regeninslag.</span>
+                <span class="btn btn--primary btn--block">Bekijk vochtige muur</span>
+              </span></span>
+            </span>
+          </a>
+          
+          <a class="tile" href="schimmel.html">
+            <span class="tile__img media--ph"></span>
+            <span class="tile__overlay"></span>
+            <span class="tile__body">
+              <span class="tile__head"><span class="h3 c-on-ink">Schimmel</span><span class="tile__arrow only-mobile"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></span>
+              <span class="tile__details"><span class="tile__details-inner">
+                <span class="c-on-ink">Zie je zwarte, groene of grijze plekken op muren, plafonds of rond kozijnen? Schimmel ontstaat waar oppervlakken langere tijd vochtig blijven.</span>
+                <span class="btn btn--primary btn--block">Bekijk schimmel in huis</span>
+              </span></span>
+            </span>
+          </a>
+          
+          <a class="tile" href="schimmel.html">
+            <span class="tile__img media--ph"></span>
+            <span class="tile__overlay"></span>
+            <span class="tile__body">
+              <span class="tile__head"><span class="h3 c-on-ink">Condens</span><span class="tile__arrow only-mobile"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></span>
+              <span class="tile__details"><span class="tile__details-inner">
+                <span class="c-on-ink">Zijn je ramen vaak nat of zie je vocht op koude muren? Dan kunnen temperatuur en onvoldoende ventilatie een belangrijke rol spelen.</span>
+                <span class="btn btn--primary btn--block">Bekijk condens in huis</span>
+              </span></span>
+            </span>
+          </a>
+          
+        </div>
+        <div class="dots only-mobile" data-slider-dots></div>
+      </div>
+      
+      <div class="card tiles-bar">
+        <div class="stack" style="gap:var(--gap-heading-3)">
+          <h3>Muur afwerken</h3>
+          <p class="c-secondary">Is jouw muur behandeld tegen vocht en wil je weten wanneer je weer kunt stucen of schilderen?<br>Wij leggen je uit waar je op moet letten om de muur weer netjes af te werken.</p>
+        </div>
+        <a href="vocht-in-een-binnenmuur.html" class="btn btn--secondary"><span>Bekijk muur afwerken</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <div class="sec-head sec-head--center">
+  
+  <h2>Daarom is kiezen voor <span class="c-blue">OpstijgendVocht.nl</span> een slimme keuze</h2>
+  
+</div>
+    <div class="split-acc">
+      <div class="accordion split-acc__list">
+        <div class="acc is-open" data-acc>
+  <h3 class="h3" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="true" aria-controls="acc-eerst-onderzoeken-dan-behandelen">
+      <span class="acc__title">Eerst onderzoeken, dan behandelen</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h3>
+  <div class="acc__body" id="acc-eerst-onderzoeken-dan-behandelen"><div class="acc__inner"><div class="acc__content"><div class="prose">Niet elke vochtplek is opstijgend vocht. We kijken eerst naar de plek, het schadebeeld en hoe je huis is gebouwd. Daarna zoeken we de oorzaak en adviseren we wat helpt.</div></div></div></div>
+</div>
+        <div class="acc" data-acc>
+  <h3 class="h3" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-technisch-onderbouwde-behandeling">
+      <span class="acc__title">Technisch onderbouwde behandeling</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h3>
+  <div class="acc__body" id="acc-technisch-onderbouwde-behandeling"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div>
+        <div class="acc" data-acc>
+  <h3 class="h3" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-30-jaar-garantie">
+      <span class="acc__title">30 jaar garantie</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h3>
+  <div class="acc__body" id="acc-30-jaar-garantie"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div>
+        <div class="acc" data-acc>
+  <h3 class="h3" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-we-blijven-je-helpen">
+      <span class="acc__title">We blijven je helpen</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h3>
+  <div class="acc__body" id="acc-we-blijven-je-helpen"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div>
+        
+      </div>
+      <div class="split-acc__media"><div class="media media--ph ratio-4-3"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section steps">
+  <div class="container stack" style="gap:var(--gap-action)">
+    <div class="stack" style="gap:var(--heading-gap)" data-slider>
+      <div class="steps__head">
+        <h2>Zo werkt ons <span class="c-blue">vochtadvies</span></h2>
+        
+        <div class="slider-nav only-desktop">
+          <button type="button" class="btn btn--icon btn--primary" aria-label="Vorige" data-slider-prev><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-left"></use></svg></button>
+          <button type="button" class="btn btn--icon btn--primary" aria-label="Volgende" data-slider-next><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-right"></use></svg></button>
+        </div>
+        
+      </div>
+      
+      <div class="steps__viewport">
+        <ol class="steps__track" role="list" data-slider-track>
+          
+          <li class="card step">
+            <span class="badge-num">1</span>
+            <div class="stack" style="gap:var(--gap-heading-3)">
+              <h3>Neem contact op</h3>
+              <p class="c-secondary">Bel, WhatsApp of stuur foto’s. We vragen waar je last van hebt en waar het probleem zit.</p>
+            </div>
+          </li>
+          
+          <li class="card step">
+            <span class="badge-num">2</span>
+            <div class="stack" style="gap:var(--gap-heading-3)">
+              <h3>We beoordelen de situatie</h3>
+              <p class="c-secondary">Denken we dat we iets kunnen betekenen? Dan komen we indien gewenst bij je langs en bekijken we waar het vocht vandaan komt.</p>
+            </div>
+          </li>
+          
+          <li class="card step">
+            <span class="badge-num">3</span>
+            <div class="stack" style="gap:var(--gap-heading-3)">
+              <h3>Je krijgt duidelijk advies</h3>
+              <p class="c-secondary">We leggen uit wat volgens ons de oorzaak is en welke oplossing daarbij past. Kunnen wij het probleem oplossen? Dan ontvang je een uitgebreide, vrijblijvende offerte.</p>
+            </div>
+          </li>
+          
+          <li class="card step">
+            <span class="badge-num">4</span>
+            <div class="stack" style="gap:var(--gap-heading-3)">
+              <h3>We voeren het werk uit</h3>
+              <p class="c-secondary">Ga je akkoord? Dan plannen we de werkzaamheden in en voeren we de afgesproken oplossing uit.</p>
+            </div>
+          </li>
+          
+          <li class="card step">
+            <span class="badge-num">5</span>
+            <div class="stack" style="gap:var(--gap-heading-3)">
+              <h3>We blijven je helpen</h3>
+              <p class="c-secondary">Bij muurinjectie ontvang je 30 jaar schriftelijke garantie. Na de droogperiode kun je bovendien een gratis droogcontrole aanvragen.</p>
+            </div>
+          </li>
+          
+        </ol>
+      </div>
+      <div class="dots only-mobile" data-slider-dots></div>
+    </div>
+    <div class="steps__btn"><a href="werkwijze.html" class="btn btn--secondary"><span>Bekijk onze werkwijze</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a></div>
+  </div>
+</section>
+
+<section class="section marks-sec">
+  <div class="container stack center" style="gap:var(--heading-gap)">
+    <div class="sec-head sec-head--center">
+  
+  <h2>Onze keurmerken en certificeringen</h2>
+  
+</div>
+    <ul class="marks" role="list">
+      
+      <li class="mark"><span class="mark__logo">Logo ATG 3121</span><span class="body-sm c-secondary">Onafhankelijk technisch beoordeeld.</span></li>
+      
+      <li class="mark"><span class="mark__logo">Logo Buildwise getest</span><span class="body-sm c-secondary">Prestaties getest bij verschillende vochtbelastingen.</span></li>
+      
+      <li class="mark"><span class="mark__logo">Logo VCA</span><span class="body-sm c-secondary">Veilig en verantwoord werken.</span></li>
+      
+      <li class="mark"><span class="mark__logo">Logo Kiwa</span><span class="body-sm c-secondary">Gecertificeerd personeel voor injectietechniek.</span></li>
+      
+      <li class="mark"><span class="mark__logo">Logo Trustoo</span><span class="body-sm c-secondary">Beoordeeld door klanten.</span></li>
+      
+    </ul>
+  </div>
+</section>
+
+<section class="section--bleed reviews-sec">
+  <div class="reviews-panel">
+    <div class="reviews-panel__side">
+      <div class="reviews-panel__sticky">
+        <div class="stack" style="gap:var(--gap-heading-2)">
+          <h2>Blije klanten, dáár doen we het voor!</h2>
+          <p class="body-lg">Klanten beoordelen ons met <strong>9,7</strong> op Trustoo (144 reviews)</p>
+        </div>
+        <div class="only-desktop"><a href="resultaten.html" class="btn btn--secondary"><span>Bekijk alle reviews</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a></div>
+      </div>
+    </div>
+    <div class="reviews-panel__list" data-slider>
+      <div class="reviews-panel__track" data-slider-track>
+        <article class="card review">
+  <div class="stack" style="gap:24px">
+    <span class="stars" role="img" aria-label="5 van 5 sterren"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg></span>
+    <p class="body-lg">Ter plaatse goed en duidelijk advies gekregen en daarbij ook meteen de offerte. De uitvoering was uitstekend, werkplek werd netjes achter gelaten.</p>
+  </div>
+  <div class="person">
+    <span class="person__photo"></span>
+    <span class="stack"><strong>Paul</strong><span class="body-sm c-secondary">2 juli 2026</span></span>
+  </div>
+</article><article class="card review">
+  <div class="stack" style="gap:24px">
+    <span class="stars" role="img" aria-label="5 van 5 sterren"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg></span>
+    <p class="body-lg">Vriendelijke man. Vermoedelijk allemaal prima gelukt. Onder het keukenblok over geslagen. Bleek noet uitvoerbaar door leidingen.</p>
+  </div>
+  <div class="person">
+    <span class="person__photo"></span>
+    <span class="stack"><strong>Hans Smits</strong><span class="body-sm c-secondary">30 mei 2026</span></span>
+  </div>
+</article><article class="card review">
+  <div class="stack" style="gap:24px">
+    <span class="stars" role="img" aria-label="5 van 5 sterren"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg></span>
+    <p class="body-lg">Snelle reactie. Goede uitleg offerte Prettig contact met uitvoerder. Duidelijke en heldere prijsopgaven. Goed resultaat en goede uitvoering.</p>
+  </div>
+  <div class="person">
+    <span class="person__photo"></span>
+    <span class="stack"><strong>Esther Kuik</strong><span class="body-sm c-secondary">14 juli 2025</span></span>
+  </div>
+</article><article class="card review">
+  <div class="stack" style="gap:24px">
+    <span class="stars" role="img" aria-label="5 van 5 sterren"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg></span>
+    <p class="body-lg">Snelle reactie. Goede uitleg offerte Prettig contact met uitvoerder. Duidelijke en heldere prijsopgaven. Goed resultaat en goede uitvoering.</p>
+  </div>
+  <div class="person">
+    <span class="person__photo"></span>
+    <span class="stack"><strong>Esther Kuik</strong><span class="body-sm c-secondary">14 juli 2025</span></span>
+  </div>
+</article>
+      </div>
+      <div class="dots only-mobile" data-slider-dots></div>
+      <div class="only-mobile reviews-panel__btn"><a href="resultaten.html" class="btn btn--secondary"><span>Bekijk alle reviews</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <div class="sec-head sec-head--center sec-head--left-mobile">
+  
+  <h2>Wat helpt bij jouw <span class="c-blue">vochtprobleem?</span></h2>
+  
+</div>
+    <div class="split-acc">
+      <div class="accordion split-acc__list">
+        <div class="acc is-open" data-acc>
+  <h3 class="h3" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="true" aria-controls="acc-opstijgend-vocht">
+      <span class="acc__title">Opstijgend vocht</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h3>
+  <div class="acc__body" id="acc-opstijgend-vocht"><div class="acc__inner"><div class="acc__content"><div class="prose">Trekt grondvocht via het metselwerk omhoog? Dan kan muurinjectie de vochttoevoer stoppen. Bij vastgesteld opstijgend vocht vormen we laag in de muur een permanente waterkerende barrière.</div><a href="vocht-in-een-binnenmuur.html" class="btn btn--primary only-desktop"><span>Lees hoe wij opstijgend vocht behandelen</span></a><a href="vocht-in-een-binnenmuur.html" class="btn btn--primary only-mobile"><span>Bekijk onze aanpak</span></a></div></div></div>
+</div>
+        <div class="acc" data-acc>
+  <h3 class="h3" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-schimmel">
+      <span class="acc__title">Schimmel</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h3>
+  <div class="acc__body" id="acc-schimmel"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div>
+        <div class="acc" data-acc>
+  <h3 class="h3" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-condens-en-ventilatie">
+      <span class="acc__title">Condens en ventilatie</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h3>
+  <div class="acc__body" id="acc-condens-en-ventilatie"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div>
+        <div class="acc" data-acc>
+  <h3 class="h3" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-muur-afwerken-na-vocht">
+      <span class="acc__title">Muur afwerken na vocht</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h3>
+  <div class="acc__body" id="acc-muur-afwerken-na-vocht"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div>
+        
+      </div>
+      <div class="split-acc__media"><div class="media media--ph ratio-3-2"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <div class="split__media"><div class="media media--ph ratio-3-2"></div></div>
+    <div class="split__content">
+      <div class="stack" style="gap:var(--gap-heading-2)">
+        <h2><span class="c-blue">Opstijgend vocht?</span><br>Wij stoppen het bij de bron</h2>
+        <div class="stack" style="gap:var(--gap-block)">
+          
+          <div class="stack" style="gap:var(--gap-heading-3)">
+            
+            <div class="prose c-secondary">Bij vastgesteld opstijgend vocht gebruiken we <strong class="c-primary">FASSA-INJECT</strong>. Deze injectiecrème vormt laag in de muur een permanente waterkerende barrière, zodat nieuw vocht niet verder kan opstijgen. Waar mogelijk werken we op plintniveau, zodat de boorgaten na afloop netjes uit het zicht verdwijnen.</div>
+          </div>
+          
+          <div class="stack" style="gap:var(--gap-heading-3)">
+            <h3>Technisch getest: A+, A+, A+</h3>
+            <div class="prose c-secondary">FASSA-INJECT is onafhankelijk beoordeeld door <strong class="c-primary">Buildwise</strong> en behaalde bij verschillende vochtbelastingen telkens de hoogste klasse: <strong class="c-primary">A+</strong>. Daarnaast beschikt het product over <strong class="c-primary">ATG 3121</strong>. Zo combineren we een technisch bewezen product met een juiste diagnose en zorgvuldige uitvoering.</div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="split__btn split__btn--primary"><a href="vocht-in-een-binnenmuur.html" class="btn btn--primary"><span>Bekijk hoe muurinjectie werkt</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section--bleed">
+  <div class="team">
+    <div class="team__main">
+      <img src="assets/img/team-groot.jpg" alt="" loading="lazy">
+      <div class="team__text">
+        <div class="stack" style="gap:var(--gap-heading-2)">
+          <h2>De mensen die voor droge muren zorgen</h2>
+          <p>Achter OpstijgendVocht.nl staat een team dat dagelijks met vochtproblemen in woningen en gebouwen bezig is. Van het eerste advies tot de uitvoering willen we vooral duidelijk zijn over wat we zien, wat we adviseren en waarom. Geen standaardbehandeling. Wel een aanpak die begint bij de oorzaak.</p>
+        </div>
+        <a href="over-ons.html" class="btn btn--secondary btn--on-blue team__btn"><span>Maak kennis met ons team</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+      </div>
+    </div>
+    <div class="team__side">
+      <div class="media"><img src="assets/img/team-1.jpg" alt="" loading="lazy" style="--pos: 50% 34%"></div><div class="media"><img src="assets/img/team-2.jpg" alt="" loading="lazy" style="--pos: 50% 100%"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split split--rechts">
+    <div class="split__media"><div class="media media--ph ratio-3-2"></div></div>
+    <div class="split__content">
+      <div class="stack" style="gap:var(--gap-heading-2)">
+        <h2>Wanneer is je muur weer droog?</h2>
+        <div class="stack" style="gap:var(--gap-block)">
+          
+          <div class="stack" style="gap:var(--gap-heading-3)">
+            <h3>De muur moet drogen</h3>
+            <div class="prose c-secondary">Injecteren stopt de nieuwe vochttoevoer. Het aanwezige vocht moet daarna uit de muur verdampen. Dat duurt meestal enkele maanden en bij dikkere muren soms tot één jaar.</div>
+          </div>
+          
+          <div class="stack" style="gap:var(--gap-heading-3)">
+            <h3>Let ook op zouten in de muur</h3>
+            <div class="prose c-secondary">Na het injecteren kunnen zouten nog zichtbaar blijven in het pleisterwerk. Wij adviseren wanneer en hoe je de muur het beste kunt afwerken. Wil je de muur gelijk afwerken? Dan kan <strong class="c-primary">SaltShieldPlus</strong> in geschikte situaties helpen.</div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="split__btn split__btn--primary"><a href="productpagina.html" class="btn btn--primary"><span>Bekijk SaltShieldPlus</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <div class="split__media"><div class="media media--ph ratio-3-2"></div></div>
+    <div class="split__content">
+      <div class="stack" style="gap:var(--gap-heading-2)">
+        <h2>Ook voor VvE’s, woningbouw en bouwbedrijven</h2>
+        <div class="stack" style="gap:var(--gap-block)">
+          
+          <div class="stack" style="gap:var(--gap-heading-3)">
+            
+            <div class="prose c-secondary"><p>Wij werken niet alleen voor huiseigenaren. We werken ook voor:</p><ul><li>VvE’s</li><li>woningbouworganisaties</li><li>aannemers</li><li>bouwbedrijven</li></ul><p class="na-lege-regel">We kunnen meedenken bij renovaties, vochtproblemen beoordelen en onze werkzaamheden afstemmen op de planning van het project.</p></div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="split__btn"><a href="zakelijk.html" class="btn btn--secondary"><span>Zakelijk samenwerken</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section--bleed" id="magazine">
+  <div class="magazine">
+    <div class="magazine__img"><img src="assets/img/magazine-uitsnede.png" alt="" loading="lazy"></div>
+    <div class="magazine__body">
+      <h2>Wil je liever eerst zelf lezen? Bekijk ons <span class="c-blue">gratis Vocht Magazine</span></h2>
+      <form class="stack magazine__form" style="gap:32px" data-form data-success="magazine-ok" novalidate>
+        <p class="body-lg c-secondary">Lees handige tips over vochtige muren, schimmel en ventilatie. Zo kun je je rustig inlezen voordat je contact opneemt.</p>
+        <div class="form-row">
+          <div class="field" data-field>
+  <label class="field__label" for="f-mag-naam">Naam<span class="field__req" aria-hidden="true">*</span></label>
+  <div class="field__control">
+    <input class="input" id="f-mag-naam" name="naam" type="text" placeholder="Vul je naam in" required autocomplete="name">
+  </div>
+  <p class="field__msg" role="alert"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-error"></use></svg><span>Vul je naam in.</span></p>
+</div>
+          <div class="field" data-field>
+  <label class="field__label" for="f-mag-email">E-mailadres<span class="field__req" aria-hidden="true">*</span></label>
+  <div class="field__control">
+    <input class="input" id="f-mag-email" name="email" type="email" placeholder="email@voorbeeld.nl" required autocomplete="email">
+  </div>
+  <p class="field__msg" role="alert"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-error"></use></svg><span>Vul een geldig e-mailadres in.</span></p>
+</div>
+        </div>
+        <div class="stack" style="gap:16px; align-items:flex-start">
+          <button type="submit" class="btn btn--primary"><span>Magazine aanvragen</span></button>
+          <p class="privacy"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-shield-check"></use></svg><span>Wij respecteren je privacy. Je gegevens zijn veilig en je ontvangt geen spam. Lees onze <a class="link" href="tekstpagina.html">privacyverklaring</a>.</span></p>
+        </div>
+      </form>
+      <div class="confirm" id="magazine-ok" hidden role="status" tabindex="-1">
+  <div class="confirm__title"><span class="usp__icon usp__icon--box"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg></span><h3>Het Vocht Magazine is onderweg</h3></div>
+  <p class="c-secondary">We hebben het magazine als pdf naar je e-mailadres gestuurd. Zie je het niet binnen een paar minuten? Kijk dan ook even in je spam.</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cta">
+    <div class="stack center" style="gap:var(--heading-gap); max-width:1024px">
+      <div class="stack center" style="gap:var(--gap-action)">
+        <div class="stack center" style="gap:var(--gap-heading-2)">
+          <h2>Weet je niet waar het <span class="c-blue">vocht</span> vandaan komt?</h2>
+          <p class="body-lg c-secondary">Je hoeft dit niet zelf uit te zoeken. Stuur ons een paar duidelijke foto’s. We bekijken de situatie en geven aan wat een logische vervolgstap is.</p>
+        </div>
+        
+        <div class="btn-row btn-row--stack cta__btns">
+          <a href="gratis-vochtadvies.html" class="btn btn--primary"><span>Gratis vochtadvies aanvragen</span></a>
+          <button type="button" class="btn btn--secondary" data-wa-open><span>Stuur foto’s via WhatsApp</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--text stack" style="gap:var(--heading-gap)">
+    <div class="stack t-center" style="gap:var(--gap-heading-2)">
+      <h2>Veelgestelde vragen over <span class="c-blue">vochtproblemen</span></h2>
+      
+    </div>
+    <div class="stack" style="gap:var(--gap-action); align-items:flex-start">
+      <div class="accordion" style="width:100%">
+        <div class="acc" data-acc>
+  <h4 class="h4" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-moet-elke-vochtige-muur-worden-geinjecteerd">
+      <span class="acc__title">Moet elke vochtige muur worden geïnjecteerd?</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h4>
+  <div class="acc__body" id="acc-moet-elke-vochtige-muur-worden-geinjecteerd"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div><div class="acc" data-acc>
+  <h4 class="h4" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-kan-ik-eerst-foto-s-sturen">
+      <span class="acc__title">Kan ik eerst foto’s sturen?</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h4>
+  <div class="acc__body" id="acc-kan-ik-eerst-foto-s-sturen"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div><div class="acc" data-acc>
+  <h4 class="h4" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-is-het-vochtadvies-gratis">
+      <span class="acc__title">Is het vochtadvies gratis?</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h4>
+  <div class="acc__body" id="acc-is-het-vochtadvies-gratis"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div><div class="acc" data-acc>
+  <h4 class="h4" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-hoe-lang-duurt-het-voordat-een-muur-droog-is">
+      <span class="acc__title">Hoe lang duurt het voordat een muur droog is?</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h4>
+  <div class="acc__body" id="acc-hoe-lang-duurt-het-voordat-een-muur-droog-is"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div><div class="acc" data-acc>
+  <h4 class="h4" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-helpt-ventilatie-tegen-condens-en-schimmel">
+      <span class="acc__title">Helpt ventilatie tegen condens en schimmel?</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h4>
+  <div class="acc__body" id="acc-helpt-ventilatie-tegen-condens-en-schimmel"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div><div class="acc" data-acc>
+  <h4 class="h4" style="margin:0">
+    <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-welke-garantie-krijg-ik">
+      <span class="acc__title">Welke garantie krijg ik?</span><span class="acc__chev"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    </button>
+  </h4>
+  <div class="acc__body" id="acc-welke-garantie-krijg-ik"><div class="acc__inner"><div class="acc__content"><div class="prose">&lt;Tekst volgt vanuit de contentdocumenten&gt;</div></div></div></div>
+</div>
+      </div>
+      <a href="veelgestelde-vragen.html" class="btn btn--secondary"><span>Bekijk alle veelgestelde vragen</span><span class="btn__circle"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></span></a>
+    </div>
+  </div>
+</section>
+
+  </main>
+  
+<footer class="site-footer">
+  <div class="site-footer__cols">
+    <div class="site-footer__brand">
+      <img src="assets/img/logo-wit.svg" alt="OpstijgendVocht.nl" width="191" height="55">
+      <div class="site-footer__lines">
+        <div class="stack" style="gap:8px">
+          <a class="site-footer__contact" href="tel:+31767676322"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg><span>+31 (0)76 76 76 322</span></a>
+          <a class="site-footer__contact" href="mailto:info@opstijgendvocht.nl"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-envelope"></use></svg><span>info@opstijgendvocht.nl</span></a>
+        </div>
+        <address class="site-footer__locations">
+          <p><strong>Rijsbergen</strong><br>Begijneweide 4s</p><p><strong>Goes</strong><br>Van Dusseldorpstraat 40</p><p><strong>Middelharnis</strong><br>Voorstraat 15</p>
+        </address>
+        <a href="gratis-vochtadvies.html" class="btn btn--primary"><span>Gratis vochtadvies aanvragen</span></a>
+        <p class="rating__row body-sm"><span class="stars stars--sm" role="img" aria-label="5 van 5 sterren"><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-star"></use></svg></span><span><strong>9,7</strong> <span class="site-footer__reviews">(145 reviews op Trustoo)</span></span></p>
+      </div>
+    </div>
+    
+    <nav class="site-footer__col" aria-label="Vochtproblemen">
+      <p class="h4">Vochtproblemen</p>
+      <ul role="list"><li><a href="vocht-in-een-binnenmuur.html">Vochtige muur</a></li><li><a href="schimmel.html">Schimmel</a></li><li><a href="schimmel.html">Condens</a></li><li><a href="vocht-in-een-binnenmuur.html">Muur afwerken</a></li></ul>
+    </nav>
+    
+    <nav class="site-footer__col" aria-label="Over ons">
+      <p class="h4">Over ons</p>
+      <ul role="list"><li><a href="werkwijze.html">Werkwijze</a></li><li><a href="over-ons.html">Over ons</a></li><li><a href="zakelijk.html">Zakelijk samenwerken</a></li><li><a href="contact.html">Contact</a></li></ul>
+    </nav>
+    
+    <nav class="site-footer__col" aria-label="Kennis en webshop">
+      <p class="h4">Kennis en webshop</p>
+      <ul role="list"><li><a href="veelgestelde-vragen.html">Veelgestelde vragen</a></li><li><a href="blog.html">Blogs en kennisbank</a></li><li><a href="vocht-magazine.html">Vocht Magazine</a></li><li><a href="webshop.html">Webshop</a></li></ul>
+    </nav>
+    
+  </div>
+  <div class="site-footer__bottom">
+    <div class="site-footer__legal">
+      <span>© 2026 Van Eijk Vochtwering BV</span>
+      <span>KvK 00000000</span>
+      <a href="tekstpagina.html">Privacybeleid</a><a href="tekstpagina.html">Algemene voorwaarden</a>
+    </div>
+    <ul class="site-footer__badges" role="list">
+      <li>Trustoo Top PRO</li><li>Kiwa</li><li>VCA</li>
+    </ul>
+  </div>
+</footer>
+
+  
+
+<button class="sticky-wa" type="button" aria-label="Twijfel je? App ons een foto" data-wa-open>
+  <span class="sticky-wa__label">Twijfel je? App ons een foto</span>
+  <span class="sticky-wa__circle"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg></span>
+</button>
+
+
+<div class="scrim" data-wa-scrim></div>
+<aside class="wa" role="dialog" aria-modal="true" aria-labelledby="wa-title" hidden data-wa
+       data-wa-number="31611691881" data-wa-default="Hallo, ik wil graag vochtadvies.">
+  <span class="wa__grip" aria-hidden="true"></span>
+  <div class="wa__head">
+    <h2 class="h4" id="wa-title">Stuur foto’s via WhatsApp</h2>
+    <button class="btn-close" type="button" aria-label="Sluiten" data-wa-close><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-close"></use></svg></button>
+  </div>
+
+  <div class="wa__body">
+    
+    <div class="wa__step" data-wa-step="vraag">
+      <p class="c-secondary">Beantwoord drie korte vragen en je WhatsApp-bericht staat klaar voor gratis en vrijblijvend advies.</p>
+      <div class="wa__progress">
+        <div class="wa__nav">
+          <button class="wa__back" type="button" data-wa-back><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-chevron-left"></use></svg><span>Terug</span></button>
+        </div><ol class="stepper" role="list" aria-label="Stappen" data-stepper>
+  <li class="stepper__item is-active" aria-current="step">
+    <span class="stepper__bar"></span>
+    <span class="stepper__row"><span class="stepper__badge" aria-hidden="true"><span class="stepper__num">1</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-check"></use></svg></span><span class="stepper__label">1. Probleem</span></span>
+  </li>
+  <li class="stepper__item">
+    <span class="stepper__bar"></span>
+    <span class="stepper__row"><span class="stepper__badge" aria-hidden="true"><span class="stepper__num">2</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-check"></use></svg></span><span class="stepper__label">2. Ruimte</span></span>
+  </li>
+  <li class="stepper__item">
+    <span class="stepper__bar"></span>
+    <span class="stepper__row"><span class="stepper__badge" aria-hidden="true"><span class="stepper__num">3</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-check"></use></svg></span><span class="stepper__label">3. Plek</span></span>
+  </li>
+</ol>
+      </div>
+      
+      <fieldset class="wa__question" data-wa-q="0" data-key="wat">
+        <legend class="h3">Wat zie je?</legend>
+        <div class="wa__options">
+          <button class="choice" type="button" data-wa-choice="Vochtige plekken"><span>Vochtige plekken</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Beschadigd stucwerk"><span>Beschadigd stucwerk</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Schimmel"><span>Schimmel</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Condens"><span>Condens</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Anders / weet ik niet"><span>Anders / weet ik niet</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button>
+        </div>
+      </fieldset>
+      
+      <fieldset class="wa__question" data-wa-q="1" data-key="waar" hidden>
+        <legend class="h3">Waar in de woning zie je het?</legend>
+        <div class="wa__options">
+          <button class="choice" type="button" data-wa-choice="Bovenverdieping / zolder"><span>Bovenverdieping / zolder</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Begane grond"><span>Begane grond</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Trapkast"><span>Trapkast</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Souterrain"><span>Souterrain</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Kelder"><span>Kelder</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Op meerdere verdiepingen"><span>Op meerdere verdiepingen</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button>
+        </div>
+      </fieldset>
+      
+      <fieldset class="wa__question" data-wa-q="2" data-key="plek" hidden>
+        <legend class="h3">Waar zit het?</legend>
+        <div class="wa__options">
+          <button class="choice" type="button" data-wa-choice="Binnenmuur"><span>Binnenmuur</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Buitenmuur"><span>Buitenmuur</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Rond ramen of kozijnen"><span>Rond ramen of kozijnen</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Op meerdere plekken"><span>Op meerdere plekken</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button><button class="choice" type="button" data-wa-choice="Weet ik niet"><span>Weet ik niet</span><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg></button>
+        </div>
+      </fieldset>
+      
+      <button class="link wa__direct" type="button" data-wa-go="direct">Liever direct naar WhatsApp?</button>
+    </div>
+
+    
+    <div class="wa__step" data-wa-step="bericht" hidden>
+      <div class="wa__progress" data-wa-only="direct">
+        <div class="wa__nav">
+          <button class="wa__back" type="button" data-wa-go="vraag"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-chevron-left"></use></svg><span>Terug</span></button>
+          <span class="body-sm c-secondary">Direct contact</span>
+        </div>
+        <div class="wa__bar" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+      <div class="stack wa__intro">
+        <h3 class="h3" data-wa-only="bericht">Nog één stap: verstuur je bericht</h3>
+        <h3 class="h3" data-wa-only="direct">Stuur ons een bericht</h3>
+        <p class="c-secondary"><span data-wa-only="bericht">Vul het bericht aan</span><span data-wa-only="direct">Vertel kort wat je ziet</span> en stuur een paar foto’s mee. We gebruiken je foto’s alleen om je te adviseren en bewaren ze niet langer dan nodig. Lees meer in onze <a class="link" href="tekstpagina.html">privacyverklaring</a>.</p>
+      </div>
+      <div class="stack" style="gap:8px">
+        <p class="wa__bubble" data-wa-message>Hallo, ik wil graag vochtadvies.</p>
+        <button class="wa__restart" type="button" data-wa-restart data-wa-only="bericht"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-rotate-left"></use></svg><span>Begin opnieuw</span></button>
+      </div>
+
+      
+      <div class="wa__qr-wrap only-desktop">
+        <div class="wa__qr">
+          <div class="wa__qr-code" data-wa-qr aria-label="QR-code voor WhatsApp" role="img"></div>
+          <div class="stack" style="gap:4px">
+            <p class="bold">Scan de QR-code</p>
+            <p class="body-sm c-secondary">Open de camera op je telefoon, het bericht staat er al in.</p>
+          </div>
+        </div>
+        <p class="body-sm c-secondary center">Liever op deze computer? <a class="link" href="#" target="_blank" rel="noopener" data-wa-web>Open WhatsApp Web</a></p>
+      </div>
+      <a class="btn btn--whatsapp btn--block only-mobile" href="#" target="_blank" rel="noopener" data-wa-link><span>Open WhatsApp</span><span class="btn__circle"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg></span></a>
+
+      <ul class="checklist checklist--success" role="list">
+        <li><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>We reageren binnen &lt;reactietijd&gt; op werkdagen.</span></li>
+        <li><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Gratis en vrijblijvend</span></li>
+        <li><svg class="icon " aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Liever bellen? Bel naar: <a class="link" href="tel:+31767676322">+31 (0)76 76 76 322</a></span></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+</body>
+</html>

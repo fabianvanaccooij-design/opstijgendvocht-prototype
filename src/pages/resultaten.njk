@@ -1,0 +1,38 @@
+---
+crumb: Resultaten
+title: Resultaten & Klantbeoordelingen
+description: Bekijk onze recente projecten, voor-en-na-situaties en de ervaringen van onze klanten.
+---
+{% import "components/sections.njk" as s %}
+{% import "components/blocks.njk" as b %}
+{% set r = {
+  title: '"Snel, netjes en helder gecommuniceerd!"',
+  text: '"De specialist legde tijdens de diagnose precies uit waar het vocht vandaan kwam. De werkzaamheden waren binnen een dag klaar en alles werd netjes achtergelaten."',
+  name: 'Marc v.d. B. (Utrecht)'
+} %}
+
+{{ s.heroPage({
+  variant: 'center', tight: true,
+  title: 'Resultaten & Klantbeoordelingen',
+  text: 'Ontdek hoe wij woningen in heel Nederland definitief vochtvrij maken. Bekijk onze recente projecten, voor-en-na-situaties en lees de ervaringen van onze klanten.',
+  btn: { label: 'Gratis vochtinspectie aanvragen', href: 'gratis-vochtadvies' }
+}, site) }}
+
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <h2 class="t-center">Voor-en-Na Resultaten</h2>
+    <div class="results">
+      {% for i in range(0, 6) %}{{ b.resultaat(r) }}{% endfor %}
+    </div>
+    {{ b.paginering(1, 3) }}
+  </div>
+</section>
+
+{{ s.cta({
+  title: 'Heb je ook last van <span class="c-blue">vochtproblemen</span> in huis?',
+  text: 'Laat ons je woning inspecteren en ontvang een helder plan van aanpak inclusief prijsgarantie.',
+  primary: { label: 'Plan direct een afspraak in', href: 'gratis-vochtadvies' },
+  secondary: false, contact: true
+}) }}
+
+{{ s.artikelen({ title: 'Handige kennis & advies', items: shared.artikelen }) }}

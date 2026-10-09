@@ -1,0 +1,61 @@
+---
+crumb: Vocht Magazine
+title: Gratis Vocht Magazine
+description: Download gratis ons Vocht Magazine met praktisch advies, stappenplannen en productvergelijkingen.
+---
+{% import "components/sections.njk" as s %}
+{% import "components/ui.njk" as ui %}
+
+{{ s.heroPage({
+  variant: 'foto', licht: true, image: 'magazine.png',
+  title: 'Gratis Vocht Magazine',
+  text: 'Download gratis ons nieuwste magazine en ontdek de meest effectieve oplossingen tegen opstijgend vocht, muffe lucht en zoutuitslag. Boordevol praktisch advies, stappenplannen en productvergelijkingen.',
+  btn: { label: 'Download gratis PDF magazine', href: '#aanvragen' }
+}, site) }}
+
+<section class="section" id="aanvragen">
+  <div class="container mag-request">
+    <div class="mag-request__head">
+      <p class="body-lg c-blue">De complete gids tegen vocht in huis</p>
+      <div class="stack" style="gap:var(--gap-heading-2)">
+        <h2>Vraag direct jouw <br>gratis exemplaar aan</h2>
+        <p class="body-lg c-secondary">Vul het onderstaande formulier in en ontvang het magazine direct als pdf in je mailbox.</p>
+      </div>
+    </div>
+    <div>
+      <form class="stack" style="gap:40px" data-form data-success="vm-ok" novalidate>
+        <div class="form-row">
+          {{ ui.field('voornaam', 'Voornaam', 'text', { required: true, placeholder: 'Vul je voornaam in', autocomplete: 'given-name', idPrefix: 'vm-' }) }}
+          {{ ui.field('email', 'E-mailadres', 'email', { required: true, placeholder: 'naam@voorbeeld.nl', idPrefix: 'vm-', error: 'Vul een geldig e-mailadres in.' }) }}
+        </div>
+        <div class="stack" style="gap:16px; align-items:flex-start">
+          {{ ui.btn('Download gratis PDF magazine', '', 'primary', { type: 'submit' }) }}
+          {{ ui.privacy() }}
+        </div>
+      </form>
+      {{ ui.confirm('vm-ok', 'Het Vocht Magazine is onderweg', 'We hebben het magazine als pdf naar je e-mailadres gestuurd. Zie je het niet binnen een paar minuten? Kijk dan ook even in je spam.') }}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    {{ s.head('Wat kun je verwachten in dit magazine?', 'Het Vocht Magazine is samengesteld door onze ervaren vochtspecialisten. We nemen je helder en stapsgewijs mee door de nieuwste technieken en oplossingen.', { center: true }) }}
+    <div class="cards cards--3">
+      {% for c in [
+        { title: 'Wat is muurinjectie & hoe werkt het?', text: 'Ontdek precies hoe het injecteren van muren een definitieve, waterafstotende barrière vormt tegen opstijgend vocht. Inclusief een helder stappenplan, materiaalkeuze en duidelijke instructies over het droogproces.' },
+        { title: 'Meltem WTW Balansventilatie', text: 'Lees alles over de Meltem M-WRG-I decentrale ventilatie-unit. Ontdek hoe dit slimme systeem vochtige, vervuilde lucht afvoert én tot 71% van de warmte hergebruikt voor een gezond en energiezuinig binnenklimaat.' },
+        { title: 'Saltshield: Bescherming tegen zoutuitslag', text: 'Leer hoe je schadelijke zoutpeterschade en witte aanslag op de muur definitief voorkomt. Onze experts leggen uit hoe de Saltshield technologie zouten neutraliseert en je stuc- en schilderwerk langdurig beschermt.' }
+      ] %}
+      <article class="card step"><span class="usp__icon usp__icon--box">{{ icon('check', 'icon--lg') }}</span><div class="stack" style="gap:var(--gap-heading-3)"><h3>{{ c.title }}</h3><p class="c-secondary">{{ c.text }}</p></div></article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{{ s.cta({
+  title: 'Laat <span class="c-blue">vocht</span> jouw woning niet langer beschadigen',
+  text: 'Twijfel je over de oorzaak van het vocht in je muren of wil je direct weten waar je aan toe bent? Onze specialisten komen vrijblijvend bij je langs op locatie voor een professionele meting en eerlijk advies.',
+  primary: { label: 'Plan direct een afspraak in', href: 'gratis-vochtadvies' },
+  secondary: false, contact: true
+}) }}

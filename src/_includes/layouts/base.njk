@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}{% if title != site.name %} | {{ site.name }}{% endif %}</title>
+  {% if description %}<meta name="description" content="{{ description }}">{% endif %}
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <script src="assets/js/vendor/qrcode.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body class="{{ bodyClass }}">
+  {{ inlineSvg('assets/icons/sprite.svg') }}
+  <a class="skip-link" href="#main">Naar de inhoud</a>
+  {% include "components/header.njk" %}
+  <main id="main" class="page">
+    {#- Kruimelpad (plat: Home > pagina). Pagina's met een dieper pad roepen de macro zelf aan. -#}
+    {% if crumb %}{% import "components/sections.njk" as crumbs %}{{ crumbs.kruimelpad([{ label: 'Home', href: 'index' }].concat(crumbParents or []).concat([{ label: crumb }])) }}{% endif %}
+    {{ content | safe }}
+  </main>
+  {% include "components/footer.njk" %}
+  {% include "components/whatsapp.njk" %}
+</body>
+</html>

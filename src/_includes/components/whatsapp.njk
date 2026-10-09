@@ -1,0 +1,82 @@
+{#- Sticky WhatsApp-knop + WhatsApp-keuzehulp.
+    Desktop: zijpaneel rechts met QR-code. Mobiel: bottom sheet met knop "Open WhatsApp".
+    Elke knop met data-wa-open opent dit paneel. Vragen staan in site.keuzehulp. -#}
+{% import "components/ui.njk" as ui %}
+{% if not hideSticky %}
+<button class="sticky-wa" type="button" aria-label="Twijfel je? App ons een foto" data-wa-open>
+  <span class="sticky-wa__label">Twijfel je? App ons een foto</span>
+  <span class="sticky-wa__circle">{{ icon('whatsapp', 'icon--lg') }}</span>
+</button>
+{% endif %}
+
+<div class="scrim" data-wa-scrim></div>
+<aside class="wa" role="dialog" aria-modal="true" aria-labelledby="wa-title" hidden data-wa
+       data-wa-number="{{ site.whatsapp.number }}" data-wa-default="{{ site.whatsapp.defaultText }}">
+  <span class="wa__grip" aria-hidden="true"></span>
+  <div class="wa__head">
+    <h2 class="h4" id="wa-title">Stuur foto’s via WhatsApp</h2>
+    <button class="btn-close" type="button" aria-label="Sluiten" data-wa-close>{{ icon('close') }}</button>
+  </div>
+
+  <div class="wa__body">
+    {# Stap 1 t/m 3: vragen #}
+    <div class="wa__step" data-wa-step="vraag">
+      <p class="c-secondary">Beantwoord drie korte vragen en je WhatsApp-bericht staat klaar voor gratis en vrijblijvend advies.</p>
+      <div class="wa__progress">
+        <div class="wa__nav">
+          <button class="wa__back" type="button" data-wa-back>{{ icon('chevron-left', 'icon--sm') }}<span>Terug</span></button>
+        </div>
+        {#- Zelfde stappenbalk als het vochtadviesformulier (Formulier / Stappen, Apparaat=Mobile: balk + label) -#}
+        {{ ui.stepper(['1. Probleem', '2. Ruimte', '3. Plek'], 1) }}
+      </div>
+      {% for q in site.keuzehulp %}
+      <fieldset class="wa__question" data-wa-q="{{ loop.index0 }}" data-key="{{ q.key }}"{% if not loop.first %} hidden{% endif %}>
+        <legend class="h3">{{ q.question }}</legend>
+        <div class="wa__options">
+          {% for opt in q.options %}<button class="choice" type="button" data-wa-choice="{{ opt }}"><span>{{ opt }}</span>{{ icon('arrow-right') }}</button>{% endfor %}
+        </div>
+      </fieldset>
+      {% endfor %}
+      <button class="link wa__direct" type="button" data-wa-go="direct">Liever direct naar WhatsApp?</button>
+    </div>
+
+    {# Laatste stap: bericht klaar (na de vragen) of direct contact #}
+    <div class="wa__step" data-wa-step="bericht" hidden>
+      <div class="wa__progress" data-wa-only="direct">
+        <div class="wa__nav">
+          <button class="wa__back" type="button" data-wa-go="vraag">{{ icon('chevron-left', 'icon--sm') }}<span>Terug</span></button>
+          <span class="body-sm c-secondary">Direct contact</span>
+        </div>
+        <div class="wa__bar" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+      <div class="stack wa__intro">
+        <h3 class="h3" data-wa-only="bericht">Nog één stap: verstuur je bericht</h3>
+        <h3 class="h3" data-wa-only="direct">Stuur ons een bericht</h3>
+        <p class="c-secondary"><span data-wa-only="bericht">Vul het bericht aan</span><span data-wa-only="direct">Vertel kort wat je ziet</span> en stuur een paar foto’s mee. We gebruiken je foto’s alleen om je te adviseren en bewaren ze niet langer dan nodig. Lees meer in onze <a class="link" href="{{ 'tekstpagina' | href }}">privacyverklaring</a>.</p>
+      </div>
+      <div class="stack" style="gap:8px">
+        <p class="wa__bubble" data-wa-message>{{ site.whatsapp.defaultText }}</p>
+        <button class="wa__restart" type="button" data-wa-restart data-wa-only="bericht">{{ icon('rotate-left', 'icon--sm') }}<span>Begin opnieuw</span></button>
+      </div>
+
+      {# Desktop: QR-code. Mobiel: knop. #}
+      <div class="wa__qr-wrap only-desktop">
+        <div class="wa__qr">
+          <div class="wa__qr-code" data-wa-qr aria-label="QR-code voor WhatsApp" role="img"></div>
+          <div class="stack" style="gap:4px">
+            <p class="bold">Scan de QR-code</p>
+            <p class="body-sm c-secondary">Open de camera op je telefoon, het bericht staat er al in.</p>
+          </div>
+        </div>
+        <p class="body-sm c-secondary center">Liever op deze computer? <a class="link" href="#" target="_blank" rel="noopener" data-wa-web>Open WhatsApp Web</a></p>
+      </div>
+      <a class="btn btn--whatsapp btn--block only-mobile" href="#" target="_blank" rel="noopener" data-wa-link><span>Open WhatsApp</span><span class="btn__circle">{{ icon('whatsapp', 'icon--lg') }}</span></a>
+
+      <ul class="checklist checklist--success" role="list">
+        <li>{{ icon('check') }}<span>We reageren binnen {{ site.reactietijd }} op werkdagen.</span></li>
+        <li>{{ icon('check') }}<span>Gratis en vrijblijvend</span></li>
+        <li>{{ icon('check') }}<span>Liever bellen? Bel naar: <a class="link" href="{{ site.phone.href }}">{{ site.phone.label }}</a></span></li>
+      </ul>
+    </div>
+  </div>
+</aside>

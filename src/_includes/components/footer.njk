@@ -1,0 +1,35 @@
+{% import "components/ui.njk" as ui %}
+<footer class="site-footer">
+  <div class="site-footer__cols">
+    <div class="site-footer__brand">
+      <img src="assets/img/logo-wit.svg" alt="{{ site.name }}" width="191" height="55">
+      <div class="site-footer__lines">
+        <div class="stack" style="gap:8px">
+          <a class="site-footer__contact" href="{{ site.phone.href }}">{{ icon('phone', 'icon--sm') }}<span>{{ site.phone.label }}</span></a>
+          <a class="site-footer__contact" href="mailto:{{ site.email }}">{{ icon('envelope', 'icon--sm') }}<span>{{ site.email }}</span></a>
+        </div>
+        <address class="site-footer__locations">
+          {% for l in site.footer.locations %}<p><strong>{{ l.city }}</strong><br>{{ l.street }}</p>{% endfor %}
+        </address>
+        {{ ui.btn('Gratis vochtadvies aanvragen', 'gratis-vochtadvies') }}
+        <p class="rating__row body-sm">{{ ui.stars(5, true) }}<span><strong>{{ site.rating.score }}</strong> <span class="site-footer__reviews">({{ site.rating.count }} reviews op {{ site.rating.source }})</span></span></p>
+      </div>
+    </div>
+    {% for col in site.footer.columns %}
+    <nav class="site-footer__col" aria-label="{{ col.title }}">
+      <p class="h4">{{ col.title }}</p>
+      <ul role="list">{% for l in col.links %}<li><a href="{{ l.href | href }}">{{ l.label }}</a></li>{% endfor %}</ul>
+    </nav>
+    {% endfor %}
+  </div>
+  <div class="site-footer__bottom">
+    <div class="site-footer__legal">
+      <span>© {{ site.year }} {{ site.company }}</span>
+      <span>{{ site.kvk }}</span>
+      {% for l in site.footer.legal %}<a href="{{ l.href | href }}">{{ l.label }}</a>{% endfor %}
+    </div>
+    <ul class="site-footer__badges" role="list">
+      {% for b in site.footer.badges %}<li>{{ b }}</li>{% endfor %}
+    </ul>
+  </div>
+</footer>

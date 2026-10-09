@@ -1,0 +1,25 @@
+---
+crumb: Veelgestelde vragen
+title: Veelgestelde vragen
+description: Vind snel een antwoord op jouw vragen over vochtbestrijding, onze werkwijze en de garanties.
+---
+{% import "components/sections.njk" as s %}
+
+{{ s.heroPage({
+  variant: 'center', tight: true,
+  title: 'Veelgestelde vragen (FAQ)',
+  text: 'Vind snel een antwoord op jouw vragen over vochtbestrijding, onze werkwijze en de garanties.'
+}, site) }}
+
+{% for cat in shared.faqCategorieen %}
+{{ s.faq({ title: cat.title, center: true, btn: false, ruim: true, items: cat.items }) }}
+{% endfor %}
+
+{{ s.cta({
+  title: 'Staat jouw vraag er niet tussen?',
+  text: 'Onze specialisten helpen je graag persoonlijk verder.',
+  primary: { label: 'Stel je vraag via onze contactpagina', href: 'contact' },
+  secondary: false
+}) }}
+
+{{ s.artikelen({ title: 'Bekijk onze blogs', items: shared.artikelen }) }}

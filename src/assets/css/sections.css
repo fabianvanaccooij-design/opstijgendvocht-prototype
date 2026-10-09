@@ -1,0 +1,384 @@
+/* ==========================================================================
+   Secties (Figma: Sectie / ...). Desktop eerst, mobiel onder 768 px.
+   ========================================================================== */
+
+.sec-head { display: flex; flex-direction: column; gap: var(--gap-heading-2); }
+.sec-head > .h2 + h2 { margin-top: calc(-1 * var(--gap-heading-2)); }
+.sec-head--center { align-items: center; text-align: center; margin-inline: auto; }
+@media (max-width: 767px) { .sec-head--left-mobile { align-items: flex-start; text-align: left; } }   /* Figma 393: kop links (home, Wat helpt) */
+.sec-head--narrow { max-width: var(--container-text); }   /* Figma: kop 1024 breed (o.a. Gratis vochtadvies) */
+
+/* --- Sectie / Hero (homepage) -------------------------------------------- */
+.hero-home { position: relative; display: grid; padding: 96px 0; min-height: 826px; align-items: center; }
+.hero-home__img { position: absolute; inset: 0; background: var(--color-placeholder) url("../img/placeholder.png") center / cover no-repeat; }
+.hero-home__img img { width: 100%; height: 100%; object-fit: cover; }
+.hero-home__wrap { position: relative; padding: 0 80px; }
+.hero-home__card { width: min(880px, 100%); display: flex; flex-direction: column; gap: var(--gap-action); padding: var(--card-padding-lg); background: var(--color-bg-surface); border-radius: var(--radius-card); }
+.hero-home__text { gap: var(--gap-heading-1); }
+.usp-bar { padding-top: 48px; margin-top: calc(-1 * var(--section-padding-y)); }
+.usp-bar__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--grid-gutter); list-style: none; padding: 0; }
+.usp-bar .usp { justify-content: center; }
+.usp-bar .usp__icon { color: var(--color-text-primary); }
+@media (max-width: 1199px) { .hero-home__wrap { padding: 0 var(--page-margin); } .hero-home { min-height: 0; } }
+@media (max-width: 767px) {
+  .hero-home { display: flex; flex-direction: column; align-items: stretch; padding: 0; min-height: 0; }   /* beeld en kaart over de volle breedte (niet de beeldbreedte) */
+  .hero-home__img { position: relative; height: 289px; }
+  .hero-home__wrap { margin-top: -48px; padding: 0 var(--page-margin); }
+  .hero-home__card { padding: var(--card-padding); }
+  .hero-home__btns { align-items: center !important; }
+  .hero-home__btns .btn--secondary { align-self: center; }
+  .hero-home .rating { flex-wrap: nowrap; gap: 8px; }   /* Figma 393: logo, sterren en score op één regel */
+  .hero-home .checklist { gap: 0; }
+}
+
+/* --- Sectie / Wat zie je in huis (beeldtegels) --------------------------- */
+.tiles__track { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--grid-gutter); }
+.tile { position: relative; display: block; aspect-ratio: 539 / 680; overflow: hidden; border-radius: var(--radius-card); isolation: isolate; }
+.tile__img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: var(--color-placeholder) url("../img/placeholder.png") center / cover no-repeat; transition: transform .5s var(--ease); }
+.tile__img.media--ph::before { display: none; }
+.tile__overlay { position: absolute; inset: 0; background: var(--gradient-beeldtegel-overlay); transition: background .3s var(--ease); }
+.tile__body { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; padding: var(--card-padding); }
+/* Hover: de kaart maakt ruimte (titel schuift omhoog) en tekst + knop komen vanaf de onderrand van de kaart omhoog.
+   In rust staan ze net onder de kaart (de kaart knipt af). */
+.tile { --tile-speed: .6s; }
+.tile__details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--tile-speed) var(--ease); }
+.tile__details-inner { min-height: 0; align-self: start; display: flex; flex-direction: column; gap: var(--gap-action-sm); padding-top: var(--gap-action-sm); transform: translateY(var(--card-padding)); transition: transform var(--tile-speed) var(--ease); }
+.tile__overlay { transition: background var(--tile-speed) var(--ease); }
+.tile:hover .tile__overlay, .tile:focus-visible .tile__overlay { background: var(--gradient-beeldtegel-overlay-hover); }
+.tile:hover .tile__details, .tile:focus-visible .tile__details { grid-template-rows: 1fr; }
+.tile:hover .tile__details-inner, .tile:focus-visible .tile__details-inner { transform: none; }
+.tile__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tile__arrow { display: grid; place-items: center; width: var(--size-control-inner); height: var(--size-control-inner); border-radius: var(--radius-full); background: var(--color-action-secondary-circle); color: var(--color-text-primary); flex: none; }
+.tiles-bar { display: flex; flex-direction: column; align-items: center; gap: var(--gap-action-sm); text-align: center; padding: var(--card-padding); }   /* Figma: kaart = card/padding */
+.tiles-bar > .stack { align-items: center; }
+@media (max-width: 767px) {
+  .tiles-sec { padding-inline: 0; }
+  .tiles-sec .sec-head, .tiles-sec .tiles-bar { margin-inline: var(--page-margin); }
+  .tiles-sec .sec-head { align-items: flex-start; text-align: left; }   /* Figma 393: kop links */
+  .hero-home .rating__row, .hero-home .rating__score { gap: 8px; }      /* Figma 393: sterren, score en aantal 8 uit elkaar */
+  .hero-home .rating__logo, .hero-page .rating__logo { height: 14px; }    /* Figma 393: mobiele hero-rating, logo 60x14 */
+  .hero-home .stars, .hero-page .stars { --star: 14px; gap: 4px; }        /* Figma 393: sterren 14, 4 uit elkaar */
+  .tiles__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--page-margin); scroll-padding: 0 var(--page-margin); scrollbar-width: none; }
+  .tiles__track::-webkit-scrollbar { display: none; }
+  .tile { flex: 0 0 280px; aspect-ratio: auto; height: 360px; scroll-snap-align: start; }
+  .tile__details { display: none; }
+  .tiles .dots { margin-top: var(--grid-gutter); }
+  .tiles-bar { align-items: flex-start; text-align: left; padding: var(--card-padding); }
+  .tiles-bar > .stack { align-items: flex-start; }
+}
+
+/* --- Sectie / Uitklaplijst (kaarten + beeld) ----------------------------- */
+.split-acc { display: grid; grid-template-columns: minmax(0, 784fr) minmax(0, 864fr); gap: 32px; align-items: start; }
+.split-acc--links { grid-template-columns: minmax(0, 864fr) minmax(0, 784fr); }
+.split-acc--links .split-acc__media { order: -1; }
+.split-acc .accordion { gap: 24px; }
+@media (max-width: 1199px) { .split-acc, .split-acc--links { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 767px) {
+  .split-acc, .split-acc--links { grid-template-columns: 1fr; gap: 24px; }
+  .split-acc__media { order: -1; }
+  .split-acc .accordion { gap: 16px; }
+}
+
+/* --- Sectie / Zo werkt (stappen) ----------------------------------------- */
+.steps__head { display: flex; align-items: center; justify-content: space-between; gap: 64px; }
+/* Figma: kaarten lopen rechts door tot de paginarand (sectie knipt af) */
+.steps__viewport { overflow: hidden; margin: -8px; padding: 8px; }
+/* Slider loopt van de linker tot de rechter browserrand; de eerste kaart start op de contentlijn */
+@media (min-width: 768px) { .steps:not(.steps--raster) .steps__viewport { margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%); } }
+.steps__track { display: flex; gap: var(--grid-gutter); list-style: none; padding: 0; transition: transform .45s var(--ease); }
+.step { flex: 0 0 var(--step-w, 476px); display: flex; flex-direction: column; gap: var(--grid-gutter); }
+.steps__btn { display: flex; justify-content: center; }
+.steps--raster .steps__head { justify-content: center; text-align: center; }
+.steps--raster .steps__intro { text-align: center; max-width: 1024px; margin: 0 auto; }
+.steps--raster .steps__track { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); transform: none !important; }
+.steps--raster .step { flex: none; }
+@media (max-width: 1199px) { .step { flex-basis: calc((100% - 1.5 * var(--grid-gutter)) / 2.3); } }
+@media (max-width: 767px) {
+  .steps { padding-inline: 0; }
+  .steps__head, .steps__intro, .steps__btn { padding-inline: var(--page-margin); }
+  .steps__btn { justify-content: flex-start; }
+  .steps__viewport { margin: 0; padding: 0; overflow: visible; }
+  .steps__track { overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--card-gap); padding: 0 var(--page-margin); scroll-padding: 0 var(--page-margin); scrollbar-width: none; transform: none !important; }
+  .steps__track::-webkit-scrollbar { display: none; }
+  .step { flex: 0 0 300px; scroll-snap-align: start; }
+  .steps .dots { margin-top: calc(var(--grid-gutter) - var(--heading-gap)); }
+  .steps--raster .steps__track { display: flex; }
+  .steps--raster .step { flex: 0 0 300px; }
+}
+
+/* --- Sectie / Keurmerken ------------------------------------------------- */
+.marks { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; list-style: none; padding: 0; width: 100%; }
+.mark { flex: 0 1 262px; min-width: 180px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+.mark__logo { display: grid; place-items: center; width: 150px; height: 100px; background: var(--color-bg-secondary-subtle); font-size: var(--font-size-body-sm); color: var(--color-text-muted); white-space: nowrap; }
+.marks--bold .mark__logo { font-weight: var(--font-weight-bold); }   /* Figma: Over ons en Zakelijk */
+/* Figma 393: kop links, kaartjes 160 breed, 16 naast en 32 onder elkaar */
+@media (max-width: 767px) { .marks-sec { overflow-x: clip; } .marks-sec .sec-head { align-self: stretch; align-items: flex-start; text-align: left; } .marks { gap: 32px 16px; } .mark { flex: 0 0 160px; min-width: 0; } }
+
+/* --- Sectie / Reviews ---------------------------------------------------- */
+.reviews-panel { display: grid; grid-template-columns: minmax(0, 800fr) minmax(0, 800fr); gap: var(--grid-column-gap); padding: var(--card-padding-lg) 96px; background: var(--color-bg-band-alt); border-radius: var(--radius-card); max-width: 1872px; margin-inline: auto; }
+@media (min-width: 1200px) { .reviews-panel { min-height: 1392px; } }   /* Figma: paneel vast 1392 hoog */
+.reviews-panel__sticky { position: sticky; top: calc(var(--header-h) + 48px); display: flex; flex-direction: column; gap: var(--gap-action); align-items: flex-start; }
+.reviews-panel__track { display: flex; flex-direction: column; gap: var(--grid-gutter); }
+.review { display: flex; flex-direction: column; gap: var(--grid-gutter); }
+.person { display: flex; align-items: center; gap: 12px; }
+.person__photo { width: var(--size-avatar); height: var(--size-avatar); flex: none; border-radius: var(--radius-full); background: var(--color-placeholder) url("../img/placeholder.png") center / cover no-repeat; }
+@media (max-width: 1199px) { .reviews-panel { padding-inline: var(--card-padding-lg); } }
+@media (max-width: 767px) {
+  .reviews-panel { grid-template-columns: minmax(0, 1fr); gap: var(--heading-gap); padding: var(--card-padding-lg) 0; border-radius: 0; }
+  .reviews-panel__side { padding: 0 var(--page-margin); }
+  .reviews-panel__list { display: flex; flex-direction: column; gap: var(--gap-action); }
+  .reviews-panel__track { flex-direction: row; gap: var(--card-gap); overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--page-margin); scroll-padding: 0 var(--page-margin); scrollbar-width: none; }
+  .reviews-panel__track::-webkit-scrollbar { display: none; }
+  .reviews-panel__track .review { flex: 0 0 300px; scroll-snap-align: start; }
+  .reviews-panel__btn { padding: 0 var(--page-margin); }
+  .reviews-panel .dots { margin-top: calc(var(--grid-gutter) - var(--gap-action)); }
+}
+
+/* --- Sectie / Split ------------------------------------------------------ */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--grid-column-gap); align-items: center; }
+.split--rechts .split__media { order: 2; }
+.split__content { display: flex; flex-direction: column; gap: var(--gap-action); align-items: flex-start; }
+/* Split als wit paneel met 24 px rand (Figma: GV, Vocht Magazine-blok) */
+.split-panel { max-width: 1872px; margin-inline: auto; padding-inline: var(--page-margin); background: var(--color-bg-surface); border-radius: var(--radius-card); }
+.split-panel .split__media .media { aspect-ratio: 776 / 600; }
+@media (max-width: 1199px) { .split-panel { padding-block: var(--card-padding); } }   /* onder desktop vult het beeld de hoogte niet meer: ruimte boven en onder (Figma 393: card/padding) */
+@media (max-width: 767px) {
+  .split { grid-template-columns: 1fr; gap: 24px; }
+  .split--rechts .split__media { order: 0; }
+  .split__btn { width: 100%; }
+  .split__btn--primary .btn { width: 100%; }
+}
+
+/* --- Sectie / Team ------------------------------------------------------- */
+.team { display: grid; grid-template-columns: minmax(0, 1004fr) minmax(0, 844fr); grid-template-rows: minmax(0, 1fr); gap: 24px; height: 880px; max-width: 1872px; margin-inline: auto; overflow: hidden; }
+.team__main { position: relative; overflow: hidden; border-radius: var(--radius-card); display: flex; padding: var(--card-padding-lg); color: var(--color-text-on-secondary); }
+.team__main > img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.team__main::after { content: ""; position: absolute; inset: 0; background: var(--gradient-team-overlay); }
+.team__text { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-action); max-width: 844px; }
+.team__text h2 { color: var(--color-text-on-secondary); }
+.team__side { display: grid; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; min-height: 0; }
+.team__side .media { height: 100%; min-height: 0; }
+.team__side .media > img { object-position: var(--pos, 50% 50%); }
+@media (max-width: 1199px) { .team { height: 640px; } }
+@media (max-width: 767px) {
+  .section--bleed:has(.team) { padding-inline: var(--page-margin); }
+  .team { display: flex; flex-direction: column; height: auto; gap: 16px; overflow: visible; }
+  .team__main { display: contents; color: inherit; }
+  .team__main > img { position: static; width: 100%; height: 235px; border-radius: var(--radius-card); order: 1; }
+  .team__main::after { display: none; }
+  .team__side { order: 2; grid-template-rows: none; grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); }
+  .team__side .media { aspect-ratio: 1; }
+  .team__side .media > img { object-position: 50% 50%; }
+  .team__text { order: 3; margin-top: 8px; }
+  .team__text h2 { color: var(--color-text-primary); }
+  .team__text p { color: var(--color-text-secondary); }
+  .team__btn { color: var(--color-action-secondary-text) !important; }
+}
+
+/* --- Sectie / Vocht Magazine --------------------------------------------- */
+.magazine { display: grid; grid-template-columns: 895fr 977fr; background: var(--color-bg-surface); border-radius: var(--radius-card); overflow: hidden; max-width: 1872px; margin-inline: auto; }
+.magazine__img { position: relative; min-height: 400px; }
+.magazine__img img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.magazine__body { display: flex; flex-direction: column; gap: var(--gap-heading-2); padding: var(--card-padding-lg); justify-content: center; }   /* Figma: grote kaart = card/padding-lg (mobiel card/padding) */
+@media (min-width: 1200px) { .magazine__body h2 { margin-right: -5px; } }   /* Figma: titelvak 742 breed, 5 px breder dan de kolom */
+@media (max-width: 1199px) { .magazine__body { padding: var(--card-padding-lg); } }
+@media (max-width: 767px) {
+  .section--bleed:has(.magazine) { padding-inline: var(--page-margin); }
+  .magazine { grid-template-columns: 1fr; }
+  .magazine__img { height: 240px; min-height: 0; }
+  .magazine__body { padding: var(--card-padding); }
+  .magazine__form .btn--primary { width: 100%; }
+}
+
+/* --- Sectie / CTA -------------------------------------------------------- */
+.cta { display: flex; justify-content: center; padding: var(--card-padding-lg); background: var(--color-bg-surface); border-radius: var(--radius-card); }
+.cta__btns { justify-content: center; }
+@media (max-width: 767px) { .cta { padding: var(--card-padding); } }   /* knoppen mobiel: zie regel 'links uitlijnen' onderaan */
+
+/* --- Uitklapkaart met nummer ------------------------------------------- */
+.acc--badge .acc__head { justify-content: flex-start; }
+.acc--badge .acc__title { flex: 1; }
+
+/* --- CTA-varianten -------------------------------------------------------- */
+.cta__checks { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; list-style: none; padding: 0; }
+.cta__checks li { display: flex; align-items: center; gap: 8px; }
+.cta__checks .icon { color: var(--color-feedback-success); }   /* zelfde als de vinkjeslijst in de koopbox */
+.cta__phone { display: inline-flex; align-items: center; gap: 8px; color: var(--color-text-brand-blue); }
+.cta__phone .icon { transform: translateY(2px); }   /* Figma: icoon optisch 2 lager (wrapper met 4 boven) */
+@media (max-width: 767px) { .cta__phone .icon { width: var(--size-icon-md); height: var(--size-icon-md); } }   /* Figma 393: icoon 20 */
+@media (max-width: 767px) { .cta__checks { flex-direction: column; align-items: flex-start; row-gap: 0; } }
+
+/* --- Navigatie / Kruimelpad ----------------------------------------------- */
+/* Kruimelpad: transparant. Volgt er een hero, dan loopt de hero-gradient vanaf direct onder de header
+   achter het kruimelpad door (hero schuift omhoog met de hoogte van het kruimelpad). */
+:root { --crumbs-h: calc(32px + var(--font-line-height-body)); }   /* Figma: 60 desktop, 57 mobiel */
+.crumbs { position: relative; z-index: 1; box-sizing: border-box; height: var(--crumbs-h); padding: 16px var(--page-margin); background: transparent; }
+.crumbs__list { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; list-style: none; padding: 0; }
+.crumbs__list li { display: flex; align-items: center; gap: 12px; }
+.crumbs__list a { text-decoration: underline; text-underline-offset: 3px; }
+.crumbs__list [aria-current] { color: var(--color-text-secondary); }
+.crumbs__back { display: none; align-items: center; gap: 8px; font-weight: var(--font-weight-medium); }
+@media (max-width: 767px) { .crumbs__list { display: none; } .crumbs__back { display: inline-flex; } .crumbs__back span { text-decoration: underline; } }
+.page > .crumbs + * { margin-top: calc(-1 * var(--section-padding-y)); }
+.page > .crumbs + .hero-page { margin-top: calc(-1 * (var(--section-padding-y) + var(--crumbs-h))); padding-top: calc(var(--section-padding-y) + var(--crumbs-h)); }
+/* Foto-hero: de foto begint direct onder de header en het kruimelpad staat erop (hero zelf blijft even hoog) */
+.page > .crumbs + .hero-page--foto { padding-top: var(--section-padding-y); }
+.page > .crumbs:has(+ .hero-page--foto:not(.hero-page--licht)) .crumbs__list a,
+.page > .crumbs:has(+ .hero-page--foto:not(.hero-page--licht)) .crumbs__back { color: var(--color-text-on-ink); }
+.page > .crumbs:has(+ .hero-page--foto:not(.hero-page--licht)) .crumbs__list [aria-current],
+.page > .crumbs:has(+ .hero-page--foto:not(.hero-page--licht)) .crumbs__list .icon { color: var(--color-text-on-ink-secondary); }
+@media (max-width: 767px) {
+  .page > .crumbs + .hero-page--foto { padding-top: 296px; }
+  /* Mobiel: lichte schaduw bovenaan de foto zodat de terug-link leesbaar blijft */
+  .page > .crumbs:has(+ .hero-page--foto:not(.hero-page--licht)) { background: linear-gradient(180deg, rgb(10 42 67 / .6), rgb(10 42 67 / 0)); }
+  /* Pagina op eerste niveau (pad Home > pagina): mobiel geen kruimelpad, de hero begint direct onder de header (Figma 393) */
+  .page > .crumbs--top { display: none; }
+  .page > .crumbs--top + * { margin-top: 0; }
+  .page > .crumbs--top + .hero-page { margin-top: 0; padding-top: var(--section-padding-y); }
+  .page > .crumbs--top + .hero-page--foto { padding-top: 296px; }
+}
+
+/* --- Sectie / Hero pagina --------------------------------------------------- */
+.hero-page { position: relative; padding: var(--section-padding-y) var(--page-margin); background: var(--gradient-hero-licht); }
+.hero-page--tight { margin-bottom: calc(-1 * var(--section-padding-y)); }
+.hero-page__inner { position: relative; max-width: var(--container); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 760fr) minmax(0, 840fr); gap: var(--grid-column-gap); align-items: start; }
+.hero-page__intro { display: flex; flex-direction: column; gap: var(--gap-action); align-items: flex-start; }
+.hero-page__text .prose { color: var(--color-text-secondary); }
+.hero-page--center .hero-page__inner { grid-template-columns: minmax(0, 1024px); justify-content: center; text-align: center; }
+.hero-page--center .hero-page__intro { align-items: center; }
+.hero-page--center .btn-row { justify-content: center; }
+.hero-page--foto { min-height: 760px; display: flex; align-items: center; color: var(--color-text-on-secondary); background: none; }
+.hero-page--foto .hero-page__bg { position: absolute; inset: 0; background: var(--color-placeholder) url("../img/placeholder.png") center / cover no-repeat; }
+.hero-page--foto .hero-page__bg img { width: 100%; height: 100%; object-fit: cover; }
+.hero-page--foto .hero-page__bg::after { content: ""; position: absolute; inset: 0; background: var(--gradient-foto-overlay); }
+.hero-page--foto .hero-page__inner { width: 100%; grid-template-columns: minmax(0, 690px); }
+.hero-page--foto h1, .hero-page--foto .h4, .hero-page--foto .prose { color: var(--color-text-on-secondary); }
+@media (max-width: 767px) {
+  .hero-page { padding-block: var(--section-padding-y); }
+  .hero-page__inner { grid-template-columns: 1fr; gap: var(--gap-action); }
+  .hero-page--foto { min-height: 0; padding-top: 296px; padding-bottom: 48px; color: var(--color-text-on-ink); background: var(--color-bg-ink); }   /* Figma 393: foto 360, tekst 64 erover */
+  .hero-page--foto .hero-page__bg { bottom: auto; height: 360px; }
+  .hero-page--foto .hero-page__bg::after { background: var(--gradient-foto-naar-inkt-mobiel); }
+  .hero-page .btn-row--stack { align-self: stretch; }
+  .hero-page .btn-row--stack .btn--primary { width: 100%; }
+  .hero-page .rating { gap: 8px; }                                         /* Figma 393: logo, sterren en score op één regel, 8 uit elkaar */
+  .hero-page .rating .rating__row { display: contents; }
+  .hero-page .rating .rating__score { gap: 8px; }                         /* Figma 393: score en aantal 8 uit elkaar (zoals home) */
+}
+
+/* --- Signalen (5 beeldkaarten) -------------------------------------------- */
+.tiles__track--5 { grid-template-columns: repeat(5, 1fr); }
+.tile--sm { aspect-ratio: 310 / 430; }
+.tile--sm .tile__body { padding: var(--card-padding-sm); }
+.tile--beeld .tile__body { padding: var(--card-padding); }
+@media (max-width: 1199px) { .tiles__track--5 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 767px) { .tile--sm { flex-basis: 240px; height: 333px; } .tile--sm .tile__details { display: grid; grid-template-rows: 1fr; opacity: 1; } .tile--sm .tile__details-inner { transform: none; } }
+
+/* --- USP-lijst en USP-paneel (Uitklaplijst, Beeld=Achtergrond) ------------ */
+.usp-list { display: flex; flex-direction: column; gap: var(--gap-block); list-style: none; padding: 0; }
+.usp--top { align-items: flex-start; gap: 16px; }
+.usp--top .usp__text { padding-top: 8px; }
+.usp-panel { position: relative; display: flex; align-items: center; justify-content: flex-end; padding: var(--section-padding-y) calc(var(--page-margin) - 24px); min-height: 896px; max-width: 1872px; margin-inline: auto; }
+.usp-panel__bg { position: absolute; inset: 0; border-radius: var(--radius-card); overflow: hidden; background: var(--color-placeholder) url("../img/placeholder.png") center / cover no-repeat; }
+.usp-panel__bg img { width: 100%; height: 100%; object-fit: cover; }
+.usp-panel__card { position: relative; width: min(720px, 100%); display: flex; flex-direction: column; gap: var(--gap-block); padding: var(--card-padding); background: var(--color-bg-surface); border-radius: var(--radius-card); }
+@media (max-width: 767px) {
+  /* Figma 393 (Sectie / Uitklaplijst Beeld=Achtergrond): foto 280 over de volle breedte, kaart op de paginamarge, 64 over de foto, 48 eronder */
+  .section--bleed:has(.usp-panel) { padding-inline: 0; }
+  .usp-panel { flex-direction: column; padding: 0 0 var(--section-padding-y); min-height: 0; }
+  .usp-panel__bg { position: relative; inset: auto; width: 100%; height: 280px; border-radius: 0; }
+  .usp-panel__card { margin-top: -64px; width: calc(100% - 2 * var(--page-margin)); }
+}
+
+/* --- Kaarten met beeld (Card / Content, Surface=Transparant) --------------- */
+.cards { display: grid; gap: var(--grid-gutter); }
+.cards--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cards--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card-t { position: relative; display: flex; flex-direction: column; gap: var(--grid-gutter); }
+.card-t__body { display: flex; flex-direction: column; gap: var(--gap-action-sm); align-items: flex-start; }
+.card-t__link::after { content: ""; position: absolute; inset: 0; }
+@media (max-width: 1199px) { .cards--3, .cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .btn { white-space: normal; } .btn--secondary, .btn--text { text-align: left; } }   /* tablet: niets breder dan het scherm; afgebroken secundaire knoptekst links */
+@media (max-width: 767px) {
+  .cards--2, .cards--3, .cards--4 { grid-template-columns: 1fr; }
+  .cards--slide-mobile { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--card-gap); margin-inline: calc(-1 * var(--page-margin)); padding-inline: var(--page-margin); scrollbar-width: none; }
+  .cards--slide-mobile > * { flex: 0 0 300px; scroll-snap-align: center; }
+}
+
+/* --- Productuitlicht (band) ------------------------------------------------ */
+.pband { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--grid-column-gap); align-items: center; padding: var(--section-padding-y) 96px; background: var(--color-bg-ink); border-radius: var(--radius-card); max-width: 1872px; margin-inline: auto; }
+.pband__content { display: flex; flex-direction: column; gap: var(--gap-block); }
+.pband__muted { color: var(--color-text-on-ink-secondary); }
+.pband__meta { display: flex; flex-direction: column; gap: 8px; }
+.pband__list { display: flex; flex-direction: column; gap: 12px; list-style: none; padding: 0; color: var(--color-text-on-ink-secondary); }
+.pband__list li { display: flex; gap: 12px; }
+.pband__list .icon { flex: none; margin: 4px; color: var(--color-text-brand-orange); }
+.pband__certs { display: grid; grid-template-columns: 1fr 1fr; gap: 24px var(--grid-gutter); list-style: none; padding: 0; }
+.pband__certs li { display: flex; gap: 12px; }
+.pband__certs .icon { color: var(--color-text-brand-orange); margin-top: 4px; flex: none; }
+.pband__subsidy { display: flex; align-items: center; gap: 24px; padding: var(--card-padding); background: var(--color-bg-on-ink-subtle); border-radius: var(--radius-card); }
+.pband__logos { display: flex; flex-direction: column; gap: 8px; flex: 0 0 240px; }
+.pband__logos span { display: grid; place-items: center; padding: 12px 16px; border-radius: 8px; background: var(--color-bg-on-ink-subtle); color: var(--color-text-on-ink-secondary); }
+@media (max-width: 1199px) { .pband { padding-inline: var(--card-padding-lg); } }
+@media (max-width: 767px) {
+  .pband { grid-template-columns: 1fr; padding: var(--card-padding-lg) var(--page-margin); border-radius: 0; }
+  .pband__media { order: -1; }
+  .pband__certs { grid-template-columns: 1fr; gap: 16px; }
+  .pband__content { gap: 24px; }   /* Figma 393: blokken 24 uit elkaar, padding 48 20 */
+  .pband { padding: 48px var(--page-margin); gap: 32px; }
+  .pband__subsidy { flex-direction: column; align-items: stretch; }
+  .pband__logos { flex-basis: auto; }
+}
+
+/* --- Sectie / Tekst ---------------------------------------------------------- */
+.text-sec { display: flex; flex-direction: column; gap: var(--gap-heading-2); max-width: 1024px; }
+.text-sec--quote { margin-inline: auto; text-align: center; align-items: center; }
+
+/* Card / Content, Surface=Wit */
+.content-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-action-sm); }
+.content-card > .btn { margin-top: auto; }
+/* Figma: tekst naar primaire knop 40 (desktop), naar tekstknop 24 */
+.content-card:has(> .btn--primary) { gap: var(--gap-action); }
+/* Hero pagina, Tekstbreedte=Smal */
+.hero-page--smal .hero-page__inner { grid-template-columns: minmax(0, 1024px); justify-content: center; text-align: center; }
+.hero-page--smal .hero-page__intro { align-items: center; }
+.hero-page--smal .btn-row { justify-content: center; }
+/* Foto-hero met witte overlay en donkere tekst (Figma: Verloop/Foto overlay wit, Vocht Magazine) */
+.hero-page--foto.hero-page--licht .hero-page__bg::after { background: var(--gradient-foto-overlay-wit); }
+.hero-page--foto.hero-page--licht h1, .hero-page--foto.hero-page--licht .h4 { color: var(--color-text-primary); }
+.hero-page--foto.hero-page--licht .prose { color: var(--color-text-secondary); }
+@media (max-width: 767px) {
+  /* Figma Vocht Magazine 393: lichte variant met de kleuren van desktop, foto loopt onderaan over in wit */
+  .hero-page--foto.hero-page--licht { background: var(--color-bg-surface); color: var(--color-text-primary); }
+  .hero-page--foto.hero-page--licht .hero-page__bg { background: var(--color-bg-surface); }   /* magazinebeeld is deels transparant: wit erachter, geen grijze placeholder */
+  .hero-page--foto.hero-page--licht .hero-page__bg::after { background: var(--gradient-foto-naar-wit-mobiel); }
+}
+/* Flex i.p.v. block: anders telt de regelhoogte van de tekst eromheen mee en wordt het vak 5 px te hoog (Figma 44) */
+.hero-page__rating { display: flex; }
+.hero-page--foto .hero-page__rating { align-self: flex-start; padding: 8px 16px; border-radius: var(--radius-full); background: var(--color-bg-surface); color: var(--color-text-primary); }
+.steps--left .steps__head { justify-content: flex-start; text-align: left; }
+.steps--left .steps__btn { justify-content: flex-start; }
+.crumbs__list .icon { color: var(--color-text-muted); }
+
+/* --- Regel mobiel: koppen en teksten links uitgelijnd (Figma Apparaat=Mobile, 9 okt) ---
+   Blijft gecentreerd: keurmerk-bijschriften, knoplabels, upload, swipe-bullets, modelvergelijking. */
+.t-center { text-align: center; }
+@media (max-width: 767px) {
+  .t-center { text-align: left; }
+  .sec-head--center { align-items: flex-start; text-align: left; margin-inline: 0; }
+  .steps--raster .steps__head { justify-content: flex-start; text-align: left; }
+  .steps--raster .steps__intro { text-align: left; margin: 0; }
+  .text-sec--quote { margin-inline: 0; text-align: left; align-items: flex-start; }
+  .hero-page--center .hero-page__inner, .hero-page--smal .hero-page__inner { text-align: left; }
+  .hero-page--center .hero-page__intro, .hero-page--smal .hero-page__intro { align-items: flex-start; }
+  .hero-page--center .btn-row, .hero-page--smal .btn-row { justify-content: flex-start; }
+  .cta > .stack { width: 100%; }
+  .cta .center { align-items: stretch; text-align: left; }   /* Figma CTA mobiel: blokken over de volle kaartbreedte, tekst links */
+  .cta .cta__phone { align-self: flex-start; }
+  .cta__btns { justify-content: flex-start; }   /* Figma CTA mobiel: primaire knop volle breedte, secundaire links */
+}
+
+/* Sectie / Oplossingen mobiel: kaarten onder elkaar, 40 ertussen (Figma space/40) */
+@media (max-width: 767px) { .cards--opl { gap: var(--space-40); } }
+/* Gerelateerde artikelen: slider met swipe-indicator op mobiel */
+.art-slider { gap: var(--grid-gutter); }   /* Figma Swiperij: grid/gutter */

@@ -1,0 +1,35 @@
+---
+crumb: Werkwijze
+title: Onze werkwijze
+description: Van vochtdiagnose tot definitieve oplossing.
+---
+{% import "components/sections.njk" as s %}
+{% import "components/blocks.njk" as b %}
+
+{{ s.heroPage({
+  variant: 'foto', image: '',
+  title: 'Onze werkwijze',
+  subtitle: 'Van vochtdiagnose tot definitieve oplossing',
+  text: 'Een vochtprobleem aanpakken kan ingrijpend lijken, maar met onze gestructureerde aanpak weet je precies waar je aan toe bent. Wij begeleiden je van de eerste inspectie tot de oplevering én de nabehandeling.',
+  btn: { label: 'Gratis vochtadvies aanvragen', href: 'gratis-vochtadvies' }
+}, site) }}
+
+{{ b.werkwijze({
+  title: 'Gecertificeerde kwaliteit & zekerheid',
+  text: 'Wij werken volgens de hoogste kwaliteitsnormen in de vochtbestrijdingsbranche.',
+  cards: [
+    { title: 'Vrijblijvende Vochtdiagnose', subtitle: 'Een afspraak wanneer het jou uitkomt', text: 'Na je aanvraag komt onze vochtspecialist bij je langs op locatie. Met professionele vochtmeters stellen we de exacte oorzaak vast (bijv. opstijgend vocht, doorslaand vocht of condensatie). Zo voorkomen we dat er een verkeerde of overbodige behandeling wordt toegepast.' },
+    { title: 'Heldere Offerte op Maat', subtitle: '100% transparant vooraf', text: 'Op basis van de diagnose stellen we een transparant plan van aanpak op. Je ontvangt een gespecificeerde offerte waarin exact staat welke werkzaamheden worden uitgevoerd, inclusief een vaste prijsgarantie zonder onverwachte kosten achteraf.' },
+    { title: 'Voorbereiding & Bescherming', subtitle: 'Zorgvuldig afschermen', text: 'Op de afgesproken werkdag beginnen we met het afdekken van de vloeren en omliggende meubels. We werken netjes en zorgen ervoor dat de overlast in de woning tot een minimum beperkt blijft.' },
+    { title: 'Professionele Uitvoering', subtitle: 'Injecteren of ventileren', text: 'Afhankelijk van de gekozen oplossing voeren onze gecertificeerde specialisten de werkzaamheden uit (bijvoorbeeld het injecteren van de muren, het plaatsen van een Meltem WTW-unit).' },
+    { title: 'Oplevering & Schoonmaak', subtitle: 'Schoon en droog opgeleverd', text: 'Na de behandeling ruimen we alles netjes op en voeren we het afval af. Samen lopen we het resultaat door en leggen we uit hoe het droogproces in de muren zich de komende weken zal ontwikkelen.' },
+    { title: 'Garantie & Nazorg', subtitle: '30 jaar garantie op injecteren', text: 'Na oplevering ontvang je jouw officiële garantiecertificaat. Mocht je tijdens het droogproces vragen hebben, dan staat onze klantenservice direct voor je klaar.' }
+  ]
+}) }}
+
+{{ s.cta({
+  title: 'Laat <span class="c-blue">vocht</span> jouw woning niet langer beschadigen',
+  text: 'Twijfel je over de oorzaak van het vocht in je muren of wil je direct weten waar je aan toe bent? Onze specialisten komen vrijblijvend bij je langs op locatie voor een professionele meting en eerlijk advies.',
+  primary: { label: 'Plan direct een afspraak in', href: 'gratis-vochtadvies' },
+  secondary: false, contact: true
+}) }}

@@ -1,0 +1,91 @@
+---
+title: Vocht in een binnenmuur
+description: Vochtplekken, zoutuitslag of loslatend stucwerk op een binnenmuur? Wij achterhalen de oorzaak.
+---
+{% import "components/sections.njk" as s %}
+
+{{ s.kruimelpad([{ label: 'Home', href: 'index' }, { label: 'Vochtige muur', href: site.routes.vochtigeMuur }, { label: 'Vocht in een binnenmuur' }]) }}
+
+{{ s.heroPage({
+  tight: true, rating: true,
+  title: 'Vocht in een binnenmuur',
+  text: 'Heb je last van vochtplekken, witte zoutuitslag, schimmel of loslatend stucwerk op een binnenmuur? Vocht in een binnenmuur kan verschillende oorzaken hebben. Het kan gaan om opstijgend vocht uit de fundering, maar ook om een verborgen lekkage, doorslaand vocht vanuit de spouw of condensatie. Wij helpen je de exacte oorzaak te achterhalen, zodat jouw binnenmuur weer blijvend droog en strak wordt.',
+  btn: { label: 'Gratis vochtinspectie aanvragen', href: 'gratis-vochtadvies' },
+  image: ''
+}, site) }}
+
+{{ s.signalen({
+  title: 'Herken je deze schimmelproblemen in jouw woning?', beeldtegel: true,
+  intro: 'Schimmel kan op verschillende plekken binnenshuis opduiken. Herken je een van de volgende situaties?',
+  items: [
+    { title: 'Vochtplek onderaan binnenmuur', text: 'Donkere plekken die net boven de plint beginnen en langzaam omhoog trekken.' },
+    { title: 'Witte, poederachtige zoutuitslag', text: 'Zouten uit het metselwerk die door vocht naar buiten worden gedrukt en de afwerking aantasten.' },
+    { title: 'Loslatend stucwerk of verf', text: 'Bubbels in de verflaag, blaasjes onder het behang of stucwerk dat afbrokkelt' },
+    { title: 'Schimmel of muffe geur', text: 'Een klam gevoel en een typische muffe ‘kelderlucht’ in de ruimte.' },
+    { title: 'Slechts aan één zijde vocht', text: 'De muur kan aan de ene kant nat zijn, terwijl de andere zijde (of aangrenzende ruimte) er nog droog uitziet.' }
+  ]
+}) }}
+
+{{ s.uitklaplijst({
+  title: 'Wat is de oorzaak van vocht in een binnenmuur?', center: true, small: true,
+  intro: 'Een binnenmuur staat meestal niet direct in verbinding met buitenwater of regen, maar kan op verschillende manieren vochtig worden:',
+  image: '', ratio: '4-3',
+  items: [
+    { title: 'Opstijgend vocht (grondvocht)', text: 'Als een werkende horizontale waterkering ontbreekt of is overbrugd, trekt grondvocht via de fundering door poriën in de stenen omhoog (capillaire werking). Dit komt veel voor bij oudere woningen.' },
+    { title: 'Condensatie en onvoldoende ventilatie', text: shared.TBD },
+    { title: 'Lekkage van leidingen of afvoeren', text: shared.TBD },
+    { title: 'Vocht vanuit de vloer en kruipruimte', text: shared.TBD }
+  ]
+}) }}
+
+{{ s.stappen({
+  variant: 'raster', title: 'Onze 3-stappen methode voor een droge binnenmuur',
+  steps: [
+    { title: 'Grondige Oorzakenanalyse', text: 'We beoordelen beide zijden van de muur, het schadebeeld en de aansluiting op de vloer en fundering. Lekkage en condens sluiten we eerst uit.' },
+    { title: 'Oplossen van de Vochtoorzaak', text: 'Is er sprake van opstijgend grondvocht? Dan injecteren we de binnenmuur eenmalig met FASSA-INJECT (Buildwise A+ gecertificeerd, ATG 3121). Dit vormt een permanente waterkerende barrière. Waar mogelijk boren we op plintniveau.' },
+    { title: 'Gecontroleerde Droging & Afwerking', text: 'Na behandeling moet het vocht verdampen. Wil je de wand direct herstellen of is er zoutschade? Met het stucmembraan SaltShieldPlus kan de muur meteen strak en beschermd worden afgewerkt.' }
+  ],
+  btn: { label: 'Meer over onze werkwijze', href: 'werkwijze', style: 'secondary' }
+}) }}
+
+{{ s.productBand({
+  title: 'Ons product, tegen jouw probleem',
+  intro: 'Lorem ipsum dolor sit amet. Est voluptatem molestiae est dolores voluptatem hic autem repellendus. Aut dicta optio aut molestiae obcaecati et illo repellat. Non quos eveniet est debitis accusantium et quae optio ut voluptas voluptatem 33 doloribus itaque?Eum harum sunt ex omnis similique est placeat consequatur et quidem nobis nam ipsam laborum. Aut eligendi ipsum et repudiandae laboriosam sed sequi illum ea iste natus! Sed eveniet illum ea beatae galisum est omnis quia ut voluptatum doloribus ad aliquam quaerat.',
+  price: '€ <prijs>', score: '<score>', count: '<aantal>',
+  featuresTitle: '<Kop boven de eigenschappen>',
+  features: ['<Eigenschap 1, max. 8 woorden>', '<Eigenschap 2, max. 8 woorden>', '<Eigenschap 3, max. 8 woorden>', '<Eigenschap 4, max. 8 woorden>'],
+  certsTitle: '<Kop boven keurmerken en certificering>',
+  certs: [
+    { title: '<Keurmerk of certificaat>', text: '<Korte toelichting>' }, { title: '<Keurmerk of certificaat>', text: '<Korte toelichting>' },
+    { title: '<Keurmerk of certificaat>', text: '<Korte toelichting>' }, { title: '<Keurmerk of certificaat>', text: '<Korte toelichting>' }
+  ],
+  subsidy: { title: '<Subsidie of financiering>', text: '<Alleen tonen als dit van toepassing is op het product>', logos: ['<Logo 1>', '<Logo 2>'] },
+  btn: { label: 'Bekijk product', href: site.routes.product },
+  image: ''
+}, site) }}
+
+{{ s.uspPanel({
+  title: 'Waarom kiezen voor OpstijgendVocht.nl?', image: '',
+  items: [
+    { icon: 'bullseye', title: 'Oplossing bij de bron', text: 'Wij herstellen niet alleen de schade, maar zorgen dat de vochtbron stopt.' },
+    { icon: 'shield-check', title: '30 Jaar schriftelijke garantie', text: 'Je krijgt 30 jaar schriftelijke garantie tegen opstijgend vocht op door ons geïnjecteerde binnenmuren.' },
+    { icon: 'search', title: 'Gratis droogcontrole', text: 'Na de droogperiode voeren we op verzoek één gratis controle uit met een boortest.' },
+    { icon: 'success', title: 'Geen wachttijd voor herstel', text: 'Met SaltShieldPlus hoef je bij zoutschade niet een jaar te wachten op een strakke wand.' }
+  ]
+}) }}
+
+{{ s.reviews({ title: 'Dit zeggen onze klanten', text: 'Klanten beoordelen ons met <strong>9,7</strong> op Trustoo (144 reviews)', items: shared.reviews }, site) }}
+
+{{ s.cta({
+  title: 'Vraag gratis vochtadvies aan',
+  text: 'Reken definitief af met een vochtige binnenmuur. Twijfel je waar het vocht door veroorzaakt wordt?',
+  primary: { label: 'Stuur foto’s via WhatsApp voor gratis advies', wa: true },
+  secondary: false, contact: true
+}) }}
+
+{{ s.faq({ title: 'Veelgestelde vragen over vocht in een binnenmuur', items: [
+  { q: 'Kan een binnenmuur vochtig worden door opstijgend vocht?', a: shared.TBD },
+  { q: 'Waarom is de binnenmuur maar aan één kant nat?', a: shared.TBD },
+  { q: 'Moet een vochtige binnenmuur altijd worden geïnjecteerd?', a: shared.TBD },
+  { q: 'Wanneer kan ik een behandelde binnenmuur weer stucen of schilderen?', a: shared.TBD }
+] }) }}

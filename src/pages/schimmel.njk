@@ -1,0 +1,120 @@
+---
+crumb: Schimmel
+title: Schimmel in huis
+description: Schimmel in huis? Eerst de oorzaak, daarna de juiste oplossing.
+---
+{% import "components/sections.njk" as s %}
+
+{{ s.heroPage({
+  tight: true, rating: true,
+  title: 'Schimmel in huis',
+  text: 'Zie je zwarte, groene of grijze plekken op muren, plafonds of rond kozijnen? Schimmel ontstaat waar oppervlakken langere tijd vochtig blijven. Dat kan komen door condens door onvoldoende ventilatie, maar ook door een lekkage, regeninslag of een ander vochtprobleem. Daarom begint de oplossing bij de vraag waarom de plek vochtig blijft.',
+  btn: { label: 'Gratis vochtadvies aanvragen', href: 'gratis-vochtadvies' },
+  image: ''
+}, site) }}
+
+{{ s.signalen({
+  title: 'Herken je deze signalen van schimmel in huis?',
+  intro: 'Deze tekenen van schimmel in huis betekenen niet automatisch dat onvoldoende ventilatie de oorzaak is. Ook een lekkage, regeninslag of ander vochtprobleem kan een oppervlak vochtig houden.',
+  items: [
+    { title: 'Schimmel in hoeken' }, { title: 'Schimmel achter kasten' }, { title: 'Schimmel rond kozijnen' },
+    { title: 'Regelmatig natte ramen' }, { title: 'Een muffe geur' }
+  ]
+}) }}
+
+{{ s.uitklaplijst({
+  title: 'Hoe ontstaat schimmel in huis?', center: true, numbered: true,
+  intro: 'Schimmel ontstaat niet door één vaste oorzaak. De belangrijke vraag is waarom het oppervlak langere tijd vochtig blijft.',
+  image: '', ratio: '4-3',
+  items: [
+    { title: 'Condens door onvoldoende ventilatie', btn: 'Bekijk condens in huis', href: site.routes.condens,
+      text: '<p>In huis komt dagelijks vocht vrij door douchen, koken, wassen, drogen, ademen en gewoon wonen.<br><br>Wordt gebruikte, vochtige lucht onvoldoende afgevoerd? Dan kan de luchtvochtigheid oplopen en kan vocht condenseren op koude oppervlakken.<br><br>Blijft zo’n oppervlak langere tijd vochtig, dan kan daar schimmel ontstaan.</p>' },
+    { title: 'Een lage temperatuur en koude oppervlakken', text: shared.TBD },
+    { title: 'Lekkage of bouwkundig vocht', text: shared.TBD }
+  ]
+}) }}
+
+{{ s.oplossingen({
+  title: 'Onze oplossingen tegen schimmel',
+  intro: 'Heb je last van hardnekkige schimmel en wil je dit grondig en definitief laten aanpakken? Wij helpen je niet alleen met het vakkundig weghalen van de schimmel, maar pakken ook direct de bron van het vochtprobleem aan. Binnen onze expertise bieden wij twee gerichte oplossingen:',
+  cards: [
+    { title: 'Schimmel in huis verwijderen', text: 'Laat bestaande schimmel op muren, plafonds of in de badkamer veilig en grondig door ons behandelen, zodat alle sporen en lelijke plekken verdwijnen.', btn: { label: 'Bekijk schimmel verwijderen', href: site.routes.schimmel } },
+    { title: 'Vocht en schimmel in huis', text: 'Laat een grondige vochtdiagnose uitvoeren om de exacte oorzaak (zoals condensatie, opstijgend vocht of lekkage) op te sporen en structureel op te lossen.', btn: { label: 'Bekijk vocht en schimmel', href: site.routes.schimmel } }
+  ]
+}) }}
+
+{{ s.split({
+  side: 'rechts', image: '', ratio: '4-3',
+  title: 'Samen bepalen we de oorzaak van de schimmel',
+  blocks: [
+    { text: 'Schimmel in huis is niet alleen een lelijk gezicht, maar ook slecht voor je gezondheid en de woning. Om schimmel definitief te stoppen, is een proffesionele aanpak nodig: schoonmaken, de oorzaak opsporen en het probleem bij de bron oplossen.' },
+    { title: 'Waarom alleen een ontvochtiger niet genoeg is', text: 'Een losse ontvochtiger haalt weliswaar tijdelijk vocht uit de lucht, maar lost het gebrek aan verse lucht niet op. Zonder continue, structurele luchtverversing blijft de basisoorzaak van schimmel bestaan.' },
+    { title: 'De oplossing bij condensatie: Gebalanceerde ventilatie', text: '<p>Is onvoldoende ventilatie de boosdoener? Dan helpt alleen het continu verversen van de lucht: gebruikte, vochtige binnenlucht afvoeren en schone, gefilterde buitenlucht aanvoeren.<br><br>In bestaande woningen biedt een decentrale WTW-unit (Warmteterugwinning) hiervoor de ideale uitkomst, zonder dat er een ingewikkeld buizenstelsel door het hele huis aangelegd hoeft te worden.</p>' }
+  ],
+  btn: { label: 'Bekijk onze decentrale ventilatieoplossingen', href: site.routes.product }
+}) }}
+
+{{ s.productBand({
+  title: 'Ventileren zonder warmteverlies: Meltem M-WRG-II',
+  intro: 'Sluit een decentrale WTW-oplossing aan op jouw situatie? Dan werken wij bij voorkeur met de <strong>Meltem M-WRG-II</strong>.',
+  featuresTitle: 'Zo werkt de Meltem M-WRG-II',
+  features: ['Voert vochtige, gebruikte binnenlucht continu af.', 'Voert verse, gefilterde buitenlucht aan.', 'Hergebruikt tot wel 94% van de warmte uit de afgevoerde lucht.', 'Regelt de ventilatie automatisch op basis van luchtvochtigheid en CO₂ (afhankelijk van de uitvoering).'],
+  certsTitle: 'Kwaliteit en certificering',
+  certs: [
+    { title: 'TÜV-getest', text: 'Gegarandeerde prestaties en veiligheid.' },
+    { title: 'Hygiënisch gecertificeerd', text: 'Voldoet aan de strenge VDI 6022 blad 1 norm.' },
+    { title: 'Passivhaus-certificaat (PHI)', text: 'Extreem energiezuinig in gebruik.' },
+    { title: 'Bedieningsgemak', text: 'Eenvoudig te bedienen via het toestel of de Meltem-app.' }
+  ],
+  subsidy: { title: 'Subsidie en financiering voor ventilatie', text: 'Voor de installatie van de Meltem M-WRG-II kun je mogelijk gebruikmaken van de ISDE-subsidie. Daarnaast komt het systeem in aanmerking voor een voordelige lening via het Nationaal Warmtefonds (afhankelijk van jouw situatie en de actuele voorwaarden).', logos: ['<ISDE/RVO-logo>', '<Warmtefonds-logo>'] },
+  image: 'meltem-m-wrg-ii.png'
+}, site) }}
+
+{{ s.reviews({ title: 'Dit zeggen onze klanten', text: 'Klanten beoordelen ons met <strong>9,7</strong> op Trustoo (144 reviews)', items: shared.reviews }, site) }}
+
+{{ s.split({
+  side: 'links', image: '', ratio: '4-3',
+  title: 'Bij isoleren hoort ventileren',
+  blocks: [{ text: 'Een goed geïsoleerde woning houdt warmte beter binnen. Maar na isoleren kan een woning ook luchtdichter zijn. Daardoor verdwijnt gebruikte, vochtige lucht minder makkelijk via naden en kieren. Ventilatie wordt dan juist belangrijker. Krijg je na isoleren meer condens op ramen, vocht in hoeken of schimmel op koude oppervlakken? Dan kan onvoldoende luchtverversing een belangrijke rol spelen.' }],
+  btn: { label: 'Bekijk vochtproblemen na isoleren', href: site.routes.vochtigeMuur }
+}) }}
+
+{{ s.tekst({
+  title: 'Wat gebeurt er als je de oorzaak niet aanpakt?',
+  text: 'Blijft de vochtbron aanwezig? Dan kan schimmel na het schoonmaken weer terugkomen. Ook kunnen verf, behang en andere afwerkingen opnieuw worden aangetast. Een muffe geur kan eveneens blijven hangen. Daarom is alleen schoonmaken niet genoeg als de onderliggende vocht- of ventilatieoorzaak blijft bestaan.'
+}) }}
+
+{{ s.stappen({
+  variant: 'raster', title: 'Zo helpen we bij <span class="c-blue">schimmel in huis</span>',
+  steps: [
+    { title: 'We onderzoeken de oorzaak', text: 'Je krijgt eerst duidelijkheid over waardoor de schimmel ontstaat.' },
+    { title: 'Je krijgt duidelijk advies', text: 'Je hoort welke oplossing bij de oorzaak past en waarom.' },
+    { title: 'We pakken de oorzaak aan', text: 'Is onvoldoende ventilatie een belangrijke oorzaak? Dan adviseren en plaatsen we een passende ventilatie oplossing wanneer die bij de woning past.' }
+  ],
+  btn: { label: 'Bekijk onze werkwijze', href: 'werkwijze', style: 'secondary' }
+}) }}
+
+{{ s.uspPanel({
+  title: 'Waarom kiezen voor Opstijgendvocht.nl?', image: '',
+  items: [
+    { icon: 'search', title: 'Eerst de oorzaak', text: 'Je krijgt duidelijkheid over waardoor de schimmel ontstaat.' },
+    { icon: 'info', title: 'Duidelijk advies', text: 'Je hoort welke vocht- of ventilatie oorzaak een rol speelt en wat een logische vervolgstap is.' },
+    { icon: 'bullseye', title: 'Passende oplossing', text: 'Alleen een aanpak die past bij de oorzaak van de schimmel.' }
+  ],
+  btn: { label: 'Bekijk onze resultaten', href: 'resultaten' }
+}) }}
+
+{{ s.cta({
+  title: 'Gratis vochtadvies',
+  text: 'Weet je niet waarom de schimmel terugkomt? Je hoeft dat niet zelf uit te zoeken. Bel, WhatsApp-bericht of stuur een paar foto’s. Je krijgt duidelijkheid over een logische volgende stap.',
+  checks: ['Bellen, WhatsAppen of foto’s sturen', 'Duidelijk en eerlijk advies', 'We komen langs als dat nodig is'],
+  contact: true
+}) }}
+
+{{ s.faq({ title: 'Veelgestelde vragen over schimmel', items: [
+  { q: 'Komt schimmel door te weinig ventilatie?', a: shared.TBD },
+  { q: 'Helpt ventilatie tegen schimmel?', a: shared.TBD },
+  { q: 'Kan schimmel ontstaan na isoleren?', a: shared.TBD },
+  { q: 'Helpt een WTW-unit tegen schimmel?', a: shared.TBD },
+  { q: 'Moet ik schimmel eerst verwijderen?', a: shared.TBD }
+] }) }}

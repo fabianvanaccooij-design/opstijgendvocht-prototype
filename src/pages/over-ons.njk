@@ -1,0 +1,89 @@
+---
+crumb: Over ons
+title: Over ons
+description: Eerst de oorzaak. Daarna de juiste oplossing.
+---
+{% import "components/sections.njk" as s %}
+{% import "components/blocks.njk" as b %}
+
+{{ s.heroPage({
+  variant: 'foto', image: '',
+  title: 'Over OpstijgendVocht.nl',
+  text: '<p>Een vochtprobleem gaat niet alleen over een muur. Het gaat over de plek waar je woont, slaapt en leeft. Daarom kijken we niet alleen naar wat je ziet, maar vooral naar waar het vocht vandaan komt. Pas als dat duidelijk is, adviseren we wat bij jouw woning past.<br><strong>Eerst de oorzaak. Daarna de juiste oplossing.</strong></p>',
+  btn: { label: 'Gratis vochtadvies aanvragen', href: 'gratis-vochtadvies' }
+}, site) }}
+
+{{ s.tekst({
+  title: 'Geen nattevingerwerk bij vocht.',
+  text: '<p><strong>We kijken eerst wat er echt aan de hand is.</strong><br>Een vochtplek is een signaal. Nog geen diagnose. Opstijgend vocht, condens, een lekkage of regeninslag kunnen soms vergelijkbare schade geven. Daarom adviseren we niet automatisch één behandeling. Je krijgt eerst duidelijkheid over wat er waarschijnlijk speelt. Daarna bespreken we welke oplossing logisch is. Ook als dat betekent dat injecteren niet de juiste oplossing is.</p>'
+}) }}
+
+{{ s.stappen({
+  variant: 'raster', title: 'Duidelijk, eerlijk en goed geregeld.',
+  steps: [
+    { icon: 'info', title: 'Duidelijk', text: 'Je begrijpt wat er aan de hand is, welke oplossing wordt geadviseerd en waarom.' },
+    { icon: 'shield-check', title: 'Eerlijk', text: 'Geen behandeling om een behandeling te verkopen. Als de oorzaak ergens anders ligt, zeggen we dat.' },
+    { icon: 'check', title: 'Goed geregeld', text: 'Van advies en planning tot uitvoering en nazorg: je weet waar je aan toe bent.' }
+  ]
+}) }}
+
+{{ b.verhaal([
+  { title: 'Van timmerman naar vochtspecialist', image: '',
+    text: '<p>Elroy begon in de bouw als timmerman en volgde in de avonduren MTS Bouwkunde. Later werkte hij samen met zijn vader en startte hij Van Eijk Afbouw. In 2008 leerde Elroy bij een Belgisch vochtweringsbedrijf het vak van vochtwering en muurinjecties. Daar deed hij de eerste praktijkervaring op en ging hij al snel zelfstandig op pad. Vanuit die ervaring groeide Van Eijk Vochtwering verder. Tegenwoordig werken we onder de handelsnaam OpstijgendVocht.nl aan vochtproblemen, ventilatie en de afwerking van muren.<br><strong>Wat al die jaren hetzelfde bleef? Mensen helpen met een probleem en alleen werk afleveren waar je zelf achter staat.</strong></p>' },
+  { title: 'Vakmanschap komt niet uit een boekje alleen.', image: '',
+    text: '<p>Praktijkervaring is belangrijk. Gerichte vakkennis ook. Elroy volgde opleidingen bij Remmers Bouwchemie, onder andere op het gebied van injectietechnieken en kelderafdichtingen. Daarnaast beschikt hij over het Kiwa-certificaat Vakspecialist voor injectietechnieken. Samen met zijn bouwkundige achtergrond helpt die kennis om eerst goed te beoordelen wat er speelt en pas daarna een behandeling te adviseren.</p>' },
+  { title: 'Goed werk begint vóór we aan de muur beginnen.', image: '',
+    text: '<p>Achter het technische werk staat ook een organisatie die goed moet draaien. Bianca nam door de jaren heen de boekhouding, administratie, afspraken en marketing op zich. Daardoor draait het niet alleen om wat er op de muur gebeurt. Ook bereikbaarheid, duidelijke afspraken, planning en opvolging horen bij de ervaring van de klant. Het doel is eenvoudig: goed informeren, netjes regelen en klanten zonder druk zelf laten kiezen.</p>' }
+]) }}
+
+{{ s.oplossingen({
+  title: 'Van droge muren naar prettig wonen.',
+  intro: '<p>Niet ieder vochtprobleem vraagt om dezelfde techniek. Bij vastgesteld opstijgend vocht stopt muurinjectie de aanvoer van nieuw opstijgend grondvocht definitief. Bij condens en onvoldoende ventilatie kan goede luchtverversing belangrijker zijn. Na een vochtbehandeling spelen ook droging en afwerking een rol.<br><strong>Zo kijken we verder dan de vochtplek alleen: naar wat nodig is voor een droge, comfortabele woning en een gezond binnenklimaat.</strong></p>',
+  cards: [
+    { title: 'Droge muren', text: 'Bij opstijgend vocht pakken we de vochttoevoer bij de bron aan.' },
+    { title: 'Juiste afwerking', text: 'Na de behandeling kijken we ook naar droging, zouten en het juiste moment om de muur weer af te werken.' },
+    { title: 'Gezond binnenklimaat', text: 'Bij onvoldoende ventilatie zorgt gecontroleerde ventilatie met warmteterugwinning voor continue luchtverversing.' }
+  ]
+}) }}
+
+{{ s.uspPanel({
+  title: 'Waar je ons aan mag houden', image: '',
+  items: [
+    { title: 'Eerst de oorzaak onderzoeken, daarna pas een behandeling adviseren.' },
+    { title: 'Geen muurinjectie adviseren als een andere oorzaak waarschijnlijker is.' },
+    { title: 'Uitleggen wat je vóór én na de behandeling kunt verwachten.' },
+    { title: 'Duidelijke afspraken over advies, planning en uitvoering.' },
+    { title: 'Op door ons geïnjecteerde muren: 30 jaar schriftelijke garantie tegen opstijgend vocht.' },
+    { title: 'Na de droogperiode kun je bij door ons geïnjecteerde muren één gratis droogcontrole aanvragen.' }
+  ]
+}) }}
+
+{{ s.keurmerken({ logoBold: true,
+  title: 'Vakmanschap dat je kunt controleren.',
+  intro: 'Vertrouwen moet je ook kunnen onderbouwen.',
+  items: [
+    { logo: 'Logo Kiwa', name: 'Elroy van Eijk', text: 'MTS Bouwkunde, opleidingen bij Remmers Bouwchemie en Kiwa-gecertificeerd Vakspecialist voor injectietechnieken.' },
+    { logo: 'Logo ATG 3121', name: 'FASSA-INJECT', text: 'Onafhankelijk technisch beoordeeld en voorzien van ATG 3121.' },
+    { logo: 'Logo Buildwise', name: 'Buildwise', text: 'De prestaties van FASSA-INJECT zijn onafhankelijk getest.' }
+  ]
+}) }}
+
+{{ s.oplossingen({
+  title: 'De mensen die het voor je regelen',
+  intro: 'Advies, planning en uitvoering blijven mensenwerk.',
+  cards: [
+    { title: 'Elroy van Eijk', image: '', text: '<p><strong>Vochtadvies en technische inhoud.</strong><br>Duidelijkheid over de oorzaak komt vóór het advies over de oplossing.</p>' },
+    { title: 'Bianca', text: '<p><strong>Administratie, organisatie en marketing.</strong><br>Goed informeren, netjes regelen en klanten zelf laten kiezen zonder druk.</p>' },
+    { title: 'Ons team', text: '<p><strong>Samen zorgen we dat klanten snel duidelijkheid krijgen en het werk goed wordt geregeld.</strong><br>Van advies en planning tot uitvoering en nazorg: iedereen draagt vanuit zijn eigen rol bij.</p>' }
+  ]
+}) }}
+
+{{ s.reviews({ title: 'Klanten vertellen het beter dan wij', text: 'Klanten beoordelen ons met <strong>9,7</strong> op Trustoo (144 reviews)', items: shared.reviews }, site) }}
+
+{{ s.tekst({ style: 'citaat', kicker: 'Wat we hopen dat je over 30 jaar nog zegt', quote: '“Zij hebben onze problemen opgelost, onze muren zijn nog steeds droog.”', caption: 'Dat zegt eigenlijk alles.' }) }}
+
+{{ s.cta({
+  title: 'Heb je vocht in huis en weet je niet waar je moet beginnen?',
+  text: 'Dat hoeft ook niet. Bel, WhatsApp of stuur een paar foto\'s. Je krijgt duidelijkheid over een logische volgende stap.',
+  secondary: 'WhatsApp ons'
+}) }}

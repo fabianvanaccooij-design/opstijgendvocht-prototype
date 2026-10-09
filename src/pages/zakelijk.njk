@@ -1,0 +1,69 @@
+---
+crumb: Zakelijk samenwerken
+title: Zakelijk
+description: Zakelijke oplossingen voor vochtige muren, schimmel en ventilatie.
+---
+{% import "components/sections.njk" as s %}
+
+{{ s.heroPage({
+  variant: 'foto', image: '', imageMobile: 'hero-zakelijk-mobiel.jpg',
+  title: 'Zakelijke oplossingen voor vochtige muren, schimmel en ventilatie',
+  text: '<p>Werk je aan woningen, vastgoed of een renovatieproject met vochtige muren, schimmel, condens of ventilatieproblemen? We helpen VvE’s, woningcorporaties, vastgoedbeheerders, verhuurders, aannemers en bouwbedrijven met advies en uitvoering die passen bij de oorzaak en het project. Van inspectie en offerte tot planning en uitvoering.<br><strong>Eerst de oorzaak. Daarna de juiste oplossing.</strong></p>',
+  btn: { label: 'Bespreek je zakelijke project', href: 'contact' }
+}, site) }}
+
+{{ s.watZieJe({
+  title: 'Waarmee kunnen we helpen?',
+  tiles: [
+    { title: 'Opstijgend vocht', image: '', href: site.routes.vochtigeMuur, btn: 'Bekijk opstijgend vocht', text: 'Bij vastgesteld opstijgend vocht behandelen we de muur met muurinjectie.' },
+    { title: 'Schimmel', image: '', href: 'schimmel', btn: 'Bekijk schimmel', text: 'We kijken naar de onderliggende vocht- of ventilatieoorzaak en adviseren de passende vervolgstap.' },
+    { title: 'Ventilatie', image: '', href: site.routes.condens, btn: 'Bekijk ventilatie', text: 'Bij condens of onvoldoende ventilatie kan een decentrale WTW-oplossing passend zijn.' }
+  ],
+  bar: { title: 'Muur afwerken', btn: 'Bekijk muur afwerken', href: site.routes.muurAfwerken, text: 'Advies over droging, zouten en afwerking na een vochtbehandeling.' }
+}) }}
+
+{{ s.stappen({
+  variant: 'raster', title: 'Zo verloopt een zakelijk traject',
+  steps: [
+    { title: 'We bekijken de situatie', text: 'We plannen een afspraak en beoordelen ter plaatse wat er speelt en of wij de juiste partij zijn.' },
+    { title: 'Je ontvangt een offerte op maat', text: 'Kunnen we het probleem oplossen? Dan ontvang je een uitgebreide, vrijblijvende offerte voor de afgesproken werkzaamheden.' },
+    { title: 'We stemmen de planning af', text: 'We proberen flexibel mee te denken met de projectplanning, bewoners en bereikbaarheid van de woningen.' },
+    { title: 'We voeren het werk uit', text: 'Na akkoord plannen we de werkzaamheden en voeren we de afgesproken oplossing uit.' }
+  ]
+}) }}
+
+{{ s.split({
+  side: 'rechts', image: '',
+  title: 'Meerdere woningen? Dat kunnen we flexibel plannen.',
+  blocks: [{ text: 'Bij grotere projecten kunnen we meerdere woningen op één dag uitvoeren of de werkzaamheden verdelen over meerdere dagen. Zo stemmen we de planning zo goed mogelijk af op het project en de beschikbare woningen. De precieze planning hangt af van de omvang, locatie en werkzaamheden.' }]
+}) }}
+
+{{ s.uspPanel({
+  title: 'Wat mag je van ons verwachten?', image: '',
+  items: [
+    { title: 'Technische kennis en een oorzaakgerichte beoordeling.' },
+    { title: 'Een duidelijke, uitgebreide offerte op maat.' },
+    { title: 'VCA-gecertificeerde medewerkers voor veilig werken op locatie.' },
+    { title: 'Flexibel meedenken over de planning waar dat mogelijk is.' },
+    { title: 'Bij door ons geïnjecteerde muren: 30 jaar schriftelijke garantie tegen opstijgend vocht.' }
+  ]
+}) }}
+
+{{ s.keurmerken({ logoBold: true,
+  title: 'Ervaring met zakelijke opdrachtgevers',
+  intro: 'We werken onder andere voor:',
+  items: [
+    { logo: 'Logo Oost West Wonen', text: '<strong>Oost West Wonen</strong>' },
+    { logo: 'Logo De Kok Bouwgroep BV', text: '<strong>De Kok Bouwgroep BV</strong>' },
+    { logo: 'Logo Vloer +', text: '<strong>Vloer +</strong>' }
+  ]
+}) }}
+
+{{ s.tekst({ title: 'Werkgebied', text: 'Voor zakelijke projecten werken we in heel Nederland, met uitzondering van de Waddeneilanden, Friesland en Groningen. Heb je een project met meerdere locaties? Dan bespreken we vooraf wat praktisch en planbaar is.' }) }}
+
+{{ s.cta({
+  title: 'Een project bespreken?',
+  text: 'Bel ons of stuur kort wat er speelt, om hoeveel woningen of locaties het gaat en waar het project is. Dan geven we aan wat een logische volgende stap is.',
+  primary: { label: 'Bespreek je zakelijke project', href: 'contact' },
+  secondaryLink: { label: 'Bel ons', href: 'tel:+31767676322' }
+}) }}

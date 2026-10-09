@@ -1,0 +1,26 @@
+---
+crumb: Pagina niet gevonden
+title: Pagina niet gevonden
+permalink: 404.html
+---
+{% import "components/sections.njk" as s %}
+
+{{ s.heroPage({
+  variant: 'center', tight: true,
+  title: 'Oeps! Deze pagina is opgedroogd',
+  text: '<p>De pagina die je zoekt bestaat niet meer, is verplaatst of de link klopt niet.<br><strong>Geen probleem. We helpen je graag verder.</strong></p>'
+}, site) }}
+
+{{ s.contentCards({
+  title: 'Waar wil je naartoe?',
+  cards: [
+    { title: 'Vochtige muur', text: 'Bekijk mogelijke oorzaken en oplossingen voor vochtige muren.', btn: { label: 'Bekijk vochtige muur', href: site.routes.vochtigeMuur } },
+    { title: 'Schimmel', text: 'Lees waardoor schimmel ontstaat en wat je eraan kunt doen.', btn: { label: 'Bekijk schimmel', href: 'schimmel' } },
+    { title: 'Condens', text: 'Ontdek welke rol ventilatie, temperatuur en luchtvochtigheid spelen.', btn: { label: 'Bekijk condens', href: site.routes.condens } },
+    { title: 'Muur afwerken', text: 'Lees wanneer en hoe je een behandelde muur weer kunt afwerken.', btn: { label: 'Bekijk muur afwerken', href: site.routes.muurAfwerken } },
+    { title: 'Onze werkwijze', text: 'Bekijk hoe we van eerste contact naar advies en uitvoering werken.', btn: { label: 'Bekijk onze werkwijze', href: 'werkwijze' } },
+    { title: 'Gratis Vocht Magazine', text: 'Lees eerst rustig verder in onze gratis gids over vocht in huis.', btn: { label: 'Bekijk het Vocht Magazine', href: 'vocht-magazine' } }
+  ]
+}) }}
+
+{{ s.cta({ title: 'Liever meteen hulp?', text: 'Bel, WhatsApp of stuur een paar foto’s.', secondary: 'WhatsApp ons' }) }}

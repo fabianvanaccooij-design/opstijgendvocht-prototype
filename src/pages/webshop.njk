@@ -1,0 +1,55 @@
+---
+crumb: Webshop
+title: Webshop
+cart: true
+cartCount: 1
+description: Professionele middelen en materialen om zelf vochtproblemen aan te pakken.
+---
+{% import "components/sections.njk" as s %}
+{% import "components/blocks.njk" as b %}
+{% import "components/ui.njk" as ui %}
+
+{{ s.heroPage({ variant: 'center', tight: true, title: 'Webshop', text: 'Professionele middelen en materialen om zelf vochtproblemen aan te pakken.' }, site) }}
+
+<section class="section" data-filterable>
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <div class="stack" style="gap:40px">
+      <div class="filters" role="group" aria-label="Filter producten">
+        {% for f in [['alle', 'Alle producten'], ['mwrg2', 'M-WRG-II'], ['mwrg1', 'M-WRG-I'], ['saltshield', 'SaltShield & SaltShieldPlus']] %}
+        <button type="button" class="pill{{ ' is-active' if loop.first }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-filter="{{ f[0] }}">{{ f[1] }}</button>
+        {% endfor %}
+      </div>
+      <ul class="cards cards--3 products" role="list">
+        {% for p in products %}
+        <li class="product-card card-t card-t--link" data-cat="{{ p.cat }}">
+          {{ ui.media('', '', '16-9') }}
+          <div class="product-card__body">
+            <div class="stack" style="gap:var(--gap-meta)">
+              <span class="c-primary">{{ p.label }}</span>
+              <h3><a class="card-t__link" href="{{ 'productpagina' | href }}">{{ p.name }}</a></h3>
+            </div>
+            <span class="rating__row"><span class="stars">{{ icon('star') }}</span><span><strong>4,8</strong> <span class="body-sm c-secondary">(24)</span></span></span>
+            <p class="c-secondary">Product introtekst</p>
+            <p class="h4">{{ p.price }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {{ b.paginering(1, 12) }}
+  </div>
+</section>
+
+{{ s.cta({
+  title: 'Twijfel je welk product het beste is <br>voor jouw muur?',
+  text: 'Voorkom een verkeerde aanpak en vraag onze specialisten om advies op maat.',
+  primary: { label: 'Neem contact op voor deskundig advies', href: 'contact' },
+  secondary: false
+}) }}
+
+{{ s.faq({ title: 'Veelgestelde vragen over onze producten', btn: false, intro: 'Vind snel een antwoord op vragen over bestellen, gebruik en het zelf behandelen van vocht.', items: [
+  { q: 'Moet elke vochtige muur worden geïnjecteerd?', a: shared.TBD },
+  { q: 'Hoe bereken ik hoeveel injectiegel of reiniger ik nodig heb?', a: shared.TBD },
+  { q: 'Wat is de levertijd van de bestelde materialen?', a: shared.TBD },
+  { q: 'Wat als het product het vochtprobleem niet volledig oplost?', a: shared.TBD }
+] }) }}

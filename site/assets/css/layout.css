@@ -1,0 +1,150 @@
+/* ==========================================================================
+   Vaste onderdelen: Topheader, Main-Header (+ megamenu, mobiel menu),
+   Footer, Sticky WhatsApp en het WhatsApp-paneel.
+   Desktopmenu vanaf 1200 px; daaronder de mobiele balk met menuknop.
+   ========================================================================== */
+
+/* --- Topheader ----------------------------------------------------------- */
+.topheader { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 24px; background: var(--color-bg-page); font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); }
+.topheader__usps { display: flex; gap: var(--grid-gutter); list-style: none; padding: 0; }
+.topheader__usps li { display: flex; align-items: center; gap: 8px; }
+.topheader__usps .icon { color: var(--color-text-brand-blue); }
+.topheader__right { display: flex; align-items: center; gap: 24px; }
+.topheader__links { display: flex; gap: 16px; color: var(--color-text-secondary); }
+.topheader__divider { width: 1px; height: 24px; background: var(--color-border-default); }
+.topheader__phone { display: flex; align-items: center; gap: 8px; font-weight: var(--font-weight-bold); }
+.topheader__phone .icon { color: var(--color-text-brand-blue); }
+
+/* --- Main-Header --------------------------------------------------------- */
+.site-header { position: sticky; top: 0; z-index: 80; background: var(--color-bg-surface); }
+@media (max-width: 767px) { .site-header { border-bottom: 1px solid var(--color-border-default); } }   /* Figma Main-Header Apparaat=Mobile: rand onder 1px */
+@media (min-width: 1200px) {
+  .site-header { transition: box-shadow var(--duration) var(--ease); }
+  .site-header.is-stuck { box-shadow: var(--shadow-default); }   /* lichte schaduw zodra de header vastzit */
+}
+.site-header__bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px; }
+.site-header__logo img { width: 180px; height: auto; }
+.mainnav { flex: 1; margin-left: 40px; }
+.mainnav__link { white-space: nowrap; }
+@media (max-width: 1599px) { .mainnav { margin-left: 0; } .mainnav__list { gap: 16px; } .site-header__bar { gap: 24px; } }
+.mainnav__list { display: flex; align-items: center; gap: 24px; list-style: none; padding: 0; }
+.mainnav__link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; font-weight: var(--font-weight-bold); color: var(--color-text-primary); transition: color var(--duration); }
+.mainnav__link .icon { color: var(--color-text-muted); }
+.mainnav__link[aria-expanded="true"] .icon { transform: rotate(180deg); color: var(--color-text-brand-blue); }
+.site-header__actions { display: none; align-items: center; gap: var(--card-gap); }
+.iconbtn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius-full); color: var(--color-text-primary); }
+.site-header__cta { display: flex; align-items: center; gap: 16px; }
+.cartbtn { position: relative; display: grid; place-items: center; width: 64px; height: 64px; border-radius: var(--radius-full); background: var(--color-bg-surface-alt); color: var(--color-text-primary); }   /* Figma: geen zandkleur, bg/surface-alt (blue/50) */
+.cartbtn.iconbtn { width: 44px; height: 44px; background: none; }
+.cartbtn__count { position: absolute; top: -2px; right: -2px; display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: var(--radius-full); background: var(--color-bg-brand); font-size: 12px; line-height: 18px; font-weight: var(--font-weight-bold); color: var(--color-text-primary); }
+
+/* Megamenu */
+.mega { position: absolute; left: 0; right: 0; top: 100%; background: var(--color-bg-surface); border-top: 1px solid var(--color-border-default); box-shadow: var(--shadow-default); }
+.mega__inner { display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-action); padding: var(--card-padding) var(--page-margin); }
+.mega__groups { display: grid; grid-template-columns: repeat(3, 396px); gap: var(--grid-gutter); }
+.mega__inner--small .mega__groups { grid-template-columns: 396px; }
+.mega__group { display: flex; flex-direction: column; gap: var(--gap-heading-4); }
+.mega__group ul { display: flex; flex-direction: column; gap: var(--gap-meta); list-style: none; padding: 0; }
+.mega__group a { color: var(--color-text-secondary); }
+.scrim--mega { z-index: 70; }
+
+@media (max-width: 1399px) {
+  .topheader, .mainnav, .site-header__cta, .mega, .scrim--mega { display: none !important; }
+  .site-header__bar { padding: var(--grid-gutter) var(--page-margin); }
+  .site-header__logo img { width: 131px; }
+  .site-header__actions { display: flex; }
+}
+
+/* Mobiel menu */
+.mobilemenu { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; background: var(--color-bg-surface); overflow-y: auto; overscroll-behavior: contain; }
+.mobilemenu__bar { display: flex; align-items: center; justify-content: space-between; padding: var(--grid-gutter) var(--page-margin); }
+.mobilemenu__bar .site-header__actions { display: flex; }
+.mobilemenu__bar .site-header__logo img { width: 131px; }
+.mobilemenu__panes { flex: 1; }
+.mobilemenu__list { list-style: none; padding: 0; }
+.mobilemenu__row { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: var(--grid-gutter) var(--page-margin); border-bottom: 1px solid var(--color-border-default); font-weight: var(--font-weight-bold); text-align: left; }
+.mobilemenu__secondary { display: flex; flex-direction: column; gap: var(--card-gap); padding: var(--grid-gutter) var(--page-margin) 0; font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); color: var(--color-text-secondary); }
+.mobilemenu__sub { display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-block); padding: 0 var(--page-margin); }
+.mobilemenu__back { display: flex; align-items: center; gap: 8px; padding-top: var(--grid-gutter); font-weight: var(--font-weight-bold); }
+.mobilemenu__group { display: flex; flex-direction: column; gap: 12px; }
+.mobilemenu__group a { color: var(--color-text-secondary); }
+.mobilemenu__cta { display: flex; flex-direction: column; align-items: center; gap: var(--gap-buttons); padding: var(--card-padding) var(--page-margin); margin-top: 24px; }
+
+/* --- Footer -------------------------------------------------------------- */
+.site-footer { background: var(--color-bg-ink); color: var(--color-text-on-ink); padding-top: var(--card-padding-lg); }
+.site-footer__cols { display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); gap: var(--grid-gutter); padding: 0 var(--page-margin) var(--grid-column-gap); max-width: calc(var(--container) + 2 * var(--page-margin)); margin-inline: auto; }
+.site-footer__brand { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; max-width: 420px; }
+.site-footer__brand > img { width: 191px; }
+.site-footer__lines { display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-action-sm); }
+.site-footer__contact { display: flex; align-items: center; gap: 8px; }
+.site-footer__contact .icon { color: var(--color-brand-primary); }
+.site-footer__locations { display: flex; flex-direction: column; gap: 16px; font-style: normal; }
+.site-footer__col { display: flex; flex-direction: column; gap: var(--gap-heading-4); }
+.site-footer__col .h4 { color: var(--color-text-on-ink); }
+.site-footer__col ul { display: flex; flex-direction: column; gap: 12px; list-style: none; padding: 0; }
+.site-footer__bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: var(--card-padding) var(--page-margin); background: var(--color-bg-surface); color: var(--color-text-secondary); }
+.site-footer__legal { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.site-footer__badges { display: flex; gap: 16px; list-style: none; padding: 0; }
+.site-footer__badges li { display: grid; place-items: center; height: 40px; padding: 0 12px; border-radius: 8px; background: var(--color-bg-secondary-subtle); font-size: var(--font-size-caption); line-height: var(--font-line-height-caption); }
+@media (max-width: 1199px) { .site-footer__cols { grid-template-columns: repeat(3, minmax(0, 1fr)); } .site-footer__brand { grid-column: 1 / -1; } }
+@media (max-width: 767px) {
+  .site-footer__cols { grid-template-columns: 1fr; gap: var(--gap-block); }
+  .site-footer__bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .site-footer__legal { gap: 12px 16px; }                         /* Figma 393: regels lopen door en breken af */
+  .site-footer__brand { max-width: none; align-items: stretch; }
+  .site-footer__lines { align-items: stretch; gap: 16px; }
+  .site-footer__lines > * { align-self: flex-start; }
+  .site-footer__lines > .btn { align-self: stretch; }            /* Figma 393: knop over de volle breedte */
+  .site-footer__lines > .rating__row { align-self: stretch; justify-content: center; text-align: center; }   /* Figma 393: score gecentreerd onder de knop */
+}
+
+/* --- Sticky WhatsApp ----------------------------------------------------- */
+/* Sticky / WhatsApp: groene cirkel; bij hover (desktop) schuift het label "Twijfel je? App ons een foto" uit */
+.sticky-wa { position: fixed; right: 24px; bottom: 24px; z-index: 60; display: flex; align-items: center; height: 64px; padding: 8px; border-radius: var(--radius-full); background: var(--color-action-whatsapp); color: var(--color-action-secondary-text); transition: padding var(--duration) var(--ease); }
+.sticky-wa__label { max-width: 0; overflow: hidden; white-space: nowrap; font-weight: var(--font-weight-medium); transition: max-width .3s var(--ease), margin .3s var(--ease); }
+.sticky-wa__circle { display: grid; place-items: center; width: 48px; height: 48px; flex: none; border-radius: var(--radius-full); background: var(--color-action-whatsapp); color: var(--color-text-primary); transition: width var(--duration), height var(--duration), background-color var(--duration); }
+@media (hover: hover) and (min-width: 768px) {
+  .sticky-wa:hover { padding: 0 0 0 32px; }
+  .sticky-wa:hover .sticky-wa__label { max-width: 300px; margin-right: 16px; }
+  .sticky-wa:hover .sticky-wa__circle { width: 64px; height: 64px; background: var(--color-bg-surface); }
+}
+@media (max-width: 767px) { .sticky-wa { right: 16px; bottom: 24px; height: 56px; } .sticky-wa__circle { width: 40px; height: 40px; } }
+.has-sticky-bar .sticky-wa { bottom: 120px; }
+
+/* --- WhatsApp-paneel (desktop) / bottom sheet (mobiel) -------------------- */
+.wa { position: fixed; z-index: 95; top: 0; right: 0; bottom: 0; width: 480px; max-width: 100%; display: flex; flex-direction: column; gap: 0; padding: var(--card-padding) 0 0; background: var(--color-bg-surface); box-shadow: var(--shadow-mobiel); transform: translateX(100%); transition: transform .3s var(--ease); }
+.wa.is-open { transform: none; }
+.wa__grip { display: none; }
+.wa__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 var(--card-padding) var(--gap-block); border-bottom: 1px solid var(--color-border-default); }
+.wa__body { flex: 1; overflow-y: auto; padding: var(--gap-block) var(--card-padding) var(--card-padding); }   /* ruimte binnen het scrollvlak: tekst scrolt tot de lijn onder de kop en tot de onderrand, niet afgesneden in een witte strook */
+.wa__step { display: flex; flex-direction: column; gap: var(--gap-action-sm); }
+.wa__step[data-wa-step="bericht"] { gap: var(--gap-block); }
+.wa__progress { display: flex; flex-direction: column; gap: 12px; }
+.wa__nav { display: flex; align-items: center; justify-content: flex-end; min-height: 25px; }
+.wa__nav:has(.wa__back:not([hidden])) { justify-content: space-between; }
+.wa__back { display: inline-flex; align-items: center; gap: 4px; color: var(--color-text-brand-blue); font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); }
+.wa__bar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }   /* Direct contact: zelfde balkstijl als de stappenbalk */
+.wa__bar span { height: 4px; border-radius: var(--radius-full); background: var(--color-border-default); }
+.wa .stepper__item { gap: var(--space-8); }
+.wa .stepper__badge { display: none; }   /* Figma Formulier / Stappen Apparaat=Mobile: alleen balk en label */
+.wa__nav:not(:has(.wa__back:not([hidden]))) { display: none; }   /* vraag 1: geen Terug, dan ook geen lege regel */
+.wa__question { border: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: var(--gap-action-sm); }
+.wa__question legend { padding: 0; margin-bottom: var(--gap-action-sm); }
+.wa__options { display: flex; flex-direction: column; gap: 8px; }
+.wa__direct { align-self: flex-start; font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); }
+.wa__intro { gap: var(--gap-heading-3); }
+.wa__bubble { padding: 16px; background: var(--color-bg-secondary-subtle); border-radius: 12px 12px 12px 2px; white-space: pre-line; }
+.wa__restart { display: inline-flex; align-self: flex-start; align-items: center; gap: 4px; color: var(--color-text-secondary); font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); }
+.wa__restart .icon { color: var(--color-text-brand-blue); }
+.wa__qr-wrap { display: flex; flex-direction: column; gap: 16px; }
+.wa__qr { display: flex; align-items: center; gap: 24px; padding: var(--space-24);   /* Figma QR-kaart: space/24 */ border: 1px solid var(--color-border-default); border-radius: var(--radius-card); }
+.wa__qr-code { width: 120px; height: 120px; flex: none; }   /* geen afgeronde hoeken: die sneden de QR-code af */
+.wa__qr-code svg { width: 100%; height: 100%; }
+[data-wa-mode="bericht"] [data-wa-only="direct"], [data-wa-mode="direct"] [data-wa-only="bericht"] { display: none !important; }
+
+@media (max-width: 767px) {
+  .wa { top: auto; left: 0; width: 100%; height: min(756px, calc(100dvh - 48px)); gap: 16px; padding: 16px 0 32px; border-radius: var(--radius-card) var(--radius-card) 0 0; transform: translateY(100%); box-shadow: var(--shadow-mobiel); }
+  .wa__grip { display: block; align-self: center; width: 40px; height: 4px; border-radius: 2px; background: var(--color-border-strong); }
+  .wa__head { padding: 0 var(--page-margin) 16px; }
+  .wa__body { padding: 0 var(--page-margin); }
+}
