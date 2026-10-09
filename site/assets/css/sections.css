@@ -49,7 +49,9 @@
    In rust staan ze net onder de kaart (de kaart knipt af). */
 .tile { --tile-speed: .6s; }
 .tile__details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--tile-speed) var(--ease); }
-.tile__details-inner { min-height: 0; align-self: start; display: flex; flex-direction: column; gap: var(--gap-action-sm); padding-top: var(--gap-action-sm); transform: translateY(var(--card-padding)); transition: transform var(--tile-speed) var(--ease); }
+.tile__details-inner { min-height: 0; align-self: start; display: flex; flex-direction: column; gap: var(--gap-action-sm); transform: translateY(var(--card-padding)); transition: transform var(--tile-speed) var(--ease); }
+/* Ruimte tussen titel en tekst als marge binnen de inklapbare inhoud: padding op het vak zelf bleef in rust staan (titel 24 te hoog) */
+.tile__details-inner > :first-child { margin-top: var(--gap-action-sm); }
 .tile__overlay { transition: --tile-mid var(--tile-speed) var(--ease), --tile-mid-a var(--tile-speed) var(--ease), --tile-end-a var(--tile-speed) var(--ease); }
 .tile:hover .tile__overlay, .tile:focus-visible .tile__overlay { --tile-mid: 50%; --tile-mid-a: .25; --tile-end-a: .7; }
 .tile:hover .tile__details, .tile:focus-visible .tile__details { grid-template-rows: 1fr; }
