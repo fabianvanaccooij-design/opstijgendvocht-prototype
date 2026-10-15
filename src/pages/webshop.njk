@@ -15,7 +15,7 @@ description: Professionele middelen en materialen om zelf vochtproblemen aan te 
   <div class="container stack" style="gap:var(--heading-gap)">
     <div class="stack" style="gap:40px">
       <div class="filters" role="group" aria-label="Filter producten">
-        {% for f in [['alle', 'Alle producten'], ['mwrg2', 'M-WRG-II'], ['mwrg1', 'M-WRG-I'], ['saltshield', 'SaltShield & SaltShieldPlus']] %}
+        {% for f in [['alle', 'Alle producten'], ['units', 'Decentrale ventilatie-units'], ['filters', 'Filters'], ['muur', 'Muur afwerken']] %}
         <button type="button" class="pill{{ ' is-active' if loop.first }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-filter="{{ f[0] }}">{{ f[1] }}</button>
         {% endfor %}
       </div>
@@ -28,7 +28,6 @@ description: Professionele middelen en materialen om zelf vochtproblemen aan te 
               <span class="c-primary">{{ p.label }}</span>
               <h3><a class="card-t__link" href="{{ 'productpagina' | href }}">{{ p.name }}</a></h3>
             </div>
-            <span class="rating__row"><span class="stars">{{ icon('star') }}</span><span><strong>4,8</strong> <span class="body-sm c-secondary">(24)</span></span></span>
             <p class="c-secondary">Product introtekst</p>
             <p class="h4">{{ p.price }}</p>
           </div>

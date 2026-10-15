@@ -9,7 +9,7 @@ cart: true
 {% import "components/ui.njk" as ui %}
 {#- Productgegevens. Alle producten in het prototype linken naar deze pagina. -#}
 {% set p = {
-  name: 'Meltem M-WRG-I Unit', category: 'Decentrale WTW balansventilatie',
+  name: 'Meltem M-WRG-I Unit', category: 'Decentrale ventilatie-units',
   score: '<score>', reviews: '<aantal>', photos: 12,
   price: 2645, montagePrice: 605,
   usps: ['Tot 71% warmteterugwinning', 'Allergiefilter tegen pollen en fijnstof', 'Bediening via de Meltem App'],
@@ -19,7 +19,7 @@ cart: true
   service: ['<Garantie, bijv. X jaar fabrieksgarantie>', '<Verzendkosten of gratis verzending>', '<Retourbeleid, bijv. X dagen bedenktijd>', '<Betaalmethoden, bijv. iDEAL>']
 } %}
 
-{{ s.kruimelpad([{ label: 'Home', href: 'index' }, { label: 'Webshop', href: 'webshop' }, { label: 'M-WRG-I unit', href: 'webshop' }, { label: 'Meltem M-WRG-I Unit' }]) }}
+{{ s.kruimelpad([{ label: 'Home', href: 'index' }, { label: 'Webshop', href: 'webshop' }, { label: 'Decentrale ventilatie-units', href: 'webshop' }, { label: 'Meltem M-WRG-I Unit' }]) }}
 
 <section class="section product-hero" data-product>
   <div class="container product-hero__grid">
@@ -131,12 +131,7 @@ cart: true
 </section>
 
 <div id="reviews">
-{{ s.reviews({ title: 'Ervaringen van kopers', btn: false, text: '&lt;Gemiddelde score en aantal reviews van dit product&gt;', items: [
-  { name: '<Naam>', date: '<Datum>', text: '<Review van een klant over de Meltem M-WRG-I>' },
-  { name: '<Naam>', date: '<Datum>', text: '<Review van een klant over de Meltem M-WRG-I>' },
-  { name: '<Naam>', date: '<Datum>', text: '<Review van een klant over de Meltem M-WRG-I>' },
-  { name: '<Naam>', date: '<Datum>', text: '<Review van een klant over de Meltem M-WRG-I>' }
-] }, site) }}
+{{ s.reviews({ items: shared.reviews }, site) }}
 </div>
 
 <section class="section">
@@ -147,8 +142,7 @@ cart: true
       <li class="product-card card-t card-t--link">
         {{ ui.media('', '', '16-9') }}
         <div class="product-card__body">
-          <div class="stack" style="gap:var(--gap-meta)"><span>Vervangfilter</span><h3><a class="card-t__link" href="{{ 'productpagina' | href }}">{{ f[0] }}</a></h3></div>
-          <span class="rating__row"><span class="stars">{{ icon('star') }}</span><span><strong>&lt;score&gt;</strong> <span class="body-sm c-secondary">(&lt;aantal&gt;)</span></span></span>
+          <div class="stack" style="gap:var(--gap-meta)"><span>Filters</span><h3><a class="card-t__link" href="{{ 'productpagina' | href }}">{{ f[0] }}</a></h3></div>
           <p class="h4">Vanaf {{ f[1] }}</p>
         </div>
       </li>

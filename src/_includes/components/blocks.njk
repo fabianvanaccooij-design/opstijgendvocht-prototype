@@ -26,7 +26,7 @@
           <h2>{{ d.title }}</h2>
           <p class="body-lg c-secondary">{{ d.text }}</p>
         </div>
-        {{ ui.btn('Gratis vochtadvies aanvragen', 'gratis-vochtadvies') }}
+        {% if d.btn !== false %}{{ ui.btn('Gratis vochtadvies aanvragen', 'gratis-vochtadvies') }}{% endif %}
       </div>
     </div>
     <ol class="ww__cards" role="list">
@@ -34,7 +34,7 @@
       <li class="ww__slot" style="--i: {{ loop.index0 }}">
         <div class="ww__card">
           <div class="ww__card-head"><span class="badge-num ww__badge">{{ loop.index }}</span><h3>{{ c.title }}</h3></div>
-          <div class="ww__card-body"><p class="bold">{{ c.subtitle }}</p><p class="c-secondary">{{ c.text }}</p></div>
+          <div class="ww__card-body">{% if c.subtitle %}<p class="bold">{{ c.subtitle }}</p>{% endif %}<p class="c-secondary">{{ c.text }}</p></div>
         </div>
       </li>
       {% endfor %}

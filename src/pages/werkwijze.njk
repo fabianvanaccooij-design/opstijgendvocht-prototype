@@ -1,35 +1,82 @@
 ---
 crumb: Werkwijze
 title: Onze werkwijze
-description: Van vochtdiagnose tot definitieve oplossing.
+description: Je hoeft zelf niet te weten waar het vocht vandaan komt. Eerst de situatie beoordelen, daarna duidelijk advies.
 ---
 {% import "components/sections.njk" as s %}
 {% import "components/blocks.njk" as b %}
 
 {{ s.heroPage({
-  variant: 'foto', image: '',
+  variant: 'foto', image: '', rating: true,
   title: 'Onze werkwijze',
-  subtitle: 'Van vochtdiagnose tot definitieve oplossing',
-  text: 'Een vochtprobleem aanpakken kan ingrijpend lijken, maar met onze gestructureerde aanpak weet je precies waar je aan toe bent. Wij begeleiden je van de eerste inspectie tot de oplevering én de nabehandeling.',
+  text: 'Je hoeft zelf niet te weten waar het vocht vandaan komt. Eerst beoordelen we de situatie en kijken we welke oorzaken mogelijk zijn. Daarna krijg je duidelijk advies over de oplossing en wat er daarna gebeurt.',
   btn: { label: 'Gratis vochtadvies aanvragen', href: 'gratis-vochtadvies' }
 }, site) }}
 
 {{ b.werkwijze({
-  title: 'Gecertificeerde kwaliteit & zekerheid',
-  text: 'Wij werken volgens de hoogste kwaliteitsnormen in de vochtbestrijdingsbranche.',
+  title: 'Zo verloopt onze werkwijze',
+  text: 'Van eerste contact tot behandeling en nazorg in vijf duidelijke stappen.',
+  btn: false,
   cards: [
-    { title: 'Vrijblijvende Vochtdiagnose', subtitle: 'Een afspraak wanneer het jou uitkomt', text: 'Na je aanvraag komt onze vochtspecialist bij je langs op locatie. Met professionele vochtmeters stellen we de exacte oorzaak vast (bijv. opstijgend vocht, doorslaand vocht of condensatie). Zo voorkomen we dat er een verkeerde of overbodige behandeling wordt toegepast.' },
-    { title: 'Heldere Offerte op Maat', subtitle: '100% transparant vooraf', text: 'Op basis van de diagnose stellen we een transparant plan van aanpak op. Je ontvangt een gespecificeerde offerte waarin exact staat welke werkzaamheden worden uitgevoerd, inclusief een vaste prijsgarantie zonder onverwachte kosten achteraf.' },
-    { title: 'Voorbereiding & Bescherming', subtitle: 'Zorgvuldig afschermen', text: 'Op de afgesproken werkdag beginnen we met het afdekken van de vloeren en omliggende meubels. We werken netjes en zorgen ervoor dat de overlast in de woning tot een minimum beperkt blijft.' },
-    { title: 'Professionele Uitvoering', subtitle: 'Injecteren of ventileren', text: 'Afhankelijk van de gekozen oplossing voeren onze gecertificeerde specialisten de werkzaamheden uit (bijvoorbeeld het injecteren van de muren, het plaatsen van een Meltem WTW-unit).' },
-    { title: 'Oplevering & Schoonmaak', subtitle: 'Schoon en droog opgeleverd', text: 'Na de behandeling ruimen we alles netjes op en voeren we het afval af. Samen lopen we het resultaat door en leggen we uit hoe het droogproces in de muren zich de komende weken zal ontwikkelen.' },
-    { title: 'Garantie & Nazorg', subtitle: '30 jaar garantie op injecteren', text: 'Na oplevering ontvang je jouw officiële garantiecertificaat. Mocht je tijdens het droogproces vragen hebben, dan staat onze klantenservice direct voor je klaar.' }
+    { title: 'Contact', text: 'Je neemt contact op en kunt foto’s meesturen.' },
+    { title: 'Situatie beoordelen', text: 'We bekijken wat er speelt en welke oorzaken mogelijk zijn.' },
+    { title: 'Duidelijk advies', text: 'Je hoort welke oplossing past en waarom.' },
+    { title: 'Werk uitvoeren', text: 'De afgesproken behandeling wordt uitgevoerd.' },
+    { title: 'Drogen en nazorg', text: 'Je krijgt uitleg over droging, afwerking en eventuele controle.' }
   ]
 }) }}
 
-{{ s.cta({
-  title: 'Laat <span class="c-blue">vocht</span> jouw woning niet langer beschadigen',
-  text: 'Twijfel je over de oorzaak van het vocht in je muren of wil je direct weten waar je aan toe bent? Onze specialisten komen vrijblijvend bij je langs op locatie voor een professionele meting en eerlijk advies.',
-  primary: { label: 'Plan direct een afspraak in', href: 'gratis-vochtadvies' },
-  secondary: false, contact: true
+{{ s.tekst({
+  title: 'Waarom begint alles bij de oorzaak?',
+  text: '<p><strong>Niet ieder vochtprobleem vraagt dezelfde behandeling.</strong><br>Opstijgend vocht vraagt iets anders dan condens, een lekkage of regeninslag. Daarom adviseren we injecteren alleen als opstijgend vocht is vastgesteld. Bij een ventilatieprobleem ligt de oplossing juist bij luchtverversing.</p>'
 }) }}
+
+{{ s.oplossingen({
+  title: 'Welke oplossing past bij welk vochtprobleem?',
+  intro: 'De oorzaak bepaalt welke oplossing past.',
+  cards: [
+    { title: 'Opstijgend vocht', text: 'Bij vastgesteld opstijgend vocht kan injecteren een passende behandeling zijn.', btn: { label: 'Bekijk', href: site.routes.vochtigeMuur } },
+    { title: 'Condens of hoge luchtvochtigheid', text: 'Is te weinig ventilatie de oorzaak? Dan kan decentrale ventilatie met WTW helpen.', btn: { label: 'Bekijk', href: site.routes.product } },
+    { title: 'Lekkage of regeninslag', text: 'Dan moet eerst die vochtbron worden opgelost. Injecteren helpt daar niet tegen.', btn: { label: 'Bekijk', href: site.routes.vochtigeMuur } }
+  ]
+}) }}
+
+{{ s.split({
+  side: 'rechts', image: '',
+  title: 'Wat gebeurt er na de behandeling?',
+  blocks: [
+    { text: '<strong>De werkzaamheden kunnen klaar zijn terwijl de muur nog verder moet drogen.</strong>' },
+    { title: 'Muur laten drogen', text: 'Bij natuurlijke droging duurt dit meestal een paar maanden. Bij dikkere of sterk vochtbelaste muren kan de droogtijd oplopen tot ongeveer één jaar.' },
+    { title: 'Afwerking kiezen', text: 'Is de muur voldoende droog? Dan kan een passende afwerking volgen. In geschikte situaties kan SaltShieldPlus direct afwerken mogelijk maken.' },
+    { title: 'Droogcontrole', text: 'Hebben wij de muur geïnjecteerd tegen opstijgend vocht? Dan kun je na de droogperiode een gratis droogcontrole aanvragen als je dat wilt.' }
+  ]
+}) }}
+
+{{ s.uspPanel({
+  title: 'Wat kun je van ons verwachten?', image: '',
+  intro: 'Geen standaardbehandeling, maar een oplossing die past bij de oorzaak.',
+  items: [
+    { icon: 'info', title: 'Gratis en vrijblijvend vochtadvies', text: 'Je krijgt eerst duidelijkheid over de situatie en de juiste vervolgstap.' },
+    { icon: 'check', title: 'Heldere offerte', text: 'Je weet vooraf welke werkzaamheden worden voorgesteld en wat daarbij hoort.' },
+    { icon: 'search', title: 'Gratis droogcontrole', text: 'Hebben wij de muur geïnjecteerd tegen opstijgend vocht? Dan kun je na de droogperiode gratis een droogcontrole aanvragen als je dat wilt.' },
+    { icon: 'star', title: '30 jaar schriftelijke garantie', text: 'Op muren die door OpstijgendVocht.nl zijn geïnjecteerd tegen opstijgend vocht.' }
+  ]
+}) }}
+
+{{ s.reviews({ items: shared.reviews }, site) }}
+
+{{ s.cta({
+  title: 'Wat is voor jouw woning de juiste eerste stap?',
+  text: 'Je hoeft zelf niet te bepalen welk vochtprobleem je hebt. Stuur gerust een paar foto’s via WhatsApp of neem telefonisch contact op. Je krijgt gratis en vrijblijvend duidelijkheid over de eerste stap die bij jouw situatie past.',
+  primary: { label: 'Gratis vochtadvies aanvragen', href: 'gratis-vochtadvies' },
+  secondary: 'WhatsApp ons'
+}) }}
+
+{{ s.faq({ title: 'Veelgestelde vragen over onze werkwijze', items: [
+  { q: 'Moet ik zelf weten welk vochtprobleem ik heb?', a: 'Nee. Je hoeft vooraf niet te weten of het om opstijgend vocht, condens of een andere oorzaak gaat. We beginnen juist met het bepalen van de oorzaak.' },
+  { q: 'Injecteren jullie iedere vochtige muur?', a: 'Nee. Injecteren is alleen passend wanneer opstijgend vocht is vastgesteld. Bij condens, lekkage of regeninslag hoort een andere aanpak.' },
+  { q: 'Hoe bepalen jullie waar het vocht vandaan komt?', a: 'We kijken naar de plek, het schadebeeld en mogelijke vochtbronnen. Kunnen we op afstand niet genoeg zeggen? Dan bespreken we welke vervolgstap nodig is om de oorzaak beter te beoordelen.' },
+  { q: 'Hoe lang duurt een behandeling?', a: 'Dat hangt af van de oorzaak, de omvang van het probleem en de gekozen oplossing. Je krijgt vooraf uitleg over de werkzaamheden die bij jouw situatie horen.' },
+  { q: 'Wanneer kan een behandelde muur weer worden afgewerkt?', a: 'Dat hangt af van de droogte, zoutbelasting en gekozen afwerking. Bij natuurlijke droging wacht je tot de muur voldoende droog is. In geschikte situaties kan SaltShieldPlus eerder afwerken mogelijk maken.' },
+  { q: 'Wat gebeurt er na het injecteren tegen opstijgend vocht?', a: 'De nieuwe aanvoer van opstijgend grondvocht wordt gestopt, maar het aanwezige vocht moet nog uit de muur verdampen. Hebben wij de muur geïnjecteerd? Dan kun je na de droogperiode een gratis droogcontrole aanvragen als je dat wilt.' }
+] }) }}

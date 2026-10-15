@@ -96,9 +96,10 @@
 @media (min-width: 768px) { .steps:not(.steps--raster) .steps__viewport { margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%); } }
 .steps__track { display: flex; gap: var(--grid-gutter); list-style: none; padding: 0; transition: transform .45s var(--ease); }
 .step { flex: 0 0 var(--step-w, 476px); display: flex; flex-direction: column; gap: var(--grid-gutter); }
-.steps__btn { display: flex; justify-content: center; }
+.steps__btn { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--gap-buttons); }
+.steps__intro { margin-top: calc(var(--gap-heading-2) - var(--heading-gap)); }   /* Figma: subregel direct onder de kop (gap/heading-2) */
 .steps--raster .steps__head { justify-content: center; text-align: center; }
-.steps--raster .steps__intro { text-align: center; max-width: 1024px; margin: 0 auto; }
+.steps--raster .steps__intro { text-align: center; max-width: 1024px; margin: calc(var(--gap-heading-2) - var(--heading-gap)) auto 0; }
 .steps--raster .steps__track { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); transform: none !important; }
 .steps--raster .step { flex: none; }
 @media (max-width: 1199px) { .step { flex-basis: calc((100% - 1.5 * var(--grid-gutter)) / 2.3); } }
@@ -106,6 +107,8 @@
   .steps { padding-inline: 0; }
   .steps__head, .steps__intro, .steps__btn { padding-inline: var(--page-margin); }
   .steps__btn { justify-content: flex-start; }
+  .steps__btn--2 { flex-direction: column; align-items: stretch; }   /* Figma 393: twee knoppen volle breedte, label links, cirkel rechts */
+  .steps__btn--2 .btn { width: 100%; justify-content: space-between; text-align: left; }
   .steps__viewport { margin: 0; padding: 0; overflow: visible; }
   .steps__track { overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--card-gap); padding: 0 var(--page-margin); scroll-padding: 0 var(--page-margin); scrollbar-width: none; transform: none !important; }
   .steps__track::-webkit-scrollbar { display: none; }
@@ -277,10 +280,11 @@
 
 /* --- Signalen (5 beeldkaarten) -------------------------------------------- */
 .tiles__track--5 { grid-template-columns: repeat(5, 1fr); }
-.tile--sm { aspect-ratio: 310 / 430; }
+.tile--sm { aspect-ratio: 539 / 680; }   /* Figma 15 okt: zelfde verhouding als Beeldtegel op Home (5 kaarten 310x392, 4 kaarten 396x500) */
+.tiles__track--4 { grid-template-columns: repeat(4, 1fr); }
 .tile--sm .tile__body { padding: var(--card-padding-sm); }
 .tile--beeld .tile__body { padding: var(--card-padding); }
-@media (max-width: 1199px) { .tiles__track--5 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1199px) { .tiles__track--5 { grid-template-columns: repeat(3, 1fr); } .tiles__track--4 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 767px) { .tile--sm { flex-basis: 240px; height: 333px; } .tile--sm .tile__details { display: grid; grid-template-rows: 1fr; opacity: 1; } .tile--sm .tile__details-inner { transform: none; } }
 
 /* --- USP-lijst en USP-paneel (Uitklaplijst, Beeld=Achtergrond) ------------ */
@@ -376,7 +380,7 @@
   .t-center { text-align: left; }
   .sec-head--center { align-items: flex-start; text-align: left; margin-inline: 0; }
   .steps--raster .steps__head { justify-content: flex-start; text-align: left; }
-  .steps--raster .steps__intro { text-align: left; margin: 0; }
+  .steps--raster .steps__intro { text-align: left; margin: calc(var(--gap-heading-2) - var(--heading-gap)) 0 0; }
   .text-sec--quote { margin-inline: 0; text-align: left; align-items: flex-start; }
   .hero-page--center .hero-page__inner, .hero-page--smal .hero-page__inner { text-align: left; }
   .hero-page--center .hero-page__intro, .hero-page--smal .hero-page__intro { align-items: flex-start; }

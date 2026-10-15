@@ -12,6 +12,8 @@ const routes = {
   schimmel: 'schimmel',
   condens: 'schimmel',
   muurAfwerken: 'vocht-in-een-binnenmuur',
+  // Hoofdpagina's (Vochtige muur, Schimmel, Condens, Muur afwerken) hebben een eigen template: voorbeeld = Schimmel
+  hoofdpagina: 'schimmel',
   product: 'productpagina',
   blog: 'blogartikel',
   juridisch: 'tekstpagina',
@@ -47,7 +49,7 @@ module.exports = {
   // Hoofdmenu. Items met `groups` openen een megamenu (desktop) of submenu (mobiel).
   nav: [
     {
-      label: 'Vochtige muur', href: routes.vochtigeMuur,
+      label: 'Vochtige muur', href: routes.hoofdpagina,
       groups: [
         { title: 'Waar zit het vocht?', links: [
           { label: 'Vocht in een binnenmuur', href: 'vocht-in-een-binnenmuur' },
@@ -65,7 +67,7 @@ module.exports = {
           { label: 'Vochtige muren behandelen', href: routes.vochtigeMuur },
         ] },
       ],
-      cta: { label: 'Alles over vochtige muren', href: routes.vochtigeMuur },
+      cta: { label: 'Alles over vochtige muren', href: routes.hoofdpagina },
     },
     {
       label: 'Schimmel', href: 'schimmel',
@@ -95,7 +97,7 @@ module.exports = {
       cta: { label: 'Alles over condens', href: routes.condens },
     },
     {
-      label: 'Muur afwerken', href: routes.muurAfwerken,
+      label: 'Muur afwerken', href: routes.hoofdpagina,
       groups: [
         { title: 'Afwerking & Herstel', links: [
           { label: 'Muur drogen na injecteren', href: routes.muurAfwerken },
@@ -104,7 +106,7 @@ module.exports = {
           { label: 'SaltShieldPlus', href: routes.product },
         ] },
       ],
-      cta: { label: 'Alles over muur afwerken', href: routes.muurAfwerken },
+      cta: { label: 'Alles over muur afwerken', href: routes.hoofdpagina },
     },
     {
       label: 'Over ons', href: 'over-ons',
@@ -128,10 +130,10 @@ module.exports = {
     ],
     columns: [
       { title: 'Vochtproblemen', links: [
-        { label: 'Vochtige muur', href: routes.vochtigeMuur },
+        { label: 'Vochtige muur', href: routes.hoofdpagina },
         { label: 'Schimmel', href: 'schimmel' },
         { label: 'Condens', href: routes.condens },
-        { label: 'Muur afwerken', href: routes.muurAfwerken },
+        { label: 'Muur afwerken', href: routes.hoofdpagina },
       ] },
       { title: 'Over ons', links: [
         { label: 'Werkwijze', href: 'werkwijze' },

@@ -138,7 +138,7 @@
       </div>
       <div class="dots only-mobile" data-slider-dots></div>
     </div>
-    {% if d.btn %}<div class="steps__btn">{{ action(d.btn, { style: 'secondary' }) }}</div>{% endif %}
+    {% if d.btn %}<div class="steps__btn{{ ' steps__btn--2' if d.btn2 }}">{{ action(d.btn, { style: 'secondary' }) }}{% if d.btn2 %}{{ action(d.btn2, { style: 'secondary' }) }}{% endif %}</div>{% endif %}
   </div>
 </section>
 {%- endmacro %}
@@ -345,7 +345,7 @@
   <div class="container stack" style="gap:var(--heading-gap)">
     {{ head(d.title, d.intro, { center: true }) }}
     <div class="tiles" data-slider>
-      <div class="tiles__track tiles__track--5" data-slider-track>
+      <div class="tiles__track tiles__track--{{ d.items.length }}" data-slider-track>
         {% for t in d.items %}
         <div class="tile tile--sm{{ ' tile--beeld' if d.beeldtegel }}" tabindex="0">
           {% if t.image %}<img class="tile__img" src="assets/img/{{ t.image }}" alt="" loading="lazy">{% else %}<span class="tile__img media--ph"></span>{% endif %}
@@ -379,7 +379,7 @@
   <div class="usp-panel">
     <div class="usp-panel__bg{{ ' media--ph' if not d.image }}">{% if d.image %}<img src="assets/img/{{ d.image }}" alt="" loading="lazy">{% endif %}</div>
     <div class="usp-panel__card">
-      <h2>{{ d.title | safe }}</h2>
+      {% if d.intro %}<div class="stack" style="gap:var(--gap-heading-2)"><h2>{{ d.title | safe }}</h2><p class="body-lg c-secondary">{{ d.intro | safe }}</p></div>{% else %}<h2>{{ d.title | safe }}</h2>{% endif %}
       <div class="stack" style="gap:var(--gap-action-sm); align-items:flex-start">
         {{ uspList(d.items) }}
         {% if d.btn %}{{ action(d.btn, { style: 'secondary' }) }}{% endif %}
@@ -516,6 +516,7 @@
         {% for it in d.items %}{{ ui.acc(it.q, '<div class="prose">' ~ it.a ~ '</div>', false, 4) }}{% endfor %}
       </div>
       {% if d.btn !== false %}{{ ui.btn(d.btnLabel or 'Bekijk alle veelgestelde vragen', 'veelgestelde-vragen', 'secondary') }}{% endif %}
+      {% if d.date %}<p class="body-sm c-muted">{{ d.date }}</p>{% endif %}   {#- Figma: Toon controledatum -#}
     </div>
   </div>
 </section>

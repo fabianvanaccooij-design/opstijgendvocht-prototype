@@ -29,7 +29,7 @@
       <p class="body-lg">{{ p.category }}</p>
       <h1 class="h2">{{ p.name }}</h1>
     </div>
-    <span class="rating__row">{{ ui.stars(5) }}<span><strong>{{ p.score }}</strong> <span class="body-sm c-secondary">({{ p.reviews }} reviews)</span></span></span>
+    {#- Rating verborgen (feedback Bianca 15 okt: geen productscore) -#}
   </div>
   <ul class="buybox__usps" role="list">{% for u in p.usps %}<li>{{ u }}</li>{% endfor %}</ul>
   <div class="stack" style="gap:var(--gap-value)">
