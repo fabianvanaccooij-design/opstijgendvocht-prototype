@@ -95,7 +95,6 @@ cart: true
         <div class="compare__cell" role="cell"><p class="bold center compare__spacer" aria-hidden="true">Je bekijkt dit model</p>{{ ui.media('', '', '16-9') }}<p class="h4"><a class="c-blue" href="{{ 'productpagina' | href }}">Meltem M-WRG-II</a></p><p><strong>€ 3.350,00</strong> <span class="body-sm c-secondary">incl. btw, zonder montage</span></p></div>
       </div>
       {% for r in [
-        ['Reviews', 'stars', 'stars'],
         ['Beste keuze als', '<Voor wie of welke ruimte dit model de beste keuze is>', '<Voor wie of welke ruimte dit model de beste keuze is>'],
         ['Warmteterugwinning', 'Tot 71%', 'Tot 94%'],
         ['Vocht- en CO₂-sensor', '<Ja of nee>', 'Ja, ventileert automatisch'],
@@ -106,7 +105,7 @@ cart: true
       ] %}
       <div class="compare__label" role="row"><span class="is-current bold" role="rowheader">{{ r[0] }}</span><span aria-hidden="true"></span></div>
       <div class="compare__row" role="row">
-        {% for v in [r[1], r[2]] %}<div class="compare__cell{{ ' is-current' if loop.first }}" role="cell">{% if v == 'stars' %}<span class="rating__row only-desktop">{{ ui.stars(5) }}<span><strong>&lt;score&gt;</strong> <span class="body-sm c-secondary">(&lt;aantal&gt; reviews)</span></span></span><span class="rating__row only-mobile"><span class="stars">{{ icon('star') }}</span><span><strong>&lt;score&gt;</strong> <span class="c-secondary">(24)</span></span></span>{% else %}{{ v }}{% endif %}</div>{% endfor %}
+        {% for v in [r[1], r[2]] %}<div class="compare__cell{{ ' is-current' if loop.first }}" role="cell">{{ v }}</div>{% endfor %}
       </div>
       {% endfor %}
       <div class="compare__row compare__row--btn" role="row"><div class="compare__cell compare__cell--plain" role="cell"></div><div class="compare__cell" role="cell">{{ ui.btn('Bekijk de M-WRG-II', 'productpagina', 'secondary') }}</div></div>
