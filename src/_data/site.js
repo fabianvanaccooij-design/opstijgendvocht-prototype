@@ -7,12 +7,10 @@
  */
 
 // Voorbeeldtemplates waar nog niet-bestaande pagina's naartoe linken.
-// Volgens de sheet Menustructuur & Content (16 okt): level 1 = hoofdpagina-template (Schimmel),
-// level 3 = dienstpagina-template (Vocht in een binnenmuur), behalve 'Opstijgend vocht behandelen'
-// en 'Muur injecteren tegen vocht': 'Zelfde template als WERKWIJZE'.
+// Level 1 = hoofdpagina-template (Schimmel), alle dienstpagina's (level 3) = dienst-template
+// (Vocht in een binnenmuur). Alleen de pagina Werkwijze gebruikt het Werkwijze-template (keuze Fabian 16 okt).
 const routes = {
   dienst: 'vocht-in-een-binnenmuur',
-  behandeling: 'werkwijze',
   vochtigeMuur: 'vocht-in-een-binnenmuur',
   schimmel: 'vocht-in-een-binnenmuur',    // dienstpagina's onder Schimmel (verwijderen, vocht en schimmel)
   condens: 'schimmel',                    // hoofdpagina Condens
@@ -67,8 +65,8 @@ module.exports = {
           { label: 'Andere oorzaken van vocht in muren', href: routes.vochtigeMuur },
         ] },
         { title: 'Behandeling', links: [
-          { label: 'Opstijgend vocht behandelen', href: routes.behandeling },
-          { label: 'Muur injecteren tegen vocht', href: routes.behandeling },
+          { label: 'Opstijgend vocht behandelen', href: routes.dienst },
+          { label: 'Muur injecteren tegen vocht', href: routes.dienst },
           { label: 'Vochtige muren behandelen', href: routes.vochtigeMuur },
         ] },
       ],
