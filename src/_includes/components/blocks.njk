@@ -81,13 +81,13 @@
 {#- Sectie / Project (Figma 09 Resultaten-secties, 3576:207).
     Desktop: witte kaart plakt vast onder de header; de fotokolom rechts scrolt langs alle stapfoto's,
     daarna scrolt de pagina verder. Mobiel en tablet: tekst, daarna stapfoto's swipen. Gedrag in main.js (data-project).
-    p.id, p.title, p.blocks[{icon, title, text}], p.photos[{label, image}] -#}
+    p.id, p.kicker (blauwe eerste regel), p.title, p.blocks[{icon, title, text}], p.photos[{label, image}] -#}
 {% macro project(p) -%}
 <section class="project" id="{{ p.id }}" aria-labelledby="{{ p.id }}-titel" data-project>
   <div class="project__pin">
     <div class="project__card">
       <div class="project__text">
-        <h2 id="{{ p.id }}-titel">{{ p.title }}</h2>
+        <h2 id="{{ p.id }}-titel"><span class="c-blue">{{ p.kicker }}</span><br>{{ p.title }}</h2>   {#- Figma: Accentregel (blauw) + Titel -#}
         {{ s.uspList(p.blocks) }}
       </div>
       <div class="project__photos" data-project-photos>
