@@ -52,7 +52,7 @@
 .tile__details-inner { min-height: 0; align-self: start; display: flex; flex-direction: column; gap: var(--gap-action-sm); transform: translateY(var(--card-padding)); transition: transform var(--tile-speed) var(--ease); }
 /* Ruimte tussen titel en tekst als marge binnen de inklapbare inhoud: padding op het vak zelf bleef in rust staan (titel 24 te hoog) */
 .tile__details-inner > :first-child { margin-top: var(--gap-action-sm); }
-@media (min-width: 768px) { .tile__details-inner > :first-child { margin-top: calc(var(--gap-heading-3) + var(--space-12)); } }   /* Figma Card / Beeldtegel Hover: titel → tekst = gap/heading-3 (16) + paddingTop Details space/12 = 28 */
+@media (min-width: 768px) { .tile__details-inner > :first-child { margin-top: var(--gap-heading-3); } }   /* Figma Card / Beeldtegel Hover (16 okt): titel → tekst gap/heading-3 = 16 */
 .tile__overlay { transition: --tile-mid var(--tile-speed) var(--ease), --tile-mid-a var(--tile-speed) var(--ease), --tile-end-a var(--tile-speed) var(--ease); }
 .tile:hover .tile__overlay, .tile:focus-visible .tile__overlay { --tile-mid: 50%; --tile-mid-a: .25; --tile-end-a: .7; }
 .tile:hover .tile__details, .tile:focus-visible .tile__details { grid-template-rows: 1fr; }
