@@ -384,7 +384,7 @@
   .anchors__link::after { content: attr(data-label); height: 0; overflow: hidden; visibility: hidden; font-weight: var(--font-weight-bold); }   /* reserveert de breedte van de vette staat */
   .anchors__link::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--color-border-default); }   /* Figma 16 okt: lijn 4, niet actief blauw */
   .anchors__link.is-active { color: var(--color-text-primary); font-weight: var(--font-weight-bold); }
-  .anchors__link.is-active::before { background: var(--color-border-brand); }
+  .anchors .anchors__indicator { display: block; }
   .anchors::before, .anchors::after { content: ""; position: absolute; top: 0; bottom: 0; z-index: 1; width: 48px; pointer-events: none; opacity: 0; transition: opacity var(--duration); }
   .anchors::before { left: 0; background: var(--gradient-scroll-wit-links); }
   .anchors::after { right: 0; background: var(--gradient-scroll-wit-rechts); }
@@ -396,6 +396,14 @@
    Hero, zoekbalk, links Onderwerpen (sticky), rechts Veel gezocht en 9 onderwerpen met elk 5 vragen
    en "Toon alle X vragen". Gedrag in main.js (data-faq). */
 .page-faq .faq-top { display: flex; flex-direction: column; }
+/* Kruimelpad ligt op het verloop van de hero (Figma: frame 'Kruimelpad en hero' met Verloop/Hero licht),
+   net als op de andere pagina's (.page > .crumbs + .hero-page). De hero zit hier in .faq-top. */
+.page > .crumbs + .faq-top { margin-top: calc(-1 * (var(--section-padding-y) + var(--crumbs-h))); }
+.page > .crumbs + .faq-top > .hero-page { padding-top: calc(var(--section-padding-y) + var(--crumbs-h)); }
+@media (max-width: 767px) {
+  .page > .crumbs--top + .faq-top { margin-top: 0; }
+  .page > .crumbs--top + .faq-top > .hero-page { padding-top: var(--section-padding-y); }
+}
 .page-faq .hero-page { padding-bottom: var(--heading-gap); }   /* Figma: hero-padding onder = heading/gap (64, mobiel 24), direct daaronder de zoekbalk */
 .faq-search { padding-inline: var(--page-margin); }
 .faq-search__field { position: relative; max-width: 800px; margin-inline: auto; }   /* Figma: Zoekveld 800 breed, gecentreerd */
@@ -409,13 +417,17 @@
 
 /* Navigatie / Onderwerp: lijn van 4 links (blauw, actief oranje), alleen de buitenste uiteindes afgerond */
 .faq-nav { display: flex; flex-direction: column; gap: var(--gap-heading-3); padding: var(--card-padding); background: var(--color-bg-surface); border-radius: var(--radius-card); }
-.faq-nav__list { list-style: none; margin: 0; padding: 0; }
+.faq-nav__list { position: relative; list-style: none; margin: 0; padding: 0; }
 .faq-nav__link { position: relative; display: flex; align-items: center; min-height: 52px; padding: 12px 16px 12px 20px; color: var(--color-text-link); font-weight: var(--font-weight-medium); }
 .faq-nav__link::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--color-border-default); }
 .faq-nav__list li:first-child .faq-nav__link::before { border-radius: 2px 2px 0 0; }
 .faq-nav__list li:last-child .faq-nav__link::before { border-radius: 0 0 2px 2px; }
 .faq-nav__link.is-active { color: var(--color-text-primary); font-weight: var(--font-weight-bold); }
-.faq-nav__link.is-active::before { background: var(--color-border-brand); }
+/* Actieve oranje balk schuift naar het volgende onderwerp (main.js zet positie en hoogte) */
+.faq-nav__indicator { position: absolute; left: 0; top: 0; width: 4px; height: 52px; background: var(--color-border-brand); pointer-events: none;
+  transition: transform .3s var(--ease), height .3s var(--ease), border-radius .3s var(--ease); }
+.faq-nav__indicator.is-first { border-radius: 2px 2px 0 0; }
+.faq-nav__indicator.is-last { border-radius: 0 0 2px 2px; }
 
 .faq-content { display: flex; flex-direction: column; gap: var(--space-80); min-width: 0; }
 .faq-popular { display: flex; flex-direction: column; gap: var(--gap-heading-3); }
@@ -462,5 +474,11 @@
   .faq-anchors .anchors__link::after { content: attr(data-label); height: 0; overflow: hidden; visibility: hidden; font-weight: var(--font-weight-bold); }
   .faq-anchors .anchors__link::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--color-border-default); }
   .faq-anchors .anchors__link.is-active { color: var(--color-text-primary); font-weight: var(--font-weight-bold); }
-  .faq-anchors .anchors__link.is-active::before { background: var(--color-border-brand); }
+  .faq-anchors .anchors__indicator { display: block; }
 }
+
+/* Ankerbalk: actieve oranje lijn schuift mee naar het actieve item (main.js). Alleen zichtbaar waar de balk lijnen heeft. */
+.anchors__indicator { display: none; position: absolute; left: 0; bottom: 0; z-index: 1; width: 0; height: 4px; background: var(--color-border-brand); pointer-events: none;
+  transition: transform .3s var(--ease), width .3s var(--ease), opacity .2s; }
+.anchors__indicator.is-hidden { opacity: 0; }
+.no-anim, .no-anim * { transition: none !important; }

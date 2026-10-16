@@ -527,6 +527,16 @@
       nav.classList.toggle('has-more-left', bar.scrollLeft > 4);
       nav.classList.toggle('has-more-right', bar.scrollLeft < max - 4);
     };
+    // Actieve oranje lijn als los element, zodat hij naar het volgende item schuift
+    const ind = document.createElement('span');
+    ind.className = 'anchors__indicator no-anim';
+    ind.setAttribute('aria-hidden', 'true');
+    bar.appendChild(ind);
+    const place = () => {
+      const a = links[current];
+      ind.classList.toggle('is-hidden', !a);
+      if (a) { ind.style.width = a.offsetWidth + 'px'; ind.style.transform = `translateX(${a.offsetLeft}px)`; }
+    };
     let current = -2;
     const spy = () => {
       const headerH = header ? header.offsetHeight : 0;
@@ -537,6 +547,7 @@
       if (idx === current) return;
       current = idx;
       links.forEach((a, i) => { a.classList.toggle('is-active', i === idx); if (i === idx) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+      place();
       // Actief item in beeld schuiven (midden van de balk)
       if (idx >= 0 && mqMobile.matches) {
         const a = links[idx];
@@ -545,8 +556,10 @@
     };
     bar.addEventListener('scroll', () => requestAnimationFrame(fades), { passive: true });
     window.addEventListener('scroll', () => requestAnimationFrame(spy), { passive: true });
-    window.addEventListener('resize', () => { fades(); spy(); });
+    window.addEventListener('resize', () => { fades(); spy(); place(); });
     fades(); spy();
+    requestAnimationFrame(() => requestAnimationFrame(() => ind.classList.remove('no-anim')));
+    document.fonts && document.fonts.ready.then(place);
   });
 
   /* --- Paginering: actieve pagina wisselen en naar boven scrollen ---------- */
@@ -674,6 +687,19 @@
     if (nav) {
       const links = $$('a[href^="#"]', nav);
       const targets = links.map((a) => document.getElementById(a.getAttribute('href').slice(1)));
+      // Actieve oranje balk schuift naar het volgende onderwerp
+      const list = $('.faq-nav__list', nav);
+      const ind = document.createElement('span');
+      ind.className = 'faq-nav__indicator no-anim';
+      ind.setAttribute('aria-hidden', 'true');
+      list.appendChild(ind);
+      const place = () => {
+        const a = links[current]; if (!a) return;
+        ind.style.height = a.offsetHeight + 'px';
+        ind.style.transform = `translateY(${a.parentElement.offsetTop}px)`;
+        ind.classList.toggle('is-first', current === 0);
+        ind.classList.toggle('is-last', current === links.length - 1);
+      };
       let current = -2;
       const spy = () => {
         const line = (header ? header.offsetHeight : 0) + 120;
@@ -682,10 +708,13 @@
         if (idx === current) return;
         current = idx;
         links.forEach((a, i) => { a.classList.toggle('is-active', i === idx); if (i === idx) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+        place();
       };
       window.addEventListener('scroll', () => requestAnimationFrame(spy), { passive: true });
-      window.addEventListener('resize', spy);
+      window.addEventListener('resize', () => { spy(); place(); });
       spy();
+      requestAnimationFrame(() => requestAnimationFrame(() => ind.classList.remove('no-anim')));
+      document.fonts && document.fonts.ready.then(place);
     }
   }
 
