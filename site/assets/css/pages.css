@@ -489,7 +489,7 @@ a.tile { display: block; color: inherit; text-decoration: none; }
 
 /* Sectie / Project: witte kaart (rand 24, 920 hoog op 1080) plakt vast; fotokolom rechts schuift langs alle foto's (main.js) */
 .project { padding-inline: var(--space-24); scroll-margin-top: 0; }   /* tegel-link: kaart begint direct op de vastplakpositie */
-.project__card { display: grid; grid-template-columns: minmax(0, 1fr) calc(50% + (var(--page-margin) + var(--space-64)) / 2);   /* Figma 16 okt: foto's 50% van de kaartbreedte */ gap: var(--grid-column-gap); padding: 0 var(--space-64) 0 var(--page-margin);   /* Figma 16 okt: foto's tot de boven- en onderrand; rechts 64 voor de stippen */ background: var(--color-bg-surface); border-radius: var(--radius-card); overflow: hidden; }
+.project__card { display: grid; grid-template-columns: minmax(0, 1fr) calc(50% + (var(--page-margin) + var(--space-24)) / 2);   /* Figma 16 okt: foto's 50% van de kaartbreedte */ gap: var(--grid-column-gap); padding: 0 var(--space-24) 0 var(--page-margin);   /* Figma 16 okt: foto's tot de boven- en onderrand, rechts 24 */ background: var(--color-bg-surface); border-radius: var(--radius-card); overflow: hidden; }
 .project__text { display: flex; flex-direction: column; justify-content: center; gap: var(--gap-action); }
 .project__text .usp-list { max-width: 536px; }   /* Figma: lijst maximaal 536 breed */
 .project .usp__icon { display: none; }               /* Figma 16 okt: blokken zonder icoon en icoonvak */
@@ -508,11 +508,11 @@ a.tile { display: block; color: inherit; text-decoration: none; }
   .project__col { padding-block: var(--space-24); translate: 0 var(--project-y, 0); will-change: translate; }
   .project__photo { height: calc(var(--project-h) - 2 * var(--space-24)); }
   .project__photo .media { height: 100%; aspect-ratio: auto; }
-  /* Figma 16 okt: Swipe-indicator Richting=Verticaal rechts naast de foto's, midden in de rand van 64 (28 aan beide kanten) */
+  /* Figma 16 okt: Swipe-indicator Richting=Verticaal op de foto, 16 van de rechterrand van de foto, wit (niet actief 50%) */
   .project__card { position: relative; }
-  .project__dots { display: flex; flex-direction: column; position: absolute; top: 50%; right: calc(var(--space-64) / 2 - 4px); translate: 0 -50%; gap: 6px; }
-  .project__dots button { transition: height var(--duration), background-color var(--duration); }
-  .project__dots button.is-active { width: 8px; height: 24px; }
+  .project__dots { display: flex; flex-direction: column; position: absolute; top: 50%; right: calc(var(--space-24) + var(--space-16)); z-index: 1; translate: 0 -50%; gap: 6px; }
+  .project__dots button { background: var(--color-text-on-ink); opacity: .5; transition: height var(--duration), opacity var(--duration); }
+  .project__dots button.is-active { width: 8px; height: 24px; background: var(--color-text-on-ink); opacity: 1; }
 }
 @media (max-width: 1199px) {
   .project { padding-inline: var(--page-margin); }
