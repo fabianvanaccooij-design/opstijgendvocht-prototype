@@ -486,6 +486,8 @@
 /* --- Resultaten (Figma 16 okt: Resultaten 1920 2484:3998 / 393 2809:8421) --------------------------- */
 .tiles__track--3 { grid-template-columns: repeat(3, 1fr); }
 a.tile { display: block; color: inherit; text-decoration: none; }
+/* Beeldtegel met knop (Figma Card / Beeldtegel: Actie): desktop primaire knop bij hover, mobiel pijlcirkel naast de titel, zoals op Home */
+@media (max-width: 767px) { .tile--sm.tile--btn .tile__details { display: none; } }
 
 /* Sectie / Project: witte kaart (rand 24, 920 hoog op 1080) plakt vast; fotokolom rechts schuift langs alle foto's (main.js) */
 .project { padding-inline: var(--space-24); scroll-margin-top: 0; }   /* tegel-link: kaart begint direct op de vastplakpositie */
