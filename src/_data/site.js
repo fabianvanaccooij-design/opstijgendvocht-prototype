@@ -7,10 +7,15 @@
  */
 
 // Voorbeeldtemplates waar nog niet-bestaande pagina's naartoe linken.
+// Volgens de sheet Menustructuur & Content (16 okt): level 1 = hoofdpagina-template (Schimmel),
+// level 3 = dienstpagina-template (Vocht in een binnenmuur), behalve 'Opstijgend vocht behandelen'
+// en 'Muur injecteren tegen vocht': 'Zelfde template als WERKWIJZE'.
 const routes = {
+  dienst: 'vocht-in-een-binnenmuur',
+  behandeling: 'werkwijze',
   vochtigeMuur: 'vocht-in-een-binnenmuur',
-  schimmel: 'schimmel',
-  condens: 'schimmel',
+  schimmel: 'vocht-in-een-binnenmuur',    // dienstpagina's onder Schimmel (verwijderen, vocht en schimmel)
+  condens: 'schimmel',                    // hoofdpagina Condens
   muurAfwerken: 'vocht-in-een-binnenmuur',
   // Hoofdpagina's (Vochtige muur, Schimmel, Condens, Muur afwerken) hebben een eigen template: voorbeeld = Schimmel
   hoofdpagina: 'schimmel',
@@ -62,8 +67,8 @@ module.exports = {
           { label: 'Andere oorzaken van vocht in muren', href: routes.vochtigeMuur },
         ] },
         { title: 'Behandeling', links: [
-          { label: 'Opstijgend vocht behandelen', href: routes.vochtigeMuur },
-          { label: 'Muur injecteren tegen vocht', href: routes.vochtigeMuur },
+          { label: 'Opstijgend vocht behandelen', href: routes.behandeling },
+          { label: 'Muur injecteren tegen vocht', href: routes.behandeling },
           { label: 'Vochtige muren behandelen', href: routes.vochtigeMuur },
         ] },
       ],
@@ -84,14 +89,14 @@ module.exports = {
       label: 'Condens', href: routes.condens,
       groups: [
         { title: 'Condens & Luchtvochtigheid', links: [
-          { label: 'Condens aan de binnenkant van het raam', href: routes.condens },
-          { label: 'Hoge luchtvochtigheid in huis', href: routes.condens },
+          { label: 'Condens aan de binnenkant van het raam', href: routes.dienst },
+          { label: 'Hoge luchtvochtigheid in huis', href: routes.dienst },
         ] },
         { title: 'Ventilatie als oplossing', links: [
-          { label: 'CTA systeem (Overdruksysteem)', href: routes.product },
-          { label: 'Decentrale ventilatie (WTW)', href: routes.product },
-          { label: 'WTW-unit / Luchtbehandeling', href: routes.product },
-          { label: 'Spouwmuurisolatie vochtproblemen', href: routes.condens },
+          { label: 'CTA systeem (Overdruksysteem)', href: routes.dienst },
+          { label: 'Decentrale ventilatie (WTW)', href: routes.dienst },
+          { label: 'WTW-unit / Luchtbehandeling', href: routes.dienst },
+          { label: 'Spouwmuurisolatie vochtproblemen', href: routes.dienst },
         ] },
       ],
       cta: { label: 'Alles over condens', href: routes.condens },
@@ -103,7 +108,7 @@ module.exports = {
           { label: 'Muur drogen na injecteren', href: routes.muurAfwerken },
           { label: 'Zoutuitslag op de muur', href: routes.muurAfwerken },
           { label: 'Beschadigd stucwerk herstellen', href: routes.muurAfwerken },
-          { label: 'SaltShieldPlus', href: routes.product },
+          { label: 'SaltShieldPlus', href: routes.dienst },
         ] },
       ],
       cta: { label: 'Alles over muur afwerken', href: routes.hoofdpagina },
