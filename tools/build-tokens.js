@@ -18,6 +18,7 @@ const TABLET_MAX = 1199;
 const TABLET = {
   'page/margin': 40,
   'section/padding-y': 80,
+  'hero/padding-top': 64,
   'card/padding-lg': 56,
   'heading/gap': 40,
   'grid/column-gap': 48,

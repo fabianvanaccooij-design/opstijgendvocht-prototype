@@ -223,18 +223,20 @@
 /* --- Navigatie / Kruimelpad ----------------------------------------------- */
 /* Kruimelpad: transparant. Volgt er een hero, dan loopt de hero-gradient vanaf direct onder de header
    achter het kruimelpad door (hero schuift omhoog met de hoogte van het kruimelpad). */
-:root { --crumbs-h: calc(32px + var(--font-line-height-body)); }   /* Figma: 60 desktop, 57 mobiel */
-.crumbs { position: relative; z-index: 1; box-sizing: border-box; height: var(--crumbs-h); padding: 16px var(--page-margin); background: transparent; }
+:root { --crumbs-h: calc(32px + var(--font-line-height-body-sm)); }   /* Figma 16 okt: desktop Body/Small, 57 hoog */
+@media (max-width: 767px) { :root { --crumbs-h: calc(32px + var(--font-line-height-body)); } }   /* mobiel Body/Default, 57 hoog */
+.crumbs { position: relative; z-index: 1; box-sizing: border-box; height: var(--crumbs-h); padding: 16px var(--page-margin); background: transparent; font-size: var(--font-size-body-sm); line-height: var(--font-line-height-body-sm); }
+@media (max-width: 767px) { .crumbs { font-size: var(--font-size-body); line-height: var(--font-line-height-body); } }
 .crumbs__list { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; list-style: none; padding: 0; }
 .crumbs__list li { display: flex; align-items: center; gap: 12px; }
-.crumbs__list a { text-decoration: underline; text-underline-offset: 3px; }
+.crumbs__list a { color: var(--color-text-link); text-decoration: underline; text-underline-offset: 3px; }   /* Figma 16 okt: links in linkkleur */
 .crumbs__list [aria-current] { color: var(--color-text-secondary); }
-.crumbs__back { display: none; align-items: center; gap: 8px; font-weight: var(--font-weight-medium); }
-@media (max-width: 767px) { .crumbs__list { display: none; } .crumbs__back { display: inline-flex; } .crumbs__back span { text-decoration: underline; } }
+.crumbs__back { display: none; align-items: center; gap: 8px; font-weight: var(--font-weight-medium); color: var(--color-text-link); }   /* mobiel: linkkleur, zonder onderstreping */
+@media (max-width: 767px) { .crumbs__list { display: none; } .crumbs__back { display: inline-flex; } }
 .page > .crumbs + * { margin-top: calc(-1 * var(--section-padding-y)); }
-.page > .crumbs + .hero-page { margin-top: calc(-1 * (var(--section-padding-y) + var(--crumbs-h))); padding-top: calc(var(--section-padding-y) + var(--crumbs-h)); }
+.page > .crumbs + .hero-page { margin-top: calc(-1 * (var(--section-padding-y) + var(--crumbs-h))); padding-top: calc(var(--hero-padding-top) + var(--crumbs-h)); }   /* Figma 16 okt: hero/padding-top (80) i.p.v. section/padding-y (120) */
 /* Foto-hero: de foto begint direct onder de header en het kruimelpad staat erop (hero zelf blijft even hoog) */
-.page > .crumbs + .hero-page--foto { padding-top: var(--section-padding-y); }
+.page > .crumbs + .hero-page--foto { padding-top: var(--hero-padding-top); }
 .page > .crumbs:has(+ .hero-page--foto:not(.hero-page--licht)) .crumbs__list a,
 .page > .crumbs:has(+ .hero-page--foto:not(.hero-page--licht)) .crumbs__back { color: var(--color-text-on-ink); }
 .page > .crumbs:has(+ .hero-page--foto:not(.hero-page--licht)) .crumbs__list [aria-current],
@@ -246,12 +248,12 @@
   /* Pagina op eerste niveau (pad Home > pagina): mobiel geen kruimelpad, de hero begint direct onder de header (Figma 393) */
   .page > .crumbs--top { display: none; }
   .page > .crumbs--top + * { margin-top: 0; }
-  .page > .crumbs--top + .hero-page { margin-top: 0; padding-top: var(--section-padding-y); }
+  .page > .crumbs--top + .hero-page { margin-top: 0; padding-top: var(--hero-padding-top); }
   .page > .crumbs--top + .hero-page--foto { padding-top: 296px; }
 }
 
 /* --- Sectie / Hero pagina --------------------------------------------------- */
-.hero-page { position: relative; padding: var(--section-padding-y) var(--page-margin); background: var(--gradient-hero-licht); }
+.hero-page { position: relative; padding: var(--hero-padding-top) var(--page-margin) var(--section-padding-y); background: var(--gradient-hero-licht); }
 .hero-page--tight { margin-bottom: calc(-1 * var(--section-padding-y)); }
 .hero-page__inner { position: relative; max-width: var(--container); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 760fr) minmax(0, 840fr); gap: var(--grid-column-gap); align-items: start; }
 .hero-page__intro { display: flex; flex-direction: column; gap: var(--gap-action); align-items: flex-start; }
@@ -266,7 +268,7 @@
 .hero-page--foto .hero-page__inner { width: 100%; grid-template-columns: minmax(0, 690px); }
 .hero-page--foto h1, .hero-page--foto .h4, .hero-page--foto .prose { color: var(--color-text-on-secondary); }
 @media (max-width: 767px) {
-  .hero-page { padding-block: var(--section-padding-y); }
+  .hero-page { padding-block: var(--hero-padding-top) var(--section-padding-y); }
   .hero-page__inner { grid-template-columns: 1fr; gap: var(--gap-action); }
   .hero-page--foto { min-height: 0; padding-top: 296px; padding-bottom: 48px; color: var(--color-text-on-ink); background: var(--color-bg-ink); }   /* Figma 393: foto 360, tekst 64 erover */
   .hero-page--foto .hero-page__bg { bottom: auto; height: 360px; }

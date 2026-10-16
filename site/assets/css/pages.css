@@ -399,10 +399,10 @@
 /* Kruimelpad ligt op het verloop van de hero (Figma: frame 'Kruimelpad en hero' met Verloop/Hero licht),
    net als op de andere pagina's (.page > .crumbs + .hero-page). De hero zit hier in .faq-top. */
 .page > .crumbs + .faq-top { margin-top: calc(-1 * (var(--section-padding-y) + var(--crumbs-h))); }
-.page > .crumbs + .faq-top > .hero-page { padding-top: calc(var(--section-padding-y) + var(--crumbs-h)); }
+.page > .crumbs + .faq-top > .hero-page { padding-top: calc(var(--hero-padding-top) + var(--crumbs-h)); }
 @media (max-width: 767px) {
   .page > .crumbs--top + .faq-top { margin-top: 0; }
-  .page > .crumbs--top + .faq-top > .hero-page { padding-top: var(--section-padding-y); }
+  .page > .crumbs--top + .faq-top > .hero-page { padding-top: var(--hero-padding-top); }
 }
 .page-faq .hero-page { padding-bottom: var(--heading-gap); }   /* Figma: hero-padding onder = heading/gap (64, mobiel 24), direct daaronder de zoekbalk */
 .faq-search { padding-inline: var(--page-margin); }
