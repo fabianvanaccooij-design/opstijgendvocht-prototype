@@ -739,6 +739,7 @@
         if (!p.extra) return;
         const prog = Math.min(1, Math.max(0, (top - p.sec.getBoundingClientRect().top) / p.extra));
         p.col.style.setProperty('--project-y', (-prog * p.extra) + 'px');
+        p.setIndex(Math.round(prog * (p.col.children.length - 1)));   // verticale stippen volgen de foto
       });
     };
     // Stippen (mobiel/tablet)
@@ -747,8 +748,15 @@
       p.dots.innerHTML = items.map((_, i) => `<button type="button" aria-label="Ga naar foto ${i + 1}"></button>`).join('');
       const btns = Array.from(p.dots.children);
       const stepX = () => (items[1] ? items[1].offsetLeft - items[0].offsetLeft : 1) || 1;
-      const setActive = () => { const i = Math.round(p.col.scrollLeft / stepX()); btns.forEach((b, j) => b.classList.toggle('is-active', j === Math.min(i, btns.length - 1))); };
-      btns.forEach((b, i) => b.addEventListener('click', () => p.col.scrollTo({ left: i * stepX(), behavior: 'smooth' })));
+      p.setIndex = (i) => btns.forEach((b, j) => b.classList.toggle('is-active', j === Math.min(i, btns.length - 1)));
+      const setActive = () => { if (!mqWide.matches) p.setIndex(Math.round(p.col.scrollLeft / stepX())); };
+      btns.forEach((b, i) => b.addEventListener('click', () => {
+        if (mqWide.matches) {   // desktop: pagina naar het punt waarop die foto in beeld is
+          const top = (header ? header.offsetHeight : 0) + 24;
+          const y = window.scrollY + p.sec.getBoundingClientRect().top - top + (items.length > 1 ? i / (items.length - 1) : 0) * p.extra;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        } else p.col.scrollTo({ left: i * stepX(), behavior: 'smooth' });
+      }));
       p.col.addEventListener('scroll', () => requestAnimationFrame(setActive), { passive: true });
       setActive();
     });
