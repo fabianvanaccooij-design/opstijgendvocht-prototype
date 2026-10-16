@@ -376,13 +376,13 @@
 /* --- Ankerbalk mobiel (Figma Navigatie / Anker en 'Productpagina 393 | Ankerbalk sticky (voorbeeld)') ---
    Plakt onder de header, wit verloop waar nog items zijn, actief onderdeel donker en vet met oranje lijn. Gedrag in main.js (data-anchors). */
 @media (max-width: 767px) {
-  html:has([data-anchors]) { scroll-padding-top: calc(var(--header-h) + 57px + 16px); }
+  html:has([data-anchors]) { scroll-padding-top: calc(var(--header-h) + 61px + 16px); }
   html:has([data-anchors]) [id] { scroll-margin-top: 0; }   /* onderdeel begint 16 onder de vastgeplakte ankerbalk */
   .anchors { position: sticky; top: var(--header-h); z-index: 60; }
-  .anchors__bar { position: relative; padding-block: 0; }
-  .anchors__link { position: relative; flex-direction: column; align-items: flex-start; gap: 0; padding: 16px 0; }
+  .anchors__bar { position: relative; padding-block: 0; gap: 0; }   /* Figma Navigatie / Anker: items sluiten op elkaar aan, lijn loopt door */
+  .anchors__link { position: relative; flex-direction: column; align-items: flex-start; gap: 0; padding: 16px 12px 20px; }   /* Figma: 16 boven, 16 + lijn van 4 onder, 12 opzij */
   .anchors__link::after { content: attr(data-label); height: 0; overflow: hidden; visibility: hidden; font-weight: var(--font-weight-bold); }   /* reserveert de breedte van de vette staat */
-  .anchors__link::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; }
+  .anchors__link::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--color-border-default); }   /* Figma 16 okt: lijn 4, niet actief blauw */
   .anchors__link.is-active { color: var(--color-text-primary); font-weight: var(--font-weight-bold); }
   .anchors__link.is-active::before { background: var(--color-border-brand); }
   .anchors::before, .anchors::after { content: ""; position: absolute; top: 0; bottom: 0; z-index: 1; width: 48px; pointer-events: none; opacity: 0; transition: opacity var(--duration); }
@@ -390,4 +390,77 @@
   .anchors::after { right: 0; background: var(--gradient-scroll-wit-rechts); }
   .anchors.has-more-left::before, .anchors.has-more-right::after { opacity: 1; }
   .anchors.is-stuck .anchors__bar { box-shadow: inset 0 -1px 0 var(--color-border-default); }
+}
+
+/* --- Veelgestelde vragen (Figma Veelgestelde vragen | 1920px 3523:19178 en | 393px 3524:19690) ---
+   Hero, zoekbalk, links Onderwerpen (sticky), rechts Veel gezocht en 9 onderwerpen met elk 5 vragen
+   en "Toon alle X vragen". Gedrag in main.js (data-faq). */
+.page-faq .faq-top { display: flex; flex-direction: column; }
+.page-faq .hero-page { padding-bottom: var(--heading-gap); }   /* Figma: hero-padding onder = heading/gap (64, mobiel 24), direct daaronder de zoekbalk */
+.faq-search { padding-inline: var(--page-margin); }
+.faq-search__field { position: relative; max-width: 800px; margin-inline: auto; }   /* Figma: Zoekveld 800 breed, gecentreerd */
+.faq-search__field .icon { position: absolute; left: 24px; top: 50%; translate: 0 -50%; color: var(--color-text-primary); pointer-events: none; }
+.faq-search .input { padding-left: calc(24px + var(--size-icon-md) + 8px); }   /* Figma: icoon 20, 8 tot de tekst */
+
+.faq-main { margin-top: calc(var(--space-80) - var(--section-padding-y)); }   /* Figma: 80 tussen zoekbalk en inhoud */
+.faq-layout { display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: var(--grid-column-gap); align-items: start; }
+.faq-side { position: sticky; top: calc(var(--header-h) + 24px); }
+.page-faq [id], .page-faq .acc { scroll-margin-top: 0; }   /* onderwerp of vraag komt 24 onder de header, gelijk met de zijkolom (html scroll-padding) */
+
+/* Navigatie / Onderwerp: lijn van 4 links (blauw, actief oranje), alleen de buitenste uiteindes afgerond */
+.faq-nav { display: flex; flex-direction: column; gap: var(--gap-heading-3); padding: var(--card-padding); background: var(--color-bg-surface); border-radius: var(--radius-card); }
+.faq-nav__list { list-style: none; margin: 0; padding: 0; }
+.faq-nav__link { position: relative; display: flex; align-items: center; min-height: 52px; padding: 12px 16px 12px 20px; color: var(--color-text-link); font-weight: var(--font-weight-medium); }
+.faq-nav__link::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--color-border-default); }
+.faq-nav__list li:first-child .faq-nav__link::before { border-radius: 2px 2px 0 0; }
+.faq-nav__list li:last-child .faq-nav__link::before { border-radius: 0 0 2px 2px; }
+.faq-nav__link.is-active { color: var(--color-text-primary); font-weight: var(--font-weight-bold); }
+.faq-nav__link.is-active::before { background: var(--color-border-brand); }
+
+.faq-content { display: flex; flex-direction: column; gap: var(--space-80); min-width: 0; }
+.faq-popular { display: flex; flex-direction: column; gap: var(--gap-heading-3); }
+.faq-popular__list { display: flex; flex-direction: column; gap: var(--space-12); list-style: none; margin: 0; padding: 0; }
+.faq-popular__list a { color: var(--color-text-link); }
+.faq-popular__list a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.faq-cat { display: flex; flex-direction: column; gap: var(--gap-block); }
+.faq-cat__head { display: flex; flex-direction: column; gap: var(--gap-heading-3); }
+.faq-cat__body { display: flex; flex-direction: column; gap: var(--gap-action); align-items: flex-start; }
+.faq-cat__body .accordion { width: 100%; }
+
+/* Eerst 5 vragen per onderwerp; de rest na "Toon alle X vragen" of tijdens zoeken (alleen treffers) */
+.faq-cat:not(.is-all) [data-faq-list] > .acc:nth-child(n+6) { display: none; }
+.faq-main.is-searching [data-faq-list] > .acc:nth-child(n) { display: block; }
+.faq-main [data-faq-list] > .acc[hidden] { display: none !important; }
+.faq-cat.is-all .faq-cat__more,
+.faq-main.is-searching .faq-cat__more,
+.faq-main.is-searching .faq-popular,
+.faq-cat[hidden] { display: none; }
+
+@media (min-width: 1200px) { .faq-anchors { display: none; } }
+@media (max-width: 1199px) {
+  .faq-main { margin-top: 0; }
+  .faq-layout { grid-template-columns: minmax(0, 1fr); }
+  .faq-side { display: none; }
+  .faq-anchors { position: sticky; top: var(--header-h); z-index: 60; margin-top: 0; }
+}
+@media (max-width: 767px) {
+  /* Figma 393: hero, zoekbalk en ankerbalk op wit (Frame 144), 48 tussen zoekbalk en ankerbalk */
+  .page-faq .faq-top { padding-bottom: var(--section-padding-y); background: var(--color-bg-surface); }
+  .page-faq .hero-page { background: none; }
+  .faq-anchors { margin-top: calc(-1 * var(--section-padding-y)); }
+  .faq-content { gap: var(--space-48); }
+  .faq-popular__list { gap: var(--space-8); }
+  .faq-cat__more { align-self: stretch; justify-content: flex-start; }   /* Figma 393: knop over de volle breedte, label links */
+}
+/* FAQ tablet (768-1199): dezelfde ankerbalk als mobiel (Navigatie / Anker), vastgeplakt onder de header */
+@media (min-width: 768px) and (max-width: 1199px) {
+  html:has(.faq-anchors) { scroll-padding-top: calc(var(--header-h) + 61px + 16px); }
+  .faq-anchors { background: var(--color-bg-surface); }
+  .faq-anchors .anchors__bar { position: relative; justify-content: flex-start; gap: 0; padding: 0 var(--page-margin); border-radius: 0; }
+  .faq-anchors .anchors__link { position: relative; flex-direction: column; align-items: flex-start; gap: 0; padding: 16px 12px 20px; }
+  .faq-anchors .anchors__link::after { content: attr(data-label); height: 0; overflow: hidden; visibility: hidden; font-weight: var(--font-weight-bold); }
+  .faq-anchors .anchors__link::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--color-border-default); }
+  .faq-anchors .anchors__link.is-active { color: var(--color-text-primary); font-weight: var(--font-weight-bold); }
+  .faq-anchors .anchors__link.is-active::before { background: var(--color-border-brand); }
 }

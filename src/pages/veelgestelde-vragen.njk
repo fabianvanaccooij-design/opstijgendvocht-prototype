@@ -1,25 +1,95 @@
 ---
 crumb: Veelgestelde vragen
 title: Veelgestelde vragen
-description: Vind snel een antwoord op jouw vragen over vochtbestrijding, onze werkwijze en de garanties.
+description: Vind snel antwoord op vragen over vocht, schimmel, condens, ventilatie of muurinjectie.
+bodyClass: page-faq
 ---
+{#- Figma: Veelgestelde vragen | 1920px (3523:19178) en | 393px (3524:19690).
+    Inhoud: src/_data/faq.json (165 vragen uit het doc van Bianca, 16 okt 2026).
+    Gedrag in main.js (data-faq): zoeken, "Toon alle X vragen", Veel gezocht naar de vraag, actief onderwerp. -#}
 {% import "components/sections.njk" as s %}
+{% import "components/ui.njk" as ui %}
 
-{{ s.heroPage({
-  variant: 'center', tight: true,
-  title: 'Veelgestelde vragen (FAQ)',
-  text: 'Vind snel een antwoord op jouw vragen over vochtbestrijding, onze werkwijze en de garanties.'
-}, site) }}
+<div class="faq-top">
+  {{ s.heroPage({
+    variant: 'center',
+    title: 'Veelgestelde vragen <br class="only-desktop">over vocht in huis',
+    text: 'Vind snel antwoord op vragen over vocht, schimmel, condens, ventilatie of muurinjectie.'
+  }, site) }}
 
-{% for cat in shared.faqCategorieen %}
-{{ s.faq({ title: cat.title, center: true, btn: false, ruim: true, items: cat.items }) }}
-{% endfor %}
+  {#- Figma Zoekbalk: Form/Field Type=Text met zoekicoon, 800 breed (mobiel volle breedte) -#}
+  <div class="faq-search">
+    <label class="visually-hidden" for="faq-zoek">Zoek in veelgestelde vragen</label>
+    <div class="faq-search__field">
+      {{ icon('search') }}
+      <input class="input" id="faq-zoek" type="search" placeholder="Zoek in veelgestelde vragen" autocomplete="off" data-faq-search>
+    </div>
+  </div>
+</div>
+
+{#- Mobiel en tablet: Onderwerpen (sticky, horizontaal scrollen), Figma Navigatie / Anker -#}
+<nav class="anchors faq-anchors" aria-label="Onderwerpen" data-anchors data-anchors-default="0">
+  <div class="anchors__bar" data-anchors-bar>
+    {% for c in faq.categorieen %}
+    <a class="btn btn--text anchors__link" href="#{{ c.id }}" data-label="{{ c.nav }}">{{ c.nav }}</a>
+    {% endfor %}
+  </div>
+</nav>
+
+<section class="section faq-main" data-faq data-visible="{{ faq.zichtbaar }}">
+  <div class="container faq-layout">
+
+    {#- Desktop: Onderwerpen (sticky), Figma Navigatie / Onderwerp -#}
+    <aside class="faq-side">
+      <nav class="faq-nav" aria-labelledby="faq-nav-titel" data-faq-nav>
+        <h2 class="h3" id="faq-nav-titel">Onderwerpen</h2>
+        <ul class="faq-nav__list" role="list">
+          {% for c in faq.categorieen %}
+          <li><a class="faq-nav__link" href="#{{ c.id }}" data-label="{{ c.nav }}">{{ c.nav }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="faq-content">
+      <div class="faq-popular" data-faq-popular>
+        <h2 class="h3">Veel gezocht</h2>
+        <ul class="faq-popular__list" role="list">
+          {% for v in faq.veelGezocht %}
+          <li><a href="#{{ v.id }}" data-faq-goto>• {{ v.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% for c in faq.categorieen %}
+      <section class="faq-cat" id="{{ c.id }}" aria-labelledby="{{ c.id }}-titel" data-faq-cat>
+        <div class="faq-cat__head">
+          <h2 class="h3" id="{{ c.id }}-titel">{{ c.title }}</h2>
+          {% if c.introHtml %}<p class="c-secondary">{{ c.introHtml | safe }}</p>{% endif %}
+        </div>
+        <div class="faq-cat__body">
+          <div class="accordion" data-faq-list>
+            {% for it in c.items %}{{ ui.acc(it.q, '<div class="prose">' ~ it.a ~ '</div>', false, 4, it.id) }}{% endfor %}
+          </div>
+          {% if c.items.length > faq.zichtbaar %}
+          {{ ui.btn('Toon alle ' ~ c.items.length ~ ' vragen', '#', 'secondary', { type: 'button', icon: 'plus', cls: 'faq-cat__more', attrs: 'data-faq-more aria-controls="' ~ c.id ~ '"' }) }}
+          {% endif %}
+        </div>
+      </section>
+      {% endfor %}
+
+      {#- Niet in Figma: melding als de zoekopdracht niets oplevert -#}
+      <p class="faq-empty c-secondary" role="status" hidden data-faq-empty>Geen vragen gevonden. Probeer een ander woord, of stel je vraag hieronder.</p>
+    </div>
+  </div>
+</section>
 
 {{ s.cta({
   title: 'Staat jouw vraag er niet tussen?',
-  text: 'Onze specialisten helpen je graag persoonlijk verder.',
-  primary: { label: 'Stel je vraag via onze contactpagina', href: 'contact' },
-  secondary: false
-}) }}
+  text: "Je hoeft zelf geen diagnose te stellen. Stuur gerust een paar duidelijke foto's via WhatsApp of neem telefonisch contact op. Je krijgt snel en gratis duidelijkheid over de juiste vervolgstap.",
+  secondary: 'WhatsApp ons'
+}, site) }}
 
-{{ s.artikelen({ title: 'Bekijk onze blogs', items: shared.artikelen }) }}
+<section class="section faq-date">
+  <div class="container"><p class="body-sm c-muted">Laatst inhoudelijk gecontroleerd: 12 oktober 2026.</p></div>
+</section>

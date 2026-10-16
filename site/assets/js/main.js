@@ -531,8 +531,8 @@
     const spy = () => {
       const headerH = header ? header.offsetHeight : 0;
       const line = headerH + nav.offsetHeight + 24;
-      let idx = -1;
-      targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top <= line) idx = i; });
+      let idx = nav.dataset.anchorsDefault ? Number(nav.dataset.anchorsDefault) : -1;   // FAQ: eerste onderwerp is meteen actief (Figma)
+      targets.forEach((t, i) => { if (t && !t.hidden && t.getBoundingClientRect().top <= line) idx = i; });
       nav.classList.toggle('is-stuck', nav.getBoundingClientRect().top <= headerH + 1);
       if (idx === current) return;
       current = idx;
@@ -607,6 +607,86 @@
     fit();
     window.addEventListener('resize', fit);
     document.fonts && document.fonts.ready.then(fit);
+  }
+
+  /* --- Veelgestelde vragen (data-faq) ----------------------------------------
+     - Per onderwerp eerst 5 vragen; "Toon alle X vragen" toont de rest.
+     - Zoeken: zodra je typt gelden de 5 niet meer en zie je alleen vragen waarin alle woorden
+       voorkomen (vraag of antwoord), over alle onderwerpen. Onderwerpen zonder treffer, Veel gezocht
+       en de knoppen verdwijnen. Leeg zoekveld = terug naar de begintoestand.
+     - Veel gezocht en links naar #vraag: onderwerp helemaal tonen, vraag openen en ernaartoe scrollen.
+     - Desktop: actief onderwerp in de zijkolom volgt de scrollpositie. */
+  const faq = $('[data-faq]');
+  if (faq) {
+    const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’‘]/g, "'");
+    const cats = $$('[data-faq-cat]', faq);
+    const items = $$('[data-faq-list] > .acc', faq).map((acc) => ({ acc, cat: acc.closest('[data-faq-cat]'), text: norm(acc.textContent) }));
+    const search = $('[data-faq-search]');
+    const empty = $('[data-faq-empty]', faq);
+
+    const setOpen = (acc, open) => {
+      acc.classList.toggle('is-open', open);
+      const h = $('.acc__head', acc); h && h.setAttribute('aria-expanded', String(open));
+    };
+
+    $$('[data-faq-more]', faq).forEach((btn) => btn.addEventListener('click', () => {
+      const cat = btn.closest('[data-faq-cat]');
+      cat.classList.add('is-all');
+      const first = $$('[data-faq-list] > .acc', cat)[Number(faq.dataset.visible) || 5];
+      const head = first && $('.acc__head', first);
+      head && head.focus({ preventScroll: true });   // toetsenbord: verder bij de eerste nieuwe vraag
+    }));
+
+    const runSearch = () => {
+      const terms = norm(search.value).trim().split(/\s+/).filter(Boolean);
+      const on = terms.length > 0;
+      faq.classList.toggle('is-searching', on);
+      let hits = 0;
+      items.forEach((it) => { const ok = !on || terms.every((t) => it.text.includes(t)); it.acc.hidden = !ok; if (ok && on) hits++; });
+      cats.forEach((c) => { c.hidden = on && !items.some((it) => it.cat === c && !it.acc.hidden); });
+      empty.hidden = !on || hits > 0;
+    };
+    if (search) {
+      search.addEventListener('input', runSearch);
+      search.addEventListener('keydown', (e) => { if (e.key === 'Escape') { search.value = ''; runSearch(); } });
+    }
+
+    // Naar een vraag: onderwerp helemaal tonen, zoekfilter wissen als de vraag verborgen is, openen, scrollen
+    const goTo = (id, smooth = true) => {
+      const acc = document.getElementById(id);
+      const target = acc && acc.closest('.acc');
+      if (!target || !faq.contains(target)) return false;
+      if (target.hidden && search) { search.value = ''; runSearch(); }
+      target.closest('[data-faq-cat]').classList.add('is-all');
+      $$('.acc.is-open', target.parentElement).forEach((o) => { if (o !== target) setOpen(o, false); });
+      setOpen(target, true);
+      target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+      return true;
+    };
+    // De id staat op het antwoord (acc__body); links wijzen naar dat id
+    $$('[data-faq-goto]').forEach((a) => a.addEventListener('click', (e) => {
+      if (goTo(a.getAttribute('href').slice(1))) { e.preventDefault(); history.replaceState(null, '', a.getAttribute('href')); }
+    }));
+    if (location.hash.length > 1) requestAnimationFrame(() => goTo(decodeURIComponent(location.hash.slice(1)), false));
+
+    // Desktop: actief onderwerp in de zijkolom
+    const nav = $('[data-faq-nav]');
+    if (nav) {
+      const links = $$('a[href^="#"]', nav);
+      const targets = links.map((a) => document.getElementById(a.getAttribute('href').slice(1)));
+      let current = -2;
+      const spy = () => {
+        const line = (header ? header.offsetHeight : 0) + 120;
+        let idx = 0;
+        targets.forEach((t, i) => { if (t && !t.hidden && t.getBoundingClientRect().top <= line) idx = i; });
+        if (idx === current) return;
+        current = idx;
+        links.forEach((a, i) => { a.classList.toggle('is-active', i === idx); if (i === idx) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+      };
+      window.addEventListener('scroll', () => requestAnimationFrame(spy), { passive: true });
+      window.addEventListener('resize', spy);
+      spy();
+    }
   }
 
   window.OV = Object.assign(window.OV || {}, { lock, unlock, $, $$ });
