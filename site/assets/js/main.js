@@ -718,5 +718,47 @@
     }
   }
 
+  /* --- Resultaten: Sectie / Project (data-project) ------------------------------
+     Desktop (vanaf 1200): de kaart plakt vast onder de header. De sectie krijgt extra hoogte gelijk aan
+     het deel van de fotokolom dat buiten beeld valt; zolang je daardoorheen scrolt, schuift alleen de
+     fotokolom omhoog (tekst blijft staan). Na de laatste foto scrolt de pagina verder.
+     Kleiner: stapfoto's horizontaal swipen, stippen volgen de positie. */
+  const projects = $$('[data-project]');
+  if (projects.length) {
+    const mqWide = window.matchMedia('(min-width: 1200px)');
+    const state = projects.map((sec) => ({ sec, card: $('.project__card', sec), photos: $('[data-project-photos]', sec), col: $('[data-project-col]', sec), dots: $('[data-project-dots]', sec), extra: 0 }));
+    const measure = () => state.forEach((p) => {
+      if (!mqWide.matches) { p.sec.style.height = ''; p.col.style.removeProperty('--project-y'); p.extra = 0; return; }
+      p.extra = Math.max(0, p.col.scrollHeight - p.photos.clientHeight);
+      p.sec.style.height = (p.card.offsetHeight + p.extra) + 'px';
+    });
+    const move = () => {
+      if (!mqWide.matches) return;
+      const top = (header ? header.offsetHeight : 0) + 24;
+      state.forEach((p) => {
+        if (!p.extra) return;
+        const prog = Math.min(1, Math.max(0, (top - p.sec.getBoundingClientRect().top) / p.extra));
+        p.col.style.setProperty('--project-y', (-prog * p.extra) + 'px');
+      });
+    };
+    // Stippen (mobiel/tablet)
+    state.forEach((p) => {
+      const items = Array.from(p.col.children);
+      p.dots.innerHTML = items.map((_, i) => `<button type="button" aria-label="Ga naar foto ${i + 1}"></button>`).join('');
+      const btns = Array.from(p.dots.children);
+      const stepX = () => (items[1] ? items[1].offsetLeft - items[0].offsetLeft : 1) || 1;
+      const setActive = () => { const i = Math.round(p.col.scrollLeft / stepX()); btns.forEach((b, j) => b.classList.toggle('is-active', j === Math.min(i, btns.length - 1))); };
+      btns.forEach((b, i) => b.addEventListener('click', () => p.col.scrollTo({ left: i * stepX(), behavior: 'smooth' })));
+      p.col.addEventListener('scroll', () => requestAnimationFrame(setActive), { passive: true });
+      setActive();
+    });
+    measure(); move();
+    window.addEventListener('scroll', () => requestAnimationFrame(move), { passive: true });
+    window.addEventListener('resize', () => { measure(); move(); });
+    mqWide.addEventListener('change', () => { measure(); move(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { measure(); move(); });
+    window.addEventListener('load', () => { measure(); move(); });
+  }
+
   window.OV = Object.assign(window.OV || {}, { lock, unlock, $, $$ });
 })();

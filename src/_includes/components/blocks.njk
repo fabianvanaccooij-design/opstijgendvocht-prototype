@@ -3,6 +3,7 @@
     Importeer met {% import "components/blocks.njk" as b %}.
     ========================================================================== -#}
 {% import "components/ui.njk" as ui %}
+{% import "components/sections.njk" as s %}
 
 {#- Paginering (Figma: Paginering). current = actieve pagina, total = aantal -#}
 {% macro paginering(current=1, total=3) -%}
@@ -73,5 +74,51 @@
     </div>
   </div>
   {% endfor %}
+</section>
+{%- endmacro %}
+
+
+{#- Sectie / Project (Figma 09 Resultaten-secties, 3576:207).
+    Desktop: witte kaart plakt vast onder de header; de fotokolom rechts scrolt langs alle stapfoto's,
+    daarna scrolt de pagina verder. Mobiel en tablet: tekst, daarna stapfoto's swipen. Gedrag in main.js (data-project).
+    p.id, p.title, p.blocks[{icon, title, text}], p.photos[{label, image}] -#}
+{% macro project(p) -%}
+<section class="project" id="{{ p.id }}" aria-labelledby="{{ p.id }}-titel" data-project>
+  <div class="project__pin">
+    <div class="project__card">
+      <div class="project__text">
+        <h2 id="{{ p.id }}-titel">{{ p.title }}</h2>
+        {{ s.uspList(p.blocks) }}
+      </div>
+      <div class="project__photos" data-project-photos>
+        <div class="project__col" data-project-col>
+          {% for f in p.photos %}
+          <figure class="project__photo">{{ ui.media(f.image, f.label, '4-3') }}<figcaption class="chip">{{ f.label }}</figcaption></figure>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="dots project__dots" data-project-dots></div>
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{#- Sectie / Voor en na: 3x Card / Resultaat (Gestapeld) met alleen foto's en onderschrift -#}
+{% macro voorNa(d) -%}
+<section class="section">
+  <div class="container stack" style="gap:var(--heading-gap)">
+    <h2 class="t-center">{{ d.title }}</h2>
+    <div class="vn-grid">
+      {% for c in d.items %}
+      <article class="vn-card">
+        <div class="vn-card__imgs">
+          <figure class="vn-card__img">{{ ui.media(c.before, 'Voor', '4-3') }}<figcaption class="chip">Voor</figcaption></figure>
+          <figure class="vn-card__img">{{ ui.media(c.after, 'Na', '4-3') }}<figcaption class="chip">Na</figcaption></figure>
+        </div>
+        <p class="h4 vn-card__body">{{ c.title }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 {%- endmacro %}

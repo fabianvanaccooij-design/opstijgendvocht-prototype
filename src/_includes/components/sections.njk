@@ -347,14 +347,14 @@
     <div class="tiles" data-slider>
       <div class="tiles__track tiles__track--{{ d.items.length }}" data-slider-track>
         {% for t in d.items %}
-        <div class="tile tile--sm{{ ' tile--beeld' if d.beeldtegel }}" tabindex="0">
+        {%- if t.href %}<a class="tile tile--sm{{ ' tile--beeld' if d.beeldtegel }}" href="{{ t.href }}">{% else %}<div class="tile tile--sm{{ ' tile--beeld' if d.beeldtegel }}" tabindex="0">{% endif %}
           {% if t.image %}<img class="tile__img" src="assets/img/{{ t.image }}" alt="" loading="lazy">{% else %}<span class="tile__img media--ph"></span>{% endif %}
           <span class="tile__overlay"></span>
           <span class="tile__body">
             <span class="h4 c-on-ink">{{ t.title }}</span>
             {% if t.text %}<span class="tile__details"><span class="tile__details-inner"><span class="c-on-ink">{{ t.text }}</span></span></span>{% endif %}
           </span>
-        </div>
+        {% if t.href %}</a>{% else %}</div>{% endif %}
         {% endfor %}
       </div>
       <div class="dots only-mobile" data-slider-dots></div>

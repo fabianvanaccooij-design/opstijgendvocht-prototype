@@ -482,3 +482,49 @@
   transition: transform .3s var(--ease), width .3s var(--ease), opacity .2s; }
 .anchors__indicator.is-hidden { opacity: 0; }
 .no-anim, .no-anim * { transition: none !important; }
+
+/* --- Resultaten (Figma 16 okt: Resultaten 1920 2484:3998 / 393 2809:8421) --------------------------- */
+.tiles__track--3 { grid-template-columns: repeat(3, 1fr); }
+a.tile { display: block; color: inherit; text-decoration: none; }
+
+/* Sectie / Project: witte kaart (rand 24, 920 hoog op 1080) plakt vast; fotokolom rechts schuift langs alle foto's (main.js) */
+.project { padding-inline: var(--space-24); scroll-margin-top: 0; }   /* tegel-link: kaart begint direct op de vastplakpositie */
+.project__card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--grid-column-gap); padding: var(--space-24) var(--space-24) var(--space-24) var(--page-margin); background: var(--color-bg-surface); border-radius: var(--radius-card); overflow: hidden; }
+.project__text { display: flex; flex-direction: column; justify-content: center; gap: var(--gap-action); }
+.project__text .usp-list { max-width: 536px; }   /* Figma: lijst maximaal 536 breed */
+.project__photo { position: relative; margin: 0; border-radius: var(--radius-card); overflow: hidden; }
+.project__photo .media { border-radius: 0; }
+.project__photo .chip { position: absolute; top: 16px; left: 16px; }
+.project__col { display: flex; flex-direction: column; gap: var(--grid-gutter); }
+.project__dots { display: none; }
+@media (min-width: 1200px) {
+  .project__pin { position: sticky; top: calc(var(--header-h) + var(--space-24)); }
+  .project__card { height: max(560px, calc(100vh - var(--header-h) - 2 * var(--space-24))); }
+  .project__photos { min-height: 0; overflow: hidden; }
+  .project__col { translate: 0 var(--project-y, 0); will-change: translate; }
+}
+@media (max-width: 1199px) {
+  .project { padding-inline: var(--page-margin); }
+  .project__card { grid-template-columns: minmax(0, 1fr); gap: var(--gap-block); padding: var(--card-padding); }
+  /* Figma 393: stapfoto's 260 x 195 naast elkaar swipen, met stippen */
+  .project__col { flex-direction: row; gap: var(--space-16); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--card-padding)); padding-inline: var(--card-padding); scroll-padding: 0 var(--card-padding); }
+  .project__col::-webkit-scrollbar { display: none; }
+  .project__photo { flex: 0 0 260px; scroll-snap-align: start; border-radius: var(--radius-inset); }
+  .project__dots { display: flex; }
+}
+
+/* Sectie / Voor en na: 3x Card / Resultaat (Gestapeld) met alleen foto's en onderschrift */
+.vn-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--grid-gutter); }
+.vn-card { display: flex; flex-direction: column; background: var(--color-bg-surface); border-radius: var(--radius-card); overflow: hidden; }
+.vn-card__imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.vn-card__img { position: relative; margin: 0; }
+.vn-card__img .media { border-radius: 0; }
+.vn-card__img .chip { position: absolute; top: 16px; left: 16px; }
+.vn-card__body { padding: var(--card-padding); }
+@media (max-width: 1199px) { .vn-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 767px) {
+  /* Figma 393 (Gestapeld Mobile): onderschrift boven, foto's 16:9 onder elkaar */
+  .vn-card { flex-direction: column-reverse; }
+  .vn-card__imgs { grid-template-columns: 1fr; }
+  .vn-card__img .media { aspect-ratio: 16 / 9; }
+}
