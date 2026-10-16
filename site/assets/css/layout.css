@@ -14,6 +14,7 @@
 .topheader__divider { width: 1px; height: 24px; background: var(--color-border-default); }
 .topheader__phone { display: flex; align-items: center; gap: 8px; font-weight: var(--font-weight-bold); }
 .topheader__phone .icon { color: var(--color-text-brand-blue); }
+.topheader__usps .icon, .topheader__phone .icon { translate: 0 -1px; }   /* optisch: iconen 1 px hoger, stonden te laag naast de tekst (feedback Fabian 16 okt) */
 
 /* --- Main-Header --------------------------------------------------------- */
 .site-header { position: sticky; top: 0; z-index: 80; background: var(--color-bg-surface); }
