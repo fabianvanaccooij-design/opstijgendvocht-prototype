@@ -339,7 +339,8 @@
 </section>
 {%- endmacro %}
 
-{#- Sectie / Signalen: rij beeldkaarten (5) met titel en optionele tekst bij hover -#}
+{#- Sectie / Signalen: rij beeldkaarten (5) met titel en optionele tekst bij hover.
+    d.tileHeading: kopstijl van de tegeltitel ('h4' standaard zoals Binnenmuur, 'h3' zoals Home/Resultaten in Figma) -#}
 {% macro signalen(d) -%}
 <section class="section tiles-sec">
   <div class="container stack" style="gap:var(--heading-gap)">
@@ -351,8 +352,8 @@
           {% if t.image %}<img class="tile__img" src="assets/img/{{ t.image }}" alt="" loading="lazy">{% else %}<span class="tile__img media--ph"></span>{% endif %}
           <span class="tile__overlay"></span>
           <span class="tile__body">
-            {% if t.btn %}<span class="tile__head"><span class="h4 c-on-ink">{{ t.title }}</span><span class="tile__arrow only-mobile">{{ icon('arrow-right') }}</span></span>
-            {% else %}<span class="h4 c-on-ink">{{ t.title }}</span>{% endif %}
+            {% if t.btn %}<span class="tile__head"><span class="{{ d.tileHeading or 'h4' }} c-on-ink">{{ t.title }}</span><span class="tile__arrow only-mobile">{{ icon('arrow-right') }}</span></span>
+            {% else %}<span class="{{ d.tileHeading or 'h4' }} c-on-ink">{{ t.title }}</span>{% endif %}
             {% if t.text %}<span class="tile__details"><span class="tile__details-inner"><span class="c-on-ink">{{ t.text }}</span>{% if t.btn %}<span class="btn btn--primary btn--block">{{ t.btn }}</span>{% endif %}</span></span>{% endif %}
           </span>
         {% if t.href %}</a>{% else %}</div>{% endif %}
