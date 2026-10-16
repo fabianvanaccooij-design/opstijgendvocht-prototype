@@ -103,19 +103,20 @@
 </section>
 {%- endmacro %}
 
-{#- Sectie / Voor en na: 3x Card / Resultaat (Gestapeld) met alleen foto's en onderschrift -#}
+{#- Sectie / Voor en na (Figma 16 okt, gekozen optie 1): Card / Resultaat Layout=Breed, één per rij,
+    alleen onderschrift (H3) en voor- en nafoto; rating, reviewtekst en klant uit. Mobiel Gestapeld. -#}
 {% macro voorNa(d) -%}
 <section class="section">
   <div class="container stack" style="gap:var(--heading-gap)">
     <h2 class="t-center">{{ d.title }}</h2>
-    <div class="vn-grid">
+    <div class="results">
       {% for c in d.items %}
-      <article class="vn-card">
-        <div class="vn-card__imgs">
-          <figure class="vn-card__img">{{ ui.media(c.before, 'Voor', '4-3') }}<figcaption class="chip">Voor</figcaption></figure>
-          <figure class="vn-card__img">{{ ui.media(c.after, 'Na', '4-3') }}<figcaption class="chip">Na</figcaption></figure>
+      <article class="result">
+        <div class="result__body"><h3>{{ c.title }}</h3></div>
+        <div class="result__imgs">
+          <figure class="result__img">{{ ui.media(c.before, 'Voor', '1-1') }}<figcaption class="chip">Voor</figcaption></figure>
+          <figure class="result__img">{{ ui.media(c.after, 'Na', '1-1') }}<figcaption class="chip">Na</figcaption></figure>
         </div>
-        <h3 class="vn-card__body">{{ c.title }}</h3>
       </article>
       {% endfor %}
     </div>

@@ -46,11 +46,11 @@
 }
 
 /* --- Card / Resultaat ------------------------------------------------------ */
-.results { display: flex; flex-direction: column; gap: 40px; }
-.result { display: grid; grid-template-columns: minmax(0, 480fr) minmax(0, 1112fr); gap: 40px; padding: var(--card-padding); background: var(--color-bg-surface); border-radius: var(--radius-card); }
+.results { display: flex; flex-direction: column; gap: var(--grid-gutter); }   /* Figma: grid/gutter tussen de kaarten */
+.result { display: grid; grid-template-columns: minmax(0, 480fr) minmax(0, 1080fr); gap: var(--space-40); padding: var(--card-padding); background: var(--color-bg-surface); border-radius: var(--radius-card); }
 .result__body { display: flex; flex-direction: column; justify-content: flex-start; gap: var(--gap-heading-4); padding: 16px 0 16px 16px; }
-/* Figma Card / Resultaat Hover=Voor/Na: de foto onder de muis wordt 652 breed, de andere 436 (smart animate 0,4 s) */
-.result__imgs { display: grid; grid-template-columns: 544fr 544fr; gap: 24px; aspect-ratio: 1112 / 544; transition: grid-template-columns .4s cubic-bezier(.16, 1, .3, 1); }
+/* Figma Card / Resultaat Hover=Voor/Na: de foto onder de muis wordt breder (verhouding 652:436), smart animate 0,4 s */
+.result__imgs { display: grid; grid-template-columns: 528fr 528fr; gap: 24px; aspect-ratio: 1080 / 544; transition: grid-template-columns .4s cubic-bezier(.16, 1, .3, 1); }
 .result__img { position: relative; margin: 0; min-width: 0; }
 .result__img .media { height: 100%; aspect-ratio: auto; border-radius: var(--radius-inset); }
 @media (hover: hover) and (min-width: 768px) {
@@ -526,18 +526,3 @@ a.tile { display: block; color: inherit; text-decoration: none; }
   .project__dots { display: flex; }
 }
 
-/* Sectie / Voor en na: 3x Card / Resultaat (Gestapeld) met alleen foto's en onderschrift */
-.vn-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--grid-gutter); }
-.vn-card { display: flex; flex-direction: column; background: var(--color-bg-surface); border-radius: var(--radius-card); overflow: hidden; }
-.vn-card__imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.vn-card__img { position: relative; margin: 0; }
-.vn-card__img .media { border-radius: 0; }
-.vn-card__img .chip { position: absolute; top: 16px; left: 16px; }
-.vn-card__body { padding: var(--card-padding); }
-@media (max-width: 1199px) { .vn-grid { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 767px) {
-  /* Figma 393 (Gestapeld Mobile): onderschrift boven, foto's 16:9 onder elkaar */
-  .vn-card { flex-direction: column-reverse; }
-  .vn-card__imgs { grid-template-columns: 1fr; }
-  .vn-card__img .media { aspect-ratio: 16 / 9; }
-}
